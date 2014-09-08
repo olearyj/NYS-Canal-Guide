@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/tv_filters"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_filters"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Switch
+        android:id="@+id/switch_lock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp"
+        android:text="@string/switch_lock" />
+    
+    <Switch
+        android:id="@+id/switch_marina"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp"
+        android:text="@string/switch_marina" />
+
+    <Switch
+        android:id="@+id/switch_launch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp"
+        android:text="@string/switch_launch" />
+    
+    <Switch
+        android:id="@+id/switch_bridge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp"
+        android:text="@string/switch_bridge" />
+
+    <Switch
+        android:id="@+id/switch_boatsforhire"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp"
+        android:text="@string/switch_boatsforhire" />
+
+</LinearLayout>

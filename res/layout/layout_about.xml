@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New York State Canal Guide"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="The Champlain Canal, one of America's first canals, opened up vital shipping routes along the Hudson River in upstate New York. An integral part of New York and American history, the Champlain Canal's impact was substantial, opening up shipping lanes from New York City (and West via the Erie Canal and Mohawk River), north to Lake Champlain and on to the St. Lawrence Seaway. Spanning from Waterford to Whitehall, today the Champlain Canal provides sixty-three miles of scenic boating - plus waterfront picnic parks, recreation trails, eleven lock locations, numberous canal towpaths and charming villages and towns along the way."
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+</LinearLayout>

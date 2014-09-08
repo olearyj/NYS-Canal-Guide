@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">NYS Canal Guide</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    
+    <string name="button_call">Call</string>
+    <string name="button_cancel">Cancel</string>
+    
+    <string name="tv_filters">Filters</string>
+    
+    <string name="switch_lock">Locks</string>
+    <string name="switch_launch">Boat Launches</string>
+    <string name="switch_marina">Marinas and Public Docks</string>
+    <string name="switch_bridge">Bridges and Gates</string>
+    <string name="switch_boatsforhire">Rentals and Cruises</string>
+
+</resources>
