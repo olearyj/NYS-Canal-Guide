@@ -106,7 +106,11 @@ public class CanalMapFragment extends MapFragment {
     	
     	// Initialize map options
         mMap.setMyLocationEnabled(true);
-        mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+        
+        // Set map type to what the user selected in the options
+    	OptionsFragment optFrag = (OptionsFragment) ((MainActivity) activity).getOptionsFragment();
+    	log("init setting MAP TYPE = " + optFrag.getMapType());
+        mMap.setMapType(optFrag.getMapType());
         
         // Setting a custom info window adapter for the google map
         mMap.setInfoWindowAdapter(new CanalMapInfoWindowAdapter((MainActivity) activity));

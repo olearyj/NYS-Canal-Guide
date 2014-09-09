@@ -2,6 +2,7 @@ package com.AYC.canalguide;
 
 import java.util.HashMap;
 
+import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 
 import android.app.ActionBar;
@@ -9,6 +10,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.app.ActionBar.Tab;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -39,6 +41,7 @@ public class MainActivity extends Activity {
 		optionsFragment = new OptionsFragment();
 		tabBar.addTab(tabBar.newTab().setText(OPTIONS_TABSTRING)
 				.setTabListener(new TabListener(optionsFragment)));
+		loadSavedOptions();
     }
     
 	public static class TabListener implements ActionBar.TabListener {
@@ -82,6 +85,17 @@ public class MainActivity extends Activity {
     
     protected HashMap<String, String> getXmlStrings(){
     	return xmlStrings;
+    }
+    
+    /**
+     * This method will load the options that were saved in the OptionsFragment
+     */
+    private void loadSavedOptions(){
+		log("Loading Options");
+	    SharedPreferences sharedPref = getSharedPreferences(OptionsFragment.PREFS_NAME, 0);
+	    
+		int mapType = sharedPref.getInt("MapType", GoogleMap.MAP_TYPE_NORMAL);
+		((OptionsFragment) optionsFragment).setMapType(mapType);
     }
     
     private void log(String msg){

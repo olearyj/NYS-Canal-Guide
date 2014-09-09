@@ -9,11 +9,12 @@
     <string name="button_cancel">Cancel</string>
     
     <string name="tv_filters">Filters</string>
+    <string name="tv_maptype">Map Type</string>
     
     <string name="switch_lock">Locks</string>
     <string name="switch_launch">Boat Launches</string>
     <string name="switch_marina">Marinas and Public Docks</string>
-    <string name="switch_bridge">Lift Bridges and Gaurd Gates</string>
+    <string name="switch_bridge">Lift Bridges and Guard Gates</string>
     <string name="switch_boatsforhire">Rentals and Cruises</string>
 
 </resources>
