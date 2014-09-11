@@ -26,6 +26,7 @@
         android:paddingRight="3dp" >
 
         <ImageView
+            android:contentDescription="@string/iv_markercolordesc"
             android:id="@+id/ivColor1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -62,6 +63,7 @@
 
         <ImageView
             android:id="@+id/ivColor2"
+            android:contentDescription="@string/iv_markercolordesc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -97,6 +99,7 @@
 
         <ImageView
             android:id="@+id/ivColor3"
+            android:contentDescription="@string/iv_markercolordesc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -132,6 +135,7 @@
 
         <ImageView
             android:id="@+id/ivColor4"
+            android:contentDescription="@string/iv_markercolordesc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -167,6 +171,7 @@
 
         <ImageView
             android:id="@+id/ivColor5"
+            android:contentDescription="@string/iv_markercolordesc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"

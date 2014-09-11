@@ -532,6 +532,7 @@ int string common_google_play_services_update_title 0x7f060012
 int string common_signin_button_text 0x7f06001d
 int string common_signin_button_text_long 0x7f06001e
 int string hello_world 0x7f06002e
+int string iv_markercolordesc 0x7f060039
 int string switch_boatsforhire 0x7f060038
 int string switch_bridge 0x7f060037
 int string switch_launch 0x7f060035

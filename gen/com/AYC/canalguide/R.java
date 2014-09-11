@@ -1793,6 +1793,7 @@ containing a value of this type.
          */
         public static final int common_signin_button_text_long=0x7f06001e;
         public static final int hello_world=0x7f06002e;
+        public static final int iv_markercolordesc=0x7f060039;
         public static final int switch_boatsforhire=0x7f060038;
         public static final int switch_bridge=0x7f060037;
         public static final int switch_launch=0x7f060035;
