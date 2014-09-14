@@ -27,6 +27,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -63,6 +64,8 @@ public class SplashActivity extends Activity {
 	private Handler handler;
 	private CountDownLatch countDownLatch;
 	
+	private ProgressBar progressBar;
+	
 	// Use this to cancel if needed
 	private LoadAsyncTask downloadMarkersAsyncTask;
 	
@@ -74,6 +77,8 @@ public class SplashActivity extends Activity {
         log("Created Splash Activity");
 
         handler = new Handler();
+        
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
         
         // If the data has been downloaded before and isn't too old, load saved data
         // else, download data from the website
@@ -97,7 +102,7 @@ public class SplashActivity extends Activity {
      * @author James O'Leary
      *
      */
-	private class LoadAsyncTask extends AsyncTask<String, Void, HashMap<String, String>>{
+	private class LoadAsyncTask extends AsyncTask<String, Integer, HashMap<String, String>>{
 
 		@Override
         protected void onPreExecute() {
@@ -123,6 +128,7 @@ public class SplashActivity extends Activity {
 		protected HashMap<String, String> doInBackground(String... URLs) {
 			HashMap<String, String> map = new HashMap<String, String>();
 			String xmlString = "";
+			int downloadedCount = 0;
 			
 			for(String URL : URLs){
 				try {		
@@ -133,6 +139,9 @@ public class SplashActivity extends Activity {
 					HttpResponse httpResponse = httpClient.execute(httpPost);
 					HttpEntity httpEntity = httpResponse.getEntity();
 					xmlString = EntityUtils.toString(httpEntity); 
+
+					downloadedCount++;
+					publishProgress((int) ((downloadedCount / (float) URLs.length) * 100));
 					
 					if(isCancelled()){
 						log("LoadAsyncTask: is cancelled!! returning null");
@@ -200,6 +209,10 @@ public class SplashActivity extends Activity {
 			
 			return map;
 		}
+		
+	     protected void onProgressUpdate(Integer... progress) {
+	    	 progressBar.setProgress(progress[0]);
+	     }
 		
 		/**
 		 * After the xmlStrings are loaded, it will save the xmlStrings then create the main activity
@@ -321,9 +334,15 @@ public class SplashActivity extends Activity {
 	    SharedPreferences xmlStringsPref = getSharedPreferences(PREFS_NAME, 0);
 		HashMap<String, String> xmlStrings = new HashMap<String, String>();
 		
+		int downloadedCount = 0;
+		progressBar.setProgress(0);
+		
 		for(String url : URLs){
 			xmlStrings.put(url, xmlStringsPref.getString(url, ""));
 			log(url + " = " + xmlStringsPref.getString(url, "").substring(0, 100));
+			
+			downloadedCount++;
+			progressBar.setProgress((int) ((downloadedCount / (float) URLs.length) * 100));
 		}
 		
 		return xmlStrings;
