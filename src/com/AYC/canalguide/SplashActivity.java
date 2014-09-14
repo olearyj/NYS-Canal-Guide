@@ -75,15 +75,19 @@ public class SplashActivity extends Activity {
 
         handler = new Handler();
         
-        // TODO - use the following method to decide whether to download from web or load from saved data
-        isSavedDataValid();
-        
-        
-        // Latch is initialized with the parameter one because were waiting
-        // for the one runnable that is post delayed to countDown the latch
-        countDownLatch = new CountDownLatch(2);
-        
-        downloadMarkersAsyncTask = (LoadAsyncTask) new LoadAsyncTask().execute(URLs);
+        // If the data has been downloaded before and isn't too old, load saved data
+        // else, download data from the website
+        if( isSavedDataValid() ){
+        	createMainActivity( loadXmlStrings() );
+        }
+        else{
+	        // Latch is initialized with the parameter two because were waiting
+	        // for the one runnable that is post delayed to countDown the latch
+        	// and to finish downloading the data
+	        countDownLatch = new CountDownLatch(2);
+	        
+	        downloadMarkersAsyncTask = (LoadAsyncTask) new LoadAsyncTask().execute(URLs);
+        }
     }
     
     /**
