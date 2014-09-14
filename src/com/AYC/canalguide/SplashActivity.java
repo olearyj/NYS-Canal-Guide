@@ -2,6 +2,8 @@ package com.AYC.canalguide;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -47,6 +49,7 @@ public class SplashActivity extends Activity {
 	private static final long MINIMUM_SPLASH_TIME = 1000L;
 	
 	private static final String PREFS_NAME = "xmlStrings";
+	private static final String DATA_LAST_SAVED_DATE_TAG = "Last saved date";
 	
 	// Default permissions for this because MainActivity uses this
 	public static final String[] URLs = {"http://www.canals.ny.gov/xml/locks.xml", 
@@ -273,6 +276,11 @@ public class SplashActivity extends Activity {
 	        editor.putString((String) pairs.getKey(), (String) pairs.getValue());
 	        iterator.remove(); // Avoids a ConcurrentModificationException
 	    }
+	    
+	    // Save the the date that the data was downloaded
+	    Calendar calendar = Calendar.getInstance();
+	    editor.putLong(DATA_LAST_SAVED_DATE_TAG, calendar.getTimeInMillis());
+	    
 	    editor.commit();	// Commit the edits!
 	}
 	
@@ -292,6 +300,18 @@ public class SplashActivity extends Activity {
 		}
 		
 		return xmlStrings;
+	}
+	
+	/**
+	 * This will get the date that the data was last downloaded from the canal site
+	 * 
+	 * @return date in milliseconds
+	 */
+	private long loadDataLastSavedDate(){
+		log("Loading the date that the data was saved last");
+	    SharedPreferences sharedPref = getSharedPreferences(PREFS_NAME, 0);
+		
+		return sharedPref.getLong(DATA_LAST_SAVED_DATE_TAG, -1);
 	}
 		
     private void log(String msg){
