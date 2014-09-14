@@ -134,6 +134,11 @@ public class SplashActivity extends Activity {
 					HttpEntity httpEntity = httpResponse.getEntity();
 					xmlString = EntityUtils.toString(httpEntity); 
 					
+					if(isCancelled()){
+						log("LoadAsyncTask: is cancelled!! returning null");
+						return null;
+					}
+					
 				} catch (UnsupportedEncodingException e) {
 					e.printStackTrace();
 				} catch (ClientProtocolException e) {
@@ -186,6 +191,11 @@ public class SplashActivity extends Activity {
 				countDownLatch.await();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
+			}
+			
+			if(isCancelled()){
+				log("LoadAsyncTask: is cancelled!! returning null");
+				return null;
 			}
 			
 			return map;
