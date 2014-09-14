@@ -96,6 +96,8 @@ public class MainActivity extends Activity {
 	    
 		int mapType = sharedPref.getInt("MapType", GoogleMap.MAP_TYPE_NORMAL);
 		((OptionsFragment) optionsFragment).setMapType(mapType);
+		int updateTime = sharedPref.getInt("UpdateTime", 7);
+		((OptionsFragment) optionsFragment).setUpdateTime(updateTime);
     }
     
     private void log(String msg){

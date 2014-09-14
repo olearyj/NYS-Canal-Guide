@@ -25,6 +25,7 @@ public class OptionsFragment extends Fragment {
 	
 	private boolean[] switchValues;
 	private int mapType;
+	private int updateTime;
 	
 	/**
 	 * This constructor will set default values
@@ -44,6 +45,7 @@ public class OptionsFragment extends Fragment {
 	    View view = inflater.inflate(R.layout.fragment_options, container, false);
 
 	    setUpMapTypeSpinner(view);
+	    setUpDataValidSpinner(view);
 
 		switches[0] = (Switch) view.findViewById(R.id.switch_lock);
 		switches[1] = (Switch) view.findViewById(R.id.switch_marina);
@@ -93,6 +95,15 @@ public class OptionsFragment extends Fragment {
 		this.mapType = mapType;
 	}
 	
+	/**
+	 * This method is used by the main activity to set the updateTime after it's loaded
+	 * 
+	 * @param updateTime
+	 */
+	public void setUpdateTime(int updateTime){
+		this.updateTime = updateTime;
+	}
+	
 	private void setUpMapTypeSpinner(View view){
 		final int mapTypes[] = {GoogleMap.MAP_TYPE_NORMAL, GoogleMap.MAP_TYPE_HYBRID, 
 				GoogleMap.MAP_TYPE_SATELLITE, GoogleMap.MAP_TYPE_TERRAIN};
@@ -123,6 +134,35 @@ public class OptionsFragment extends Fragment {
 		
 	}
 	
+	private void setUpDataValidSpinner(View view){
+		final int updateTimes[] = {1, 3, 7, 14};
+		final String updateTimeStrings[] = {"Every day", "Every 3 days", "Every week", "Every 2 weeks"};
+		
+		final Spinner spinner = (Spinner) view.findViewById(R.id.spinnerDataValid);
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>
+				(getActivity() , android.R.layout.simple_spinner_item, updateTimeStrings);
+		
+		spinner.setAdapter(adapter);
+		
+		// Set update time
+		spinner.setSelection( intArrayIndexOf(updateTimes, updateTime) );
+		
+		spinner.setOnItemSelectedListener(new OnItemSelectedListener(){
+			@Override
+			public void onItemSelected(AdapterView<?> arg0, View arg1,
+					int arg2, long arg3) {
+				// On item select, set the map type variable
+				updateTime = updateTimes[spinner.getSelectedItemPosition()];
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				// Unimplemented
+			}
+		});
+		
+	}
+	
 	private int intArrayIndexOf(int[] array, int value) {
 	    for(int i=0; i<array.length; i++) 
 	         if(array[i] == value)
@@ -140,6 +180,7 @@ public class OptionsFragment extends Fragment {
 	    SharedPreferences.Editor editor = sharedPref.edit();
 	    
 	    editor.putInt("MapType", mapType);
+	    editor.putInt("UpdateTime", updateTime);
 	    
 	    editor.commit();	// Commit the edits!
 	}

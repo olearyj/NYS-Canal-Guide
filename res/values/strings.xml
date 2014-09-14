@@ -10,6 +10,7 @@
     
     <string name="tv_filters">Filters</string>
     <string name="tv_maptype">Map Type</string>
+    <string name="tv_datavalid">Update Data Frequency</string>
     
     <string name="switch_lock">Locks</string>
     <string name="switch_launch">Boat Launches</string>

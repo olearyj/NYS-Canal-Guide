@@ -22,11 +22,13 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -53,7 +55,7 @@ public class SplashActivity extends Activity {
 	
 	private static final String DATA_LAST_SAVED_DATE_TAG = "Last saved date";
 	private static final long DAY_IN_MILLISECONDS = 86400000;
-	private static final long DATA_VALID_TIME = 7 * DAY_IN_MILLISECONDS;	// Data valid for 7 days
+	private static long DATA_VALID_TIME;	// How long data is valid for
 	
 	// Default permissions for this because MainActivity uses this
 	public static final String[] URLs = {"http://www.canals.ny.gov/xml/locks.xml", 
@@ -73,9 +75,24 @@ public class SplashActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        
         log("Created Splash Activity");
 
+        DATA_VALID_TIME = getUpdateFrequency() * DAY_IN_MILLISECONDS;
+        
+        DisplayMetrics dm = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(dm);
+		int maxSize = dm.widthPixels/2;
+		log("Image Logo Max Size = " + maxSize);
+		
+		if(maxSize < 30){
+	        ImageView ivLogo = (ImageView) findViewById(R.id.ivLogo);
+	        ivLogo.setImageResource(R.drawable.ic_action_about);
+	        ivLogo.setMaxHeight(maxSize);
+	        ivLogo.setMaxWidth(maxSize);
+	        ivLogo.setMinimumHeight(maxSize);
+	        ivLogo.setMinimumWidth(maxSize);
+		}
+        
         handler = new Handler();
         // Latch is initialized with the parameter two because were waiting
         // for the one runnable that is post delayed to countDown the latch
@@ -409,6 +426,16 @@ public class SplashActivity extends Activity {
 		
 		return sharedPref.getLong(DATA_LAST_SAVED_DATE_TAG, -1);
 	}
+	
+	/**
+     * This method will get the update frequency that was saved in the OptionsFragment
+     * 
+     * @return Update frequency in days
+     */
+    private int getUpdateFrequency(){
+	    SharedPreferences sharedPref = getSharedPreferences(OptionsFragment.PREFS_NAME, 0);
+		return sharedPref.getInt("UpdateTime", 7);
+    }
 		
     private void log(String msg){
     	if(SplashActivity.LOG_ENABLED)

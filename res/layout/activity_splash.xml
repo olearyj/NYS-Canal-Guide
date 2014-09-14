@@ -10,7 +10,7 @@
 	<!-- TODO This will be a loading GIF -->
 	
     <ImageView
-        android:id="@+id/imageView1"
+        android:id="@+id/ivLogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
