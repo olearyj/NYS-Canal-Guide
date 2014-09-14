@@ -110,10 +110,10 @@ public class SplashActivity extends Activity {
         			countDownLatch.countDown();
         			log("latch countDown: Time has passed minimum time of: " + 
         					MINIMUM_SPLASH_TIME + "ms for this splash screen");
-        		            		
-            		// If the data isn't finished downloading yet, display a button allowing 
-            		// the option to load from previously stored data
-            		if(countDownLatch.getCount() != 0)	
+        		    
+            		// If there is saved data and if the data isn't finished downloading yet, 
+        			// display a button allowing the option to load from previously stored data
+            		if( loadDataLastSavedDate() != -1 && countDownLatch.getCount() != 0 )	
             			createLoadFromStorageButton();
             	}
             }, MINIMUM_SPLASH_TIME);
@@ -141,25 +141,31 @@ public class SplashActivity extends Activity {
 				// IOException catch will attempt to load from storage then open mainActivity on success
 				} catch (IOException e) {
 					log("Error: IOException because network not connected");
-					runOnUiThread(new Runnable(){
-						@Override
-						public void run() {
-							Toast.makeText(getApplicationContext(), "Couldn't download data from network, " + 
-									"now loading from storage", Toast.LENGTH_LONG).show();
-						}
-					});
 					
-					HashMap<String, String>	xmlStrings = loadXmlStrings();
-					// Cancel LoadAsyncTask if loadXmlStrings successful
-					if(xmlStrings.containsKey(URLs[0])){
+					// If there is saved data
+					if(loadDataLastSavedDate() != -1){
+						HashMap<String, String>	xmlStrings = loadXmlStrings();
 						downloadMarkersAsyncTask.cancel(true);
 						createMainActivity(xmlStrings);
+						
+						runOnUiThread(new Runnable(){
+							@Override
+							public void run() {
+								Toast.makeText(getApplicationContext(), "Couldn't download data from network, " + 
+										"loaded from storage.", Toast.LENGTH_LONG).show();
+							}
+						});
 						return null;
 					}
 					else{
-						Toast.makeText(getApplicationContext(), "Load from storage unsucessful: " + 
-								"(You probably have never used this app before)", Toast.LENGTH_LONG).show();
-						// Close Activity since both loading from net and load from storage failed
+						runOnUiThread(new Runnable(){
+							@Override
+							public void run() {
+								Toast.makeText(getApplicationContext(), "Couldn't download data from network, " + 
+										"check your network connection and try again.", Toast.LENGTH_LONG).show();
+							}
+						});
+						// Close Activity since loading from website failed and there is no saved data
 						finish();
 					}
 				} 
