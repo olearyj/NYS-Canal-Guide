@@ -49,7 +49,10 @@ public class SplashActivity extends Activity {
 	private static final long MINIMUM_SPLASH_TIME = 1000L;
 	
 	private static final String PREFS_NAME = "xmlStrings";
+	
 	private static final String DATA_LAST_SAVED_DATE_TAG = "Last saved date";
+	private static final long DAY_IN_MILLISECONDS = 86400000;
+	private static final long DATA_VALID_TIME = 7 * DAY_IN_MILLISECONDS;	// Data valid for 7 days
 	
 	// Default permissions for this because MainActivity uses this
 	public static final String[] URLs = {"http://www.canals.ny.gov/xml/locks.xml", 
@@ -71,6 +74,10 @@ public class SplashActivity extends Activity {
         log("Created Splash Activity");
 
         handler = new Handler();
+        
+        // TODO - use the following method to decide whether to download from web or load from saved data
+        isSavedDataValid();
+        
         
         // Latch is initialized with the parameter one because were waiting
         // for the one runnable that is post delayed to countDown the latch
@@ -303,9 +310,32 @@ public class SplashActivity extends Activity {
 	}
 	
 	/**
+	 * This method will use the date that the data was last downloaded to determine 
+	 * whether the data is too old.
+	 * 
+	 * @return true if the data isn't too old
+	 */
+	private boolean isSavedDataValid(){
+		Calendar calendar = Calendar.getInstance();
+        Date lastValidDataDate = new Date(calendar.getTimeInMillis() - DATA_VALID_TIME);
+        Date lastDownloadDataDate = new Date(loadDataLastSavedDate());
+        
+        log("Last valid data date = " + lastValidDataDate);
+        log("Last download data date = " + lastDownloadDataDate);
+        
+        if(lastDownloadDataDate.after(lastValidDataDate)){
+        	log("Saved data is valid");
+        	return true;
+        } else {
+        	log("Saved data is valid");
+        	return false;
+        }
+	}
+	
+	/**
 	 * This will get the date that the data was last downloaded from the canal site
 	 * 
-	 * @return date in milliseconds
+	 * @return Date in milliseconds
 	 */
 	private long loadDataLastSavedDate(){
 		log("Loading the date that the data was saved last");
