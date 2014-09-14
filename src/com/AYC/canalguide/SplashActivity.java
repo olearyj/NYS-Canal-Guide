@@ -31,11 +31,11 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 /**
- * This activity will be the splash screen (loading screen) while the app gathers 
- * marker data from the NY Canal web page in an AsyncTask. When done, it will
- * save the xmlStrings and open the main activity. This splash screen will always 
- * be up for a minimum amount of time. If the xmlStrings aren't downloaded in that time,
- * a button will then pop-up allowing the choice to load from storage.
+ * This activity will be the splash screen (loading screen). If the last downloaded data
+ * isn't too old, it will load that marker data. Else it will download data from the NYS canal
+ * web site in an AsyncTask and will save that data. This splash screen will always be up for 
+ * at least a minimum amount of time. If there exists saved data and the data isn't downloaded 
+ * in that time, a button will then pop-up allowing the choice to load from storage.
  * 
  * @author James O'Leary
  *
