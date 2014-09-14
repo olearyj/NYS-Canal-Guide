@@ -77,23 +77,60 @@ public class SplashActivity extends Activity {
         log("Created Splash Activity");
 
         handler = new Handler();
+        // Latch is initialized with the parameter two because were waiting
+        // for the one runnable that is post delayed to countDown the latch
+    	// and to finish loading the data
+        countDownLatch = new CountDownLatch(2);
         
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         
         // If the data has been downloaded before and isn't too old, load saved data
         // else, download data from the website
         if( isSavedDataValid() ){
-        	createMainActivity( loadXmlStrings() );
+        	loadFromStorageThread.start();
+        	// Old way to load from storage
+        	//createMainActivity( loadXmlStrings() );
         }
-        else{
-	        // Latch is initialized with the parameter two because were waiting
-	        // for the one runnable that is post delayed to countDown the latch
-        	// and to finish downloading the data
-	        countDownLatch = new CountDownLatch(2);
-	        
+        else
 	        downloadMarkersAsyncTask = (LoadAsyncTask) new LoadAsyncTask().execute(URLs);
-        }
+        
+        handler.postDelayed(new Runnable(){
+        	@Override
+    		public void run() {
+    			countDownLatch.countDown();
+    			log("latch countDown: Time has passed minimum time of: " + 
+    					MINIMUM_SPLASH_TIME + "ms for this splash screen");
+    		    
+        		// If there is saved data and if the data isn't finished downloading yet, 
+    			// display a button allowing the option to load from previously stored data
+        		if( loadDataLastSavedDate() != -1 && countDownLatch.getCount() != 0 )	
+        			createLoadFromStorageButton();
+        	}
+        }, MINIMUM_SPLASH_TIME);
     }
+    
+    Thread loadFromStorageThread = new Thread(){
+		public void run(){
+			final HashMap<String, String> xmlStrings = loadXmlStrings();
+			
+			countDownLatch.countDown();
+        	log("Latch countDown: Done loading data");
+        	
+        	// Wait for countDown before opening main activity
+    		try {
+    	    	log("Latch awaiting");
+    			countDownLatch.await();
+    		} catch (InterruptedException e) {
+    			e.printStackTrace();
+    		}
+    		
+			runOnUiThread(new Runnable(){
+				public void run(){
+				createMainActivity(xmlStrings);
+				}
+			});
+		}
+	};
     
     /**
      * This extends AsychTask will load add app data (from data or storage)
@@ -109,19 +146,7 @@ public class SplashActivity extends Activity {
             super.onPreExecute();
             log("Created LoadAsyncTask");
             
-            handler.postDelayed(new Runnable(){
-            	@Override
-        		public void run() {
-        			countDownLatch.countDown();
-        			log("latch countDown: Time has passed minimum time of: " + 
-        					MINIMUM_SPLASH_TIME + "ms for this splash screen");
-        		    
-            		// If there is saved data and if the data isn't finished downloading yet, 
-        			// display a button allowing the option to load from previously stored data
-            		if( loadDataLastSavedDate() != -1 && countDownLatch.getCount() != 0 )	
-            			createLoadFromStorageButton();
-            	}
-            }, MINIMUM_SPLASH_TIME);
+            
 		}
 		
 		@Override
@@ -158,13 +183,13 @@ public class SplashActivity extends Activity {
 					
 					// If there is saved data
 					if(loadDataLastSavedDate() != -1){
-						HashMap<String, String>	xmlStrings = loadXmlStrings();
+						final HashMap<String, String> xmlStrings = loadXmlStrings();
 						downloadMarkersAsyncTask.cancel(true);
-						createMainActivity(xmlStrings);
 						
 						runOnUiThread(new Runnable(){
 							@Override
 							public void run() {
+								createMainActivity(xmlStrings);
 								Toast.makeText(getApplicationContext(), "Couldn't download data from network, " + 
 										"loaded from storage.", Toast.LENGTH_LONG).show();
 							}
@@ -181,6 +206,7 @@ public class SplashActivity extends Activity {
 						});
 						// Close Activity since loading from website failed and there is no saved data
 						finish();
+						return null;
 					}
 				} 
 				
@@ -191,28 +217,28 @@ public class SplashActivity extends Activity {
 				map.put(URL, xmlString);
 			}
 			
-        	countDownLatch.countDown();
-        	log("Latch countDown: Done loading data");
-			
-			// Wait for countDown before going to onPostExcecute and opening main activity
-			try {
-            	log("Latch awaiting");
-				countDownLatch.await();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			
 			if(isCancelled()){
 				log("LoadAsyncTask: is cancelled!! returning null");
 				return null;
 			}
 			
+			countDownLatch.countDown();
+        	log("Latch countDown: Done loading data");
+        	
+        	// Wait for countDown before opening main activity
+    		try {
+    	    	log("Latch awaiting");
+    			countDownLatch.await();
+    		} catch (InterruptedException e) {
+    			e.printStackTrace();
+    		}
+			
 			return map;
 		}
 		
-	     protected void onProgressUpdate(Integer... progress) {
+	    protected void onProgressUpdate(Integer... progress) {
 	    	 progressBar.setProgress(progress[0]);
-	     }
+	    }
 		
 		/**
 		 * After the xmlStrings are loaded, it will save the xmlStrings then create the main activity
@@ -253,7 +279,7 @@ public class SplashActivity extends Activity {
 		RelativeLayout.LayoutParams params = 
 				new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-		params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+		params.addRule(RelativeLayout.ABOVE, R.id.progressBar);
 		layout.addView(loadFromStorageButton, params);
 		
 		loadFromStorageButton.setOnClickListener(new OnClickListener(){
@@ -290,6 +316,7 @@ public class SplashActivity extends Activity {
 	 * @param xmlStringMap xmlStrings to be sent to the MainActivity
 	 */
 	public void createMainActivity(HashMap<String, String> xmlStringMap){
+		
         log("Creating the Main Activity");
         Intent intent = new Intent(SplashActivity.this, MainActivity.class);
         intent.putExtra("map", xmlStringMap);
