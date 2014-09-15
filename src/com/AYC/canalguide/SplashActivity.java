@@ -63,6 +63,15 @@ public class SplashActivity extends Activity {
 			"http://www.canals.ny.gov/xml/liftbridges.xml", "http://www.canals.ny.gov/xml/guardgates.xml",
 			"http://www.canals.ny.gov/xml/boatsforhire.xml"};
 	
+	public static final String[] navInfoURLs = {"http://www.canals.ny.gov/xml/navinfo-hudsonriver.xml",
+		"http://www.canals.ny.gov/xml/navinfo-champlain.xml", "http://www.canals.ny.gov/xml/navinfo-fortedward.xml",
+		"http://www.canals.ny.gov/xml/navinfo-erieeastern.xml", "http://www.canals.ny.gov/xml/navinfo-uticaharbor.xml",
+		"http://www.canals.ny.gov/xml/navinfo-oswego.xml", "http://www.canals.ny.gov/xml/navinfo-eriecentral.xml",
+		"http://www.canals.ny.gov/xml/navinfo-onondagalake.xml", "http://www.canals.ny.gov/xml/navinfo-cayugaseneca.xml",
+		"http://www.canals.ny.gov/xml/navinfo-senecalake.xml", "http://www.canals.ny.gov/xml/navinfo-eriewestern.xml",
+		"http://www.canals.ny.gov/xml/navinfo-geneseeriver.xml", "http://www.canals.ny.gov/xml/navinfo-ellicottcreek.xml",
+		"http://www.canals.ny.gov/xml/navinfo-cayugalake.xml", "http://www.canals.ny.gov/xml/navinfo-frankfortharbor.xml"};
+	
 	private Handler handler;
 	private CountDownLatch countDownLatch;
 	

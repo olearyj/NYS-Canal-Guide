@@ -4,6 +4,11 @@
     <!-- The splash background will be marine blue -->
     <color name="splash_bg">#01386A</color>
     
+    <!-- These colors are the main colors throughout this app -->
+    <color name="dark_blue">#01386A</color>
+    <color name="darker_blue">#002B53</color>
+    <color name="gold">#E9C200</color>
+    
     <color name="white">#FFFFFF</color>
     
     <!-- Colors for map markers -->

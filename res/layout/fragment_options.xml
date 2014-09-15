@@ -16,7 +16,9 @@
         android:layout_height="wrap_content"
         android:paddingTop="5dp"
         android:text="@string/tv_filters"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textStyle="bold"
+        android:textColor="@color/dark_blue" />
 
     <RelativeLayout
 	    android:layout_width="match_parent"
@@ -50,7 +52,9 @@
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/frameLayout1"
         android:text="@string/switch_lock"
-        android:checked="true" />
+        android:checked="true"
+        android:thumb="@drawable/switch_inner"
+    	android:track="@drawable/switch_track" />
 
 	</RelativeLayout>
 
@@ -86,7 +90,9 @@
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/frameLayout2"
         android:text="@string/switch_marina"
-        android:checked="true" />
+        android:checked="true"
+        android:thumb="@drawable/switch_inner"
+    	android:track="@drawable/switch_track" />
 
 	</RelativeLayout>
 
@@ -122,7 +128,9 @@
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/frameLayout3"
         android:text="@string/switch_launch"
-        android:checked="true" />
+        android:checked="true"
+        android:thumb="@drawable/switch_inner"
+    	android:track="@drawable/switch_track" />
 
 	</RelativeLayout>
 
@@ -158,7 +166,9 @@
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/frameLayout4"
         android:text="@string/switch_bridge"
-        android:checked="true" />
+        android:checked="true"
+        android:thumb="@drawable/switch_inner"
+    	android:track="@drawable/switch_track" />
 
 	</RelativeLayout>
 
@@ -194,7 +204,9 @@
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/frameLayout5"
         android:text="@string/switch_boatsforhire"
-        android:checked="true" />
+        android:checked="true"
+        android:thumb="@drawable/switch_inner"
+    	android:track="@drawable/switch_track" />
 
 	</RelativeLayout>
 
@@ -206,7 +218,9 @@
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
         android:text="@string/tv_maptype"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textStyle="bold"
+        android:textColor="@color/dark_blue" />
         
     <Spinner
         android:id="@+id/spinnerMapType"
@@ -219,7 +233,9 @@
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
         android:text="@string/tv_datavalid"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textStyle="bold"
+        android:textColor="@color/dark_blue" />
     
     <Spinner
         android:id="@+id/spinnerDataValid"
