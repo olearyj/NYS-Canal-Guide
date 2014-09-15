@@ -11,6 +11,7 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.app.ActionBar.Tab;
 import android.content.SharedPreferences;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -31,6 +32,7 @@ public class MainActivity extends Activity {
 	
 		final ActionBar tabBar = getActionBar();
 		tabBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+        //tabBar.setBackgroundDrawable(new ColorDrawable(0xff01386A));
 
 		xmlStrings = (HashMap<String, String>) getIntent().getSerializableExtra("map");
 		mapFragment = new CanalMapFragment();

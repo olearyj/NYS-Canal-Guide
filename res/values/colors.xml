@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     
-    <!-- The splash background will be white -->
-    <color name="splash_bg">#FFFFFF</color>
+    <!-- The splash background will be marine blue -->
+    <color name="splash_bg">#01386A</color>
+    
+    <color name="white">#FFFFFF</color>
     
     <!-- Colors for map markers -->
     <color name="blue">#0000FF</color>
