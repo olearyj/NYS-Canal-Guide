@@ -25,7 +25,9 @@ public class CanalGuideXmlParser {
         try {
             parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
             parser.setInput(reader);
+            log("LFLSMLADA1" + parser.getName());
             parser.nextTag();
+            log("LFLSMLADA2" + parser.getName());
             return read();
         } finally {
             reader.close();
@@ -39,6 +41,7 @@ public class CanalGuideXmlParser {
     	int event = parser.getEventType();
         while(event != XmlPullParser.END_DOCUMENT){
             String name = parser.getName();
+            log("LFLSMLADA3=" + parser.getName() + " event=" + event);
             
             if(event == XmlPullParser.START_TAG)
             	   if(name.equals("locks")){
@@ -55,6 +58,9 @@ public class CanalGuideXmlParser {
             	   }
             	   else if(name.equals("guardgates") || name.equals("liftbridges")){
             		   mapMarkers = BridgeGateMarker.readMarker(parser); 
+            	   }
+            	   else if(name.equals("navigationinfo")){
+            		   mapMarkers = NavInfoMarker.readMarker(parser);
             	   }
             	   else {
             		   log("ERROR: name of markers not found: " + name);

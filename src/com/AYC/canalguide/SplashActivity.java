@@ -31,6 +31,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -76,6 +77,7 @@ public class SplashActivity extends Activity {
 	private CountDownLatch countDownLatch;
 	
 	private ProgressBar progressBar;
+	private TextView tvLoading;
 	
 	// Use this to cancel if needed
 	private LoadAsyncTask downloadMarkersAsyncTask;
@@ -88,20 +90,8 @@ public class SplashActivity extends Activity {
 
         DATA_VALID_TIME = getUpdateFrequency() * DAY_IN_MILLISECONDS;
         
-        DisplayMetrics dm = new DisplayMetrics();
-		getWindowManager().getDefaultDisplay().getMetrics(dm);
-		int maxSize = dm.widthPixels/2;
-		log("Image Logo Max Size = " + maxSize);
+        setLogoImageSize();
 		
-		if(maxSize < 30){
-	        ImageView ivLogo = (ImageView) findViewById(R.id.ivLogo);
-	        ivLogo.setImageResource(R.drawable.ic_action_about);
-	        ivLogo.setMaxHeight(maxSize);
-	        ivLogo.setMaxWidth(maxSize);
-	        ivLogo.setMinimumHeight(maxSize);
-	        ivLogo.setMinimumWidth(maxSize);
-		}
-        
         handler = new Handler();
         // Latch is initialized with the parameter two because were waiting
         // for the one runnable that is post delayed to countDown the latch
@@ -109,13 +99,12 @@ public class SplashActivity extends Activity {
         countDownLatch = new CountDownLatch(2);
         
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        tvLoading = (TextView) findViewById(R.id.tvLoading);
         
         // If the data has been downloaded before and isn't too old, load saved data
         // else, download data from the website
         if( isSavedDataValid() ){
         	loadFromStorageThread.start();
-        	// Old way to load from storage
-        	//createMainActivity( loadXmlStrings() );
         }
         else
 	        downloadMarkersAsyncTask = (LoadAsyncTask) new LoadAsyncTask().execute(URLs);
@@ -135,6 +124,10 @@ public class SplashActivity extends Activity {
         }, MINIMUM_SPLASH_TIME);
     }
     
+    /**
+     * This thread will load data from storage, await for the minimum splash time to expire
+     * and create the main activity
+     */
     Thread loadFromStorageThread = new Thread(){
 		public void run(){
 			final HashMap<String, String> xmlStrings = loadXmlStrings();
@@ -158,6 +151,24 @@ public class SplashActivity extends Activity {
 		}
 	};
     
+	/**
+	 * This method will set the logo image of the splash screen to the 512px logo.
+	 * The logo's height and width will be resized to 2/5 the width of the phones screen.
+	 */
+	private void setLogoImageSize(){
+        DisplayMetrics dm = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(dm);
+		if(dm.widthPixels != 0){
+			int maxSize = (int) (dm.widthPixels * 2/5);
+		    ImageView ivLogo = (ImageView) findViewById(R.id.ivLogo);
+	        ivLogo.setImageResource(R.drawable.ic_logo_512);
+	        ivLogo.setMaxHeight(maxSize);
+	        ivLogo.setMaxWidth(maxSize);
+	        ivLogo.setMinimumHeight(maxSize);
+	        ivLogo.setMinimumWidth(maxSize);
+		}
+	}
+	
     /**
      * This extends AsychTask will load add app data (from data or storage)
      * It will then create the main activity and close this splash activity when finished 
@@ -172,7 +183,7 @@ public class SplashActivity extends Activity {
             super.onPreExecute();
             log("Created LoadAsyncTask");
             
-            
+            tvLoading.setText(R.string.tv_loadingdatabase);
 		}
 		
 		@Override
@@ -387,15 +398,30 @@ public class SplashActivity extends Activity {
 	    SharedPreferences xmlStringsPref = getSharedPreferences(PREFS_NAME, 0);
 		HashMap<String, String> xmlStrings = new HashMap<String, String>();
 		
-		int downloadedCount = 0;
+		runOnUiThread(new Runnable(){
+			@Override
+			public void run() {
+				tvLoading.setText(R.string.tv_loadingphone);
+			}
+		});
+		
 		progressBar.setProgress(0);
+		
+		// Use this method of posting progress so it increments until the MIN_SPLASH_TIME is over
+		// since this method of loading is so fast
+		Runnable updateProgressWithTimeRunnable = new Runnable(){
+			@Override
+			public void run() {
+				int curProgress = progressBar.getProgress();
+				progressBar.setProgress((int) (curProgress + ((1 / (float) URLs.length) * 100)));
+			}
+		};
+		for(int i=1; i<URLs.length + 1; i++)
+			handler.postDelayed(updateProgressWithTimeRunnable, i * (MINIMUM_SPLASH_TIME/URLs.length));
 		
 		for(String url : URLs){
 			xmlStrings.put(url, xmlStringsPref.getString(url, ""));
 			log(url + " = " + xmlStringsPref.getString(url, "").substring(0, 100));
-			
-			downloadedCount++;
-			progressBar.setProgress((int) ((downloadedCount / (float) URLs.length) * 100));
 		}
 		
 		return xmlStrings;

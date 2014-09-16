@@ -8,8 +8,6 @@ import java.util.List;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
-import android.util.Log;
-
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -146,12 +144,12 @@ public class LaunchMarker extends MapMarker implements Serializable {
 		 String tag;
 		 int event = parser.getEventType();
 		 while(event != XmlPullParser.END_DOCUMENT){
-			 try{
-			 parser.nextTag();
-			 } catch(XmlPullParserException e){
-				 Log.i("PARSER","RETURNING launchMARKERS FROM CATCH");
-				 return mapMarkers;
-			 }
+			try{
+			parser.nextTag();
+			} catch(XmlPullParserException e){
+				log("Returning " + mapMarkers.size() + " LaunchMarkers from catch");
+				return mapMarkers;
+			}
 			tag = parser.getName();
 		    if (tag.equals("boatlaunch")) {
 		    	
@@ -185,6 +183,7 @@ public class LaunchMarker extends MapMarker implements Serializable {
 			 e.printStackTrace();
 		 }
 		 
+		 log("Returning " + mapMarkers.size() + " LaunchMarkers");
 		 return mapMarkers;
 	}
 
@@ -195,4 +194,8 @@ public class LaunchMarker extends MapMarker implements Serializable {
 				bodyOfWater;
 	}
 
+	private static void log(String msg){
+		log("LaunchMarker", msg);
+    }
+	
 }

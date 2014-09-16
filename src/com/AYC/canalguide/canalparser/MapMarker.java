@@ -2,6 +2,9 @@ package com.AYC.canalguide.canalparser;
 
 import java.io.Serializable;
 
+import android.util.Log;
+
+import com.AYC.canalguide.SplashActivity;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -23,7 +26,7 @@ public abstract class MapMarker implements Serializable {
 	// Marker will be added once it is known (not in the constructor)
 	protected Marker marker;
 	
-	// ** LatLng and Marker classes aren't Serializable
+	// **NOTE: LatLng and Marker classes aren't Serializable
 	protected double lat, lng;
 	protected String name;
 	protected String bodyOfWater;
@@ -55,9 +58,6 @@ public abstract class MapMarker implements Serializable {
 	public Marker getMarker(){
 		return marker;
 	}
-	
-	// I dont think this will work because it is a static method
-	//public abstract LockMarker readMarker(XmlPullParser parser) throws XmlPullParserException, IOException;
 
 	public LatLng getlatLng(){
 		return new LatLng(lat, lng);
@@ -79,6 +79,9 @@ public abstract class MapMarker implements Serializable {
 		return name + " " + lat + " " + lng + " " + bodyOfWater + " " + mile;
 	}
 
-	
+	protected static void log(String tag, String msg){
+    	if(SplashActivity.LOG_ENABLED)
+    		Log.i(tag, msg);
+    }
 	
 }

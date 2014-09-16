@@ -8,8 +8,6 @@ import java.util.List;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
-import android.util.Log;
-
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -70,13 +68,12 @@ public class BridgeGateMarker extends MapMarker implements Serializable {
 		 String tag;
 		 int event = parser.getEventType();
 		 while(event != XmlPullParser.END_DOCUMENT){
-			 try{
-			 parser.nextTag();
-			 } catch(XmlPullParserException e){
-				 Log.i("PARSER","RETURNING BridgeMARKERS FROM CATCH");
-				 return mapMarkers;
-			 }
-			//parser.require(XmlPullParser.START_TAG, ns, "lock");
+			try{
+			parser.nextTag();
+			} catch(XmlPullParserException e){
+				log("Returning " + mapMarkers.size() + " BridgeGateMarkers from catch");
+				return mapMarkers;
+			}
 		    tag = parser.getName();
 		    if (tag.equals("liftbridge") || tag.equals("guardgate")) {
 		    	lat = Double.parseDouble(parser.getAttributeValue(null, "latitude"));
@@ -96,6 +93,7 @@ public class BridgeGateMarker extends MapMarker implements Serializable {
 			 e.printStackTrace();
 		 }
 		 
+		 log("Returning " + mapMarkers.size() + " BridgeGateMarkers");
 		 return mapMarkers;
 	}
 
@@ -103,6 +101,8 @@ public class BridgeGateMarker extends MapMarker implements Serializable {
 		return super.toString() + " " + location + " " + phoneNumber;
 	}
 
-	
+	private static void log(String msg){
+		log("BridgeMarker", msg);
+    }
 	
 }

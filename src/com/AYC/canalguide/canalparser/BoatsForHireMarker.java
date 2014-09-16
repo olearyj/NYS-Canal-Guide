@@ -8,9 +8,6 @@ import java.util.List;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
-import android.util.Log;
-
-import com.AYC.canalguide.SplashActivity;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -139,7 +136,6 @@ public class BoatsForHireMarker extends MapMarker implements Serializable {
     	 String cruisetype = null;
     	 String homeport = null;
     	 String waterways = null;
-    	
 
 		 try{
 		 String tag;
@@ -148,10 +144,9 @@ public class BoatsForHireMarker extends MapMarker implements Serializable {
 			 try{
 			 parser.nextTag();
 			 } catch(XmlPullParserException e){
-				 Log.i("PARSER","RETURNING boatsforhireMARKERS FROM CATCH");
+				 log("Returning " + mapMarkers.size() + " BoatsForHireMarkers from catch");
 				 return mapMarkers;
 			 }
-			//parser.require(XmlPullParser.START_TAG, ns, "lock");
 		    tag = parser.getName();
 		    if (tag.equals("cruise")) {
 		    	lat = Double.parseDouble(parser.getAttributeValue(null, "latitude"));
@@ -179,6 +174,7 @@ public class BoatsForHireMarker extends MapMarker implements Serializable {
 			 e.printStackTrace();
 		 }
 		 
+		 log("Returning " + mapMarkers.size() + " BoatsForHireMarkers");
 		 return mapMarkers;
 	}
 
@@ -188,9 +184,8 @@ public class BoatsForHireMarker extends MapMarker implements Serializable {
 				homeport + " " + waterways;
 	}
 	
-	private void log(String message) {
-		if(SplashActivity.LOG_ENABLED)
-    		Log.i("BoatsForHireMarker", message);
-	}
+	private static void log(String msg){
+		log("BoatsForHireMarker", msg);
+    }
 	
 }

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
-import android.util.Log;
+
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -100,13 +100,12 @@ public class LockMarker extends MapMarker implements Serializable {
 		 String tag;
 		 int event = parser.getEventType();
 		 while(event != XmlPullParser.END_DOCUMENT){
-			 try{
-			 parser.nextTag();
-			 } catch(XmlPullParserException e){
-				 Log.i("PARSER","RETURNING LOCKMARKERS FROM CATCH");
-				 return mapMarkers;
-			 }
-			//parser.require(XmlPullParser.START_TAG, ns, "lock");
+			try{
+			parser.nextTag();
+			} catch(XmlPullParserException e){
+				log("Returning " + mapMarkers.size() + " LockMarkers from catch");
+				return mapMarkers;
+			}
 		    tag = parser.getName();
 		    if (tag.equals("lock")) {
 		    	lat = Double.parseDouble(parser.getAttributeValue(null, "latitude"));
@@ -131,6 +130,7 @@ public class LockMarker extends MapMarker implements Serializable {
 			 e.printStackTrace();
 		 }
 		 
+		 log("Returning " + mapMarkers.size() + " LockMarkers");
 		 return mapMarkers;
 	}
 
@@ -138,5 +138,9 @@ public class LockMarker extends MapMarker implements Serializable {
 		return super.toString() + " " + location + " " + lift + " " + address + " " + city + " " + 
 				zip + " " + phoneNumber;
 	}
+	
+	private static void log(String msg){
+		log("LockMarker", msg);
+    }
 	
 }

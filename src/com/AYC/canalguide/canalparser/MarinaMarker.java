@@ -8,8 +8,6 @@ import java.util.List;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
-import android.util.Log;
-
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -41,7 +39,6 @@ public class MarinaMarker extends MapMarker implements Serializable {
 		 this.facilities = facilities;		 
 	}
 	
-
 	public String getShore(){
 		return shore;
 	}
@@ -111,7 +108,7 @@ public class MarinaMarker extends MapMarker implements Serializable {
 			 try{
 			 parser.nextTag();
 			 } catch(XmlPullParserException e){
-				 Log.i("parser","RETURNING marinaMARKERS FROM CATCH");
+				 log("Returning " + mapMarkers.size() + " MarinaMarkers from catch");
 				 return mapMarkers;
 			 }
 			//parser.require(XmlPullParser.START_TAG, ns, "lock");
@@ -140,7 +137,7 @@ public class MarinaMarker extends MapMarker implements Serializable {
 			 e.printStackTrace();
 		 }
 		 
-		 Log.i("sdfnalskma","RETURNING LOCKMARKERS");
+		 log("Returning " + mapMarkers.size() + " MarinaMarkers");
 		 return mapMarkers;
 	}
 	
@@ -148,5 +145,9 @@ public class MarinaMarker extends MapMarker implements Serializable {
 		return super.toString() + " " + shore + " " + url + " " + phoneNumber + " " + 
 				vhf + " " + fuel + " " + repair + " " + facilities;
 	}
+	
+	private static void log(String msg){
+		log("MarinaMarker", msg);
+    }
 	
 }

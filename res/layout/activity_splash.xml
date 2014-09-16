@@ -15,6 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
+        android:adjustViewBounds="true"
         android:src="@drawable/ic_launcher" />
 
     <ProgressBar
@@ -27,5 +28,14 @@
         android:layout_alignParentRight="true"
         android:max="100"
         android:progress="0" />
+
+    <TextView
+        android:id="@+id/tvLoading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/progressBar"
+        android:layout_alignParentLeft="true"
+        android:text="@string/tv_loading"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
  
 </RelativeLayout>
