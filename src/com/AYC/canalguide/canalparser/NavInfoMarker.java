@@ -13,6 +13,12 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+/**
+ * This class holds marker information for buoys, beacons and some other navigation information
+ * 
+ * @author James O'Leary
+ *
+ */
 public class NavInfoMarker extends MapMarker implements Serializable {
 
 	/**
