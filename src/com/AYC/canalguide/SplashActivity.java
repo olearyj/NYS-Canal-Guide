@@ -194,7 +194,7 @@ public class SplashActivity extends Activity {
 			
 			for(String URL : URLs){
 				try {		
-		
+					
 					DefaultHttpClient httpClient = new DefaultHttpClient();
 					HttpPost httpPost = new HttpPost(URL);
 		 
