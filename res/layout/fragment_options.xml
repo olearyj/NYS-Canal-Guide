@@ -209,6 +209,44 @@
     	android:track="@drawable/switch_track" />
 
 	</RelativeLayout>
+	
+    <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <FrameLayout
+        android:id="@+id/frameLayout6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/switch_buoys"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:paddingLeft="3dp"
+        android:paddingRight="3dp" >
+
+        <ImageView
+            android:id="@+id/ivColor6"
+            android:contentDescription="@string/iv_markercolordesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@color/white"
+            android:src="@drawable/abc_ab_share_pack_holo_light" />
+    </FrameLayout>
+
+    <Switch
+        android:id="@+id/switch_buoys"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/frameLayout6"
+        android:checked="false"
+        android:text="@string/switch_buoys"
+        android:thumb="@drawable/switch_inner"
+        android:track="@drawable/switch_track" />
+
+	</RelativeLayout>
 
     <!-- End of Filters -->
     

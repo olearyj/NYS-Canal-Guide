@@ -169,7 +169,6 @@ public class NavInfoMarker extends MapMarker implements Serializable {
 					parser.next();
 				parser.nextTag();
 			} catch(XmlPullParserException e){
-				e.printStackTrace();
 				log("Returning " + mapMarkers.size() + " NavInfoMarkers from catch");
 				return mapMarkers;
 			}

@@ -12,7 +12,6 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.app.ActionBar.Tab;
-import android.content.ComponentName;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -41,21 +40,16 @@ public class MainActivity extends Activity {
 
 		xmlStrings = (HashMap<String, String>) getIntent().getSerializableExtra("map");
 		mapFragment = new CanalMapFragment();
-		//mapFragment = new CanalMapFragment((HashMap<String, String>) getIntent().getSerializableExtra("map"), this);
 		tabBar.addTab(tabBar.newTab().setText(MAP_TABSTRING)
 				.setTabListener(new TabListener(mapFragment)));
 		
 		optionsFragment = new OptionsFragment();
 		tabBar.addTab(tabBar.newTab().setText(OPTIONS_TABSTRING)
 				.setTabListener(new TabListener(optionsFragment)));
+		
 		loadSavedOptions();
 		
 		handler = new MessengerHandler(this);
-		ComponentName cn = startService(ThreadPoolDownloadService.makeIntent(this, handler));
-		if(cn != null)
-			log(cn.toString());
-		else
-			log("RETURNED NULL: SERVICE NOT STARTED");
     }
     
 	public static class TabListener implements ActionBar.TabListener {
@@ -101,6 +95,10 @@ public class MainActivity extends Activity {
     	return xmlStrings;
     }
     
+    protected void startDownloadThreadPoolService(){
+		startService(ThreadPoolDownloadService.makeIntent(this, handler));
+    }
+    
     /**
      * This method will load the options that were saved in the OptionsFragment
      */
@@ -138,6 +136,7 @@ public class MainActivity extends Activity {
     	 * @see https://groups.google.com/forum/#!msg/android-developers/1aPZXZG6kWk/lIYDavGYn5UJ
     	 */
     	public MessengerHandler(MainActivity outer) {
+    		super();
             outerClass = new WeakReference<MainActivity>(outer);
             downloadedURLs = new ArrayList<String>(); 
     	}

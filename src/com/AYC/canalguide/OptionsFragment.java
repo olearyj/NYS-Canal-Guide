@@ -19,7 +19,7 @@ import android.widget.Switch;
 public class OptionsFragment extends Fragment {
 
 	public final static String PREFS_NAME = "NYS_Canal_Guide_Options";
-	private final static int NUM_OF_SWITCHES = 5;
+	private final static int NUM_OF_SWITCHES = 6;
 	
 	private Switch[] switches;
 	
@@ -52,6 +52,7 @@ public class OptionsFragment extends Fragment {
 		switches[2] = (Switch) view.findViewById(R.id.switch_launch);
 		switches[3] = (Switch) view.findViewById(R.id.switch_bridge);
 		switches[4] = (Switch) view.findViewById(R.id.switch_boatsforhire);
+		switches[5] = (Switch) view.findViewById(R.id.switch_buoys);
 		
 		return view;
 	}

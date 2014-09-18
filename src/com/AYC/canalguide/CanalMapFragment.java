@@ -36,7 +36,7 @@ public class CanalMapFragment extends MapFragment {
 	public static final LatLng startLocation = saratogaSprings;
 	public static final float startZoom = 8.0f;
 	
-	private HashMap<String, String> xmlStrings;
+	private HashMap<String, String> xmlStrings, navInfoXmlStrings;
 	private Activity activity;
 	private Context context;
 	
@@ -131,10 +131,20 @@ public class CanalMapFragment extends MapFragment {
 			}
 		});
 
+        // TODO - dont always parse then add, only do when poiAdapter is empty??
         parseXmlStringsAndAddMarkersToMap(xmlStrings);
-        
+        if(markersNotFilteredOut("navinfo")){
+        	if(navInfoXmlStrings == null)
+        		((MainActivity) getActivity()).startDownloadThreadPoolService();
+        	else
+        		parseXmlStringsAndAddMarkersToMap(navInfoXmlStrings);
+        }
     }
     
+    /**
+     * 
+     * @param xmlStrings
+     */
     protected void parseXmlStringsAndAddMarkersToMap(HashMap<String, String> xmlStrings){
     	List<MapMarker> markerDataList = new ArrayList<MapMarker>();
 		// For each xml document, get the data
@@ -143,11 +153,8 @@ public class CanalMapFragment extends MapFragment {
 	        Map.Entry<String, String> pairs = (Map.Entry<String, String>) iterator.next();
 	        String currentURL = pairs.getKey();
 	        String currentXmlString = pairs.getValue();
-	        iterator.remove(); // Avoids a ConcurrentModificationException
+	        //iterator.remove(); // Avoids a ConcurrentModificationException
 	        
-		//for(int i=0; i<xmlStrings.size(); i++){
-			//String currentURL = SplashActivity.navInfoURLs[i];
-			
 			String currentXmlDocName = currentURL
 					.replace("http://www.canals.ny.gov/xml/", "").replace(".xml", "");
 			
@@ -155,7 +162,7 @@ public class CanalMapFragment extends MapFragment {
 				
 				try {
 					markerDataList = new CanalGuideXmlParser().parse(new StringReader(
-							currentXmlString));//xmlStrings.get(currentURL)));
+							currentXmlString));
 					log("Completed parsing for " + currentURL);
 				} catch (XmlPullParserException e) {
 					e.printStackTrace();
@@ -187,11 +194,13 @@ public class CanalMapFragment extends MapFragment {
     	OptionsFragment optFrag = (OptionsFragment) ((MainActivity) activity).getOptionsFragment();
     	boolean[] switchValues = optFrag.getFilterData();
     	
-    	if(switchValues == null || switchValuesDefault(switchValues)){
-    		return true;
+    	if(switchValues == null){
+    		if(urlDocName.contains("navinfo"))
+    			return false;
+    		else
+    			return true;
     	}
     	else{
-    		
     		if(urlDocName.equals("locks"))
     			return switchValues[0];
     		else if(urlDocName.equals("marinas"))
@@ -202,13 +211,15 @@ public class CanalMapFragment extends MapFragment {
     			return switchValues[3];
     		else if(urlDocName.equals("boatsforhire"))
     			return switchValues[4];
+    		if(urlDocName.contains("navinfo"))
+    			return switchValues[5];
     		
     	}
     	return true;
     }
     
     private boolean switchValuesDefault(boolean[] switchValues){
-    	for(int i=0; i<switchValues.length; i++)
+    	for(int i=0; i<switchValues.length-1; i++)
     		if(switchValues[i] == false)
     			return false;
     	return true;
