@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -34,7 +36,7 @@ public class CanalMapFragment extends MapFragment {
 	public static final LatLng startLocation = saratogaSprings;
 	public static final float startZoom = 8.0f;
 	
-	private HashMap<String, String> markerXmlHashMap;
+	private HashMap<String, String> xmlStrings;
 	private Activity activity;
 	private Context context;
 	
@@ -48,9 +50,9 @@ public class CanalMapFragment extends MapFragment {
 		poiAdapter = new PoiAdapter();
 	}
 	
-	public CanalMapFragment(HashMap<String, String> markerXmlHashMap, Context context){
+	public CanalMapFragment(HashMap<String, String> xmlStrings, Context context){
 		super();
-		this.markerXmlHashMap = markerXmlHashMap;
+		this.xmlStrings = xmlStrings;
 		this.context = context;
 	}
 	
@@ -60,7 +62,7 @@ public class CanalMapFragment extends MapFragment {
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 		
 		this.activity = getActivity();
-		this.markerXmlHashMap = ((MainActivity) getActivity()).getXmlStrings();
+		this.xmlStrings = ((MainActivity) getActivity()).getXmlStrings();
 		this.context = getActivity().getApplicationContext();
 
 		initMap();
@@ -128,43 +130,55 @@ public class CanalMapFragment extends MapFragment {
 	            startActivity(intent);
 			}
 		});
+
+        parseXmlStringsAndAddMarkersToMap(xmlStrings);
         
-        List<MapMarker> markerDataList = new ArrayList<MapMarker>();
+    }
+    
+    protected void parseXmlStringsAndAddMarkersToMap(HashMap<String, String> xmlStrings){
+    	List<MapMarker> markerDataList = new ArrayList<MapMarker>();
 		// For each xml document, get the data
-		for(int i=0; i<markerXmlHashMap.size(); i++){
-			String currentURL = SplashActivity.URLs[i];
+    	Iterator<Map.Entry<String, String>> iterator = xmlStrings.entrySet().iterator();
+	    while (iterator.hasNext()) {
+	        Map.Entry<String, String> pairs = (Map.Entry<String, String>) iterator.next();
+	        String currentURL = pairs.getKey();
+	        String currentXmlString = pairs.getValue();
+	        iterator.remove(); // Avoids a ConcurrentModificationException
+	        
+		//for(int i=0; i<xmlStrings.size(); i++){
+			//String currentURL = SplashActivity.navInfoURLs[i];
 			
 			String currentXmlDocName = currentURL
 					.replace("http://www.canals.ny.gov/xml/", "").replace(".xml", "");
 			
-			if(markersNotFilteredOut(currentXmlDocName)){
-			
-			try {
-				markerDataList = new CanalGuideXmlParser().parse(new StringReader(
-						markerXmlHashMap.get(currentURL)));
-				log("Completed parsing for " + currentURL);
-			} catch (XmlPullParserException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			
-			log("for url: " + currentURL + "size() = " + markerDataList.size());
-			
-			// Create each MapMarker that came from the xmlString from one URL and
-			// add the marker to the map
-			Marker marker;
-			MarkerOptions markerOptions;
-			
-			for(MapMarker mapMarker : markerDataList){
-				markerOptions = mapMarker.getMarkerOptions();
-				if(markerOptions != null && mapMarker != null){
-					marker = mMap.addMarker(markerOptions);	// Will get an error at this line on emulator
-					
-					mapMarker.setMarker(marker);
-					poiAdapter.addItem(mapMarker);
+				if(markersNotFilteredOut(currentXmlDocName)){
+				
+				try {
+					markerDataList = new CanalGuideXmlParser().parse(new StringReader(
+							currentXmlString));//xmlStrings.get(currentURL)));
+					log("Completed parsing for " + currentURL);
+				} catch (XmlPullParserException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
 				}
-			}
+				
+				log("for url: " + currentURL + "size() = " + markerDataList.size());
+				
+				// Create each MapMarker that came from the xmlString from one URL and
+				// add the marker to the map
+				Marker marker;
+				MarkerOptions markerOptions;
+				
+				for(MapMarker mapMarker : markerDataList){
+					markerOptions = mapMarker.getMarkerOptions();
+					if(markerOptions != null && mapMarker != null){
+						marker = mMap.addMarker(markerOptions);	// Will get an error at this line on emulator
+						
+						mapMarker.setMarker(marker);
+						poiAdapter.addItem(mapMarker);
+					}
+				}
 			}
 		}
     }

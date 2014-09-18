@@ -208,10 +208,12 @@ public class NavInfoMarker extends MapMarker implements Serializable {
 	}
 	
 	private static int parseInt(String string){
-		if(string.equals(""))
+		try{
+			int num = Integer.parseInt(string);
+			return num;
+		}catch(NumberFormatException nfe){
 			return -1;
-		else
-			return Integer.parseInt(string);
+		}
 	}
 	
 	private static double parseDouble(String string){

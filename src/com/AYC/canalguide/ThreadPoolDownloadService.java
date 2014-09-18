@@ -2,7 +2,11 @@ package com.AYC.canalguide;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -16,7 +20,7 @@ import org.apache.http.util.EntityUtils;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -39,40 +43,67 @@ public class ThreadPoolDownloadService extends Service {
      * The key used to store/retrieve a xmlString extra from a Bundle.
      */
 	public static final String XMLSTRING_KEY = "XMLSTRING";
+	
+	public static final String NAV_INFO_DATA_LAST_SAVED_DATE_TAG = "nav info last saved date";
+	public static final String URL_KEY = "URL";
+	public static final String DONEDOWNLOADING_KEY = "Done downloading";
+	
+	private HashMap<String, String> navInfoXmlStrings;
     
 	// The ExecutorService that references a ThreadPool.
     private ExecutorService mExecutor;
+    private CountDownLatch countDownLatch;
+    
+    private Messenger messenger;
     
     @Override
 	public void onCreate() {
     	super.onCreate();
+        log("Created ThreadPoolDownloadService");
         mExecutor = Executors.newFixedThreadPool(MAX_THREADS);
+        navInfoXmlStrings = new HashMap<String, String>();
     }
     
     private class DownloadXmlStringRunnable implements Runnable {
     	
-    	Messenger messenger;
     	String URL;
     	
-    	public DownloadXmlStringRunnable(Messenger messenger, String URL){
-    		this.messenger = messenger;
+    	public DownloadXmlStringRunnable(String URL){
     		this.URL = URL;
     	}
     	
     	@Override
     	public void run(){
     		String xmlString = downloadXmlFile(URL);
-			sendXmlString(xmlString, messenger);
+    		navInfoXmlStrings.put(URL, xmlString);
+			sendXmlString(URL);
+			countDownLatch.countDown();
     	}
     }
     
     @Override
 	public int onStartCommand(final Intent intent, int flags, int startId) {
 
-		Messenger messenger = (Messenger) intent.getExtras().get(MESSENGER_KEY);
-        
+    	Toast.makeText(getApplicationContext(), "Starting to download data", Toast.LENGTH_SHORT).show();
+    	
+		messenger = (Messenger) intent.getExtras().get(MESSENGER_KEY);
+		countDownLatch = new CountDownLatch(SplashActivity.navInfoURLs.length);
+		
         for(int i=0; i<SplashActivity.navInfoURLs.length; i++)
-        	mExecutor.execute(new DownloadXmlStringRunnable(messenger, SplashActivity.navInfoURLs[i]));
+        	mExecutor.execute(new DownloadXmlStringRunnable(SplashActivity.navInfoURLs[i]));
+        
+        mExecutor.execute(new Runnable(){
+			@Override
+			public void run() {
+				log("countDownLatch will start awaiting");
+				try {
+					countDownLatch.await();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				stopSelf();
+			}
+        });
         
         // Tell the Android framework how to behave if this service is
         // interrupted.  In our case, we want to restart the service
@@ -90,7 +121,11 @@ public class ThreadPoolDownloadService extends Service {
 	public void onDestroy() {
     	// Ensure that the threads used by the ThreadPoolExecutor
     	// complete and are reclaimed by the system.
-
+    	
+    	log("Destroying service and saving navInfoXmlStrings");
+    	saveXmlStrings();
+    	sendFinalMessage();
+    	
         mExecutor.shutdown();
     }
     
@@ -164,10 +199,11 @@ public class ThreadPoolDownloadService extends Service {
 		return xmlString;
 	}
 	
-    public void sendXmlString(String xmlString, Messenger messenger) {
+	// TODO make send message method rather than these two
+    public void sendXmlString(String URL) {
 		Message msg = Message.obtain();
 		Bundle data = new Bundle();
-		data.putString(XMLSTRING_KEY, xmlString);
+		data.putString(URL_KEY, URL);
 		
 		// Make the Bundle the "data" of the Message.
 		msg.setData(data);
@@ -180,6 +216,22 @@ public class ThreadPoolDownloadService extends Service {
 		}
     }
 
+    public void sendFinalMessage() {
+		Message msg = Message.obtain();
+		Bundle data = new Bundle();
+		data.putString(DONEDOWNLOADING_KEY, DONEDOWNLOADING_KEY);
+		
+		// Make the Bundle the "data" of the Message.
+		msg.setData(data);
+		
+		try {
+			// Send the Message back to the client Activity.
+			messenger.send(msg);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+    }
+    
     /**
      * Make an intent that will start this service if supplied to
      * startService() as a parameter.
@@ -196,20 +248,39 @@ public class ThreadPoolDownloadService extends Service {
      * Pattern.
      */
     public static Intent makeIntent(Context context,
-                                    Handler handler,
-                                    String uri) {
-    	// TODO - You fill in here, by replacing null with an
-        // invocation of the appropriate factory method in
-        // DownloadUtils that makes a MessengerIntent.
-        // return DownloadUtils.makeMessengerIntent(context, ThreadPoolDownloadService.class, handler, uri);
+                                    Handler handler) {
 
     	Messenger messenger = new Messenger(handler);
     	Intent intent = new Intent(context, ThreadPoolDownloadService.class);
     	intent.putExtra(MESSENGER_KEY, messenger);
-    	intent.setData(Uri.parse(uri));
     	
     	return intent;
     }
+    
+    /**
+	 * This method saves the navInfoXmlStrings using SharedPreferences when downloaded.
+	 * 
+	 * @param xmlStrings The navInfoXmlStrings that will be saved
+	 */
+	private void saveXmlStrings(){
+		log("Saving navInfoXmlStrings");
+		// We need an Editor object to make preference changes
+	    SharedPreferences xmlStringsPref = getSharedPreferences(SplashActivity.PREFS_NAME, 0);
+	    SharedPreferences.Editor editor = xmlStringsPref.edit();
+	    
+	    Iterator<Map.Entry<String, String>> iterator = navInfoXmlStrings.entrySet().iterator();
+	    while (iterator.hasNext()) {
+	        Map.Entry<String, String> pairs = (Map.Entry<String, String>) iterator.next();
+	        editor.putString((String) pairs.getKey(), (String) pairs.getValue());
+	        iterator.remove(); // Avoids a ConcurrentModificationException
+	    }
+	    
+	    // Save the the date that the data was downloaded
+	    Calendar calendar = Calendar.getInstance();
+	    editor.putLong(NAV_INFO_DATA_LAST_SAVED_DATE_TAG, calendar.getTimeInMillis());
+	    
+	    editor.commit();	// Commit the edits!
+	}
 	
 	private void log(String msg){
     	if(SplashActivity.LOG_ENABLED)

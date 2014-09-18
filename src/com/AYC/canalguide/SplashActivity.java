@@ -52,7 +52,7 @@ public class SplashActivity extends Activity {
 	// This is the minimum amount of time the splash screen will be up for (in milliseconds)
 	private static final long MINIMUM_SPLASH_TIME = 1000L;
 	
-	private static final String PREFS_NAME = "xmlStrings";
+	static final String PREFS_NAME = "xmlStrings";
 	
 	private static final String DATA_LAST_SAVED_DATE_TAG = "Last saved date";
 	private static final long DAY_IN_MILLISECONDS = 86400000;
