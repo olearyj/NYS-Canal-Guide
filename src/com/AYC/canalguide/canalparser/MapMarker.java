@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import android.util.Log;
 
+import com.AYC.canalguide.canalparser.MapMarker;
 import com.AYC.canalguide.SplashActivity;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -77,6 +78,22 @@ public abstract class MapMarker implements Serializable {
 	
 	public String toString(){
 		return name + " " + lat + " " + lng + " " + bodyOfWater + " " + mile;
+	}
+	
+	public static String urlDocName(MapMarker mapMarker){
+		if(mapMarker instanceof MarinaMarker)
+    		return "marinas";
+		if(mapMarker instanceof LockMarker)
+    		return "locks";
+		if(mapMarker instanceof LaunchMarker)
+    		return "canalwatertrail";
+		if(mapMarker instanceof BridgeGateMarker)
+    		return "liftbridges";
+		if(mapMarker instanceof BoatsForHireMarker)
+    		return "boatsforhire";
+		if(mapMarker instanceof NavInfoMarker)
+    		return "navinfo";
+		return null;
 	}
 
 	protected static void log(String tag, String msg){

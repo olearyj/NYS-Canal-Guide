@@ -41,6 +41,8 @@ import android.widget.Toast;
  * at least a minimum amount of time. If there exists saved data and the data isn't downloaded 
  * in that time, a button will then pop-up allowing the choice to load from storage.
  * 
+ * In logcat, you can remove certain tags by typing tag:^(?!(skia))
+ * 
  * @author James O'Leary
  *
  */

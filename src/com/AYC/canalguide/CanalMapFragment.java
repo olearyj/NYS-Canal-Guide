@@ -132,13 +132,16 @@ public class CanalMapFragment extends MapFragment {
 		});
 
         // TODO - dont always parse then add, only do when poiAdapter is empty??
-        parseXmlStringsAndAddMarkersToMap(xmlStrings);
-        if(markersNotFilteredOut("navinfo")){
+        if(poiAdapter.getCount() != 0)
+        	addExistingMarkersToMap();
+        else
+        	parseXmlStringsAndAddMarkersToMap(xmlStrings);
+        /*if(markersNotFilteredOut("navinfo")){
         	if(navInfoXmlStrings == null)
         		((MainActivity) getActivity()).startDownloadThreadPoolService();
         	else
         		parseXmlStringsAndAddMarkersToMap(navInfoXmlStrings);
-        }
+        }*/
     }
     
     /**
@@ -188,6 +191,27 @@ public class CanalMapFragment extends MapFragment {
 				}
 			}
 		}
+    }
+    
+    private void addExistingMarkersToMap(){
+    	log("Adding existing markers to the map. poiAdapter size = " + poiAdapter.getCount());
+    	Marker marker;
+		MarkerOptions markerOptions;
+		
+    	for(MapMarker mapMarker : poiAdapter){
+    		if(markersNotFilteredOut(mapMarker)){
+				markerOptions = mapMarker.getMarkerOptions();
+				
+	    		if(markerOptions != null && mapMarker != null){
+					marker = mMap.addMarker(markerOptions);	// Will get an error at this line on emulator
+					mapMarker.setMarker(marker);
+	    		}
+    		}
+    	}
+    }
+    
+    private boolean markersNotFilteredOut(MapMarker mapMarker){
+    	return markersNotFilteredOut(MapMarker.urlDocName(mapMarker));
     }
     
     private boolean markersNotFilteredOut(String urlDocName){
