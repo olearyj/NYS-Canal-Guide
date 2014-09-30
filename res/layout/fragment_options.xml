@@ -279,6 +279,26 @@
         android:id="@+id/spinnerDataValid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+    
+    <TextView
+        android:id="@+id/tv_links"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:text="@string/tv_links"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold"
+        android:textColor="@color/dark_blue" />
+    
+    <TextView
+        android:id="@+id/tv_tide"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp"
+        android:text="@string/tv_tide"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/link_blue" />
         
 </LinearLayout>
 </ScrollView>

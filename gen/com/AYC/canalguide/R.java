@@ -1174,13 +1174,13 @@ containing a value of this type.
         public static final int abc_split_action_bar_is_narrow=0x7f060002;
     }
     public static final class color {
-        public static final int abc_search_url_text_holo=0x7f070024;
+        public static final int abc_search_url_text_holo=0x7f070025;
         public static final int abc_search_url_text_normal=0x7f070000;
         public static final int abc_search_url_text_pressed=0x7f070002;
         public static final int abc_search_url_text_selected=0x7f070001;
         /**  Colors for map markers 
          */
-        public static final int blue=0x7f07001f;
+        public static final int blue=0x7f070020;
         public static final int common_action_bar_splitter=0x7f07000c;
         /**  Sign-in Button Colors 
          */
@@ -1193,19 +1193,20 @@ containing a value of this type.
         public static final int common_signin_btn_light_text_disabled=0x7f070009;
         public static final int common_signin_btn_light_text_focused=0x7f07000a;
         public static final int common_signin_btn_light_text_pressed=0x7f070008;
-        public static final int common_signin_btn_text_dark=0x7f070025;
-        public static final int common_signin_btn_text_light=0x7f070026;
+        public static final int common_signin_btn_text_dark=0x7f070026;
+        public static final int common_signin_btn_text_light=0x7f070027;
         /**  These colors are the main colors throughout this app 
          */
         public static final int dark_blue=0x7f07001b;
         public static final int darker_blue=0x7f07001c;
         public static final int gold=0x7f07001d;
-        public static final int green=0x7f070023;
-        public static final int red=0x7f070020;
+        public static final int green=0x7f070024;
+        public static final int link_blue=0x7f07001f;
+        public static final int red=0x7f070021;
         /**  The splash background will be marine blue 
          */
         public static final int splash_bg=0x7f07001a;
-        public static final int violet=0x7f070022;
+        public static final int violet=0x7f070023;
         public static final int wallet_bright_foreground_disabled_holo_light=0x7f070012;
         /** 
          Wallet colors to support consistent Wallet fragment holo dark UI in client application
@@ -1224,10 +1225,10 @@ containing a value of this type.
         public static final int wallet_hint_foreground_holo_light=0x7f070014;
         public static final int wallet_holo_blue_light=0x7f070018;
         public static final int wallet_link_text_light=0x7f070019;
-        public static final int wallet_primary_text_holo_light=0x7f070027;
-        public static final int wallet_secondary_text_holo_dark=0x7f070028;
+        public static final int wallet_primary_text_holo_light=0x7f070028;
+        public static final int wallet_secondary_text_holo_dark=0x7f070029;
         public static final int white=0x7f07001e;
-        public static final int yellow=0x7f070021;
+        public static final int yellow=0x7f070022;
     }
     public static final class dimen {
         /**  Default height of an action bar. 
@@ -1506,7 +1507,7 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f050016;
         public static final int action_menu_presenter=0x7f050017;
         public static final int action_mode_close_button=0x7f050036;
-        public static final int action_settings=0x7f050077;
+        public static final int action_settings=0x7f050079;
         public static final int activity_chooser_view_content=0x7f050037;
         public static final int always=0x7f05000b;
         public static final int beginning=0x7f050011;
@@ -1541,10 +1542,10 @@ containing a value of this type.
         public static final int icon=0x7f05003c;
         public static final int ifRoom=0x7f05000a;
         public static final int image=0x7f050039;
-        public static final int infoWindowInfoImage=0x7f050071;
-        public static final int infoWindowSnippet=0x7f050070;
-        public static final int infoWindowTitle=0x7f05006f;
-        public static final int ivCall=0x7f050074;
+        public static final int infoWindowInfoImage=0x7f050073;
+        public static final int infoWindowSnippet=0x7f050072;
+        public static final int infoWindowTitle=0x7f050071;
+        public static final int ivCall=0x7f050076;
         public static final int ivColor1=0x7f050059;
         public static final int ivColor2=0x7f05005c;
         public static final int ivColor3=0x7f05005f;
@@ -1552,12 +1553,12 @@ containing a value of this type.
         public static final int ivColor5=0x7f050065;
         public static final int ivColor6=0x7f050068;
         public static final int ivLogo=0x7f050050;
-        public static final int ivWebsite=0x7f050075;
+        public static final int ivWebsite=0x7f050077;
         public static final int linearLayout=0x7f050055;
-        public static final int linearLayout1=0x7f050072;
+        public static final int linearLayout1=0x7f050074;
         public static final int listMode=0x7f050001;
         public static final int list_item=0x7f05003b;
-        public static final int map=0x7f050076;
+        public static final int map=0x7f050078;
         public static final int match_parent=0x7f050024;
         public static final int middle=0x7f050012;
         public static final int monochrome=0x7f05002b;
@@ -1573,7 +1574,7 @@ containing a value of this type.
         public static final int sandbox=0x7f050020;
         public static final int satellite=0x7f05001a;
         public static final int scrollView=0x7f050054;
-        public static final int scrollViewLinearLayout=0x7f050073;
+        public static final int scrollViewLinearLayout=0x7f050075;
         public static final int search_badge=0x7f050044;
         public static final int search_bar=0x7f050043;
         public static final int search_button=0x7f050045;
@@ -1602,14 +1603,16 @@ containing a value of this type.
         public static final int switch_marina=0x7f05005b;
         public static final int tabMode=0x7f050002;
         public static final int terrain=0x7f05001b;
-        public static final int textView1=0x7f05006d;
-        public static final int textView2=0x7f05006e;
+        public static final int textView1=0x7f05006f;
+        public static final int textView2=0x7f050070;
         public static final int title=0x7f05003d;
         public static final int top_action_bar=0x7f050032;
         public static final int tvDataValid=0x7f05006b;
         public static final int tvLoading=0x7f050052;
         public static final int tvMapType=0x7f050069;
         public static final int tv_filters=0x7f050056;
+        public static final int tv_links=0x7f05006d;
+        public static final int tv_tide=0x7f05006e;
         public static final int up=0x7f050033;
         public static final int useLogo=0x7f050003;
         public static final int webView=0x7f050053;
@@ -1816,19 +1819,21 @@ containing a value of this type.
          */
         public static final int common_signin_button_text_long=0x7f0a0025;
         public static final int hello_world=0x7f0a0028;
-        public static final int iv_markercolordesc=0x7f0a0038;
-        public static final int switch_boatsforhire=0x7f0a0036;
-        public static final int switch_bridge=0x7f0a0035;
-        public static final int switch_buoys=0x7f0a0037;
-        public static final int switch_launch=0x7f0a0033;
-        public static final int switch_lock=0x7f0a0032;
-        public static final int switch_marina=0x7f0a0034;
+        public static final int iv_markercolordesc=0x7f0a003a;
+        public static final int switch_boatsforhire=0x7f0a0038;
+        public static final int switch_bridge=0x7f0a0037;
+        public static final int switch_buoys=0x7f0a0039;
+        public static final int switch_launch=0x7f0a0035;
+        public static final int switch_lock=0x7f0a0034;
+        public static final int switch_marina=0x7f0a0036;
         public static final int tv_datavalid=0x7f0a002e;
         public static final int tv_filters=0x7f0a002c;
+        public static final int tv_links=0x7f0a0032;
         public static final int tv_loading=0x7f0a002f;
         public static final int tv_loadingdatabase=0x7f0a0030;
         public static final int tv_loadingphone=0x7f0a0031;
         public static final int tv_maptype=0x7f0a002d;
+        public static final int tv_tide=0x7f0a0033;
         /**  Text on a placeholder buy button when Google Play services is not
          available or up-to-date 
          */

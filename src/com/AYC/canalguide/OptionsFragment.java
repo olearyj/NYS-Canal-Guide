@@ -4,19 +4,22 @@ import java.util.Arrays;
 import com.google.android.gms.maps.GoogleMap;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.TextView;
 
-public class OptionsFragment extends Fragment {
+public class OptionsFragment extends Fragment implements OnClickListener {
 
 	public final static String PREFS_NAME = "NYS_Canal_Guide_Options";
 	private final static int NUM_OF_SWITCHES = 6;
@@ -54,7 +57,20 @@ public class OptionsFragment extends Fragment {
 		switches[4] = (Switch) view.findViewById(R.id.switch_boatsforhire);
 		switches[5] = (Switch) view.findViewById(R.id.switch_buoys);
 		
+		TextView tv_tide = (TextView) view.findViewById(R.id.tv_tide);
+		tv_tide.setOnClickListener(this);
+		
 		return view;
+	}
+
+	@Override
+	public void onClick(View view) {
+		switch(view.getId()){
+		case R.id.tv_tide:
+			Intent intent = new Intent(getActivity(), WebViewActivity.class);
+			intent.putExtra("url", "http://ny.usharbors.com/");
+			startActivity(intent);
+		}
 	}
 	
 	@Override

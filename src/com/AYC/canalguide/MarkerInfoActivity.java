@@ -76,12 +76,12 @@ public class MarkerInfoActivity extends Activity implements OnClickListener {
 	     launch = isLaunch ? (LaunchMarker) mapMarker : null;
 	     bridge = isBridge ? (BridgeGateMarker) mapMarker : null;
 	     boats = isBoatsForHire ? (BoatsForHireMarker) mapMarker : null;
-	        
+	     
 	     setUpCallAndWebsiteIcons();
 	        
 	     scrollView = (LinearLayout) findViewById(R.id.scrollViewLinearLayout);
 	        
-	        
+	     
 	     // Adds Title
 	     if(!isLock)
 	     	addTextView(mapMarker.getName()); 

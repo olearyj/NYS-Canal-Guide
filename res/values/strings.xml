@@ -14,6 +14,8 @@
     <string name="tv_loading">Loading..</string>
     <string name="tv_loadingdatabase">Loading from online database..</string>
     <string name="tv_loadingphone">Loading from phone..</string>
+    <string name="tv_links">Helpful Links</string>
+    <string name="tv_tide"><u>US Harbors Tide Charts</u></string>
     
     <string name="switch_lock">Locks</string>
     <string name="switch_launch">Boat Launches</string>

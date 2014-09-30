@@ -10,6 +10,7 @@
     <color name="gold">#E9C200</color>
     
     <color name="white">#FFFFFF</color>
+    <color name="link_blue">#0000FF</color>
     
     <!-- Colors for map markers -->
     <color name="blue">#0000FF</color>
