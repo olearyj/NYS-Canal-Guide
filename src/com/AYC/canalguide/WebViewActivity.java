@@ -4,7 +4,6 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -31,7 +30,6 @@ public class WebViewActivity extends Activity {
 	      super.onCreate(savedInstanceState);
 	      setContentView(R.layout.activity_webview);
 	      
-	      // TODO - Implement this in later version of this app
 	      ActionBar actionBar = getActionBar();
 	      actionBar.setDisplayHomeAsUpEnabled(true);
 	      

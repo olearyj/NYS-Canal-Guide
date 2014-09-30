@@ -10,6 +10,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -19,6 +20,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -60,6 +62,9 @@ public class MarkerInfoActivity extends Activity implements OnClickListener {
 	public void onCreate(Bundle savedInstanceState) {
 	     super.onCreate(savedInstanceState);
 	     setContentView(R.layout.layout_markerinfo);
+	     
+	      ActionBar actionBar = getActionBar();
+	      actionBar.setDisplayHomeAsUpEnabled(true);
 	     
 	     // Get MapMarker from main activity
 	     Intent intent = getIntent();
@@ -115,6 +120,23 @@ public class MarkerInfoActivity extends Activity implements OnClickListener {
 	     textSizeCount++;
 	     addTextView("*For more information, please contact "  + mapMarker.getName());
 	}
+	
+	/**
+	 * This method is overridden to control the actions when the 
+	 * action bar's Up/Home button is pressed
+	 */
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    switch (item.getItemId()) {
+	    // Respond to the action bar's Up/Home button
+	    case android.R.id.home:
+	        //NavUtils.navigateUpFromSameTask(this);	// Use this if i chose a parent activity in the manifest
+	        finish();
+	        return true;
+	    }
+	    return super.onOptionsItemSelected(item);
+	}
+	
 	
 	/**
 	 * This method will remove the icon if there is no phone number or website for the marker.
