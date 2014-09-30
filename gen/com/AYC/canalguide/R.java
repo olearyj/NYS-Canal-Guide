@@ -1488,13 +1488,25 @@ containing a value of this type.
         public static final int powered_by_google_dark=0x7f020080;
         public static final int powered_by_google_light=0x7f020081;
         public static final int progressbar_horizontal=0x7f020082;
-        public static final int switch_inner=0x7f020083;
-        public static final int switch_track=0x7f020084;
-        public static final int tab_selected_example=0x7f020085;
-        public static final int tab_selected_focused_example=0x7f020086;
-        public static final int tab_selected_pressed_example=0x7f020087;
-        public static final int tab_unselected_focused_example=0x7f020088;
-        public static final int tab_unselected_pressed_example=0x7f020089;
+        public static final int progressbar_indeterminate_horizontal=0x7f020083;
+        public static final int progressbartheme_progress_bg_holo_light=0x7f020084;
+        public static final int progressbartheme_progress_primary_holo_light=0x7f020085;
+        public static final int progressbartheme_progress_secondary_holo_light=0x7f020086;
+        public static final int progressbartheme_progressbar_indeterminate_holo1=0x7f020087;
+        public static final int progressbartheme_progressbar_indeterminate_holo2=0x7f020088;
+        public static final int progressbartheme_progressbar_indeterminate_holo3=0x7f020089;
+        public static final int progressbartheme_progressbar_indeterminate_holo4=0x7f02008a;
+        public static final int progressbartheme_progressbar_indeterminate_holo5=0x7f02008b;
+        public static final int progressbartheme_progressbar_indeterminate_holo6=0x7f02008c;
+        public static final int progressbartheme_progressbar_indeterminate_holo7=0x7f02008d;
+        public static final int progressbartheme_progressbar_indeterminate_holo8=0x7f02008e;
+        public static final int switch_inner=0x7f02008f;
+        public static final int switch_track=0x7f020090;
+        public static final int tab_selected_example=0x7f020091;
+        public static final int tab_selected_focused_example=0x7f020092;
+        public static final int tab_selected_pressed_example=0x7f020093;
+        public static final int tab_unselected_focused_example=0x7f020094;
+        public static final int tab_unselected_pressed_example=0x7f020095;
     }
     public static final class id {
         public static final int action_bar=0x7f05002e;
@@ -1843,7 +1855,7 @@ containing a value of this type.
     public static final class style {
         /**  This changes the appearance of the selected underline bar on the navigation tabs 
          */
-        public static final int ActionBarTabStyle=0x7f0b0094;
+        public static final int ActionBarTabStyle=0x7f0b0095;
         /** 
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
@@ -1866,21 +1878,27 @@ containing a value of this type.
  API 14 theme customizations can go here. 
          */
         public static final int AppBaseTheme=0x7f0b0090;
-        /**  Application theme. 
+        /**  Application theme 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f0b0091;
         /**  The theme applied to the application or activity 
          */
-        public static final int CustomActionBarTheme=0x7f0b0092;
+        public static final int CustomActionBarTheme=0x7f0b0093;
         /**  ActionBar styles 
  This will change the background color of the action bar 
          */
-        public static final int MyActionBar=0x7f0b0093;
+        public static final int MyActionBar=0x7f0b0094;
+        /**  Progress bar 
+         */
+        public static final int ProgressBarProgressBarTheme=0x7f0b0092;
+        /**  Progress bar 
+         */
+        public static final int ProgressBarTheme=0x7f0b0097;
         /**  Action bar tab bar 
  This will change the background color of the navigation tabs 
          */
-        public static final int TabBarStyle=0x7f0b0095;
+        public static final int TabBarStyle=0x7f0b0096;
         /**  Mimic text appearance in select_dialog_item.xml 
          */
         public static final int TextAppearance_AppCompat_Base_CompactMenu_Dialog=0x7f0b0063;
@@ -2093,6 +2111,7 @@ containing a value of this type.
         public static final int Widget_AppCompat_ProgressBar=0x7f0b000a;
         public static final int Widget_AppCompat_ProgressBar_Horizontal=0x7f0b0009;
         public static final int Widget_AppCompat_Spinner_DropDown_ActionBar=0x7f0b0022;
+        public static final int _ProgressBarTheme=0x7f0b0098;
     }
     public static final class styleable {
         /**  ============================================ 

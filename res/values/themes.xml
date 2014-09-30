@@ -28,4 +28,13 @@
     	<item name="android:background">@color/darker_blue</item>
     </style>
     
+    <!-- Progress bar -->
+    <style name="ProgressBarTheme" parent="@style/_ProgressBarTheme"/>
+
+	<style name="_ProgressBarTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+
+    <item name="android:progressBarStyleHorizontal">@style/ProgressBarProgressBarTheme</item>
+
+	</style>
+    
 </resources>

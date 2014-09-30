@@ -12,9 +12,17 @@
         -->
     </style>
 
-    <!-- Application theme. -->
+    <!-- Application theme -->
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
+    
+    <!-- Progress bar -->
+    <style name="ProgressBarProgressBarTheme" parent="android:Widget.ProgressBar.Horizontal">
+	    <item name="android:progressDrawable">@drawable/progressbar_horizontal</item>
+	    <item name="android:indeterminateDrawable">@drawable/progressbar_indeterminate_horizontal</item>
+	    <item name="android:minHeight">16dip</item>
+	    <item name="android:maxHeight">16dip</item>
+	</style>
 
 </resources>

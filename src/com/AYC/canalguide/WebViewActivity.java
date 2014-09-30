@@ -1,10 +1,13 @@
 package com.AYC.canalguide;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -29,8 +32,8 @@ public class WebViewActivity extends Activity {
 	      setContentView(R.layout.activity_webview);
 	      
 	      // TODO - Implement this in later version of this app
-	      //ActionBar actionBar = getActionBar();
-	      //actionBar.setDisplayHomeAsUpEnabled(true);
+	      ActionBar actionBar = getActionBar();
+	      actionBar.setDisplayHomeAsUpEnabled(true);
 	      
 	      url = getIntent().getStringExtra("url");
 	      log("URL = " + url);
@@ -46,6 +49,22 @@ public class WebViewActivity extends Activity {
 	      
 	      webView.loadUrl(url);
 
+	}
+	
+	/**
+	 * This method is overridden to control the actions when the 
+	 * action bar's Up/Home button is pressed
+	 */
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    switch (item.getItemId()) {
+	    // Respond to the action bar's Up/Home button
+	    case android.R.id.home:
+	        //NavUtils.navigateUpFromSameTask(this);	// Use this if i chose a parent activity in the manifest
+	        finish();
+	        return true;
+	    }
+	    return super.onOptionsItemSelected(item);
 	}
 	
 	/**
