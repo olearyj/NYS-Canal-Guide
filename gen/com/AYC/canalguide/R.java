@@ -1478,35 +1478,36 @@ containing a value of this type.
         public static final int common_signin_btn_text_pressed_light=0x7f020076;
         public static final int ic_action_about=0x7f020077;
         public static final int ic_action_call=0x7f020078;
-        public static final int ic_action_web_site=0x7f020079;
-        public static final int ic_launcher=0x7f02007a;
-        public static final int ic_logo_512=0x7f02007b;
-        public static final int ic_plusone_medium_off_client=0x7f02007c;
-        public static final int ic_plusone_small_off_client=0x7f02007d;
-        public static final int ic_plusone_standard_off_client=0x7f02007e;
-        public static final int ic_plusone_tall_off_client=0x7f02007f;
-        public static final int powered_by_google_dark=0x7f020080;
-        public static final int powered_by_google_light=0x7f020081;
-        public static final int progressbar_horizontal=0x7f020082;
-        public static final int progressbar_indeterminate_horizontal=0x7f020083;
-        public static final int progressbartheme_progress_bg_holo_light=0x7f020084;
-        public static final int progressbartheme_progress_primary_holo_light=0x7f020085;
-        public static final int progressbartheme_progress_secondary_holo_light=0x7f020086;
-        public static final int progressbartheme_progressbar_indeterminate_holo1=0x7f020087;
-        public static final int progressbartheme_progressbar_indeterminate_holo2=0x7f020088;
-        public static final int progressbartheme_progressbar_indeterminate_holo3=0x7f020089;
-        public static final int progressbartheme_progressbar_indeterminate_holo4=0x7f02008a;
-        public static final int progressbartheme_progressbar_indeterminate_holo5=0x7f02008b;
-        public static final int progressbartheme_progressbar_indeterminate_holo6=0x7f02008c;
-        public static final int progressbartheme_progressbar_indeterminate_holo7=0x7f02008d;
-        public static final int progressbartheme_progressbar_indeterminate_holo8=0x7f02008e;
-        public static final int switch_inner=0x7f02008f;
-        public static final int switch_track=0x7f020090;
-        public static final int tab_selected_example=0x7f020091;
-        public static final int tab_selected_focused_example=0x7f020092;
-        public static final int tab_selected_pressed_example=0x7f020093;
-        public static final int tab_unselected_focused_example=0x7f020094;
-        public static final int tab_unselected_pressed_example=0x7f020095;
+        public static final int ic_action_edit=0x7f020079;
+        public static final int ic_action_web_site=0x7f02007a;
+        public static final int ic_launcher=0x7f02007b;
+        public static final int ic_logo_512=0x7f02007c;
+        public static final int ic_plusone_medium_off_client=0x7f02007d;
+        public static final int ic_plusone_small_off_client=0x7f02007e;
+        public static final int ic_plusone_standard_off_client=0x7f02007f;
+        public static final int ic_plusone_tall_off_client=0x7f020080;
+        public static final int powered_by_google_dark=0x7f020081;
+        public static final int powered_by_google_light=0x7f020082;
+        public static final int progressbar_horizontal=0x7f020083;
+        public static final int progressbar_indeterminate_horizontal=0x7f020084;
+        public static final int progressbartheme_progress_bg_holo_light=0x7f020085;
+        public static final int progressbartheme_progress_primary_holo_light=0x7f020086;
+        public static final int progressbartheme_progress_secondary_holo_light=0x7f020087;
+        public static final int progressbartheme_progressbar_indeterminate_holo1=0x7f020088;
+        public static final int progressbartheme_progressbar_indeterminate_holo2=0x7f020089;
+        public static final int progressbartheme_progressbar_indeterminate_holo3=0x7f02008a;
+        public static final int progressbartheme_progressbar_indeterminate_holo4=0x7f02008b;
+        public static final int progressbartheme_progressbar_indeterminate_holo5=0x7f02008c;
+        public static final int progressbartheme_progressbar_indeterminate_holo6=0x7f02008d;
+        public static final int progressbartheme_progressbar_indeterminate_holo7=0x7f02008e;
+        public static final int progressbartheme_progressbar_indeterminate_holo8=0x7f02008f;
+        public static final int switch_inner=0x7f020090;
+        public static final int switch_track=0x7f020091;
+        public static final int tab_selected_example=0x7f020092;
+        public static final int tab_selected_focused_example=0x7f020093;
+        public static final int tab_selected_pressed_example=0x7f020094;
+        public static final int tab_unselected_focused_example=0x7f020095;
+        public static final int tab_unselected_pressed_example=0x7f020096;
     }
     public static final class id {
         public static final int action_bar=0x7f05002e;
@@ -1520,6 +1521,7 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f050016;
         public static final int action_menu_presenter=0x7f050017;
         public static final int action_mode_close_button=0x7f050036;
+        public static final int action_search=0x7f05007a;
         public static final int action_settings=0x7f050079;
         public static final int activity_chooser_view_content=0x7f050037;
         public static final int always=0x7f05000b;
@@ -1696,6 +1698,7 @@ containing a value of this type.
     }
     public static final class menu {
         public static final int main=0x7f0c0000;
+        public static final int searchview_in_menu=0x7f0c0001;
     }
     public static final class string {
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 

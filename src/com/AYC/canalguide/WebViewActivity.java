@@ -6,11 +6,16 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.Window;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
 
 /**
  * This activity will receive a url and display the website. It will allow
@@ -23,17 +28,21 @@ public class WebViewActivity extends Activity {
 
 	private WebView webView;
 	private ProgressBar progressBar;
+	private SearchView searchView;
 	private String url;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	      super.onCreate(savedInstanceState);
+	      getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
 	      setContentView(R.layout.activity_webview);
 	      
 	      ActionBar actionBar = getActionBar();
+	      // This will display the arrow on the left in the actionbar
 	      actionBar.setDisplayHomeAsUpEnabled(true);
 	      
-	      url = getIntent().getStringExtra("url");
+	      if(url == null)
+	    	  url = getIntent().getStringExtra("url");
 	      log("URL = " + url);
 	      
 	      progressBar = (ProgressBar) findViewById(R.id.progressBar);
@@ -46,8 +55,37 @@ public class WebViewActivity extends Activity {
 	      webView.setWebChromeClient(new CanalWebChromeClient());
 	      
 	      webView.loadUrl(url);
-
 	}
+
+	/**
+	 * Create the searchview icon in the actionbar
+	 */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.searchview_in_menu, menu);
+        searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+
+        return true;
+    }
+    
+    /**
+     * When the options menu is being prepared, change the searchview icon and
+     * set its text to the url
+     */
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem searchViewMenuItem = menu.findItem(R.id.action_search);    
+        searchView = (SearchView) searchViewMenuItem.getActionView();
+        int searchImgId = getResources().getIdentifier("android:id/search_button", null, null);
+        ImageView v = (ImageView) searchView.findViewById(searchImgId);
+        v.setImageResource(R.drawable.ic_action_edit); 
+        //searchView.setOnQueryTextListener(this);
+        searchView.setQuery(url, false);
+        return super.onPrepareOptionsMenu(menu);
+    }
 	
 	/**
 	 * This method is overridden to control the actions when the 
@@ -101,6 +139,8 @@ public class WebViewActivity extends Activity {
 		@Override
 		public void onPageFinished(WebView view, String url) {
 			progressBar.setVisibility(ProgressBar.GONE);
+			searchView.setQuery(url, false);
+	    	WebViewActivity.this.url = url;
 		}
 	}
 	

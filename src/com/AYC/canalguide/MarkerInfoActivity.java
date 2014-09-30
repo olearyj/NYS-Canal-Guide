@@ -64,6 +64,7 @@ public class MarkerInfoActivity extends Activity implements OnClickListener {
 	     setContentView(R.layout.layout_markerinfo);
 	     
 	      ActionBar actionBar = getActionBar();
+	      // This will display the arrow on the left in the actionbar
 	      actionBar.setDisplayHomeAsUpEnabled(true);
 	     
 	     // Get MapMarker from main activity
@@ -136,7 +137,6 @@ public class MarkerInfoActivity extends Activity implements OnClickListener {
 	    }
 	    return super.onOptionsItemSelected(item);
 	}
-	
 	
 	/**
 	 * This method will remove the icon if there is no phone number or website for the marker.
