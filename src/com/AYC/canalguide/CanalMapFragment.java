@@ -10,6 +10,7 @@ import java.util.Map;
 
 import org.xmlpull.v1.XmlPullParserException;
 
+import Tools.MyTimer;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -34,7 +35,7 @@ public class CanalMapFragment extends MapFragment {
 
 	public static final LatLng saratogaSprings = new LatLng(43.0616419,-73.7719178);
 	public static final LatLng startLocation = saratogaSprings;
-	public static final float startZoom = 8.0f;
+	public static final float startZoom = 8.0f;	// 8.0f is perfect
 	
 	private HashMap<String, String> xmlStrings, navInfoXmlStrings;
 	private Activity activity;
@@ -197,17 +198,22 @@ public class CanalMapFragment extends MapFragment {
     	log("Adding existing markers to the map. poiAdapter size = " + poiAdapter.getCount());
     	Marker marker;
 		MarkerOptions markerOptions;
+		MyTimer timer = new MyTimer();
 		
     	for(MapMarker mapMarker : poiAdapter){
     		if(markersNotFilteredOut(mapMarker)){
-				markerOptions = mapMarker.getMarkerOptions();
+    			markerOptions = mapMarker.getMarkerOptions();
 				
 	    		if(markerOptions != null && mapMarker != null){
+					timer.startTimer();
 					marker = mMap.addMarker(markerOptions);	// Will get an error at this line on emulator
-					mapMarker.setMarker(marker);
+					timer.endTimer();
+		    		
+		    		mapMarker.setMarker(marker);
 	    		}
     		}
     	}
+    	timer.printTimeStats("marker = mMap.addMarker(markerOptions);");
     }
     
     private boolean markersNotFilteredOut(MapMarker mapMarker){
@@ -248,7 +254,7 @@ public class CanalMapFragment extends MapFragment {
     			return false;
     	return true;
     }
-	
+    
     private void log(String msg){
     	if(SplashActivity.LOG_ENABLED)
     		Log.i("CanalMapFragment", msg);

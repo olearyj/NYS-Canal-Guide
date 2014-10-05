@@ -79,9 +79,18 @@ public class WebViewActivity extends Activity {
     public boolean onPrepareOptionsMenu(Menu menu) {
         MenuItem searchViewMenuItem = menu.findItem(R.id.action_search);    
         searchView = (SearchView) searchViewMenuItem.getActionView();
+        
         int searchImgId = getResources().getIdentifier("android:id/search_button", null, null);
         ImageView v = (ImageView) searchView.findViewById(searchImgId);
         v.setImageResource(R.drawable.ic_action_edit); 
+        
+        // Removes close button
+        int searchCloseBtnImgId = getResources().getIdentifier("android:id/search_mag_icon", null, null);
+        ImageView iv = (ImageView) searchView.findViewById(searchCloseBtnImgId);
+        iv.setAdjustViewBounds(true);
+        iv.setMaxHeight(0);
+        iv.setMaxWidth(0);
+        
         //searchView.setOnQueryTextListener(this);
         searchView.setQuery(url, false);
         return super.onPrepareOptionsMenu(menu);
