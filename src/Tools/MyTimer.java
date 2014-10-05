@@ -4,11 +4,12 @@ import android.util.Log;
 
 import com.AYC.canalguide.SplashActivity;
 
-/*
+/**
  * This class can be used to time how long it takes code to run.
  * It can also be used to see how the average time it takes for code
  * in a loop to run along with the minimum time and maximum time.
  * This will be great for debugging code that is taking too much time.
+ * This uses System.currentTimeMillis() to keep track of time.
  */
 public class MyTimer {
 	
@@ -41,15 +42,26 @@ public class MyTimer {
     	return finishTime;
     }
     
+    /**
+     * This will return the time it took from startTime to endTime in milliseconds
+     * 
+     * @return startTime - finishTime
+     */
     public long getTimeDifference(){
     	return startTime - finishTime;
     }
     
-    public void printTimeDiff(String codeDesc){
+    public void logTimeDiff(String codeDesc){
     	log("\"" + codeDesc + "\": " + (finishTime - startTime) + "ms");
     }
     
-    public void printTimeStats(String codeDesc){
+    /**
+     * This will log.i the average, minimum and maximum time in milliseconds
+     * 
+     * @param codeDesc
+     * Description of the code that was timed
+     */
+    public void logTimeStats(String codeDesc){
     	log("\"" + codeDesc + "\": Average=" + total/count + "ms");
     	log("\"" + codeDesc + "\": " + "min=" + min + "ms" + " max=" + max + "ms");
     }

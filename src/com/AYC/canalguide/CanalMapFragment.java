@@ -213,7 +213,7 @@ public class CanalMapFragment extends MapFragment {
 	    		}
     		}
     	}
-    	timer.printTimeStats("marker = mMap.addMarker(markerOptions);");
+    	timer.logTimeStats("marker = mMap.addMarker(markerOptions);");
     }
     
     private boolean markersNotFilteredOut(MapMarker mapMarker){
@@ -248,6 +248,7 @@ public class CanalMapFragment extends MapFragment {
     	return true;
     }
     
+    // Can't use this anymore after adding other switch - delete?
     private boolean switchValuesDefault(boolean[] switchValues){
     	for(int i=0; i<switchValues.length-1; i++)
     		if(switchValues[i] == false)
