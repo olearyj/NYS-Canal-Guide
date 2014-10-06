@@ -8,6 +8,7 @@ import java.util.List;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
+import com.AYC.canalguide.R;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
@@ -25,6 +26,21 @@ public class NavInfoMarker extends MapMarker implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	private static final BitmapDescriptor greenBuoyIcon = 
+			BitmapDescriptorFactory.fromResource(R.drawable.mmi_green_buoy);
+	
+	private static final BitmapDescriptor redBuoyIcon = 
+			BitmapDescriptorFactory.fromResource(R.drawable.mmi_red_buoy);
+	
+	private static final BitmapDescriptor greenBeaconIcon = 
+			BitmapDescriptorFactory.fromResource(R.drawable.mmi_green_beacon);
+
+	private static final BitmapDescriptor redBeaconIcon = 
+			BitmapDescriptorFactory.fromResource(R.drawable.mmi_red_beacon);
+	
+	private static final BitmapDescriptor bridgeIcon = 
+			BitmapDescriptorFactory.fromResource(R.drawable.mmi_bridge);
 	
 	private String shore;
 	private String featureUrl;
@@ -104,11 +120,16 @@ public class NavInfoMarker extends MapMarker implements Serializable {
 
 	@Override
 	public MarkerOptions getMarkerOptions() {
-		return new MarkerOptions()
-		.title(name)
-		.position(new LatLng(lat, lng))
-		.snippet(bodyOfWater + ", mile " + mile)
-		.icon(getBitmapDescriptor());
+		BitmapDescriptor bd = getBitmapDescriptor();
+		if(bd != null)
+			return new MarkerOptions()
+				.title(name)
+				.position(new LatLng(lat, lng))
+				.snippet(bodyOfWater + ", mile " + mile)
+				.anchor(0.5f, 0.5f)
+				.icon(bd);
+		else
+			return null;
 	}
 	
 	// TODO
@@ -123,16 +144,30 @@ public class NavInfoMarker extends MapMarker implements Serializable {
 	
 	// TODO
 	public BitmapDescriptor getBitmapDescriptor(){
-		if(featureColor.equalsIgnoreCase("green"))
-			return BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN);
-		else if(featureColor.equalsIgnoreCase("red"))
-			return BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED);
+		
+		if(name.toLowerCase().contains("buoy")){
+			if(featureColor.equalsIgnoreCase("green"))
+				return greenBuoyIcon;	//BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN);
+			else if(featureColor.equalsIgnoreCase("red"))
+				return redBuoyIcon;	//BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED);
+		}
+		else if(name.toLowerCase().contains("beacon")){
+			if(featureColor.equalsIgnoreCase("green"))
+				return greenBeaconIcon;	//BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN);
+			else if(featureColor.equalsIgnoreCase("red"))
+				return redBeaconIcon;	//BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED);
+		}
+		else if(name.toLowerCase().contains("bridge"))
+			return bridgeIcon;
+		/*
 		else if(featureColor.equalsIgnoreCase(""))
 			return BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE);
 		else
 			return BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE);
+			*/
+		return null;
 	}
-		
+
 	@Override
 	public MapMarker cloneWithoutMarker(){
 		return new NavInfoMarker(new LatLng(lat, lng), name, mile, shore, featureUrl, 

@@ -62,8 +62,10 @@ public class MyTimer {
      * Description of the code that was timed
      */
     public void logTimeStats(String codeDesc){
-    	log("\"" + codeDesc + "\": Average=" + total/count + "ms");
-    	log("\"" + codeDesc + "\": " + "min=" + min + "ms" + " max=" + max + "ms");
+    	if(count != 0){
+	    	log("\"" + codeDesc + "\": Average=" + total/count + "ms");
+	    	log("\"" + codeDesc + "\": " + "min=" + min + "ms" + " max=" + max + "ms");
+    	}
     }
 
     private void log(String msg){

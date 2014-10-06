@@ -447,7 +447,7 @@ public class SplashActivity extends Activity {
         	log("Saved data is valid");
         	return true;
         } else {
-        	log("Saved data is valid");
+        	log("Saved data is not valid");
         	return false;
         }
 	}
@@ -471,7 +471,7 @@ public class SplashActivity extends Activity {
      */
     private int getUpdateFrequency(){
 	    SharedPreferences sharedPref = getSharedPreferences(OptionsFragment.PREFS_NAME, 0);
-		return sharedPref.getInt("UpdateTime", 7);
+		return sharedPref.getInt("UpdateFrequency", 7);
     }
 		
     private void log(String msg){

@@ -137,12 +137,15 @@ public class CanalMapFragment extends MapFragment {
         	addExistingMarkersToMap();
         else
         	parseXmlStringsAndAddMarkersToMap(xmlStrings);
-        /*if(markersNotFilteredOut("navinfo")){
-        	if(navInfoXmlStrings == null)
-        		((MainActivity) getActivity()).startDownloadThreadPoolService();
+        if(markersNotFilteredOut("navinfo")){
+        	log("navinfo markers not filtered out!");
+        	if(navInfoXmlStrings == null){
+        		log("navinfo navinfostrings == null");
+        		((MainActivity) getActivity()).startDownloadThreadPoolService();}
         	else
-        		parseXmlStringsAndAddMarkersToMap(navInfoXmlStrings);
-        }*/
+        		log("navinfo navinfostrings != null so parseXmlStringsAndAddMarkersToMap()");
+        		//parseXmlStringsAndAddMarkersToMap(navInfoXmlStrings);}
+        }//*/
     }
     
     /**
@@ -194,6 +197,7 @@ public class CanalMapFragment extends MapFragment {
 		}
     }
     
+    // TODO - delete this timer after the bug is fixed
     private void addExistingMarkersToMap(){
     	log("Adding existing markers to the map. poiAdapter size = " + poiAdapter.getCount());
     	Marker marker;
