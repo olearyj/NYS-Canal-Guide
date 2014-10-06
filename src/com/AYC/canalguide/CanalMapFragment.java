@@ -3,6 +3,8 @@ package com.AYC.canalguide;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -14,6 +16,7 @@ import Tools.MyTimer;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -131,21 +134,27 @@ public class CanalMapFragment extends MapFragment {
 	            startActivity(intent);
 			}
 		});
-
-        // TODO - dont always parse then add, only do when poiAdapter is empty??
+        
         if(poiAdapter.getCount() != 0)
         	addExistingMarkersToMap();
         else
         	parseXmlStringsAndAddMarkersToMap(xmlStrings);
+        
         if(markersNotFilteredOut("navinfo")){
         	log("navinfo markers not filtered out!");
         	if(navInfoXmlStrings == null){
         		log("navinfo navinfostrings == null");
-        		((MainActivity) getActivity()).startDownloadThreadPoolService();}
-        	else
-        		log("navinfo navinfostrings != null so parseXmlStringsAndAddMarkersToMap()");
-        		//parseXmlStringsAndAddMarkersToMap(navInfoXmlStrings);}
-        }//*/
+        		if(isSavedNavinfoDataValid()){
+        			navInfoXmlStrings = loadNavInfoXmlStrings();
+        			parseXmlStringsAndAddMarkersToMap(navInfoXmlStrings);
+        		}
+        		else
+        			((MainActivity) getActivity()).startDownloadThreadPoolService();
+        	}
+        	// else if(navInfoXmlStrings != null)
+        		// NavInfoMarkers were already in the poiAdapter and added from 
+        		// the above method: addExistingMarkersToMap();
+        }
     }
     
     /**
@@ -259,6 +268,70 @@ public class CanalMapFragment extends MapFragment {
     			return false;
     	return true;
     }
+    
+	/**
+	 * This method will use the date that the data was last downloaded to determine 
+	 * whether the data is too old.
+	 * 
+	 * @return true if the data isn't too old
+	 */
+	private boolean isSavedNavinfoDataValid(){
+		Calendar calendar = Calendar.getInstance();
+        Date lastValidDataDate = new Date(calendar.getTimeInMillis() - 
+        		(getUpdateFrequency() * SplashActivity.DAY_IN_MILLISECONDS));
+        Date lastDownloadDataDate = new Date(loadDataLastSavedDate());
+        
+        log("Last valid data date = " + lastValidDataDate);
+        log("Last download data date = " + lastDownloadDataDate);
+        
+        if(lastDownloadDataDate.after(lastValidDataDate)){
+        	log("Saved data is valid");
+        	return true;
+        } else {
+        	log("Saved data is not valid");
+        	return false;
+        }
+	}
+	
+	/**
+	 * This will get the date that the data was last downloaded from the canal site
+	 * 
+	 * @return Date in milliseconds
+	 */
+	private long loadDataLastSavedDate(){
+		log("Loading the date that the data was saved last");
+	    SharedPreferences sharedPref = getActivity()
+	    		.getSharedPreferences(SplashActivity.PREFS_NAME, 0);
+		
+		return sharedPref.getLong(
+				ThreadPoolDownloadService.NAV_INFO_DATA_LAST_SAVED_DATE_TAG, -1);
+	}
+	
+	/**
+     * This method will get the update frequency that was saved in the OptionsFragment
+     * 
+     * @return Update frequency in days
+     */
+    private int getUpdateFrequency(){
+	    SharedPreferences sharedPref = getActivity()
+	    		.getSharedPreferences(OptionsFragment.PREFS_NAME, 0);
+		return sharedPref.getInt("UpdateFrequency", 7);
+    }
+    
+    private HashMap<String, String> loadNavInfoXmlStrings(){
+		log("Loading xmlStrings");
+	    SharedPreferences xmlStringsPref = getActivity()
+	    		.getSharedPreferences(SplashActivity.PREFS_NAME, 0);
+		HashMap<String, String> xmlStrings = new HashMap<String, String>();
+		
+		int i = 0;
+		for(String url : SplashActivity.navInfoURLs){
+			xmlStrings.put(url, xmlStringsPref.getString(url, ""));
+			log(i++ + ") " + url + " = " + xmlStringsPref.getString(url, "").substring(0, 100));
+		}
+		
+		return xmlStrings;
+	}
     
     private void log(String msg){
     	if(SplashActivity.LOG_ENABLED)

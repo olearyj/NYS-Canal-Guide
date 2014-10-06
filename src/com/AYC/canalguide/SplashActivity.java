@@ -57,7 +57,7 @@ public class SplashActivity extends Activity {
 	static final String PREFS_NAME = "xmlStrings";
 	
 	private static final String DATA_LAST_SAVED_DATE_TAG = "Last saved date";
-	private static final long DAY_IN_MILLISECONDS = 86400000;
+	public static final long DAY_IN_MILLISECONDS = 86400000;
 	private static long DATA_VALID_TIME;	// How long data is valid for
 	
 	// Default permissions for this because MainActivity uses this
