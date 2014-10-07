@@ -147,7 +147,10 @@ public class CanalMapFragment extends MapFragment {
         			parseXmlStringsAndAddMarkersToMap(navInfoXmlStrings);
         		}
         		else{	// If the data is too old, re-download it to get latest update
-        			((MainActivity) getActivity()).startDownloadThreadPoolService();
+        			if( !((MainActivity) getActivity()).dowloadThreadPoolServiceRunning() ){
+        				//TODO toast - and check other toast
+        				((MainActivity) getActivity()).startDownloadThreadPoolService();
+        			}
         		}
         	}
         	// else if(navInfoXmlStrings != null)

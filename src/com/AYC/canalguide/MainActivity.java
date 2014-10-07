@@ -30,6 +30,8 @@ public class MainActivity extends Activity {
 	
 	private HashMap<String, String> xmlStrings;
 	
+	private boolean dowloadThreadPoolServiceRunning = false;
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,7 +98,11 @@ public class MainActivity extends Activity {
     }
     
     protected void startDownloadThreadPoolService(){
+    	dowloadThreadPoolServiceRunning = true;
 		startService(ThreadPoolDownloadService.makeIntent(this, handler));
+    }
+    protected boolean dowloadThreadPoolServiceRunning(){
+    	return dowloadThreadPoolServiceRunning;
     }
     
     /**
@@ -165,7 +171,7 @@ public class MainActivity extends Activity {
                 		log(downloadedURLs.size() + ") Last navInfoXmlFile received");
                 		HashMap<String, String> navInfoXmlStrings = loadNavInfoXmlStrings();
                 		((CanalMapFragment) mapFragment).parseXmlStringsAndAddMarkersToMap(navInfoXmlStrings);
-                		
+                		dowloadThreadPoolServiceRunning = false;
                 	}
                 }
             }
