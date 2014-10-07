@@ -194,7 +194,7 @@ public class OptionsFragment extends Fragment implements OnClickListener {
 	private void saveOptions(){
 		log("Saving Options");
 		// We need an Editor object to make preference changes
-	    SharedPreferences sharedPref = getActivity().getSharedPreferences(PREFS_NAME, 0);
+	    SharedPreferences sharedPref = getActivity().getSharedPreferences(PREFS_NAME, SplashActivity.PREFS_MODE);
 	    SharedPreferences.Editor editor = sharedPref.edit();
 	    
 	    editor.putInt("MapType", mapType);

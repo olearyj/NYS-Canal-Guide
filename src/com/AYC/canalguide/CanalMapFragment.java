@@ -139,7 +139,7 @@ public class CanalMapFragment extends MapFragment {
         	addExistingMarkersToMap();
         else
         	parseXmlStringsAndAddMarkersToMap(xmlStrings);
-        
+        // TODO markersNotFilteredOut("navinfo") doesnt work on startup
         if(markersNotFilteredOut("navinfo")){
         	log("navinfo markers not filtered out!");
         	if(navInfoXmlStrings == null){
@@ -148,8 +148,9 @@ public class CanalMapFragment extends MapFragment {
         			navInfoXmlStrings = loadNavInfoXmlStrings();
         			parseXmlStringsAndAddMarkersToMap(navInfoXmlStrings);
         		}
-        		else
+        		else{
         			((MainActivity) getActivity()).startDownloadThreadPoolService();
+        		}
         	}
         	// else if(navInfoXmlStrings != null)
         		// NavInfoMarkers were already in the poiAdapter and added from 
@@ -238,10 +239,14 @@ public class CanalMapFragment extends MapFragment {
     	boolean[] switchValues = optFrag.getFilterData();
     	
     	if(switchValues == null){
-    		if(urlDocName.contains("navinfo"))
-    			return false;
-    		else
-    			return true;
+    		if(urlDocName.contains("navinfo")){
+    			log("markersNotFilteredOut(\"" + urlDocName + 
+    					"\") doc name does contain navinfo, returning false");
+    			return false;}
+    		else{
+    			log("markersNotFilteredOut(\"" + urlDocName + 
+    					"\") doc name does not contain navinfo, returning true");
+    			return true;}
     	}
     	else{
     		if(urlDocName.equals("locks"))
@@ -301,7 +306,7 @@ public class CanalMapFragment extends MapFragment {
 	private long loadDataLastSavedDate(){
 		log("Loading the date that the data was saved last");
 	    SharedPreferences sharedPref = getActivity()
-	    		.getSharedPreferences(SplashActivity.PREFS_NAME, 0);
+	    		.getSharedPreferences(SplashActivity.PREFS_NAME, SplashActivity.PREFS_MODE);
 		
 		return sharedPref.getLong(
 				ThreadPoolDownloadService.NAV_INFO_DATA_LAST_SAVED_DATE_TAG, -1);
@@ -314,20 +319,21 @@ public class CanalMapFragment extends MapFragment {
      */
     private int getUpdateFrequency(){
 	    SharedPreferences sharedPref = getActivity()
-	    		.getSharedPreferences(OptionsFragment.PREFS_NAME, 0);
+	    		.getSharedPreferences(OptionsFragment.PREFS_NAME, SplashActivity.PREFS_MODE);
 		return sharedPref.getInt("UpdateFrequency", 7);
     }
     
     private HashMap<String, String> loadNavInfoXmlStrings(){
 		log("Loading xmlStrings");
 	    SharedPreferences xmlStringsPref = getActivity()
-	    		.getSharedPreferences(SplashActivity.PREFS_NAME, 0);
+	    		.getSharedPreferences(SplashActivity.PREFS_NAME, SplashActivity.PREFS_MODE);
 		HashMap<String, String> xmlStrings = new HashMap<String, String>();
 		
 		int i = 0;
 		for(String url : SplashActivity.navInfoURLs){
 			xmlStrings.put(url, xmlStringsPref.getString(url, ""));
-			log(i++ + ") " + url + " = " + xmlStringsPref.getString(url, "").substring(0, 100));
+			// TODO index out of...
+			//log(i++ + ") " + url + " = " + xmlStringsPref.getString(url, "").substring(0, 100));
 		}
 		
 		return xmlStrings;

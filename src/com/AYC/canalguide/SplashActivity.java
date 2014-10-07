@@ -17,6 +17,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -55,6 +56,7 @@ public class SplashActivity extends Activity {
 	private static final long MINIMUM_SPLASH_TIME = 1000L;
 	
 	static final String PREFS_NAME = "xmlStrings";
+	static final int PREFS_MODE = 0 | Context.MODE_MULTI_PROCESS;
 	
 	private static final String DATA_LAST_SAVED_DATE_TAG = "Last saved date";
 	public static final long DAY_IN_MILLISECONDS = 86400000;
@@ -373,7 +375,7 @@ public class SplashActivity extends Activity {
 	private void saveXmlStrings(HashMap<String, String> xmlStrings){
 		log("Saving xmlStrings");
 		// We need an Editor object to make preference changes
-	    SharedPreferences xmlStringsPref = getSharedPreferences(PREFS_NAME, 0);
+	    SharedPreferences xmlStringsPref = getSharedPreferences(PREFS_NAME, SplashActivity.PREFS_MODE);
 	    SharedPreferences.Editor editor = xmlStringsPref.edit();
 	    
 	    Iterator<Map.Entry<String, String>> iterator = xmlStrings.entrySet().iterator();
@@ -397,7 +399,7 @@ public class SplashActivity extends Activity {
 	 */
 	private HashMap<String, String> loadXmlStrings(){
 		log("Loading xmlStrings");
-	    SharedPreferences xmlStringsPref = getSharedPreferences(PREFS_NAME, 0);
+	    SharedPreferences xmlStringsPref = getSharedPreferences(PREFS_NAME, SplashActivity.PREFS_MODE);
 		HashMap<String, String> xmlStrings = new HashMap<String, String>();
 		
 		runOnUiThread(new Runnable(){
@@ -423,7 +425,6 @@ public class SplashActivity extends Activity {
 		
 		for(String url : URLs){
 			xmlStrings.put(url, xmlStringsPref.getString(url, ""));
-			log(url + " = " + xmlStringsPref.getString(url, "").substring(0, 100));
 		}
 		
 		return xmlStrings;
@@ -459,7 +460,7 @@ public class SplashActivity extends Activity {
 	 */
 	private long loadDataLastSavedDate(){
 		log("Loading the date that the data was saved last");
-	    SharedPreferences sharedPref = getSharedPreferences(PREFS_NAME, 0);
+	    SharedPreferences sharedPref = getSharedPreferences(PREFS_NAME, SplashActivity.PREFS_MODE);
 		
 		return sharedPref.getLong(DATA_LAST_SAVED_DATE_TAG, -1);
 	}
@@ -470,7 +471,7 @@ public class SplashActivity extends Activity {
      * @return Update frequency in days
      */
     private int getUpdateFrequency(){
-	    SharedPreferences sharedPref = getSharedPreferences(OptionsFragment.PREFS_NAME, 0);
+	    SharedPreferences sharedPref = getSharedPreferences(OptionsFragment.PREFS_NAME, SplashActivity.PREFS_MODE);
 		return sharedPref.getInt("UpdateFrequency", 7);
     }
 		

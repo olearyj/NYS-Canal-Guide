@@ -104,7 +104,7 @@ public class MainActivity extends Activity {
      */
     private void loadSavedOptions(){
 		log("Loading Options");
-	    SharedPreferences sharedPref = getSharedPreferences(OptionsFragment.PREFS_NAME, 0);
+	    SharedPreferences sharedPref = getSharedPreferences(OptionsFragment.PREFS_NAME, SplashActivity.PREFS_MODE);
 	    
 		int mapType = sharedPref.getInt("MapType", GoogleMap.MAP_TYPE_NORMAL);
 		((OptionsFragment) optionsFragment).setMapType(mapType);
@@ -172,15 +172,21 @@ public class MainActivity extends Activity {
     	}    	
 
         private HashMap<String, String> loadNavInfoXmlStrings(){
-    		log("Loading xmlStrings");
-    	    SharedPreferences xmlStringsPref = getSharedPreferences(SplashActivity.PREFS_NAME, 0);
+    		log("Loading navInfoXmlStrings");
+    	    SharedPreferences xmlStringsPref = getSharedPreferences(SplashActivity.PREFS_NAME, SplashActivity.PREFS_MODE);
     		HashMap<String, String> xmlStrings = new HashMap<String, String>();
     		
     		int i = 0;
     		for(String url : SplashActivity.navInfoURLs){
     			xmlStrings.put(url, xmlStringsPref.getString(url, ""));
+    			try{
     			log(i++ + ") " + url + " = " + xmlStringsPref.getString(url, "").substring(0, 100));
+    			}
+    			catch(StringIndexOutOfBoundsException e){
+    				//log("StringIndexOutOfBoundsException!!!! (" + i + ") " + url + " = " + xmlStringsPref.getString(url, ""));
+    			}
     		}
+    		log("date: " + xmlStringsPref.getLong(ThreadPoolDownloadService.NAV_INFO_DATA_LAST_SAVED_DATE_TAG, -1));
     		
     		return xmlStrings;
     	}

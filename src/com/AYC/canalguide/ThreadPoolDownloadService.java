@@ -76,7 +76,7 @@ public class ThreadPoolDownloadService extends Service {
     	public void run(){
     		String xmlString = downloadXmlFile(URL);
     		navInfoXmlStrings.put(URL, xmlString);
-			sendXmlString(URL);
+			sendXmlStringUrl(URL);
 			countDownLatch.countDown();
     	}
     }
@@ -162,6 +162,7 @@ public class ThreadPoolDownloadService extends Service {
 		// IOException catch will attempt to load from storage then open mainActivity on success
 		} catch (IOException e) {
 			log("Error: IOException because network not connected");
+			// TODO
 			/*
 			// If there is saved data
 			if(loadDataLastSavedDate() != -1){
@@ -185,7 +186,8 @@ public class ThreadPoolDownloadService extends Service {
 								"check your network connection and try again.", Toast.LENGTH_LONG).show();
 					}
 				});
-				// Close Activity since loading from website failed and there is no saved data
+				// Close 
+ since loading from website failed and there is no saved data
 				finish();
 				return null;
 			}
@@ -200,7 +202,7 @@ public class ThreadPoolDownloadService extends Service {
 	}
 	
 	// TODO make send message method rather than these two
-    public void sendXmlString(String URL) {
+    public void sendXmlStringUrl(String URL) {
 		Message msg = Message.obtain();
 		Bundle data = new Bundle();
 		data.putString(URL_KEY, URL);
@@ -265,7 +267,7 @@ public class ThreadPoolDownloadService extends Service {
 	private void saveXmlStrings(){
 		log("Saving navInfoXmlStrings");
 		// We need an Editor object to make preference changes
-	    SharedPreferences xmlStringsPref = getSharedPreferences(SplashActivity.PREFS_NAME, 0);
+	    SharedPreferences xmlStringsPref = getSharedPreferences(SplashActivity.PREFS_NAME, SplashActivity.PREFS_MODE);
 	    SharedPreferences.Editor editor = xmlStringsPref.edit();
 	    
 	    Iterator<Map.Entry<String, String>> iterator = navInfoXmlStrings.entrySet().iterator();
