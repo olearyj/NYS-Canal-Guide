@@ -32,7 +32,7 @@ import android.widget.Toast;
 
 public class ThreadPoolDownloadService extends Service {
 
-    private static final int MAX_THREADS = 4;
+    private static int MAX_THREADS;
 
     /**
      * The key used to store/retrieve a Messenger extra from a Bundle.
@@ -59,9 +59,14 @@ public class ThreadPoolDownloadService extends Service {
     @Override
 	public void onCreate() {
     	super.onCreate();
-        log("Created ThreadPoolDownloadService");
-        mExecutor = Executors.newFixedThreadPool(MAX_THREADS);
         navInfoXmlStrings = new HashMap<String, String>();
+        
+        // We want to use the maximum amount of worker threads to get the job done the quickest
+        int availableProcessors = Runtime.getRuntime().availableProcessors();
+        MAX_THREADS = availableProcessors > 1 ? availableProcessors - 1 : 1 ;
+        mExecutor = Executors.newFixedThreadPool(MAX_THREADS);
+        
+        log("Created ThreadPoolDownloadService with " + MAX_THREADS + " threads");
     }
     
     private class DownloadXmlStringRunnable implements Runnable {

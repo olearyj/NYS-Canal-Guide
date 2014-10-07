@@ -139,16 +139,14 @@ public class CanalMapFragment extends MapFragment {
         	addExistingMarkersToMap();
         else
         	parseXmlStringsAndAddMarkersToMap(xmlStrings);
-        // TODO markersNotFilteredOut("navinfo") doesnt work on startup
+
         if(markersNotFilteredOut("navinfo")){
-        	log("navinfo markers not filtered out!");
         	if(navInfoXmlStrings == null){
-        		log("navinfo navinfostrings == null");
-        		if(isSavedNavinfoDataValid()){
+        		if(isSavedNavinfoDataValid()){	// If the data isnt too old, use saved
         			navInfoXmlStrings = loadNavInfoXmlStrings();
         			parseXmlStringsAndAddMarkersToMap(navInfoXmlStrings);
         		}
-        		else{
+        		else{	// If the data is too old, re-download it to get latest update
         			((MainActivity) getActivity()).startDownloadThreadPoolService();
         		}
         	}
@@ -239,14 +237,10 @@ public class CanalMapFragment extends MapFragment {
     	boolean[] switchValues = optFrag.getFilterData();
     	
     	if(switchValues == null){
-    		if(urlDocName.contains("navinfo")){
-    			log("markersNotFilteredOut(\"" + urlDocName + 
-    					"\") doc name does contain navinfo, returning false");
-    			return false;}
-    		else{
-    			log("markersNotFilteredOut(\"" + urlDocName + 
-    					"\") doc name does not contain navinfo, returning true");
-    			return true;}
+    		if(urlDocName.contains("navinfo"))
+    			return false;
+    		else
+    			return true;
     	}
     	else{
     		if(urlDocName.equals("locks"))
@@ -266,6 +260,7 @@ public class CanalMapFragment extends MapFragment {
     	return true;
     }
     
+    // TODO
     // Can't use this anymore after adding other switch - delete?
     private boolean switchValuesDefault(boolean[] switchValues){
     	for(int i=0; i<switchValues.length-1; i++)

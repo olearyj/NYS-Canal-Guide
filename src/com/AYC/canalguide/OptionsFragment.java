@@ -38,6 +38,7 @@ public class OptionsFragment extends Fragment implements OnClickListener {
 		switches = new Switch[NUM_OF_SWITCHES];
 		switchValues = new boolean[NUM_OF_SWITCHES];
 		Arrays.fill(switchValues, true);
+		switchValues[5] = false;
 	}
 
 	@Override
