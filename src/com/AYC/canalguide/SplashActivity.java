@@ -423,9 +423,8 @@ public class SplashActivity extends Activity {
 		for(int i=1; i<URLs.length + 1; i++)
 			handler.postDelayed(updateProgressWithTimeRunnable, i * (MINIMUM_SPLASH_TIME/URLs.length));
 		
-		for(String url : URLs){
+		for(String url : URLs)
 			xmlStrings.put(url, xmlStringsPref.getString(url, ""));
-		}
 		
 		return xmlStrings;
 	}

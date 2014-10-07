@@ -324,17 +324,13 @@ public class CanalMapFragment extends MapFragment {
     }
     
     private HashMap<String, String> loadNavInfoXmlStrings(){
-		log("Loading xmlStrings");
+		log("Loading navInfoXmlStrings");
 	    SharedPreferences xmlStringsPref = getActivity()
 	    		.getSharedPreferences(SplashActivity.PREFS_NAME, SplashActivity.PREFS_MODE);
 		HashMap<String, String> xmlStrings = new HashMap<String, String>();
 		
-		int i = 0;
-		for(String url : SplashActivity.navInfoURLs){
+		for(String url : SplashActivity.navInfoURLs)
 			xmlStrings.put(url, xmlStringsPref.getString(url, ""));
-			// TODO index out of...
-			//log(i++ + ") " + url + " = " + xmlStringsPref.getString(url, "").substring(0, 100));
-		}
 		
 		return xmlStrings;
 	}

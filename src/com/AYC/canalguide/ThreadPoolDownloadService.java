@@ -201,7 +201,6 @@ public class ThreadPoolDownloadService extends Service {
 		return xmlString;
 	}
 	
-	// TODO make send message method rather than these two
     public void sendXmlStringUrl(String URL) {
 		Message msg = Message.obtain();
 		Bundle data = new Bundle();
