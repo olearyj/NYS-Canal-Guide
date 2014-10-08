@@ -350,7 +350,7 @@ public class MarkerInfoActivity extends Activity implements OnClickListener {
 	 * 
 	 * @return  True if the string parameter is null, empty, only a space, or N/A
 	 */
-	public boolean isBlank(String string){
+	private boolean isBlank(String string){
 		if(string == null || string.equals("") || string.equals(" ") || string.equalsIgnoreCase("N/A"))
 			return true;
 		else 
@@ -362,7 +362,7 @@ public class MarkerInfoActivity extends Activity implements OnClickListener {
 	 * 
 	 * @return True if this mapMarker has a phone number
 	 */
-	public boolean hasPhoneNumber(){
+	private boolean hasPhoneNumber(){
 		if(!isLaunch)
 			if(	(lock == null ? false : !isBlank(lock.getPhoneNumber())) || 
 						(marina == null ? false : !isBlank(marina.getPhoneNumber())) ||
@@ -377,7 +377,7 @@ public class MarkerInfoActivity extends Activity implements OnClickListener {
 	 * 
 	 * @return True if this mapMarker has a website
 	 */
-	public boolean hasWebsite(){
+	private boolean hasWebsite(){
 		if(isMarina || isBoatsForHire)
 			if( (marina == null ? false : !isBlank(marina.getUrl())) || 
 		    			(boats == null ? false : !isBlank(boats.getUrl())) )
@@ -394,7 +394,7 @@ public class MarkerInfoActivity extends Activity implements OnClickListener {
 	 * 
 	 * @param text Text to add to the scrollView
 	 */
-	public void addTextView(String text){
+	private void addTextView(String text){
 		TextView tv = new TextView(this);
 		
 		if(textSizeCount % 2 == 0){	// Header
@@ -418,7 +418,7 @@ public class MarkerInfoActivity extends Activity implements OnClickListener {
 	 * 
 	 * @return The String of what fuel is available
 	 */
-	public String getFuelString(String letters){
+	private String getFuelString(String letters){
 		String fuel = "";
 		if(letters.contains("G"))
 			fuel = "Gas";
@@ -436,7 +436,7 @@ public class MarkerInfoActivity extends Activity implements OnClickListener {
 	 * 
 	 * @return The String of repairs available
 	 */
-	public String getRepairString(String letters){
+	private String getRepairString(String letters){
 		String repairString = "";
 		if(letters.contains("E"))
 			repairString += "Electrical\n";
@@ -460,7 +460,7 @@ public class MarkerInfoActivity extends Activity implements OnClickListener {
 	 * 
 	 * @return The String of what facilities are available
 	 */
-	public String getFacilitiesString(String letters){
+	private String getFacilitiesString(String letters){
 		
 		String facilitiesString = "";
 		final char characters[] = {'E', 'W', 'P', 'R', 'S', 'L', 'I', 'C'};
