@@ -30,6 +30,7 @@ import android.os.RemoteException;
 import android.util.Log;
 import android.widget.Toast;
 
+// TODO document this class properly
 public class ThreadPoolDownloadService extends Service {
 
     private static int MAX_THREADS;

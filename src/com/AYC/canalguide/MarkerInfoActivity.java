@@ -189,7 +189,7 @@ public class MarkerInfoActivity extends Activity implements OnClickListener {
     	
     	if( !isBlank(marina.getVhf()) ){
         	addTextView("Vhf Channels");
-        	addTextView(marina.getVhf());
+        	addTextView(marina.getVhf().replaceAll(", *", ", "));
     	}
     	
     	if( !isBlank(marina.getFacilities()) ){
