@@ -108,20 +108,21 @@ public class LockMarker extends MapMarker implements Serializable {
 			}
 		    tag = parser.getName();
 		    if (tag.equals("lock")) {
-		    	lat = Double.parseDouble(parser.getAttributeValue(null, "latitude"));
-		    	lng = Double.parseDouble(parser.getAttributeValue(null, "longitude"));
+		    	lat = parseDouble(parser.getAttributeValue(null, "latitude"));
+		    	lng = parseDouble(parser.getAttributeValue(null, "longitude"));
 		    	name = parser.getAttributeValue(null, "name");
 		    	location = parser.getAttributeValue(null, "location");
 		    	lift = parser.getAttributeValue(null, "lift");
 		    	address = parser.getAttributeValue(null, "address");
 		    	city = parser.getAttributeValue(null, "city");
 		    	zip = parser.getAttributeValue(null, "zip");
-		    	mile = Double.parseDouble(parser.getAttributeValue(null, "mile").replace("*", ""));
+		    	mile = parseDouble(parser.getAttributeValue(null, "mile").replace("*", ""));
 		    	bodyOfWater = parser.getAttributeValue(null, "bodyofwater");
 		    	phoneNumber = parser.getAttributeValue(null, "phonenumber");
-		    
-            	mapMarkers.add(new LockMarker(new LatLng(lat, lng), name, location, lift, address, 
-            			city, zip, mile, bodyOfWater, phoneNumber));	
+
+		    	if(lat != -1 || lng != -1)
+		    		mapMarkers.add(new LockMarker(new LatLng(lat, lng), name, location, lift, address, 
+		    				city, zip, mile, bodyOfWater, phoneNumber));	
 	            
 	            event = parser.next();   
 		    }

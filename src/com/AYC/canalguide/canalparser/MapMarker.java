@@ -95,6 +95,25 @@ public abstract class MapMarker implements Serializable {
     		return "navinfo";
 		return null;
 	}
+	
+	protected static int parseInt(String string){
+		try{
+			int num = Integer.parseInt(string);
+			return num;
+		}catch(NumberFormatException nfe){
+			return -1;
+		}
+	}
+	
+	protected static double parseDouble(String string){
+		try{
+			double num = Double.parseDouble(string);
+			return num;
+		}catch(NumberFormatException nfe){
+			return -1;
+		}
+	}
+
 
 	protected static void log(String tag, String msg){
     	if(SplashActivity.LOG_ENABLED)

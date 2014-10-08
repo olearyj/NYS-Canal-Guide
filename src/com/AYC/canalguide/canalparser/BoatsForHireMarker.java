@@ -149,8 +149,8 @@ public class BoatsForHireMarker extends MapMarker implements Serializable {
 			 }
 		    tag = parser.getName();
 		    if (tag.equals("cruise")) {
-		    	lat = Double.parseDouble(parser.getAttributeValue(null, "latitude"));
-		    	lng = Double.parseDouble(parser.getAttributeValue(null, "longitude"));
+		    	lat = parseDouble(parser.getAttributeValue(null, "latitude"));
+		    	lng = parseDouble(parser.getAttributeValue(null, "longitude"));
 		    	name = parser.getAttributeValue(null, "company");
 		    	type = parser.getAttributeValue(null, "type");
 		    	address = parser.getAttributeValue(null, "address");
@@ -163,9 +163,10 @@ public class BoatsForHireMarker extends MapMarker implements Serializable {
 		    	cruisetype = parser.getAttributeValue(null, "cruisetype");
 		    	homeport = parser.getAttributeValue(null, "homeport");
 		    	waterways = parser.getAttributeValue(null, "waterways");
-		    	
-            	mapMarkers.add(new BoatsForHireMarker(new LatLng(lat, lng), name, type, address, url,
-        				city, state, zip, phoneNumber, vesseltypes, cruisetype,	homeport, waterways));	
+
+		    	if(lat != -1 || lng != -1)
+		    		mapMarkers.add(new BoatsForHireMarker(new LatLng(lat, lng), name, type, address, url,
+		    				city, state, zip, phoneNumber, vesseltypes, cruisetype,	homeport, waterways));	
 	            
 	            event = parser.next();   
 		    }

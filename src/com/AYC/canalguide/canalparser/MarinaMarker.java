@@ -114,11 +114,11 @@ public class MarinaMarker extends MapMarker implements Serializable {
 			//parser.require(XmlPullParser.START_TAG, ns, "lock");
 		    tag = parser.getName();
 		    if (tag.equals("marina")) {
-		    	lat = Double.parseDouble(parser.getAttributeValue(null, "latitude"));
-		    	lng = Double.parseDouble(parser.getAttributeValue(null, "longitude"));
+		    	lat = parseDouble(parser.getAttributeValue(null, "latitude"));
+		    	lng = parseDouble(parser.getAttributeValue(null, "longitude"));
 		    	name = parser.getAttributeValue(null, "marina");
 		    	bodyOfWater = parser.getAttributeValue(null, "bodyofwater");
-		    	mile = Double.parseDouble(parser.getAttributeValue(null, "mile"));
+		    	mile = parseDouble(parser.getAttributeValue(null, "mile"));
 		    	shore = parser.getAttributeValue(null, "shore");
 		    	url = parser.getAttributeValue(null, "marina_url");
 		    	phoneNumber = parser.getAttributeValue(null, "phonenumber");
@@ -127,8 +127,10 @@ public class MarinaMarker extends MapMarker implements Serializable {
 		    	repair = parser.getAttributeValue(null, "repair");
 		    	facilities = parser.getAttributeValue(null, "facilities");
 		    
-            	mapMarkers.add(new MarinaMarker(new LatLng(lat, lng), name, bodyOfWater, 
-            			mile, shore, url, phoneNumber, vhf, fuel, repair, facilities));	
+
+		    	if(lat != -1 || lng != -1)
+		    		mapMarkers.add(new MarinaMarker(new LatLng(lat, lng), name, bodyOfWater, 
+		    				mile, shore, url, phoneNumber, vhf, fuel, repair, facilities));	
 	            
 	            event = parser.next();   
 		    }

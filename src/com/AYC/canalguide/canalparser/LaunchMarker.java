@@ -165,16 +165,18 @@ public class LaunchMarker extends MapMarker implements Serializable {
 				restrooms = parser.getAttributeValue(null, "restrooms");
 				dayUseAmenities = parser.getAttributeValue(null, "day_use_amenities");
 				portageDistance = parser.getAttributeValue(null, "portage_distance");
-		    	lat = Double.parseDouble(parser.getAttributeValue(null, "latitude"));
-		    	lng = Double.parseDouble(parser.getAttributeValue(null, "longitude"));
-		    	mile = Double.parseDouble(parser.getAttributeValue(null, "mile").replace("*", ""));
+		    	lat = parseDouble(parser.getAttributeValue(null, "latitude"));
+		    	lng = parseDouble(parser.getAttributeValue(null, "longitude"));
+		    	mile = parseDouble(parser.getAttributeValue(null, "mile").replace("*", ""));
 				shore = parser.getAttributeValue(null, "shore");
 		    	bodyOfWater = parser.getAttributeValue(null, "bodyofwater");
 				
-            	mapMarkers.add(new LaunchMarker(name, waterway, id, municipality, launchType, 
-        				parking, overnightParking, camping, potableWater, restrooms, 
-        				dayUseAmenities, portageDistance, new LatLng(lat, lng), mile, shore, 
-        				bodyOfWater));	
+
+		    	if(lat != -1 || lng != -1)
+		    		mapMarkers.add(new LaunchMarker(name, waterway, id, municipality, launchType, 
+	        				parking, overnightParking, camping, potableWater, restrooms, 
+	        				dayUseAmenities, portageDistance, new LatLng(lat, lng), mile, shore, 
+	        				bodyOfWater));	
 	            
 	            event = parser.next();   
 		    }

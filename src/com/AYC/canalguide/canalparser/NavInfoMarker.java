@@ -240,23 +240,7 @@ public class NavInfoMarker extends MapMarker implements Serializable {
 		 log("Returning " + mapMarkers.size() + " NavInfoMarkers");
 		 return mapMarkers;
 	}
-	
-	private static int parseInt(String string){
-		try{
-			int num = Integer.parseInt(string);
-			return num;
-		}catch(NumberFormatException nfe){
-			return -1;
-		}
-	}
-	
-	private static double parseDouble(String string){
-		if(string.equals(""))
-			return -1;
-		else
-			return Double.parseDouble(string);
-	}
-	
+		
 	public String toString(){
 		return super.toString() + shore + " " + featureUrl + " " + featureColor + " " + 
 				channelWidth + " " + southWestDepth + " " + middleDepth + " " + middleDepthUrl + 
