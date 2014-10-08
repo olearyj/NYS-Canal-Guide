@@ -93,9 +93,11 @@ public class MarkerInfoActivity extends Activity implements OnClickListener {
 	     scrollView = (LinearLayout) findViewById(R.id.scrollViewLinearLayout);
 	        
 	     
+	     // TODO - delete
+	     /*
 	     // Adds Title
-	     if(!isLock)
-	     	addTextView(mapMarker.getName()); 
+	     if(!isLock && !isNavInfo)
+	     	addTextView(mapMarker.getName());
 	     else
 	     	addTextView(lock.getTitle());	// ex. Lock: + getName() + lift
 	        
@@ -106,25 +108,50 @@ public class MarkerInfoActivity extends Activity implements OnClickListener {
 	     // BoatsForHireMarker is the only type of marker without a variable bodyOfWater and mile
 	     else
 	     	addTextView(boats.getSnippet());
+	     	
+	     */
 	        
-	     if(isLock)
-	     	createLockTextViews();
+	     if(isLock){
+	    	 addTextView(lock.getTitle());
+	    	 addTextView(lock.getSnippet());
+	     	 createLockTextViews();
+	     }
 	     
-	     else if(isMarina)
-	     	createMarinaTextViews();
+	     else if(isMarina){
+	    	 addTextView(marina.getTitle());
+	    	 addTextView(marina.getSnippet());
+	     	 createMarinaTextViews();
+	     }
 	      
-	     else if(isLaunch)
+	     else if(isLaunch){
+	    	 addTextView(launch.getTitle());
+	    	 addTextView(launch.getSnippet());
 	    	 createLaunchTextViews();
+	     }
 	        
-	     else if(isBridge)
-	     	createBridgeTextViews();
+	     else if(isBridge){
+	    	 addTextView(bridge.getTitle());
+	    	 addTextView(bridge.getSnippet());
+	     	 createBridgeTextViews();
+	     }
 	        
-	     else if(isBoatsForHire)
-	     	createBoatsForHireTextViews();
-	      
+	     else if(isBoatsForHire){
+	    	 addTextView(boats.getTitle());
+	    	 addTextView(boats.getSnippet());
+	     	 createBoatsForHireTextViews();
+	     }
+	     
+	     else if(isNavInfo){
+	    	 addTextView(navInfo.getTitle());
+	    	 addTextView(navInfo.getSnippet().replaceAll(", ", "\n"));
+	    	 createNavInfoTextViews();
+	     }
+	     
 	     // Because all information isn't always available, tell user to contact
-	     textSizeCount++;
-	     addTextView("*For more information, please contact "  + mapMarker.getName());
+	     if(!isNavInfo){
+		     textSizeCount++;
+		     addTextView("*For more information, please contact "  + mapMarker.getName());
+	     }
 	}
 	
 	/**
@@ -296,6 +323,14 @@ public class MarkerInfoActivity extends Activity implements OnClickListener {
     		textSizeCount++;
     		addTextView("Location: " + boats.getCity());
     	}
+	}
+	
+	// TODO
+	private void createNavInfoTextViews(){
+		if(!isBlank(navInfo.getOverheadClearance())){
+			textSizeCount++;
+			addTextView("Overhead Clearance = " + navInfo.getOverheadClearance());
+		}
 	}
 	
 	/**

@@ -123,23 +123,27 @@ public class NavInfoMarker extends MapMarker implements Serializable {
 		BitmapDescriptor bd = getBitmapDescriptor();
 		if(bd != null)
 			return new MarkerOptions()
-				.title(name)
+				.title(getTitle())
 				.position(new LatLng(lat, lng))
-				.snippet(bodyOfWater + ", mile " + mile)
+				.snippet(getSnippet())
 				.anchor(0.5f, 0.5f)
 				.icon(bd);
 		else
 			return null;
 	}
 	
-	// TODO
+	@Override
 	public String getTitle(){
-		return "";
+		return name;
 	}
 	
-	// TODO
+	@Override
 	public String getSnippet(){
-		return "";
+		return "Mile " + mile + 
+				(isNotBlank(southWestDepth) ? ", SW Depth=" + southWestDepth : "") + 
+				(isNotBlank(middleDepth) ? ", Middle Depth=" + middleDepth : "") + 
+				(isNotBlank(northEastDepth) ? ", NE Depth=" + northEastDepth : "") + 
+				(isNotBlank(overheadClearance) ? ", Overhead Clearance=" + overheadClearance : "");
 	}
 	
 	// TODO

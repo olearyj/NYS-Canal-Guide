@@ -118,6 +118,13 @@ public abstract class MapMarker implements Serializable {
 		}
 	}
 
+	protected boolean isNotBlank(int num){
+		return !(num == 0 || num == -1);
+	}
+	
+	protected boolean isNotBlank(String str){
+		return !(str.equals("") || str == null || str.equals(" ") || str.equals("-1"));
+	}
 
 	protected static void log(String tag, String msg){
     	if(SplashActivity.LOG_ENABLED)
