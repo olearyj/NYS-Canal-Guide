@@ -69,10 +69,17 @@ public class LockMarker extends MapMarker implements Serializable {
 				.snippet(bodyOfWater + ", mile " + mile)
 				.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
 	}
-	
+
+	@Override
 	public String getTitle(){
 		return "Lock - " + name.replaceAll(" Lock", "")	+ " " + lift;
 	}
+
+	@Override
+	public String getSnippet() {
+		return bodyOfWater + ", mile " + mile;
+	}
+	
 	
 	@Override
 	public MapMarker cloneWithoutMarker(){

@@ -71,12 +71,21 @@ public class MarinaMarker extends MapMarker implements Serializable {
 	@Override
 	public MarkerOptions getMarkerOptions() {
 		return new MarkerOptions()
-		.title(name)
+		.title(getTitle())
 		.position(new LatLng(lat, lng))
-		.snippet(bodyOfWater + ", mile " + mile)
+		.snippet(getSnippet())
 		.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
 	}
+	
+	@Override
+	public String getTitle() {
+		return name;
+	}
 
+	@Override
+	public String getSnippet() {
+		return bodyOfWater + ", mile " + mile;
+	}
 
 	@Override
 	public MapMarker cloneWithoutMarker(){

@@ -6,6 +6,7 @@ import com.AYC.canalguide.canalparser.LaunchMarker;
 import com.AYC.canalguide.canalparser.LockMarker;
 import com.AYC.canalguide.canalparser.MapMarker;
 import com.AYC.canalguide.canalparser.MarinaMarker;
+import com.AYC.canalguide.canalparser.NavInfoMarker;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -51,12 +52,14 @@ public class MarkerInfoActivity extends Activity implements OnClickListener {
     private boolean isLaunch;
 	private boolean isBridge;
     private boolean isBoatsForHire;
+    private boolean isNavInfo;
     
     private LockMarker lock;
     private MarinaMarker marina;
     private LaunchMarker launch;
     private BridgeGateMarker bridge;
     private BoatsForHireMarker boats;
+    private NavInfoMarker navInfo;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -76,12 +79,14 @@ public class MarkerInfoActivity extends Activity implements OnClickListener {
 	     isLaunch = mapMarker instanceof LaunchMarker;
 	     isBridge = mapMarker instanceof BridgeGateMarker;
 	     isBoatsForHire = mapMarker instanceof BoatsForHireMarker;
+	     isNavInfo = mapMarker instanceof NavInfoMarker;
 	       
 	     lock = isLock ? (LockMarker) mapMarker : null;
 	     marina = isMarina ? (MarinaMarker) mapMarker : null;
 	     launch = isLaunch ? (LaunchMarker) mapMarker : null;
 	     bridge = isBridge ? (BridgeGateMarker) mapMarker : null;
 	     boats = isBoatsForHire ? (BoatsForHireMarker) mapMarker : null;
+	     navInfo = isNavInfo ? (NavInfoMarker) mapMarker : null;
 	     
 	     setUpCallAndWebsiteIcons();
 	        

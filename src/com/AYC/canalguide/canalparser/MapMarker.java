@@ -50,6 +50,10 @@ public abstract class MapMarker implements Serializable {
 
 	public abstract MarkerOptions getMarkerOptions();
 	
+	public abstract String getTitle();
+	
+	public abstract String getSnippet();
+	
 	public abstract MapMarker cloneWithoutMarker();	
 	
 	public void setMarker(Marker marker){

@@ -103,10 +103,20 @@ public class LaunchMarker extends MapMarker implements Serializable {
 	@Override
 	public MarkerOptions getMarkerOptions() {
 		return new MarkerOptions()
-				.title("Launch - " + name)
+				.title(getTitle())
 				.position(new LatLng(lat, lng))
-				.snippet(bodyOfWater + ", mile " + mile)
+				.snippet(getSnippet())
 				.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+	}
+	
+	@Override
+	public String getTitle() {
+		return "Launch - " + name;
+	}
+
+	@Override
+	public String getSnippet() {
+		return bodyOfWater + ", mile " + mile;
 	}
 	
 	@Override

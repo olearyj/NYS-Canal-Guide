@@ -96,12 +96,18 @@ public class BoatsForHireMarker extends MapMarker implements Serializable {
 	@Override
 	public MarkerOptions getMarkerOptions() {
 		return new MarkerOptions()
-				.title(name)
+				.title(getTitle())
 				.position(new LatLng(lat, lng))
 				.snippet(getSnippet())
 				.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET));
 	}
 	
+	@Override
+	public String getTitle() {
+		return name;
+	}
+
+	@Override
 	public String getSnippet(){
 		if(getType().equals("rentals"))
         	return "Rentals: " + getVesselTypes();
