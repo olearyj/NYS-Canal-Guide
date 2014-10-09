@@ -249,6 +249,13 @@
 	</RelativeLayout>
 
     <!-- End of Filters -->
+
+	<ViewStub
+	    android:id="@+id/navinfo_legend"
+	    android:inflatedId="@+id/llNavInfoLegend"
+	    android:layout="@layout/navinfo_legend"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content" />
     
     <TextView
         android:id="@+id/tvMapType"

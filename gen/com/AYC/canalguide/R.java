@@ -1526,8 +1526,8 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f050016;
         public static final int action_menu_presenter=0x7f050017;
         public static final int action_mode_close_button=0x7f050036;
-        public static final int action_search=0x7f05007a;
-        public static final int action_settings=0x7f050079;
+        public static final int action_search=0x7f05008c;
+        public static final int action_settings=0x7f05008b;
         public static final int activity_chooser_view_content=0x7f050037;
         public static final int always=0x7f05000b;
         public static final int beginning=0x7f050011;
@@ -1546,6 +1546,11 @@ containing a value of this type.
         public static final int end=0x7f050013;
         public static final int expand_activities_button=0x7f050038;
         public static final int expanded_menu=0x7f05003e;
+        public static final int flBridge=0x7f050088;
+        public static final int flGreenBeacon=0x7f050082;
+        public static final int flGreenBuoy=0x7f05007c;
+        public static final int flRedBeacon=0x7f050085;
+        public static final int flRedBuoy=0x7f05007f;
         public static final int fragment_container=0x7f05004e;
         public static final int frameLayout1=0x7f050057;
         public static final int frameLayout2=0x7f05005a;
@@ -1562,26 +1567,34 @@ containing a value of this type.
         public static final int icon=0x7f05003c;
         public static final int ifRoom=0x7f05000a;
         public static final int image=0x7f050039;
-        public static final int infoWindowInfoImage=0x7f050073;
-        public static final int infoWindowSnippet=0x7f050072;
-        public static final int infoWindowTitle=0x7f050071;
-        public static final int ivCall=0x7f050076;
+        public static final int infoWindowInfoImage=0x7f050075;
+        public static final int infoWindowSnippet=0x7f050074;
+        public static final int infoWindowTitle=0x7f050073;
+        public static final int ivBridge=0x7f050089;
+        public static final int ivCall=0x7f050079;
         public static final int ivColor1=0x7f050059;
         public static final int ivColor2=0x7f05005c;
         public static final int ivColor3=0x7f05005f;
         public static final int ivColor4=0x7f050062;
         public static final int ivColor5=0x7f050065;
         public static final int ivColor6=0x7f050068;
+        public static final int ivGreenBeacon=0x7f050083;
+        public static final int ivGreenBuoy=0x7f05007d;
         public static final int ivLogo=0x7f050050;
-        public static final int ivWebsite=0x7f050077;
+        public static final int ivRedBeacon=0x7f050086;
+        public static final int ivRedBuoy=0x7f050080;
+        public static final int ivWebsite=0x7f05007a;
         public static final int linearLayout=0x7f050055;
-        public static final int linearLayout1=0x7f050074;
+        public static final int linearLayout1=0x7f050076;
+        public static final int linearLayoutWithButtons=0x7f050078;
         public static final int listMode=0x7f050001;
         public static final int list_item=0x7f05003b;
-        public static final int map=0x7f050078;
+        public static final int llNavInfoLegend=0x7f05006a;
+        public static final int map=0x7f05007b;
         public static final int match_parent=0x7f050024;
         public static final int middle=0x7f050012;
         public static final int monochrome=0x7f05002b;
+        public static final int navinfo_legend=0x7f050069;
         public static final int never=0x7f050009;
         public static final int none=0x7f050010;
         public static final int normal=0x7f050000;
@@ -1594,7 +1607,7 @@ containing a value of this type.
         public static final int sandbox=0x7f050020;
         public static final int satellite=0x7f05001a;
         public static final int scrollView=0x7f050054;
-        public static final int scrollViewLinearLayout=0x7f050075;
+        public static final int scrollViewLinearLayout=0x7f050077;
         public static final int search_badge=0x7f050044;
         public static final int search_bar=0x7f050043;
         public static final int search_button=0x7f050045;
@@ -1610,8 +1623,8 @@ containing a value of this type.
         public static final int showCustom=0x7f050007;
         public static final int showHome=0x7f050004;
         public static final int showTitle=0x7f050006;
-        public static final int spinnerDataValid=0x7f05006c;
-        public static final int spinnerMapType=0x7f05006a;
+        public static final int spinnerDataValid=0x7f05006e;
+        public static final int spinnerMapType=0x7f05006c;
         public static final int split_action_bar=0x7f050030;
         public static final int strict_sandbox=0x7f050021;
         public static final int submit_area=0x7f05004b;
@@ -1623,16 +1636,21 @@ containing a value of this type.
         public static final int switch_marina=0x7f05005b;
         public static final int tabMode=0x7f050002;
         public static final int terrain=0x7f05001b;
-        public static final int textView1=0x7f05006f;
-        public static final int textView2=0x7f050070;
+        public static final int textView1=0x7f050071;
+        public static final int textView2=0x7f050072;
         public static final int title=0x7f05003d;
         public static final int top_action_bar=0x7f050032;
-        public static final int tvDataValid=0x7f05006b;
+        public static final int tvBridge=0x7f05008a;
+        public static final int tvDataValid=0x7f05006d;
+        public static final int tvGreenBeacon=0x7f050084;
+        public static final int tvGreenBuoy=0x7f05007e;
         public static final int tvLoading=0x7f050052;
-        public static final int tvMapType=0x7f050069;
+        public static final int tvMapType=0x7f05006b;
+        public static final int tvRedBeacon=0x7f050087;
+        public static final int tvRedBuoy=0x7f050081;
         public static final int tv_filters=0x7f050056;
-        public static final int tv_links=0x7f05006d;
-        public static final int tv_tide=0x7f05006e;
+        public static final int tv_links=0x7f05006f;
+        public static final int tv_tide=0x7f050070;
         public static final int up=0x7f050033;
         public static final int useLogo=0x7f050003;
         public static final int webView=0x7f050053;
@@ -1697,9 +1715,10 @@ containing a value of this type.
         public static final int layout_about=0x7f03001c;
         public static final int layout_infowindow=0x7f03001d;
         public static final int layout_markerinfo=0x7f03001e;
-        public static final int old_activity_main=0x7f03001f;
-        public static final int old_fragment_options=0x7f030020;
-        public static final int support_simple_spinner_dropdown_item=0x7f030021;
+        public static final int navinfo_legend=0x7f03001f;
+        public static final int old_activity_main=0x7f030020;
+        public static final int old_fragment_options=0x7f030021;
+        public static final int support_simple_spinner_dropdown_item=0x7f030022;
     }
     public static final class menu {
         public static final int main=0x7f0c0000;
@@ -1748,8 +1767,17 @@ containing a value of this type.
         public static final int abc_shareactionprovider_share_with_application=0x7f0a000b;
         public static final int action_settings=0x7f0a0029;
         public static final int app_name=0x7f0a0027;
+        /**  Buttons 
+         */
         public static final int button_call=0x7f0a002a;
         public static final int button_cancel=0x7f0a002b;
+        public static final int cd_bridge=0x7f0a0044;
+        public static final int cd_greenbeacon=0x7f0a0042;
+        /**  NavInfo content descriptions 
+         */
+        public static final int cd_greenbuoy=0x7f0a0040;
+        public static final int cd_redbeacon=0x7f0a0043;
+        public static final int cd_redbuoy=0x7f0a0041;
         /**  Button in confirmation dialog to enable Google Play services.  Clicking it
         will direct user to application settings of Google Play services where they
         can enable it [CHAR LIMIT=40] 
@@ -1840,20 +1868,33 @@ containing a value of this type.
          */
         public static final int common_signin_button_text_long=0x7f0a0025;
         public static final int hello_world=0x7f0a0028;
-        public static final int iv_markercolordesc=0x7f0a003a;
-        public static final int switch_boatsforhire=0x7f0a0038;
-        public static final int switch_bridge=0x7f0a0037;
-        public static final int switch_buoys=0x7f0a0039;
-        public static final int switch_launch=0x7f0a0035;
-        public static final int switch_lock=0x7f0a0034;
-        public static final int switch_marina=0x7f0a0036;
+        /**  Image View's content descriptions 
+         */
+        public static final int iv_markercolordesc=0x7f0a003f;
+        public static final int switch_boatsforhire=0x7f0a003d;
+        public static final int switch_bridge=0x7f0a003c;
+        public static final int switch_buoys=0x7f0a003e;
+        public static final int switch_launch=0x7f0a003a;
+        /**  Switches 
+         */
+        public static final int switch_lock=0x7f0a0039;
+        public static final int switch_marina=0x7f0a003b;
+        public static final int tv_bridge=0x7f0a0038;
         public static final int tv_datavalid=0x7f0a002e;
+        /**  Text Views 
+         */
         public static final int tv_filters=0x7f0a002c;
+        public static final int tv_greenbeacon=0x7f0a0036;
+        /**  NavInfo Text Views 
+         */
+        public static final int tv_greenbuoy=0x7f0a0034;
         public static final int tv_links=0x7f0a0032;
         public static final int tv_loading=0x7f0a002f;
         public static final int tv_loadingdatabase=0x7f0a0030;
         public static final int tv_loadingphone=0x7f0a0031;
         public static final int tv_maptype=0x7f0a002d;
+        public static final int tv_redbeacon=0x7f0a0037;
+        public static final int tv_redbuoy=0x7f0a0035;
         public static final int tv_tide=0x7f0a0033;
         /**  Text on a placeholder buy button when Google Play services is not
          available or up-to-date 

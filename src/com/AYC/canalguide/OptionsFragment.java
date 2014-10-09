@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.ViewStub;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
@@ -23,6 +24,8 @@ public class OptionsFragment extends Fragment implements OnClickListener {
 
 	public final static String PREFS_NAME = "NYS_Canal_Guide_Options";
 	private final static int NUM_OF_SWITCHES = 6;
+	
+	private ViewStub viewStub;
 	
 	private Switch[] switches;
 	
@@ -57,11 +60,21 @@ public class OptionsFragment extends Fragment implements OnClickListener {
 		switches[3] = (Switch) view.findViewById(R.id.switch_bridge);
 		switches[4] = (Switch) view.findViewById(R.id.switch_boatsforhire);
 		switches[5] = (Switch) view.findViewById(R.id.switch_buoys);
-		
+		switches[5].setOnClickListener(this);
+
+	    viewStub = (ViewStub) view.findViewById(R.id.navinfo_legend);
+	    viewStub.inflate();
+
 		TextView tv_tide = (TextView) view.findViewById(R.id.tv_tide);
 		tv_tide.setOnClickListener(this);
 		
 		return view;
+	}
+	
+	@Override
+	public void onResume(){
+		super.onResume();
+		setViewStub();
 	}
 
 	@Override
@@ -71,7 +84,17 @@ public class OptionsFragment extends Fragment implements OnClickListener {
 			Intent intent = new Intent(getActivity(), WebViewActivity.class);
 			intent.putExtra("url", "http://ny.usharbors.com/");
 			startActivity(intent);
+			break;
+		case R.id.switch_buoys:
+			setViewStub();
 		}
+	}
+	
+	private void setViewStub(){
+		if(!switches[5].isChecked())
+			viewStub.setVisibility(ViewStub.GONE);
+		else
+			viewStub.setVisibility(ViewStub.VISIBLE);
 	}
 	
 	@Override

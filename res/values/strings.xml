@@ -5,9 +5,11 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     
+    <!-- Buttons -->
     <string name="button_call">Call</string>
     <string name="button_cancel">Cancel</string>
     
+    <!-- Text Views -->
     <string name="tv_filters">Filters</string>
     <string name="tv_maptype">Map Type</string>
     <string name="tv_datavalid">Update Data Frequency</string>
@@ -17,6 +19,14 @@
     <string name="tv_links">Helpful Links</string>
     <string name="tv_tide"><u>US Harbors Tide Charts</u></string>
     
+    <!-- NavInfo Text Views -->
+    <string name="tv_greenbuoy">Green Buoy</string>
+    <string name="tv_redbuoy">Red Buoy</string>
+    <string name="tv_greenbeacon">Green Beacon</string>
+    <string name="tv_redbeacon">Red Beacon</string>
+    <string name="tv_bridge">Bridge</string>
+    
+    <!-- Switches -->
     <string name="switch_lock">Locks</string>
     <string name="switch_launch">Boat Launches</string>
     <string name="switch_marina">Marinas and Public Docks</string>
@@ -24,6 +34,14 @@
     <string name="switch_boatsforhire">Rentals and Cruises</string>
     <string name="switch_buoys">Buoys, Beacons and Bridges</string>
     
+    <!-- Image View's content descriptions -->
     <string name="iv_markercolordesc">This ImageView displays the color associated with the marker</string>
+
+    <!-- NavInfo content descriptions -->
+    <string name="cd_greenbuoy">Green Buoy</string>
+    <string name="cd_redbuoy">Red Buoy</string>
+    <string name="cd_greenbeacon">Green Beacon</string>
+    <string name="cd_redbeacon">Red Beacon</string>
+    <string name="cd_bridge">Bridge</string>
 
 </resources>

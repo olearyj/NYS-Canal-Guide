@@ -38,6 +38,8 @@ import android.widget.TextView;
  */
 public class MarkerInfoActivity extends Activity implements OnClickListener {
 
+	private static final int NOAA_SITE_ID = 234;
+	
 	private MapMarker mapMarker;
 	
 	private GoogleMap mMap;
@@ -91,26 +93,7 @@ public class MarkerInfoActivity extends Activity implements OnClickListener {
 	     setUpCallAndWebsiteIcons();
 	        
 	     scrollView = (LinearLayout) findViewById(R.id.scrollViewLinearLayout);
-	        
-	     
-	     // TODO - delete
-	     /*
-	     // Adds Title
-	     if(!isLock && !isNavInfo)
-	     	addTextView(mapMarker.getName());
-	     else
-	     	addTextView(lock.getTitle());	// ex. Lock: + getName() + lift
-	        
-	     // Add snippet
-	     if(!isBoatsForHire){
-	     	addTextView(mapMarker.getBodyOfWater() + ", mile " + mapMarker.getMile());
-	     }
-	     // BoatsForHireMarker is the only type of marker without a variable bodyOfWater and mile
-	     else
-	     	addTextView(boats.getSnippet());
-	     	
-	     */
-	        
+	         
 	     if(isLock){
 	    	 addTextView(lock.getTitle());
 	    	 addTextView(lock.getSnippet());
@@ -176,20 +159,35 @@ public class MarkerInfoActivity extends Activity implements OnClickListener {
 	 */
 	private void setUpCallAndWebsiteIcons(){
 		// Sets the onClick listeners for call and web site icon
-	ImageView ivCall = (ImageView) findViewById(R.id.ivCall);
-	ImageView ivWebsite = (ImageView) findViewById(R.id.ivWebsite);
+		ImageView ivCall = (ImageView) findViewById(R.id.ivCall);
+		ImageView ivWebsite = (ImageView) findViewById(R.id.ivWebsite);
+		
+		// If mapMarker has a phone number, set listener, else remove the call icon
+		if(hasPhoneNumber())
+			ivCall.setOnClickListener(this);
+		else
+			ivCall.setVisibility(ImageView.GONE);
+		
+		// If mapMarker has a website, set listener, else remove the website icon
+		if(hasWebsite())
+			ivWebsite.setOnClickListener(this);
+		else
+			ivWebsite.setVisibility(ImageView.GONE);
+		
+
+		if(isNavInfo && !isBlank(navInfo.getNoaaPageUrl()))
+			addNavInfoSiteImage();
+	}
 	
-	// If mapMarker has a phone number, set listener, else remove the call icon
-	if(hasPhoneNumber())
-		ivCall.setOnClickListener(this);
-	else
-		ivCall.setVisibility(ImageView.GONE);
-	
-	// If mapMarker has a website, set listener, else remove the website icon
-	if(hasWebsite())
-		ivWebsite.setOnClickListener(this);
-	else
-		ivWebsite.setVisibility(ImageView.GONE);
+	private void addNavInfoSiteImage(){
+		ImageView ivNoaaWebsite = new ImageView(this);
+		ivNoaaWebsite.setId(NOAA_SITE_ID);
+		ivNoaaWebsite.setImageResource(R.drawable.ic_action_web_site);
+		ivNoaaWebsite.setOnClickListener(this);
+		ivNoaaWebsite.setPadding(10, 10, 10, 10);
+		// Add the imageView to the layout
+		LinearLayout layout = (LinearLayout) findViewById(R.id.linearLayoutWithButtons);
+		layout.addView(ivNoaaWebsite);
 	}
 
 	/**
@@ -325,9 +323,8 @@ public class MarkerInfoActivity extends Activity implements OnClickListener {
     	}
 	}
 	
-	// TODO
 	private void createNavInfoTextViews(){
-		if(!isBlank(navInfo.getOverheadClearance())){
+		if( !isBlank(navInfo.getOverheadClearance()) ){
 			textSizeCount++;
 			addTextView("Overhead Clearance = " + navInfo.getOverheadClearance());
 		}
@@ -358,8 +355,9 @@ public class MarkerInfoActivity extends Activity implements OnClickListener {
 			phoneNumber = boats.getPhoneNumber();
 			url = ((BoatsForHireMarker) mapMarker).getUrl();
 		}
-		else
-			return;
+		else if(isNavInfo){
+			url = ((NavInfoMarker) mapMarker).getFeatureUrl();
+		}
 		// Only use digits in phone number string
 		phoneNumber = phoneNumber.replaceAll("\\D*", "");
 		
@@ -377,6 +375,13 @@ public class MarkerInfoActivity extends Activity implements OnClickListener {
 			Intent intent = new Intent(MarkerInfoActivity.this, WebViewActivity.class);
 			intent.putExtra("url", url);
 			startActivity(intent);
+			break;
+			
+		case NOAA_SITE_ID:
+			log("Clicked Website Noaa Image" + url);
+			Intent noaaIntent = new Intent(MarkerInfoActivity.this, WebViewActivity.class);
+			noaaIntent.putExtra("url", navInfo.getNoaaPageUrl());
+			startActivity(noaaIntent);
 			break;
 		
 		}
@@ -420,7 +425,8 @@ public class MarkerInfoActivity extends Activity implements OnClickListener {
 	private boolean hasWebsite(){
 		if(isMarina || isBoatsForHire)
 			if( (marina == null ? false : !isBlank(marina.getUrl())) || 
-		    			(boats == null ? false : !isBlank(boats.getUrl())) )
+		    			(boats == null ? false : !isBlank(boats.getUrl())) ||
+		    			(navInfo == null ? false : !isBlank(navInfo.getFeatureUrl())) )
 				return true;
 		return false;
 	}
