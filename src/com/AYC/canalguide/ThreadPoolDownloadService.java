@@ -90,7 +90,7 @@ public class ThreadPoolDownloadService extends Service {
     @Override
 	public int onStartCommand(final Intent intent, int flags, int startId) {
 
-    	Toast.makeText(getApplicationContext(), "Starting to download data", Toast.LENGTH_SHORT).show();
+    	Toast.makeText(getApplicationContext(), "Starting to download data for buoys", Toast.LENGTH_SHORT).show();
     	
 		messenger = (Messenger) intent.getExtras().get(MESSENGER_KEY);
 		countDownLatch = new CountDownLatch(SplashActivity.navInfoURLs.length);

@@ -146,7 +146,6 @@ public class NavInfoMarker extends MapMarker implements Serializable {
 				(isNotBlank(overheadClearance) ? ", Overhead Clearance=" + overheadClearance : "");
 	}
 	
-	// TODO
 	public BitmapDescriptor getBitmapDescriptor(){
 		
 		if(name.toLowerCase().contains("buoy")){
@@ -163,12 +162,7 @@ public class NavInfoMarker extends MapMarker implements Serializable {
 		}
 		else if(name.toLowerCase().contains("bridge"))
 			return bridgeIcon;
-		/*
-		else if(featureColor.equalsIgnoreCase(""))
-			return BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE);
-		else
-			return BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE);
-			*/
+		
 		return null;
 	}
 

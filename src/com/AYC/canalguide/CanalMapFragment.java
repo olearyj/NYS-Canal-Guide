@@ -22,6 +22,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.AYC.canalguide.canalparser.CanalGuideXmlParser;
 import com.AYC.canalguide.canalparser.MapMarker;
@@ -151,6 +152,8 @@ public class CanalMapFragment extends MapFragment {
         				//TODO toast - and check other toast
         				((MainActivity) getActivity()).startDownloadThreadPoolService();
         			}
+        			else
+        				Toast.makeText(getActivity(), "Downloading data for buoys", Toast.LENGTH_SHORT).show();
         		}
         	}
         	// else if(navInfoXmlStrings != null)

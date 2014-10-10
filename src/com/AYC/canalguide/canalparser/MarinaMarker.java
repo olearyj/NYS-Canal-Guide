@@ -8,6 +8,8 @@ import java.util.List;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
+import com.AYC.canalguide.R;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -18,6 +20,8 @@ public class MarinaMarker extends MapMarker implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private static final BitmapDescriptor blueMarker = 
+			BitmapDescriptorFactory.fromResource(R.drawable.mmi_blue_marker);
 	
 	private String shore;
 	private String url;
@@ -67,14 +71,13 @@ public class MarinaMarker extends MapMarker implements Serializable {
 		return facilities;
 	}
 
-
 	@Override
 	public MarkerOptions getMarkerOptions() {
 		return new MarkerOptions()
 		.title(getTitle())
 		.position(new LatLng(lat, lng))
 		.snippet(getSnippet())
-		.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+		.icon(blueMarker);	//BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
 	}
 	
 	@Override

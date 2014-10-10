@@ -8,6 +8,8 @@ import java.util.List;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
+import com.AYC.canalguide.R;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -18,6 +20,8 @@ public class BoatsForHireMarker extends MapMarker implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private static final BitmapDescriptor violetMarker = 
+			BitmapDescriptorFactory.fromResource(R.drawable.mmi_violet_marker);
 	
 	private String type;
 	private String address;
@@ -99,7 +103,7 @@ public class BoatsForHireMarker extends MapMarker implements Serializable {
 				.title(getTitle())
 				.position(new LatLng(lat, lng))
 				.snippet(getSnippet())
-				.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET));
+				.icon(violetMarker);	//BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET));
 	}
 	
 	@Override

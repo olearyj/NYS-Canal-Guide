@@ -23,10 +23,12 @@ import android.widget.TextView;
 public class OptionsFragment extends Fragment implements OnClickListener {
 
 	public final static String PREFS_NAME = "NYS_Canal_Guide_Options";
+	public final static String FILTER_DATA_KEY = "Filter Data";
+	
 	private final static int NUM_OF_SWITCHES = 6;
 	
+	private View view;
 	private ViewStub viewStub;
-	
 	private Switch[] switches;
 	
 	private boolean[] switchValues;
@@ -49,7 +51,7 @@ public class OptionsFragment extends Fragment implements OnClickListener {
 	    Bundle savedInstanceState) {
 		super.onCreateView(inflater, container, savedInstanceState);
 		
-	    View view = inflater.inflate(R.layout.fragment_options, container, false);
+	    view = inflater.inflate(R.layout.fragment_options, container, false);
 
 	    setUpMapTypeSpinner(view);
 	    setUpDataValidSpinner(view);
@@ -67,6 +69,12 @@ public class OptionsFragment extends Fragment implements OnClickListener {
 
 		TextView tv_tide = (TextView) view.findViewById(R.id.tv_tide);
 		tv_tide.setOnClickListener(this);
+		
+		// TODO 
+		/*
+		if(savedInstanceState != null)
+			restoreSavedInstanceState(savedInstanceState);
+			*/
 		
 		return view;
 	}
@@ -88,6 +96,34 @@ public class OptionsFragment extends Fragment implements OnClickListener {
 		case R.id.switch_buoys:
 			setViewStub();
 		}
+	}
+	
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		log("Saving InstanceState");
+		saveFilterData();
+		outState.putBooleanArray(FILTER_DATA_KEY, switchValues);
+		for(int i=0; i<switchValues.length; i++)
+    		log("SIS - SV: switchValues[" + i + "] = " + switchValues[i]);
+	}
+	
+	/**
+	 * If the activity was reset because of screen orientation, use the
+	 * information from savedInstanceState to restore the state. This method will
+	 * restore the filter switch states.
+	 * 
+	 * @param savedInstanceState
+	 */
+	private void restoreSavedInstanceState(Bundle savedInstanceState){
+	    if(savedInstanceState.getBooleanArray(FILTER_DATA_KEY) != null){
+	    	switchValues = savedInstanceState.getBooleanArray(FILTER_DATA_KEY);
+	    	for(int i=0; i<switchValues.length; i++)
+	    		log("SV: switchValues[" + i + "] = " + switchValues[i]);
+	    	for(int i=0; i<switches.length; i++)
+	    		switches[i].setChecked(switchValues[i]);
+	    	for(int i=0; i<switches.length; i++)
+	    		log("SV: switches[" + i + "].isChecked() = " + switches[i].isChecked());
+	    }
 	}
 	
 	private void setViewStub(){
@@ -175,6 +211,7 @@ public class OptionsFragment extends Fragment implements OnClickListener {
 		
 	}
 	
+	// TODO
 	private void setUpDataValidSpinner(View view){
 		final int updateTimes[] = {0, 1, 3, 7, 14};
 		final String updateTimeStrings[] = {"Every time this app loads", "Every day", 
