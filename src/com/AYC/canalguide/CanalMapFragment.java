@@ -273,15 +273,6 @@ public class CanalMapFragment extends MapFragment {
     	return true;
     }
     
-    // TODO
-    // Can't use this anymore after adding other switch - delete?
-    private boolean switchValuesDefault(boolean[] switchValues){
-    	for(int i=0; i<switchValues.length-1; i++)
-    		if(switchValues[i] == false)
-    			return false;
-    	return true;
-    }
-    
 	/**
 	 * This method will use the date that the data was last downloaded to determine 
 	 * whether the data is too old.
