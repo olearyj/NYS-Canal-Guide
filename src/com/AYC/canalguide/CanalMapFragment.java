@@ -222,7 +222,9 @@ public class CanalMapFragment extends MapFragment {
     	Marker marker;
 		MarkerOptions markerOptions;
 		MyTimer timer = new MyTimer();
+		MyTimer forTimer = new MyTimer();
 		
+		forTimer.startTimer();
     	for(MapMarker mapMarker : poiAdapter){
     		if(markersNotFilteredOut(mapMarker)){
     			markerOptions = mapMarker.getMarkerOptions();
@@ -238,6 +240,8 @@ public class CanalMapFragment extends MapFragment {
     		else
     			mapMarker.setMarker(null);
     	}
+    	forTimer.endTimer();
+    	forTimer.logTimeDiff("for(MapMarker mapMarker : poiAdapter)");
     	timer.logTimeStats("marker = mMap.addMarker(markerOptions);");
     }
     

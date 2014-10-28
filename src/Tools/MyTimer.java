@@ -64,7 +64,7 @@ public class MyTimer {
     public void logTimeStats(String codeDesc){
     	if(count != 0){
 	    	log("\"" + codeDesc + "\": Average=" + total/count + "ms");
-	    	log("\"" + codeDesc + "\": " + "min=" + min + "ms" + " max=" + max + "ms");
+	    	log("\"" + codeDesc + "\": min=" + min + "ms" + " max=" + max + "ms");
     	}
     }
 
