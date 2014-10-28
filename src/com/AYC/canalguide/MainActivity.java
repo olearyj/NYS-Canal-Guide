@@ -112,9 +112,10 @@ public class MainActivity extends Activity {
 		log("Loading Options");
 	    SharedPreferences sharedPref = getSharedPreferences(OptionsFragment.PREFS_NAME, SplashActivity.PREFS_MODE);
 	    
-		int mapType = sharedPref.getInt("MapType", GoogleMap.MAP_TYPE_NORMAL);
+		int mapType = sharedPref.getInt(OptionsFragment.MAP_TYPE_KEY, GoogleMap.MAP_TYPE_NORMAL);
 		((OptionsFragment) optionsFragment).setMapType(mapType);
-		int updateTime = sharedPref.getInt("UpdateTime", 7);
+		
+		int updateTime = sharedPref.getInt(OptionsFragment.UPDATE_FREQ_KEY, 7);
 		((OptionsFragment) optionsFragment).setUpdateTime(updateTime);
     }
     

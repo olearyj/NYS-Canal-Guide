@@ -23,7 +23,10 @@ import android.widget.TextView;
 public class OptionsFragment extends Fragment implements OnClickListener {
 
 	public final static String PREFS_NAME = "NYS_Canal_Guide_Options";
+	
 	public final static String FILTER_DATA_KEY = "Filter Data";
+	public final static String MAP_TYPE_KEY = "Map Type";
+	public final static String UPDATE_FREQ_KEY = "Update Frequency";
 	
 	private final static int NUM_OF_SWITCHES = 6;
 	
@@ -258,8 +261,8 @@ public class OptionsFragment extends Fragment implements OnClickListener {
 	    SharedPreferences sharedPref = getActivity().getSharedPreferences(PREFS_NAME, SplashActivity.PREFS_MODE);
 	    SharedPreferences.Editor editor = sharedPref.edit();
 	    
-	    editor.putInt("MapType", mapType);
-	    editor.putInt("UpdateTime", updateTime);
+	    editor.putInt(MAP_TYPE_KEY, mapType);
+	    editor.putInt(UPDATE_FREQ_KEY, updateTime);
 	    
 	    editor.commit();	// Commit the edits!
 	}

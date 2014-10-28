@@ -321,7 +321,7 @@ public class CanalMapFragment extends MapFragment {
     private int getUpdateFrequency(){
 	    SharedPreferences sharedPref = getActivity()
 	    		.getSharedPreferences(OptionsFragment.PREFS_NAME, SplashActivity.PREFS_MODE);
-		return sharedPref.getInt("UpdateFrequency", 7);
+		return sharedPref.getInt(OptionsFragment.UPDATE_FREQ_KEY, 7);
     }
     
     private HashMap<String, String> loadNavInfoXmlStrings(){

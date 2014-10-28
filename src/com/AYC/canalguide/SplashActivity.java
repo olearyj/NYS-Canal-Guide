@@ -313,14 +313,14 @@ public class SplashActivity extends Activity {
 	 */
 	public void createLoadFromStorageButton(){
 		RelativeLayout layout = (RelativeLayout) findViewById(R.id.relativeLayout);
-		final Button loadFromStorageButton = new Button(getApplicationContext());
+		final Button loadFromStorageButton = new Button(this, null, android.R.attr.buttonStyleSmall);
 		loadFromStorageButton.setText("Load from phone storage");
 		
 		// Create params to position the ImageView
 		RelativeLayout.LayoutParams params = 
 				new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-		params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-		params.addRule(RelativeLayout.ABOVE, R.id.progressBar);
+		params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+		params.addRule(RelativeLayout.ABOVE, R.id.tvLoading);
 		layout.addView(loadFromStorageButton, params);
 		
 		loadFromStorageButton.setOnClickListener(new OnClickListener(){
@@ -471,7 +471,7 @@ public class SplashActivity extends Activity {
      */
     private int getUpdateFrequency(){
 	    SharedPreferences sharedPref = getSharedPreferences(OptionsFragment.PREFS_NAME, SplashActivity.PREFS_MODE);
-		return sharedPref.getInt("UpdateFrequency", 7);
+		return sharedPref.getInt(OptionsFragment.UPDATE_FREQ_KEY, 7);
     }
 		
     private void log(String msg){
