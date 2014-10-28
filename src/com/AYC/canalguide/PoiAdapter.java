@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.AYC.canalguide.canalparser.MapMarker;
+import com.AYC.canalguide.canalparser.NavInfoMarker;
 import com.google.android.gms.maps.model.Marker;
 
 /**
@@ -63,6 +64,15 @@ public class PoiAdapter extends BaseAdapter implements Iterable<MapMarker>, Iter
 	@Override
 	public MapMarker getItem(int idx) {
 		return mapMarkerList.get(idx);
+	}
+	
+	public boolean containsNavInfoMarkers(){
+		for(int i = 0; i<mapMarkerList.size(); i++){
+			MapMarker mm = mapMarkerList.get(i);
+			if(mm instanceof NavInfoMarker && mm.getMarker() != null)
+				return true;
+		}
+		return false;
 	}
 
 	/**

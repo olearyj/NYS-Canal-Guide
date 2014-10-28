@@ -141,25 +141,30 @@ public class CanalMapFragment extends MapFragment {
         else
         	parseXmlStringsAndAddMarkersToMap(xmlStrings);
 
-        if(markersNotFilteredOut("navinfo")){
-        	if(navInfoXmlStrings == null){
-        		if(isSavedNavinfoDataValid()){	// If the data isnt too old, use saved
-        			navInfoXmlStrings = loadNavInfoXmlStrings();
-        			parseXmlStringsAndAddMarkersToMap(navInfoXmlStrings);
-        		}
-        		else{	// If the data is too old, re-download it to get latest update
-        			if( !((MainActivity) getActivity()).dowloadThreadPoolServiceRunning() ){
-        				//TODO toast - and check other toast
-        				((MainActivity) getActivity()).startDownloadThreadPoolService();
-        			}
-        			else
-        				Toast.makeText(getActivity(), "Downloading data for buoys", Toast.LENGTH_SHORT).show();
-        		}
-        	}
-        	// else if(navInfoXmlStrings != null)
-        		// NavInfoMarkers were already in the poiAdapter and added from 
-        		// the above method: addExistingMarkersToMap();
-        }
+        if(markersNotFilteredOut("navinfo") && navInfoXmlStrings == null && 
+        		!poiAdapter.containsNavInfoMarkers()){
+        		
+    		// If the data isnt too old, use saved data
+    		if(isSavedNavinfoDataValid()){
+    	
+    			navInfoXmlStrings = loadNavInfoXmlStrings();
+    			parseXmlStringsAndAddMarkersToMap(navInfoXmlStrings);
+    		
+    		}
+    		else{	// If the data is too old, re-download it to get latest update
+    			
+    			if( !((MainActivity) getActivity()).dowloadThreadPoolServiceRunning() ){
+    				//TODO toast - and check other toast
+    				((MainActivity) getActivity()).startDownloadThreadPoolService();
+    			}
+    			else
+    				Toast.makeText(getActivity(), "Downloading data for buoys", Toast.LENGTH_SHORT).show();
+    		
+    		}
+    	}
+    	// else if(navInfoXmlStrings != null)
+    		// NavInfoMarkers were already in the poiAdapter and added from 
+    		// the above method: addExistingMarkersToMap();
     }
     
     /**
@@ -230,6 +235,8 @@ public class CanalMapFragment extends MapFragment {
 		    		mapMarker.setMarker(marker);
 	    		}
     		}
+    		else
+    			mapMarker.setMarker(null);
     	}
     	timer.logTimeStats("marker = mMap.addMarker(markerOptions);");
     }
