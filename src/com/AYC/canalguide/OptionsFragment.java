@@ -103,11 +103,14 @@ public class OptionsFragment extends Fragment implements OnClickListener {
 	
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
+    	super.onSaveInstanceState(outState);
+    	
 		log("Saving InstanceState");
 		saveFilterData();
 		outState.putBooleanArray(FILTER_DATA_KEY, switchValues);
 		for(int i=0; i<switchValues.length; i++)
     		log("SIS - SV: switchValues[" + i + "] = " + switchValues[i]);
+		
 	}
 	
 	/**

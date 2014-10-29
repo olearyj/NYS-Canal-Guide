@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 import com.AYC.canalguide.canalparser.CanalGuideXmlParser;
 import com.AYC.canalguide.canalparser.MapMarker;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -49,6 +50,7 @@ public class CanalMapFragment extends MapFragment {
 	private PoiAdapter poiAdapter;
 	
 	private CameraPosition lastCameraPosition;
+	private CameraUpdate CU;
 	
 	public CanalMapFragment(){
 		super();
@@ -72,8 +74,41 @@ public class CanalMapFragment extends MapFragment {
 		this.context = getActivity().getApplicationContext();
 
 		initMap();
+		/*
+		if(savedInstanceState != null)
+			restoreSavedInstanceState(savedInstanceState);
+		log("Instance ocv zoom = " + zoom);
+		*/
 		return view;
 	}    
+    
+    /*
+    @Override
+	public void onSaveInstanceState(Bundle outState) {
+    	//super.onSaveInstanceState(outState);
+    	
+		log("Saving InstanceState");
+		outState.putDouble("CurLat", mMap.getCameraPosition().target.latitude);
+		outState.putDouble("CurLon", mMap.getCameraPosition().target.longitude);
+		outState.putFloat("CurZoom", mMap.getCameraPosition().zoom);
+		log("InstanceState outstate.toString() = " + outState.toString());
+	}
+    
+    public double lat = -1.0, lon;
+    public float zoom = -1.0f;
+    
+    public void restoreSavedInstanceState(Bundle savedInstanceState){
+    	log("Restoring InstanceState");
+    	lat = (double) savedInstanceState.getDouble("CurLat");
+    	lon = (double) savedInstanceState.getDouble("CurLon");
+    	zoom = (float) savedInstanceState.getFloat("CurZoom");
+    	CU = CameraUpdateFactory.newLatLngZoom(
+        		new LatLng(lat, lon), zoom);
+		log("InstanceState savedInstancestate.toString() = " + savedInstanceState.toString());
+		log("InstanceState CU.to = " + CU.toString());
+		log("Instance zoom = " + zoom);
+    }
+    */
     
     /**
      * When the app resumes, it will set the camera position
@@ -83,6 +118,7 @@ public class CanalMapFragment extends MapFragment {
         super.onResume();
 
         mMap = getMap();
+        
         // If the app was never paused(freshly opened) move camera to default position
         if(lastCameraPosition == null)
 	        // Move camera to area that includes POIs (hudson river)
@@ -91,6 +127,21 @@ public class CanalMapFragment extends MapFragment {
         else
         	// Move camera to the position when the app was paused
         	mMap.moveCamera(CameraUpdateFactory.newCameraPosition(lastCameraPosition));
+        
+        /*
+        log("Instance null??");
+        if( CU != null){
+        	log("Instance - MOVING MAP");
+        	mMap.moveCamera(CU);
+        }
+        
+        log("Instance null??   zoom = " + zoom);
+        if( zoom != -1.0f){
+        	log("Instance - MOVING MAP");
+        	mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+            		new LatLng(lat, lon), zoom));
+        }
+		*/
     }
     
     /**
@@ -165,6 +216,8 @@ public class CanalMapFragment extends MapFragment {
     	// else if(navInfoXmlStrings != null)
     		// NavInfoMarkers were already in the poiAdapter and added from 
     		// the above method: addExistingMarkersToMap();
+
+		log("PoiAdapter.size() = " + poiAdapter.getCount());
     }
     
     /**
