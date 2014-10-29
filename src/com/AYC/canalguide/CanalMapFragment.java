@@ -65,9 +65,10 @@ public class CanalMapFragment extends MapFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	    Bundle savedInstanceState) {
 		View view = super.onCreateView(inflater, container, savedInstanceState);
+		activity = getActivity();
 		
 		this.activity = getActivity();
-		this.xmlStrings = ((MainActivity) getActivity()).getXmlStrings();
+		this.xmlStrings = ((MainActivity) activity).getXmlStrings();
 		this.context = getActivity().getApplicationContext();
 
 		initMap();
@@ -153,10 +154,9 @@ public class CanalMapFragment extends MapFragment {
     		}
     		else{	// If the data is too old, re-download it to get latest update
     			
-    			if( !((MainActivity) getActivity()).dowloadThreadPoolServiceRunning() ){
-    				//TODO toast - and check other toast
+    			if( !((MainActivity) getActivity()).dowloadThreadPoolServiceRunning() )
     				((MainActivity) getActivity()).startDownloadThreadPoolService();
-    			}
+    			
     			else
     				Toast.makeText(getActivity(), "Downloading data for buoys", Toast.LENGTH_SHORT).show();
     		
@@ -241,7 +241,7 @@ public class CanalMapFragment extends MapFragment {
     			mapMarker.setMarker(null);
     	}
     	forTimer.endTimer();
-    	forTimer.logTimeDiff("for(MapMarker mapMarker : poiAdapter)");
+    	forTimer.logTimeDiff("for(MapMarker mapMarker : poiAdapter){");
     	timer.logTimeStats("marker = mMap.addMarker(markerOptions);");
     }
     

@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.widget.ProgressBar;
 
 public class MainActivity extends Activity {
 
@@ -27,6 +28,7 @@ public class MainActivity extends Activity {
 	
 	private static MapFragment mapFragment;
 	private Fragment optionsFragment;
+	private ProgressBar loadingIcon;
 	
 	private HashMap<String, String> xmlStrings;
 	
@@ -52,9 +54,13 @@ public class MainActivity extends Activity {
 		loadSavedOptions();
 		
 		handler = new MessengerHandler(this);
+		
+		// TODO - make a loading icon when switching from options tab to map tab - is it possible?
+		loadingIcon = (ProgressBar) findViewById(R.id.progressBarTabs);
+		loadingIcon.setVisibility(ProgressBar.INVISIBLE);
     }
     
-	public static class TabListener implements ActionBar.TabListener {
+	public class TabListener implements ActionBar.TabListener {
 		private final Fragment mFragment;
 
 		public TabListener(Fragment fragment) {
@@ -67,9 +73,8 @@ public class MainActivity extends Activity {
 
 		@Override
 		public void onTabSelected(Tab tab, FragmentTransaction ft) {
-			if (null != mFragment) {
+			if (null != mFragment)
 				ft.replace(R.id.fragment_container, mFragment);
-			}
 		}
 
 		@Override
@@ -103,6 +108,14 @@ public class MainActivity extends Activity {
     }
     protected boolean dowloadThreadPoolServiceRunning(){
     	return dowloadThreadPoolServiceRunning;
+    }
+    
+    protected void turnOnLoadingIcon(){
+    	loadingIcon.setVisibility(ProgressBar.VISIBLE);
+    }
+    
+    protected void turnOffLoadingIcon(){
+    	loadingIcon.setVisibility(ProgressBar.INVISIBLE);
     }
     
     /**
