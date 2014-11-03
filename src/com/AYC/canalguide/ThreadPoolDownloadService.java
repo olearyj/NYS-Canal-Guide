@@ -165,39 +165,9 @@ public class ThreadPoolDownloadService extends Service {
 			e.printStackTrace();
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();
-		// IOException catch will attempt to load from storage then open mainActivity on success
 		} catch (IOException e) {
 			log("Error: IOException because network not connected");
-			// TODO
-			/*
-			// If there is saved data
-			if(loadDataLastSavedDate() != -1){
-				final HashMap<String, String> xmlStrings = loadXmlString();
-				downloadMarkersAsyncTask.cancel(true);
-				
-				runOnUiThread(new Runnable(){
-					@Override
-					public void run() {
-						Toast.makeText(getApplicationContext(), "Couldn't download data from network, " + 
-								"loaded from storage.", Toast.LENGTH_LONG).show();
-					}
-				});
-				return null;
-			}
-			else{
-				runOnUiThread(new Runnable(){
-					@Override
-					public void run() {
-						Toast.makeText(getApplicationContext(), "Couldn't download data from network, " + 
-								"check your network connection and try again.", Toast.LENGTH_LONG).show();
-					}
-				});
-				// Close 
- since loading from website failed and there is no saved data
-				finish();
-				return null;
-			}
-			*/
+			e.printStackTrace();
 		} 
 		
 		// There are 3 strange characters in the beginning of the some

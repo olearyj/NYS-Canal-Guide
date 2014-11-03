@@ -100,7 +100,8 @@ public class OptionsFragment extends Fragment implements OnClickListener {
 			setViewStub();
 		}
 	}
-	
+	//TODO
+	/*
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
     	super.onSaveInstanceState(outState);
@@ -111,7 +112,7 @@ public class OptionsFragment extends Fragment implements OnClickListener {
 		for(int i=0; i<switchValues.length; i++)
     		log("SIS - SV: switchValues[" + i + "] = " + switchValues[i]);
 		
-	}
+	}*/
 	
 	/**
 	 * If the activity was reset because of screen orientation, use the
@@ -120,7 +121,7 @@ public class OptionsFragment extends Fragment implements OnClickListener {
 	 * 
 	 * @param savedInstanceState
 	 */
-	private void restoreSavedInstanceState(Bundle savedInstanceState){
+	/*private void restoreSavedInstanceState(Bundle savedInstanceState){
 	    if(savedInstanceState.getBooleanArray(FILTER_DATA_KEY) != null){
 	    	switchValues = savedInstanceState.getBooleanArray(FILTER_DATA_KEY);
 	    	for(int i=0; i<switchValues.length; i++)
@@ -130,7 +131,7 @@ public class OptionsFragment extends Fragment implements OnClickListener {
 	    	for(int i=0; i<switches.length; i++)
 	    		log("SV: switches[" + i + "].isChecked() = " + switches[i].isChecked());
 	    }
-	}
+	}*/
 	
 	private void setViewStub(){
 		if(!switches[5].isChecked())
@@ -217,7 +218,6 @@ public class OptionsFragment extends Fragment implements OnClickListener {
 		
 	}
 	
-	// TODO
 	private void setUpDataValidSpinner(View view){
 		final int updateTimes[] = {0, 1, 3, 7, 14};
 		final String updateTimeStrings[] = {"Every time this app loads", "Every day", 

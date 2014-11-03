@@ -12,7 +12,6 @@ import java.util.Map;
 
 import org.xmlpull.v1.XmlPullParserException;
 
-import Tools.MyTimer;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -26,7 +25,6 @@ import android.widget.Toast;
 
 import com.AYC.canalguide.canalparser.CanalGuideXmlParser;
 import com.AYC.canalguide.canalparser.MapMarker;
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -50,7 +48,6 @@ public class CanalMapFragment extends MapFragment {
 	private PoiAdapter poiAdapter;
 	
 	private CameraPosition lastCameraPosition;
-	private CameraUpdate CU;
 	
 	public CanalMapFragment(){
 		super();
@@ -66,6 +63,7 @@ public class CanalMapFragment extends MapFragment {
     @Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	    Bundle savedInstanceState) {
+    	log("onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)");
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 		activity = getActivity();
 		
@@ -82,6 +80,7 @@ public class CanalMapFragment extends MapFragment {
 		return view;
 	}    
     
+    // TODO
     /*
     @Override
 	public void onSaveInstanceState(Bundle outState) {
@@ -128,6 +127,7 @@ public class CanalMapFragment extends MapFragment {
         	// Move camera to the position when the app was paused
         	mMap.moveCamera(CameraUpdateFactory.newCameraPosition(lastCameraPosition));
         
+        // TODO
         /*
         log("Instance null??");
         if( CU != null){
@@ -269,33 +269,24 @@ public class CanalMapFragment extends MapFragment {
 		}
     }
     
-    // TODO - delete this timer after the bug is fixed
     private void addExistingMarkersToMap(){
     	log("Adding existing markers to the map. poiAdapter size = " + poiAdapter.getCount());
     	Marker marker;
 		MarkerOptions markerOptions;
-		MyTimer timer = new MyTimer();
-		MyTimer forTimer = new MyTimer();
 		
-		forTimer.startTimer();
     	for(MapMarker mapMarker : poiAdapter){
     		if(markersNotFilteredOut(mapMarker)){
     			markerOptions = mapMarker.getMarkerOptions();
 				
 	    		if(markerOptions != null && mapMarker != null){
-					timer.startTimer();
 					marker = mMap.addMarker(markerOptions);	// Will get an error at this line on emulator
-					timer.endTimer();
-		    		
+					
 		    		mapMarker.setMarker(marker);
 	    		}
     		}
     		else
     			mapMarker.setMarker(null);
     	}
-    	forTimer.endTimer();
-    	forTimer.logTimeDiff("for(MapMarker mapMarker : poiAdapter){");
-    	timer.logTimeStats("marker = mMap.addMarker(markerOptions);");
     }
     
     private boolean markersNotFilteredOut(MapMarker mapMarker){

@@ -28,7 +28,7 @@ public class MainActivity extends Activity {
 	
 	private static MapFragment mapFragment;
 	private Fragment optionsFragment;
-	private ProgressBar loadingIcon;
+	//private ProgressBar loadingIcon;
 	
 	private HashMap<String, String> xmlStrings;
 	
@@ -55,9 +55,10 @@ public class MainActivity extends Activity {
 		
 		handler = new MessengerHandler(this);
 		
+		// TODO - used saved instance state in this class instead of fragments?
 		// TODO - make a loading icon when switching from options tab to map tab - is it possible?
-		loadingIcon = (ProgressBar) findViewById(R.id.progressBarTabs);
-		loadingIcon.setVisibility(ProgressBar.INVISIBLE);
+		//loadingIcon = (ProgressBar) findViewById(R.id.progressBarTabs);
+		//loadingIcon.setVisibility(ProgressBar.INVISIBLE);
     }
     
 	public class TabListener implements ActionBar.TabListener {
@@ -109,14 +110,15 @@ public class MainActivity extends Activity {
     protected boolean dowloadThreadPoolServiceRunning(){
     	return dowloadThreadPoolServiceRunning;
     }
-    
+    //TODO
+    /*
     protected void turnOnLoadingIcon(){
     	loadingIcon.setVisibility(ProgressBar.VISIBLE);
     }
     
     protected void turnOffLoadingIcon(){
     	loadingIcon.setVisibility(ProgressBar.INVISIBLE);
-    }
+    }*/
     
     /**
      * This method will load the options that were saved in the OptionsFragment
