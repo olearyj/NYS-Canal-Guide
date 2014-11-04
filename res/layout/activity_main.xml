@@ -13,6 +13,7 @@
 
     </LinearLayout>
 
+    <!--
     <ProgressBar
         android:id="@+id/progressBarTabs"
         style="?android:attr/progressBarStyleLarge"
@@ -21,5 +22,6 @@
         android:layout_gravity="center"
         android:indeterminate="true"
         android:visibility="visible" />
+        -->
     
 </FrameLayout>

@@ -324,10 +324,13 @@ public class MarkerInfoActivity extends Activity implements OnClickListener {
 	}
 	
 	private void createNavInfoTextViews(){
+		// The following will print already because of the snippet
+		/*
 		if( !isBlank(navInfo.getOverheadClearance()) ){
 			textSizeCount++;
 			addTextView("Overhead Clearance = " + navInfo.getOverheadClearance());
 		}
+		*/
 	}
 	
 	/**
