@@ -1,5 +1,11 @@
 package com.AYC.canalguide.NearbyPlaces;
 
+import com.AYC.canalguide.R;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
 public class Place {
 
 	private String name;
@@ -28,5 +34,13 @@ public class Place {
     public double getLongitude(){
     	return longitude;
     }
+    
+	public MarkerOptions getMarkerOptions() {
+			return new MarkerOptions()
+				.title(name)
+				.position(new LatLng(latitude, longitude))
+				.snippet(vicinity)
+				.icon(BitmapDescriptorFactory.fromResource(R.drawable.mmi_red_buoy));
+	}
     
 }
