@@ -611,8 +611,7 @@ public class MarkerInfoActivity extends Activity implements OnClickListener {
         mMap.addMarker(mapMarker.getMarkerOptions());
         
         // Get and add nearby places to the map
-        AddNearbyPlacesToMapTask task = new AddNearbyPlacesToMapTask(mMap, mapMarker.getlatLng());
-        task.execute();
+        new AddNearbyPlacesToMapTask(mMap, mapMarker.getlatLng()).execute();
 	}
 	
 	private void log(String message) {

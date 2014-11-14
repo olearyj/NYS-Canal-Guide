@@ -25,6 +25,13 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import android.os.AsyncTask;
 import android.util.Log;
 
+/**
+ * This task will download the jsonData that includes nearby places data. It will then parse
+ * the places data and add them to the maps.
+ * 
+ * @author James O'Leary
+ *
+ */
 public class AddNearbyPlacesToMapTask extends AsyncTask<Void, Integer, String> {
 	
     private static final String types = "airport|amusement_park|aquarium|art_gallery|bakery|bank|bar" +
@@ -33,12 +40,19 @@ public class AddNearbyPlacesToMapTask extends AsyncTask<Void, Integer, String> {
     		"|liquor_store|lodging|meal_delivery|meal_takeaway|movie_theater|museum|park|pet_store" +
     		"|pharmacy|post_office|restaurant|shoe_store|shopping_mall|spa|stadium|store" +
     		"|subway_station|taxi_stand|train_station|zoo";
-    private static final String types1 = "food|bar|store|museum|art_gallery";
+    //private static final String types1 = "food|bar|store|museum|art_gallery";
 	private static final int radius = 1000;
 
 	private GoogleMap googleMap;
 	private String placesSearchUrl;
 	
+	/**
+	 * Constructs the task
+	 * 
+	 * @param googleMap in order to add the nearby places to it on completion
+	 * @param latLng
+	 * Location to get near places
+	 */
 	public AddNearbyPlacesToMapTask(GoogleMap googleMap, LatLng latLng){
 		super();
 		this.googleMap = googleMap;
@@ -51,7 +65,10 @@ public class AddNearbyPlacesToMapTask extends AsyncTask<Void, Integer, String> {
 		placesSearchUrl = setPlacesSearchUrl(lat, lng);
 	}
 	
-    // Invoked by execute() method of this object
+    /**
+     *  Invoked by execute() method of this object
+     *  Starts to download in the background
+     */
     @Override
     protected String doInBackground(Void... v) {
         String jsonString = null;
@@ -64,7 +81,10 @@ public class AddNearbyPlacesToMapTask extends AsyncTask<Void, Integer, String> {
         return jsonString;
     }
  
-    // Executed after the complete execution of doInBackground() method
+    /**
+     *  Executed after the complete execution of doInBackground() method
+     *  Will then start the parser task to parse the downloaded jsonString
+     */
     @Override
     protected void onPostExecute(String result){
         ParserTask parserTask = new ParserTask();
@@ -75,6 +95,7 @@ public class AddNearbyPlacesToMapTask extends AsyncTask<Void, Integer, String> {
     }
     
     /*
+     * TODO - delete???
     public String downloadUrl(String URL){
     	try {		
 			
@@ -96,8 +117,15 @@ public class AddNearbyPlacesToMapTask extends AsyncTask<Void, Integer, String> {
     	return null;
     }*/
     
+    /**
+     * Downloads url to a string
+     * 
+     * @param strUrl
+     * @return downloaded page as a string
+     * @throws IOException
+     */
     private String downloadUrl(String strUrl) throws IOException{
-        String data = "";
+        String dataString = "";
         InputStream iStream = null;
         HttpURLConnection urlConnection = null;
         try{
@@ -113,28 +141,32 @@ public class AddNearbyPlacesToMapTask extends AsyncTask<Void, Integer, String> {
             iStream = urlConnection.getInputStream();
  
             BufferedReader br = new BufferedReader(new InputStreamReader(iStream));
- 
-            StringBuffer sb  = new StringBuffer();
- 
+
             String line = "";
             while( ( line = br.readLine())  != null){
-                sb.append(line);
+                dataString += line;
             }
- 
-            data = sb.toString();
  
             br.close();
  
         }catch(Exception e){
-            Log.d("Exception while downloading url", e.toString());
+            log("Exception while downloading url");
+            e.printStackTrace();
         }finally{
             iStream.close();
             urlConnection.disconnect();
         }
  
-        return data;
+        return dataString;
     }
 
+    /**
+     * URL string to get the nearby places in json format
+     * 
+     * @param latitude
+     * @param longitude
+     * @return URL string
+     */
     public String setPlacesSearchUrl(double lat, double lng){
 		return "https://maps.googleapis.com/maps/api/place/nearbysearch/" +
 			    "json?location=" + lat + "," + lng +
@@ -158,17 +190,10 @@ public class AddNearbyPlacesToMapTask extends AsyncTask<Void, Integer, String> {
             List<Place> places = null;
             PlaceJSONParser placeJsonParser = new PlaceJSONParser();
  
-            try{
-            	log("jsonString = " + jsonString[0]);
-            	if(jsonString[0] == null)
-                	log("jsonString == null!!!");
-                
+            try{                
                 jObject = new JSONObject(jsonString[0]);
  
-                if(jObject == null)
-                	log("jObj == null!!!");
-                
-                /// Getting the parsed data as a List construct
+                // Getting the parsed data as a List construct
                 places = placeJsonParser.parse(jObject);
  
             }catch(Exception e){
