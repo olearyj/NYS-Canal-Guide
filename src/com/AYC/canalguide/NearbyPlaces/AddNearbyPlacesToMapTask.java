@@ -27,6 +27,13 @@ import android.util.Log;
 
 public class AddNearbyPlacesToMapTask extends AsyncTask<Void, Integer, String> {
 	
+    private static final String types = "airport|amusement_park|aquarium|art_gallery|bakery|bank|bar" +
+    		"|beauty_salon|book_store|bowling_alley|bus_station|cafe|casino|department_store|food" +
+    		"|gas_station|grocery_or_supermarket|hair_care|hardware_store|laundry|library" +
+    		"|liquor_store|lodging|meal_delivery|meal_takeaway|movie_theater|museum|park|pet_store" +
+    		"|pharmacy|post_office|restaurant|shoe_store|shopping_mall|spa|stadium|store" +
+    		"|subway_station|taxi_stand|train_station|zoo";
+    private static final String types1 = "food|bar|store|museum|art_gallery";
 	private static final int radius = 1000;
 
 	private GoogleMap googleMap;
@@ -133,9 +140,8 @@ public class AddNearbyPlacesToMapTask extends AsyncTask<Void, Integer, String> {
 			    "json?location=" + lat + "," + lng +
 			    "&radius=" + radius + 
 			    "&sensor=true" +
-			    "&types=food|bar|store|museum|art_gallery"+
+			    "&types=" + types +
 			    "&key=AIzaSyAAepbo8NVMqtqz_TQczV7YLPwSu6yhj5g";
-		// TODO I will need to change the key here if i ever change the api_key
 	}
 
     /** 
