@@ -50,7 +50,11 @@ import android.widget.Toast;
 public class SplashActivity extends Activity {
 
 	// This boolean will be used in all classes to choose whether to use logs or not
-	public static final boolean LOG_ENABLED = false;
+	public static final boolean LOG_ENABLED = true;
+	//TODO
+	//TODO
+	//TODO
+	// Before the next launch, i must include terms and conditions agreement for places API!!!!!!
 	
 	// This is the minimum amount of time the splash screen will be up for (in milliseconds)
 	private static final long MINIMUM_SPLASH_TIME = 1000L;

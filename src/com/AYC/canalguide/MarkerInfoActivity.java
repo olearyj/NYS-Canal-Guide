@@ -1,5 +1,6 @@
 package com.AYC.canalguide;
 
+import com.AYC.canalguide.NearbyPlaces.AddNearbyPlacesToMapTask;
 import com.AYC.canalguide.canalparser.BoatsForHireMarker;
 import com.AYC.canalguide.canalparser.BridgeGateMarker;
 import com.AYC.canalguide.canalparser.LaunchMarker;
@@ -608,6 +609,10 @@ public class MarkerInfoActivity extends Activity implements OnClickListener {
         // Initialize map options
         // mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
         mMap.addMarker(mapMarker.getMarkerOptions());
+        
+        // Get and add nearby places to the map
+        AddNearbyPlacesToMapTask task = new AddNearbyPlacesToMapTask(mMap, mapMarker.getlatLng());
+        task.execute();
 	}
 	
 	private void log(String message) {
