@@ -40,7 +40,7 @@ public class PoiAdapter extends BaseAdapter implements Iterable<MapMarker>, Iter
 	public void addItem(MapMarker mapMarker){
 		mapMarkerList.add(mapMarker);
 	}
-	
+
 	public MapMarker getMapMarker(Marker marker){
 		
 		for(MapMarker mapMarker: mapMarkerList)

@@ -1720,8 +1720,7 @@ containing a value of this type.
         public static final int layout_infowindow=0x7f03001d;
         public static final int layout_markerinfo=0x7f03001e;
         public static final int navinfo_legend=0x7f03001f;
-        public static final int sdsd=0x7f030020;
-        public static final int support_simple_spinner_dropdown_item=0x7f030021;
+        public static final int support_simple_spinner_dropdown_item=0x7f030020;
     }
     public static final class menu {
         public static final int main=0x7f0c0000;

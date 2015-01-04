@@ -64,6 +64,14 @@ public abstract class MapMarker implements Serializable {
 		return marker;
 	}
 
+	public double getLat(){
+		return lat;
+	}
+	
+	public double getLng(){
+		return lng;
+	}
+	
 	public LatLng getlatLng(){
 		return new LatLng(lat, lng);
 	}

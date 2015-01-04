@@ -137,12 +137,13 @@ public class NavInfoMarker extends MapMarker implements Serializable {
 		return name;
 	}
 	
+	// Only show middle depth or clearance. Other stuff can be shown when clicked on
 	@Override
 	public String getSnippet(){
 		return "Mile " + mile + 
-				(isNotBlank(southWestDepth) ? ", SW Depth=" + southWestDepth : "") + 
+				//(isNotBlank(southWestDepth) ? ", SW Depth=" + southWestDepth : "") + 
 				(isNotBlank(middleDepth) ? ", Middle Depth=" + middleDepth : "") + 
-				(isNotBlank(northEastDepth) ? ", NE Depth=" + northEastDepth : "") + 
+				//(isNotBlank(northEastDepth) ? ", NE Depth=" + northEastDepth : "") + 
 				(isNotBlank(overheadClearance) ? ", Overhead Clearance=" + overheadClearance : "");
 	}
 	
