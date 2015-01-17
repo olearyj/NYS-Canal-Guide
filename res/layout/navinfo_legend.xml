@@ -6,6 +6,41 @@
         android:orientation="vertical"
         android:paddingLeft="15dp" >
 
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+        
+            <FrameLayout
+		        android:id="@+id/flBridge"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_alignParentLeft="true"
+		        android:layout_alignParentTop="true"
+		        android:paddingLeft="3dp"
+		        android:paddingRight="3dp" >
+		
+	        <ImageView
+	            android:id="@+id/ivBridge"
+	            android:contentDescription="@string/cd_bridge"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:src="@drawable/mmi_bridge"
+	            android:layout_gravity="center_vertical" />
+	        	  
+	    	</FrameLayout>
+    
+	        <TextView
+	            android:id="@+id/tvBridge"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="@string/tv_bridge"
+	            android:textAppearance="?android:attr/textAppearanceSmall"
+		        android:layout_alignParentRight="true"
+		        android:layout_alignParentTop="true"
+		        android:layout_toRightOf="@+id/flBridge" />
+        
+        </RelativeLayout>
+    
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
@@ -145,40 +180,5 @@
 		        android:layout_toRightOf="@+id/flRedBeacon" />
         
         </RelativeLayout>
-        
-		<RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-        
-            <FrameLayout
-		        android:id="@+id/flBridge"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:layout_alignParentLeft="true"
-		        android:layout_alignParentTop="true"
-		        android:paddingLeft="3dp"
-		        android:paddingRight="3dp" >
-		
-	        <ImageView
-	            android:id="@+id/ivBridge"
-	            android:contentDescription="@string/cd_bridge"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:src="@drawable/mmi_bridge"
-	            android:layout_gravity="center_vertical" />
-	        	  
-	    	</FrameLayout>
-    
-	        <TextView
-	            android:id="@+id/tvBridge"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:text="@string/tv_bridge"
-	            android:textAppearance="?android:attr/textAppearanceSmall"
-		        android:layout_alignParentRight="true"
-		        android:layout_alignParentTop="true"
-		        android:layout_toRightOf="@+id/flBridge" />
-        
-        </RelativeLayout>
-    
+            
     </LinearLayout>	

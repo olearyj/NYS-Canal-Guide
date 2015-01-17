@@ -19,45 +19,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textStyle="bold"
         android:textColor="@color/dark_blue" />
-
-    <RelativeLayout
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content" >
-
-    <FrameLayout
-        android:id="@+id/frameLayout1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/switch_lock"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:paddingLeft="3dp"
-        android:paddingRight="3dp" >
-
-        <ImageView
-            android:contentDescription="@string/iv_markercolordesc"
-            android:id="@+id/ivColor1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:background="@color/red"
-            android:src="@drawable/abc_ab_share_pack_holo_light" />
-    </FrameLayout>
-
-    <Switch
-        android:id="@+id/switch_lock"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/frameLayout1"
-        android:text="@string/switch_lock"
-        android:checked="true"
-        android:thumb="@drawable/switch_inner"
-    	android:track="@drawable/switch_track" />
-
-	</RelativeLayout>
-
+    
     <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content" >
@@ -133,45 +95,7 @@
     	android:track="@drawable/switch_track" />
 
 	</RelativeLayout>
-
-    <RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content" >
-
-    <FrameLayout
-        android:id="@+id/frameLayout4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/switch_bridge"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:paddingLeft="3dp"
-        android:paddingRight="3dp" >
-
-        <ImageView
-            android:id="@+id/ivColor4"
-            android:contentDescription="@string/iv_markercolordesc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:background="@color/yellow"
-            android:src="@drawable/abc_ab_share_pack_holo_light" />
-    </FrameLayout>
-
-    <Switch
-        android:id="@+id/switch_bridge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/frameLayout4"
-        android:text="@string/switch_bridge"
-        android:checked="true"
-        android:thumb="@drawable/switch_inner"
-    	android:track="@drawable/switch_track" />
-
-	</RelativeLayout>
-
+    
     <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content" >
@@ -210,6 +134,82 @@
 
 	</RelativeLayout>
 	
+    <RelativeLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content" >
+
+    <FrameLayout
+        android:id="@+id/frameLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/switch_lock"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:paddingLeft="3dp"
+        android:paddingRight="3dp" >
+
+        <ImageView
+            android:contentDescription="@string/iv_markercolordesc"
+            android:id="@+id/ivColor1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@color/red"
+            android:src="@drawable/abc_ab_share_pack_holo_light" />
+    </FrameLayout>
+
+    <Switch
+        android:id="@+id/switch_lock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/frameLayout1"
+        android:text="@string/switch_lock"
+        android:checked="true"
+        android:thumb="@drawable/switch_inner"
+    	android:track="@drawable/switch_track" />
+
+	</RelativeLayout>
+
+    <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <FrameLayout
+        android:id="@+id/frameLayout4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/switch_bridge"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:paddingLeft="3dp"
+        android:paddingRight="3dp" >
+
+        <ImageView
+            android:id="@+id/ivColor4"
+            android:contentDescription="@string/iv_markercolordesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@color/yellow"
+            android:src="@drawable/abc_ab_share_pack_holo_light" />
+    </FrameLayout>
+
+    <Switch
+        android:id="@+id/switch_bridge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/frameLayout4"
+        android:text="@string/switch_bridge"
+        android:checked="true"
+        android:thumb="@drawable/switch_inner"
+    	android:track="@drawable/switch_track" />
+
+	</RelativeLayout>
+    
     <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content" >

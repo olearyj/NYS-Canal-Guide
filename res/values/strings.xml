@@ -12,7 +12,7 @@
     <!-- Text Views -->
     <string name="tv_filters">Filters</string>
     <string name="tv_maptype">Map Type</string>
-    <string name="tv_datavalid">Update Data Frequency</string>
+    <string name="tv_datavalid">Data Update Frequency</string>
     <string name="tv_loading">Loading..</string>
     <string name="tv_loadingdatabase">Loading from online database..</string>
     <string name="tv_loadingphone">Loading from phone..</string>
