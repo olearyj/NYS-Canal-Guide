@@ -149,11 +149,11 @@ public class OptionsFragment extends Fragment implements OnClickListener {
 	
 	private void saveFilterData(){
 		boolean[] switchValues = new boolean[NUM_OF_SWITCHES];
-		
+
 		for(int i=0; i<switchValues.length; i++){
 			switchValues[i] = switches[i].isChecked();
 		}
-		
+
 		this.switchValues = switchValues;
 	}
 	

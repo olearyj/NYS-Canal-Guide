@@ -301,6 +301,10 @@ public class MarkerInfoActivity extends Activity implements OnClickListener {
 		textSizeCount++;
 		if( !isBlank(bridge.getLocation()) )
 			addTextView("Location: " + bridge.getLocation());
+		textSizeCount++;
+		addTextView("Closed clearance: " + bridge.getClearanceClosed());
+		addTextView("Opened clearance: " + 
+				(bridge.getClearanceOpened() == 999 ? "Unlimited" : bridge.getClearanceClosed()));
 	}
 	
 	/**

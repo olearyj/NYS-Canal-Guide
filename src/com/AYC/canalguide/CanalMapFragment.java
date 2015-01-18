@@ -284,8 +284,6 @@ public class CanalMapFragment extends MapFragment {
 		    		mapMarker.setMarker(marker);
 	    		}
     		}
-    		else
-    			mapMarker.setMarker(null);
     	}
     }
     

@@ -25,13 +25,17 @@ public class BridgeGateMarker extends MapMarker implements Serializable {
 	
 	private String location;
 	private String phoneNumber;
+	private double clearanceClosed;
+	private double clearanceOpened;
 	
 	public BridgeGateMarker(LatLng latLng, String name, String location, double mile, 
-			String bodyOfWater, String phoneNumber){
+			String bodyOfWater, String phoneNumber, double clearanceClosed, double clearanceOpened){
 		
 		 super(latLng, name, bodyOfWater, mile);
 		 this.location = location;
 		 this.phoneNumber = phoneNumber;
+		 this.clearanceClosed = clearanceClosed;
+		 this.clearanceOpened = clearanceOpened;
 	}
 	
 	public String getLocation(){
@@ -40,6 +44,14 @@ public class BridgeGateMarker extends MapMarker implements Serializable {
 
 	public String getPhoneNumber(){
 		return phoneNumber;
+	}
+	
+	public double getClearanceClosed(){
+		return clearanceClosed;
+	}
+	
+	public double getClearanceOpened(){
+		return clearanceOpened;
 	}
 	
 	@Override
@@ -63,7 +75,8 @@ public class BridgeGateMarker extends MapMarker implements Serializable {
 	
 	@Override
 	public MapMarker cloneWithoutMarker(){
-		return new BridgeGateMarker(new LatLng(lat, lng), name, location, mile, bodyOfWater, phoneNumber);
+		return new BridgeGateMarker(new LatLng(lat, lng), name, location, mile, bodyOfWater, phoneNumber,
+				clearanceClosed, clearanceOpened);
 	}
 	
 	public static List<MapMarker> readMarker(XmlPullParser parser) 
@@ -77,6 +90,8 @@ public class BridgeGateMarker extends MapMarker implements Serializable {
 		 double mile = 0;
 		 String bodyOfWater = null;
 		 String phoneNumber = null;
+		 double clearanceClosed = 0;
+		 double clearanceOpened = 0;
 
 		 try{
 		 String tag;
@@ -97,10 +112,12 @@ public class BridgeGateMarker extends MapMarker implements Serializable {
 		    	mile = parseDouble(parser.getAttributeValue(null, "mile").replace("*", ""));
 		    	bodyOfWater = parser.getAttributeValue(null, "bodyofwater");
 		    	phoneNumber = parser.getAttributeValue(null, "phonenumber");
+		    	clearanceClosed = parseDouble(parser.getAttributeValue(null, "clearance_closed").replace("unlimited", "999"));
+		    	clearanceOpened = parseDouble(parser.getAttributeValue(null, "clearance_opened").replace("unlimited", "999"));
 
 		    	if(lat != -1 || lng != -1)
 		    		mapMarkers.add(new BridgeGateMarker(new LatLng(lat, lng), name, location, 
-		    				mile, bodyOfWater, phoneNumber));	
+		    				mile, bodyOfWater, phoneNumber, clearanceClosed, clearanceOpened));	
 	            
 	            event = parser.next();   
 		    }
