@@ -125,7 +125,7 @@ public class BridgeGateMarker extends MapMarker implements Serializable {
 		 }catch(Exception e){
 			 e.printStackTrace();
 		 }
-		 
+
 		 log("Returning " + mapMarkers.size() + " BridgeGateMarkers");
 		 return mapMarkers;
 	}
