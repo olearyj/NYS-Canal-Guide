@@ -15,10 +15,18 @@ import android.util.Xml;
 
 public class CanalGuideXmlParser {
 
-    XmlPullParser parser;
+    private XmlPullParser parser;
+    private int URL;
 	
-	public CanalGuideXmlParser(){
+	public CanalGuideXmlParser(String URL){
         parser = Xml.newPullParser();
+        if(URL.contains("navinfo")){
+	        for(int i = 0; i<SplashActivity.navInfoURLs.length; i++)
+	        	if(SplashActivity.navInfoURLs[i].equals(URL))
+	        		this.URL = i;
+        }
+        else 
+        	this.URL = 0;
 	}
 	
     public List<MapMarker> parse(Reader reader) throws XmlPullParserException, IOException {
@@ -57,10 +65,10 @@ public class CanalGuideXmlParser {
             		   mapMarkers = BridgeGateMarker.readMarker(parser); 
             	   }
             	   else if(name.equals("navigationinfo")){
-            		   mapMarkers = NavInfoMarker.readMarker(parser);
+            		   mapMarkers = NavInfoMarker.readMarker(parser, URL);
             	   }
             	   else {
-            		   log("ERROR: name of markers not found: " + name);
+            		   log("ERROR: name of markers not found: \"" + name + "\"");
             	   }
             
             event = parser.next();   

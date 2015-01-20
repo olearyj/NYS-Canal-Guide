@@ -180,5 +180,40 @@
 		        android:layout_toRightOf="@+id/flRedBeacon" />
         
         </RelativeLayout>
+        
+		<RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+        
+            <FrameLayout
+		        android:id="@+id/flOtherBeacon"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_alignParentLeft="true"
+		        android:layout_alignParentTop="true"
+		        android:paddingLeft="3dp"
+		        android:paddingRight="3dp" >
+		
+	        <ImageView
+	            android:id="@+id/ivOtherBeacon"
+	            android:contentDescription="@string/cd_otherbeacon"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:src="@drawable/mmi_other_beacon"
+	            android:layout_gravity="center_vertical" />
+	        	  
+	    	</FrameLayout>
+    
+	        <TextView
+	            android:id="@+id/tvOtherBeacon"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="@string/tv_otherbeacon"
+	            android:textAppearance="?android:attr/textAppearanceSmall"
+		        android:layout_alignParentRight="true"
+		        android:layout_alignParentTop="true"
+		        android:layout_toRightOf="@+id/flOtherBeacon" />
+        
+        </RelativeLayout>
             
     </LinearLayout>	

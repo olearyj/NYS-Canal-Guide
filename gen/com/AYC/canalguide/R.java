@@ -1491,33 +1491,34 @@ containing a value of this type.
         public static final int mmi_green_beacon=0x7f020083;
         public static final int mmi_green_buoy=0x7f020084;
         public static final int mmi_green_marker=0x7f020085;
-        public static final int mmi_red_beacon=0x7f020086;
-        public static final int mmi_red_buoy=0x7f020087;
-        public static final int mmi_red_marker=0x7f020088;
-        public static final int mmi_violet_marker=0x7f020089;
-        public static final int mmi_yellow_marker=0x7f02008a;
-        public static final int powered_by_google_dark=0x7f02008b;
-        public static final int powered_by_google_light=0x7f02008c;
-        public static final int progressbar_horizontal=0x7f02008d;
-        public static final int progressbar_indeterminate_horizontal=0x7f02008e;
-        public static final int progressbartheme_progress_bg_holo_light=0x7f02008f;
-        public static final int progressbartheme_progress_primary_holo_light=0x7f020090;
-        public static final int progressbartheme_progress_secondary_holo_light=0x7f020091;
-        public static final int progressbartheme_progressbar_indeterminate_holo1=0x7f020092;
-        public static final int progressbartheme_progressbar_indeterminate_holo2=0x7f020093;
-        public static final int progressbartheme_progressbar_indeterminate_holo3=0x7f020094;
-        public static final int progressbartheme_progressbar_indeterminate_holo4=0x7f020095;
-        public static final int progressbartheme_progressbar_indeterminate_holo5=0x7f020096;
-        public static final int progressbartheme_progressbar_indeterminate_holo6=0x7f020097;
-        public static final int progressbartheme_progressbar_indeterminate_holo7=0x7f020098;
-        public static final int progressbartheme_progressbar_indeterminate_holo8=0x7f020099;
-        public static final int switch_inner=0x7f02009a;
-        public static final int switch_track=0x7f02009b;
-        public static final int tab_selected_example=0x7f02009c;
-        public static final int tab_selected_focused_example=0x7f02009d;
-        public static final int tab_selected_pressed_example=0x7f02009e;
-        public static final int tab_unselected_focused_example=0x7f02009f;
-        public static final int tab_unselected_pressed_example=0x7f0200a0;
+        public static final int mmi_other_beacon=0x7f020086;
+        public static final int mmi_red_beacon=0x7f020087;
+        public static final int mmi_red_buoy=0x7f020088;
+        public static final int mmi_red_marker=0x7f020089;
+        public static final int mmi_violet_marker=0x7f02008a;
+        public static final int mmi_yellow_marker=0x7f02008b;
+        public static final int powered_by_google_dark=0x7f02008c;
+        public static final int powered_by_google_light=0x7f02008d;
+        public static final int progressbar_horizontal=0x7f02008e;
+        public static final int progressbar_indeterminate_horizontal=0x7f02008f;
+        public static final int progressbartheme_progress_bg_holo_light=0x7f020090;
+        public static final int progressbartheme_progress_primary_holo_light=0x7f020091;
+        public static final int progressbartheme_progress_secondary_holo_light=0x7f020092;
+        public static final int progressbartheme_progressbar_indeterminate_holo1=0x7f020093;
+        public static final int progressbartheme_progressbar_indeterminate_holo2=0x7f020094;
+        public static final int progressbartheme_progressbar_indeterminate_holo3=0x7f020095;
+        public static final int progressbartheme_progressbar_indeterminate_holo4=0x7f020096;
+        public static final int progressbartheme_progressbar_indeterminate_holo5=0x7f020097;
+        public static final int progressbartheme_progressbar_indeterminate_holo6=0x7f020098;
+        public static final int progressbartheme_progressbar_indeterminate_holo7=0x7f020099;
+        public static final int progressbartheme_progressbar_indeterminate_holo8=0x7f02009a;
+        public static final int switch_inner=0x7f02009b;
+        public static final int switch_track=0x7f02009c;
+        public static final int tab_selected_example=0x7f02009d;
+        public static final int tab_selected_focused_example=0x7f02009e;
+        public static final int tab_selected_pressed_example=0x7f02009f;
+        public static final int tab_unselected_focused_example=0x7f0200a0;
+        public static final int tab_unselected_pressed_example=0x7f0200a1;
     }
     public static final class id {
         public static final int action_bar=0x7f05002e;
@@ -1531,8 +1532,8 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f050016;
         public static final int action_menu_presenter=0x7f050017;
         public static final int action_mode_close_button=0x7f050036;
-        public static final int action_search=0x7f05008b;
-        public static final int action_settings=0x7f05008a;
+        public static final int action_search=0x7f05008e;
+        public static final int action_settings=0x7f05008d;
         public static final int activity_chooser_view_content=0x7f050037;
         public static final int always=0x7f05000b;
         public static final int beginning=0x7f050011;
@@ -1554,6 +1555,7 @@ containing a value of this type.
         public static final int flBridge=0x7f05007b;
         public static final int flGreenBeacon=0x7f050084;
         public static final int flGreenBuoy=0x7f05007e;
+        public static final int flOtherBeacon=0x7f05008a;
         public static final int flRedBeacon=0x7f050087;
         public static final int flRedBuoy=0x7f050081;
         public static final int fragment_container=0x7f05004e;
@@ -1586,6 +1588,7 @@ containing a value of this type.
         public static final int ivGreenBeacon=0x7f050085;
         public static final int ivGreenBuoy=0x7f05007f;
         public static final int ivLogo=0x7f050050;
+        public static final int ivOtherBeacon=0x7f05008b;
         public static final int ivRedBeacon=0x7f050088;
         public static final int ivRedBuoy=0x7f050082;
         public static final int ivWebsite=0x7f050079;
@@ -1650,6 +1653,7 @@ containing a value of this type.
         public static final int tvGreenBuoy=0x7f050080;
         public static final int tvLoading=0x7f050052;
         public static final int tvMapType=0x7f05006b;
+        public static final int tvOtherBeacon=0x7f05008c;
         public static final int tvRedBeacon=0x7f050089;
         public static final int tvRedBuoy=0x7f050083;
         public static final int tv_filters=0x7f050056;
@@ -1773,13 +1777,14 @@ containing a value of this type.
          */
         public static final int button_call=0x7f0a002a;
         public static final int button_cancel=0x7f0a002b;
-        public static final int cd_bridge=0x7f0a0044;
-        public static final int cd_greenbeacon=0x7f0a0042;
+        public static final int cd_bridge=0x7f0a0046;
+        public static final int cd_greenbeacon=0x7f0a0043;
         /**  NavInfo content descriptions 
          */
-        public static final int cd_greenbuoy=0x7f0a0040;
-        public static final int cd_redbeacon=0x7f0a0043;
-        public static final int cd_redbuoy=0x7f0a0041;
+        public static final int cd_greenbuoy=0x7f0a0041;
+        public static final int cd_otherbeacon=0x7f0a0045;
+        public static final int cd_redbeacon=0x7f0a0044;
+        public static final int cd_redbuoy=0x7f0a0042;
         /**  Button in confirmation dialog to enable Google Play services.  Clicking it
         will direct user to application settings of Google Play services where they
         can enable it [CHAR LIMIT=40] 
@@ -1872,16 +1877,16 @@ containing a value of this type.
         public static final int hello_world=0x7f0a0028;
         /**  Image View's content descriptions 
          */
-        public static final int iv_markercolordesc=0x7f0a003f;
-        public static final int switch_boatsforhire=0x7f0a003d;
-        public static final int switch_bridge=0x7f0a003c;
-        public static final int switch_buoys=0x7f0a003e;
-        public static final int switch_launch=0x7f0a003a;
+        public static final int iv_markercolordesc=0x7f0a0040;
+        public static final int switch_boatsforhire=0x7f0a003e;
+        public static final int switch_bridge=0x7f0a003d;
+        public static final int switch_buoys=0x7f0a003f;
+        public static final int switch_launch=0x7f0a003b;
         /**  Switches 
          */
-        public static final int switch_lock=0x7f0a0039;
-        public static final int switch_marina=0x7f0a003b;
-        public static final int tv_bridge=0x7f0a0038;
+        public static final int switch_lock=0x7f0a003a;
+        public static final int switch_marina=0x7f0a003c;
+        public static final int tv_bridge=0x7f0a0039;
         public static final int tv_datavalid=0x7f0a002e;
         /**  Text Views 
          */
@@ -1895,6 +1900,7 @@ containing a value of this type.
         public static final int tv_loadingdatabase=0x7f0a0030;
         public static final int tv_loadingphone=0x7f0a0031;
         public static final int tv_maptype=0x7f0a002d;
+        public static final int tv_otherbeacon=0x7f0a0038;
         public static final int tv_redbeacon=0x7f0a0037;
         public static final int tv_redbuoy=0x7f0a0035;
         public static final int tv_tide=0x7f0a0033;

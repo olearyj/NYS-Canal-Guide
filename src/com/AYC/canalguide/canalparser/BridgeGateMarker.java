@@ -98,7 +98,7 @@ public class BridgeGateMarker extends MapMarker implements Serializable {
 		 int event = parser.getEventType();
 		 while(event != XmlPullParser.END_DOCUMENT){
 			try{
-			parser.nextTag();
+				parser.nextTag();
 			} catch(XmlPullParserException e){
 				log("Returning " + mapMarkers.size() + " BridgeGateMarkers from catch");
 				return mapMarkers;
@@ -107,14 +107,25 @@ public class BridgeGateMarker extends MapMarker implements Serializable {
 		    if (tag.equals("liftbridge") || tag.equals("guardgate")) {
 		    	lat = parseDouble(parser.getAttributeValue(null, "latitude"));
 		    	lng = parseDouble(parser.getAttributeValue(null, "longitude"));
+		    	
 		    	name = parser.getAttributeValue(null, "name");
+		    	if(tag.equals("liftbridge") && !name.toLowerCase().contains("bridge"))
+		    		name = "Lift Bridge: " + name;
+		    	else if(tag.equals("guardgate") && !name.toLowerCase().contains("Guard"))
+		    		name = "Guard Gate/Lock: " + name;
+		    	
 		    	location = parser.getAttributeValue(null, "location");
 		    	mile = parseDouble(parser.getAttributeValue(null, "mile").replace("*", ""));
 		    	bodyOfWater = parser.getAttributeValue(null, "bodyofwater");
 		    	phoneNumber = parser.getAttributeValue(null, "phonenumber");
-		    	clearanceClosed = parseDouble(parser.getAttributeValue(null, "clearance_closed").replace("unlimited", "999"));
-		    	clearanceOpened = parseDouble(parser.getAttributeValue(null, "clearance_opened").replace("unlimited", "999"));
-
+		    	try{
+			    	clearanceClosed = parseDouble(parser.getAttributeValue(null, "clearance_closed").replace("unlimited", "999"));
+			    	clearanceOpened = parseDouble(parser.getAttributeValue(null, "clearance_opened").replace("unlimited", "999"));
+		    	}
+		    	catch(NullPointerException e){
+		    		clearanceClosed = clearanceOpened = -1;
+		    	}
+		    	
 		    	if(lat != -1 || lng != -1)
 		    		mapMarkers.add(new BridgeGateMarker(new LatLng(lat, lng), name, location, 
 		    				mile, bodyOfWater, phoneNumber, clearanceClosed, clearanceOpened));	
@@ -129,7 +140,7 @@ public class BridgeGateMarker extends MapMarker implements Serializable {
 		 log("Returning " + mapMarkers.size() + " BridgeGateMarkers");
 		 return mapMarkers;
 	}
-
+		
 	public String toString(){
 		return super.toString() + " " + location + " " + phoneNumber;
 	}

@@ -24,6 +24,7 @@
     <string name="tv_redbuoy">Red Buoy</string>
     <string name="tv_greenbeacon">Green Beacon</string>
     <string name="tv_redbeacon">Red Beacon</string>
+    <string name="tv_otherbeacon">Lighthouse</string>
     <string name="tv_bridge">Bridge</string>
     
     <!-- Switches -->
@@ -32,7 +33,7 @@
     <string name="switch_marina">Marinas and Public Docks</string>
     <string name="switch_bridge">Lift Bridges and Guard Gates</string>
     <string name="switch_boatsforhire">Rentals and Cruises</string>
-    <string name="switch_buoys">Buoys, Beacons and Bridges</string>
+    <string name="switch_buoys">Navigation</string>
     
     <!-- Image View's content descriptions -->
     <string name="iv_markercolordesc">This ImageView displays the color associated with the marker</string>
@@ -42,6 +43,7 @@
     <string name="cd_redbuoy">Red Buoy</string>
     <string name="cd_greenbeacon">Green Beacon</string>
     <string name="cd_redbeacon">Red Beacon</string>
+    <string name="cd_otherbeacon">Lighthouse</string>
     <string name="cd_bridge">Bridge</string>
 
 </resources>

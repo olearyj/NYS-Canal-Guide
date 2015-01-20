@@ -39,9 +39,13 @@ public class NavInfoMarker extends MapMarker implements Serializable {
 	private static final BitmapDescriptor redBeaconIcon = 
 			BitmapDescriptorFactory.fromResource(R.drawable.mmi_red_beacon);
 	
+	private static final BitmapDescriptor otherBeaconIcon = 
+			BitmapDescriptorFactory.fromResource(R.drawable.mmi_other_beacon);
+	
 	private static final BitmapDescriptor bridgeIcon = 
 			BitmapDescriptorFactory.fromResource(R.drawable.mmi_bridge);
 	
+	private int urlIndex;
 	private String shore;
 	private String featureUrl;
 	private String featureColor;
@@ -54,11 +58,12 @@ public class NavInfoMarker extends MapMarker implements Serializable {
 	private String noaaPage;
 	private String noaaPageUrl;
 	
-	public NavInfoMarker(LatLng latLng, String feature, double mile, String shore, 
+	public NavInfoMarker(int urlIdx, LatLng latLng, String feature, double mile, String shore, 
 			String featureUrl, String featureColor, int channelWidth, int southWestDepth, 
 			int middleDepth, String middleDepthUrl, int northEastDepth, String overheadClearance, 
 			String noaaPage, String noaaPageUrl){
 		super(latLng, feature, "", mile);
+		this.urlIndex = urlIdx;
 		this.shore = shore;
 		this.featureUrl = featureUrl;
 		this.featureColor = featureColor;
@@ -71,7 +76,10 @@ public class NavInfoMarker extends MapMarker implements Serializable {
 		this.noaaPage = noaaPage;
 		this.noaaPageUrl = noaaPageUrl;		 
 	}
-	
+
+	public int getUrlIndex(){
+		return urlIndex;
+	}
 
 	public String getShore(){
 		return shore;
@@ -161,20 +169,22 @@ public class NavInfoMarker extends MapMarker implements Serializable {
 			else if(featureColor.equalsIgnoreCase("red"))
 				return redBeaconIcon;	//BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED);
 		}
+		else if(name.toLowerCase().startsWith("light"))
+			return otherBeaconIcon;
 		else if(name.toLowerCase().contains("bridge"))
 			return bridgeIcon;
 		
 		return null;
 	}
-
+	
 	@Override
 	public MapMarker cloneWithoutMarker(){
-		return new NavInfoMarker(new LatLng(lat, lng), name, mile, shore, featureUrl, 
+		return new NavInfoMarker(urlIndex, new LatLng(lat, lng), name, mile, shore, featureUrl, 
 				featureColor, channelWidth, southWestDepth, middleDepth, middleDepthUrl, 
 				northEastDepth, overheadClearance, noaaPage, noaaPageUrl);
 	}
 	
-	public static List<MapMarker> readMarker(XmlPullParser parser)
+	public static List<MapMarker> readMarker(XmlPullParser parser, int URL)
 			throws XmlPullParserException, IOException {
         
     	List<MapMarker> mapMarkers = new ArrayList<MapMarker>();
@@ -225,7 +235,7 @@ public class NavInfoMarker extends MapMarker implements Serializable {
 		    	noaaPageUrl = parser.getAttributeValue(null, "noaa_page_url");
 		    
 		    	if(lat != -1 || lng != -1)
-		    		mapMarkers.add(new NavInfoMarker(new LatLng(lat, lng), name, mile, shore, featureUrl, 
+		    		mapMarkers.add(new NavInfoMarker(URL, new LatLng(lat, lng), name, mile, shore, featureUrl, 
 	        				featureColor, channelWidth, southWestDepth, middleDepth, middleDepthUrl, 
 	        				northEastDepth, overheadClearance, noaaPage, noaaPageUrl));	
 	            

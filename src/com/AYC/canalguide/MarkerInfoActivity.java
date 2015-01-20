@@ -301,11 +301,15 @@ public class MarkerInfoActivity extends Activity implements OnClickListener {
 		textSizeCount++;
 		if( !isBlank(bridge.getLocation()) )
 			addTextView("Location: " + bridge.getLocation());
-		textSizeCount++;
-		addTextView("Closed clearance: " + bridge.getClearanceClosed());
-		textSizeCount++;
-		addTextView("Opened clearance: " + 
-				(bridge.getClearanceOpened() == 999 ? "Unlimited" : bridge.getClearanceClosed()));
+		
+		double cc = bridge.getClearanceClosed(), co = bridge.getClearanceOpened();
+		if(cc != -1 && co != -1){
+			textSizeCount++;
+			addTextView("Closed clearance: " + bridge.getClearanceClosed());
+			textSizeCount++;
+			addTextView("Opened clearance: " + 
+					(bridge.getClearanceOpened() == 999 ? "Unlimited" : bridge.getClearanceClosed()));
+		}
 	}
 	
 	/**
@@ -331,12 +335,24 @@ public class MarkerInfoActivity extends Activity implements OnClickListener {
 	
 	private void createNavInfoTextViews(){
 		// The following will print already because of the snippet
-		/*
-		if( !isBlank(navInfo.getOverheadClearance()) ){
+		
+		// Erie and Ft Edward flows east and west, so the depths are north and south
+		boolean ns = SplashActivity.navInfoURLs[navInfo.getUrlIndex()].contains("fortedward") || 
+				SplashActivity.navInfoURLs[navInfo.getUrlIndex()].contains("eriewestern") ||
+				SplashActivity.navInfoURLs[navInfo.getUrlIndex()].contains("erieeastern") ||
+				SplashActivity.navInfoURLs[navInfo.getUrlIndex()].contains("eriecentral");
+		
+		log("idx = " + navInfo.getUrlIndex() + " ns boolean = " + ns);
+		
+		if(navInfo.getNorthEastDepth() != -1){
 			textSizeCount++;
-			addTextView("Overhead Clearance = " + navInfo.getOverheadClearance());
+			addTextView( (ns ? "North" : "East") + " Depth = " + navInfo.getNorthEastDepth());
 		}
-		*/
+		if(navInfo.getSouthWestDepth() != -1){
+			textSizeCount++;
+			addTextView( (ns ? "South" : "West") + " Depth = " + navInfo.getSouthWestDepth());
+		}
+		
 	}
 	
 	/**
