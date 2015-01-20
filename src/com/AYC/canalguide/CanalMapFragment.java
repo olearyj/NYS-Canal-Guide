@@ -240,7 +240,7 @@ public class CanalMapFragment extends MapFragment {
 				if(markersNotFilteredOut(currentXmlDocName)){
 				
 				try {
-					markerDataList = new CanalGuideXmlParser().parse(new StringReader(
+					markerDataList = new CanalGuideXmlParser(currentURL).parse(new StringReader(
 							currentXmlString));
 					log("Completed parsing for " + currentURL);
 				} catch (XmlPullParserException e) {

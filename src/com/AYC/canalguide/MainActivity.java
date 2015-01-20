@@ -92,7 +92,6 @@ public class MainActivity extends Activity {
     @Override
     public void onStop() {
         super.onStop();
-        ((CanalMapFragment) mapFragment).setCameraPositionToDefault();
     }
     
     protected Fragment getOptionsFragment(){

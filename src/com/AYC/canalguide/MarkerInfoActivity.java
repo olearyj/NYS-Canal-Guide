@@ -342,8 +342,6 @@ public class MarkerInfoActivity extends Activity implements OnClickListener {
 				SplashActivity.navInfoURLs[navInfo.getUrlIndex()].contains("erieeastern") ||
 				SplashActivity.navInfoURLs[navInfo.getUrlIndex()].contains("eriecentral");
 		
-		log("idx = " + navInfo.getUrlIndex() + " ns boolean = " + ns);
-		
 		if(navInfo.getNorthEastDepth() != -1){
 			textSizeCount++;
 			addTextView( (ns ? "North" : "East") + " Depth = " + navInfo.getNorthEastDepth());
