@@ -157,19 +157,22 @@ public class NavInfoMarker extends MapMarker implements Serializable {
 	
 	public BitmapDescriptor getBitmapDescriptor(){
 		
-		if(name.toLowerCase().contains("buoy")){
-			if(featureColor.equalsIgnoreCase("green"))
-				return greenBuoyIcon;	//BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN);
-			else if(featureColor.equalsIgnoreCase("red"))
-				return redBuoyIcon;	//BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED);
+		boolean isBeaconLightOrLighthouse = name.toLowerCase().contains("beacon") || 
+				name.toLowerCase().startsWith("light");
+		
+		if(featureColor.equalsIgnoreCase("green")){
+			if(name.toLowerCase().contains("buoy"))
+				return greenBuoyIcon;
+			else if(isBeaconLightOrLighthouse)
+				return greenBeaconIcon;
 		}
-		else if(name.toLowerCase().contains("beacon")){
-			if(featureColor.equalsIgnoreCase("green"))
-				return greenBeaconIcon;	//BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN);
-			else if(featureColor.equalsIgnoreCase("red"))
-				return redBeaconIcon;	//BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED);
+		else if(featureColor.equalsIgnoreCase("red")){
+			if(name.toLowerCase().contains("buoy"))
+				return redBuoyIcon;
+			else if(isBeaconLightOrLighthouse)
+				return redBeaconIcon;
 		}
-		else if(name.toLowerCase().startsWith("light"))
+		else if(isBeaconLightOrLighthouse)
 			return otherBeaconIcon;
 		else if(name.toLowerCase().contains("bridge"))
 			return bridgeIcon;

@@ -22,9 +22,9 @@
     <!-- NavInfo Text Views -->
     <string name="tv_greenbuoy">Green Buoy</string>
     <string name="tv_redbuoy">Red Buoy</string>
-    <string name="tv_greenbeacon">Green Beacon</string>
-    <string name="tv_redbeacon">Red Beacon</string>
-    <string name="tv_otherbeacon">Lighthouse</string>
+    <string name="tv_greenbeacon">Green Beacon/Light/Lighthouse</string>
+    <string name="tv_redbeacon">Red Beacon/Light/Lighthouse</string>
+    <string name="tv_otherbeacon">Other Color Beacon/Light/Lighthouse</string>
     <string name="tv_bridge">Bridge</string>
     
     <!-- Switches -->
