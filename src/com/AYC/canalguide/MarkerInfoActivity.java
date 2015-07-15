@@ -1,5 +1,7 @@
 package com.AYC.canalguide;
 
+import java.io.UnsupportedEncodingException;
+
 import com.AYC.canalguide.NearbyPlaces.AddNearbyPlacesToMapTask;
 import com.AYC.canalguide.canalparser.BoatsForHireMarker;
 import com.AYC.canalguide.canalparser.BridgeGateMarker;
@@ -98,9 +100,14 @@ public class MarkerInfoActivity extends Activity implements OnClickListener {
 	     scrollView = (LinearLayout) findViewById(R.id.scrollViewLinearLayout);
 	         
 	     if(isLock){
-	    	 addTextView(lock.getTitle());
-	    	 addTextView(lock.getSnippet());
-	     	 createLockTextViews();
+	    	// This is used because there is UTF-8 characters in the LockMarker's title
+	         try {
+	 			addTextView(new String(lock.getTitle().getBytes("ISO-8859-1"), "UTF-8"));
+	 		} catch (UnsupportedEncodingException e) {
+	 			addTextView(lock.getTitle());
+	 		}
+	    	addTextView(lock.getSnippet());
+	     	createLockTextViews();
 	     }
 	     
 	     else if(isMarina){

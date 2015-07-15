@@ -1,6 +1,9 @@
 package com.AYC.canalguide;
 
+import java.io.UnsupportedEncodingException;
+
 import android.app.Activity;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -39,7 +42,12 @@ public class CanalMapInfoWindowAdapter implements InfoWindowAdapter{
 		TextView title = (TextView) view.findViewById(R.id.infoWindowTitle);
         TextView snippet = (TextView) view.findViewById(R.id.infoWindowSnippet);
         
-        title.setText(marker.getTitle());
+        // This is used because there is UTF-8 characters in the LockMarker's title
+        try {
+			title.setText(new String(marker.getTitle().getBytes("ISO-8859-1"), "UTF-8"));
+		} catch (UnsupportedEncodingException e) {
+			title.setText(marker.getTitle());
+		}
         snippet.setText(marker.getSnippet());
         return view;
 	}
