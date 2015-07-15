@@ -220,7 +220,7 @@ public class OptionsFragment extends Fragment implements OnClickListener {
 	
 	private void setUpDataValidSpinner(View view){
 		final int updateTimes[] = {0, 1, 3, 7, 14};
-		final String updateTimeStrings[] = {"Every time this app loads", "Every day", 
+		final String updateTimeStrings[] = {"Every time this app loads", "Every 24 hours", 
 				"Every 3 days", "Every week", "Every 2 weeks"};
 		
 		final Spinner spinner = (Spinner) view.findViewById(R.id.spinnerDataValid);

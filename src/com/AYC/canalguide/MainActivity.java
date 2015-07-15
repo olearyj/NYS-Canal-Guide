@@ -22,6 +22,9 @@ public class MainActivity extends Activity {
 
 	private static final String MAP_TABSTRING = "Map";
 	private static final String OPTIONS_TABSTRING = "Options";
+	private static final String ABOUT_TABSTRING = "About";
+	
+	private static final int DEFAULT_UPDATE_DATA_FREQ = 1;	// Everyday
 	
 	private MessengerHandler handler;
 	
@@ -49,6 +52,9 @@ public class MainActivity extends Activity {
 		optionsFragment = new OptionsFragment();
 		tabBar.addTab(tabBar.newTab().setText(OPTIONS_TABSTRING)
 				.setTabListener(new TabListener(optionsFragment)));
+		
+		tabBar.addTab(tabBar.newTab().setText(ABOUT_TABSTRING)
+				.setTabListener(new TabListener(new AboutFragment())));
 		
 		loadSavedOptions();
 		
@@ -115,7 +121,7 @@ public class MainActivity extends Activity {
 		int mapType = sharedPref.getInt(OptionsFragment.MAP_TYPE_KEY, GoogleMap.MAP_TYPE_NORMAL);
 		((OptionsFragment) optionsFragment).setMapType(mapType);
 		
-		int updateTime = sharedPref.getInt(OptionsFragment.UPDATE_FREQ_KEY, 7);
+		int updateTime = sharedPref.getInt(OptionsFragment.UPDATE_FREQ_KEY, DEFAULT_UPDATE_DATA_FREQ);
 		((OptionsFragment) optionsFragment).setUpdateTime(updateTime);
     }
     

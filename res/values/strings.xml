@@ -20,19 +20,19 @@
     <string name="tv_tide"><u>US Harbors Tide Charts</u></string>
     
     <!-- NavInfo Text Views -->
-    <string name="tv_greenbuoy">Green Buoy</string>
-    <string name="tv_redbuoy">Red Buoy</string>
-    <string name="tv_greenbeacon">Green Beacon/Light/Lighthouse</string>
-    <string name="tv_redbeacon">Red Beacon/Light/Lighthouse</string>
-    <string name="tv_otherbeacon">Other Color Beacon/Light/Lighthouse</string>
-    <string name="tv_bridge">Bridge</string>
+    <string name="tv_greenbuoy">Green Buoys</string>
+    <string name="tv_redbuoy">Red Buoys</string>
+    <string name="tv_greenbeacon">Green Beacons/Lights/Lighthouses</string>
+    <string name="tv_redbeacon">Red Beacons/Lights/Lighthouses</string>
+    <string name="tv_otherbeacon">Other Beacons/Lights/Lighthouses</string>
+    <string name="tv_bridge">Bridges</string>
     
     <!-- Switches -->
     <string name="switch_lock">Locks</string>
-    <string name="switch_launch">Boat Launches</string>
-    <string name="switch_marina">Marinas and Public Docks</string>
-    <string name="switch_bridge">Lift Bridges and Guard Gates</string>
-    <string name="switch_boatsforhire">Rentals and Cruises</string>
+    <string name="switch_launch">Boat Ramps &amp; Kayak Launches</string>
+    <string name="switch_marina">Marinas &amp; Public Docks</string>
+    <string name="switch_bridge">Lift Bridges &amp; Guard Gates</string>
+    <string name="switch_boatsforhire">Rentals &amp; Cruises</string>
     <string name="switch_buoys">Navigation</string>
     
     <!-- Image View's content descriptions -->

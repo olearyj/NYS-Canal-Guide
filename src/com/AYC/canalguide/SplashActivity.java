@@ -66,7 +66,6 @@ public class SplashActivity extends Activity {
 	public static final long DAY_IN_MILLISECONDS = 86400000;
 	private static long DATA_VALID_TIME;	// How long data is valid for
 	
-	// Default permissions for this because MainActivity uses this
 	public static final String[] URLs = {"http://www.canals.ny.gov/xml/locks.xml", 
 			"http://www.canals.ny.gov/xml/marinas.xml", "http://www.canals.ny.gov/xml/canalwatertrail.xml", 
 			"http://www.canals.ny.gov/xml/liftbridges.xml", "http://www.canals.ny.gov/xml/guardgates.xml",

@@ -17,6 +17,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -28,6 +29,7 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * This class is an activity that is opened when a marker info window is clicked.
@@ -308,7 +310,7 @@ public class MarkerInfoActivity extends Activity implements OnClickListener {
 			addTextView("Closed clearance: " + bridge.getClearanceClosed());
 			textSizeCount++;
 			addTextView("Opened clearance: " + 
-					(bridge.getClearanceOpened() == 999 ? "Unlimited" : bridge.getClearanceClosed()));
+					(bridge.getClearanceOpened() == 999 ? "Unlimited" : bridge.getClearanceOpened()));
 		}
 	}
 	
@@ -387,7 +389,7 @@ public class MarkerInfoActivity extends Activity implements OnClickListener {
 		switch(view.getId()){
 		
 		case R.id.ivCall:
-			log("Clicked Call Image" + phoneNumber);
+			log("Clicked Call Image: \"" + phoneNumber + "\"");
 			// Creates a dialog box to confirm call
 			ConfirmCallDialogFragment.newInstance(phoneNumber)
 					.show(getFragmentManager(), "MarkerInfoActivity_CallConfirmation");
@@ -583,11 +585,15 @@ public class MarkerInfoActivity extends Activity implements OnClickListener {
 			               @Override
 			               public void onClick(DialogInterface dialog, int id) {
 			            	   
-			       			Intent intent = new Intent(Intent.ACTION_CALL);
-			       			// This line allows the phone to default to call using the android dialer
-			       			intent.setPackage("com.android.phone");
-			       			intent.setData(Uri.parse("tel:" + phoneNumber));
-			    			startActivity(intent); 
+			            	   try{
+			            		   // If ACTION_CALL, it will call (make sure permission in manifest is set)
+			            		   Intent intent = new Intent(Intent.ACTION_DIAL);
+			            		   intent.setData(Uri.parse("tel:" + phoneNumber));
+			            		   getActivity().startActivity(intent); 
+			            	   } catch(ActivityNotFoundException e) {
+			            		   Toast.makeText(getActivity(), "Error with call", Toast.LENGTH_LONG).show();
+			            	   }
+			            	   
 			               }
 					})
 					.setNegativeButton(R.string.button_cancel, new DialogInterface.OnClickListener() {
