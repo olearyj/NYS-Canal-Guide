@@ -1,7 +1,6 @@
 package com.AYC.canalguide.NearbyPlaces;
 
 import com.AYC.canalguide.R;
-import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;

@@ -642,8 +642,9 @@ public class MarkerInfoActivity extends Activity implements OnClickListener {
         // mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
         mMap.addMarker(mapMarker.getMarkerOptions());
         
-        // Get and add nearby places to the map
-        new AddNearbyPlacesToMapTask(mMap, mapMarker.getlatLng()).execute();
+        // if nearby places are enabled, get and add nearby places to the map
+        if(SplashActivity.NEARBY_PLACES_ENABLED)
+        	new AddNearbyPlacesToMapTask(mMap, mapMarker.getlatLng()).execute();
 	}
 	
 	private void log(String message) {

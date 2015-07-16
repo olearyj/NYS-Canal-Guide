@@ -51,6 +51,7 @@ public class SplashActivity extends Activity {
 
 	// This boolean will be used in all classes to choose whether to use logs or not
 	public static final boolean LOG_ENABLED = true;
+	public static final boolean NEARBY_PLACES_ENABLED = true;
 	//TODO
 	//TODO
 	//TODO
