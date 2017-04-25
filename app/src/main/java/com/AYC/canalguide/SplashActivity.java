@@ -12,6 +12,7 @@ import java.util.concurrent.CountDownLatch;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
@@ -21,6 +22,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.DisplayMetrics;
@@ -28,6 +30,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -52,6 +56,7 @@ public class SplashActivity extends Activity {
 	// This boolean will be used in all classes to choose whether to use logs or not
 	public static final boolean LOG_ENABLED = false;
 	public static final boolean NEARBY_PLACES_ENABLED = false;
+	public static final boolean	DATA_ALWAYS_INVALID = false;
 	//TODO
 	//TODO
 	//TODO
@@ -67,8 +72,8 @@ public class SplashActivity extends Activity {
 	public static final long DAY_IN_MILLISECONDS = 86400000;
 	private static long DATA_VALID_TIME;	// How long data is valid for
 	
-	public static final String[] URLs = {"http://www.canals.ny.gov/xml/locks.xml", 
-			"http://www.canals.ny.gov/xml/marinas.xml", "http://www.canals.ny.gov/xml/canalwatertrail.xml", 
+	public static final String[] URLs = {"http://www.canals.ny.gov/xml/locks.xml",
+			"http://www.canals.ny.gov/xml/marinas.xml", "http://www.canals.ny.gov/xml/canalwatertrail.xml",
 			"http://www.canals.ny.gov/xml/liftbridges.xml", "http://www.canals.ny.gov/xml/guardgates.xml",
 			"http://www.canals.ny.gov/xml/boatsforhire.xml"};
 	
@@ -95,6 +100,12 @@ public class SplashActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         log("Created Splash Activity");
+
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+			getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+			getWindow().setStatusBarColor(getResources().getColor(R.color.darker_blue));
+			getWindow().setNavigationBarColor(getResources().getColor(R.color.darker_blue));
+		}
 
         DATA_VALID_TIME = getUpdateFrequency() * DAY_IN_MILLISECONDS;
         
@@ -201,14 +212,15 @@ public class SplashActivity extends Activity {
 			int downloadedCount = 0;
 			
 			for(String URL : URLs){
-				try {		
-					
+				try {
+
 					DefaultHttpClient httpClient = new DefaultHttpClient();
-					HttpPost httpPost = new HttpPost(URL);
-		 
-					HttpResponse httpResponse = httpClient.execute(httpPost);
+					HttpGet httpGet = new HttpGet(URL);
+					//httpGet.setHeader("Content-Type", "text/xml");
+
+					HttpResponse httpResponse = httpClient.execute(httpGet);
 					HttpEntity httpEntity = httpResponse.getEntity();
-					xmlString = EntityUtils.toString(httpEntity); 
+					xmlString = EntityUtils.toString(httpEntity);
 
 					downloadedCount++;
 					publishProgress((int) ((downloadedCount / (float) URLs.length) * 100));
@@ -253,11 +265,13 @@ public class SplashActivity extends Activity {
 						finish();
 						return null;
 					}
-				} 
-				
+				}
+
 				// There are 3 strange characters in the beginning of the some
 				// strings that need to be taken out
-				xmlString = xmlString.substring(xmlString.indexOf("<?xml version=\"1.0\" encoding=\"utf-8\"?>"));
+				int idx = xmlString.indexOf("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
+				if(idx != -1)
+					xmlString = xmlString.substring(idx);
 				
 				map.put(URL, xmlString);
 			}
@@ -440,6 +454,9 @@ public class SplashActivity extends Activity {
 	 * @return true if the data isn't too old
 	 */
 	private boolean isSavedDataValid(){
+		if(DATA_ALWAYS_INVALID)
+			return false;
+
 		Calendar calendar = Calendar.getInstance();
         Date lastValidDataDate = new Date(calendar.getTimeInMillis() - DATA_VALID_TIME);
         Date lastDownloadDataDate = new Date(loadDataLastSavedDate());

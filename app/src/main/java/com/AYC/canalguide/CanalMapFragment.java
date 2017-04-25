@@ -326,6 +326,9 @@ public class CanalMapFragment extends MapFragment {
 	 * @return true if the data isn't too old
 	 */
 	private boolean isSavedNavinfoDataValid(){
+		if(SplashActivity.DATA_ALWAYS_INVALID)
+			return false;
+
 		Calendar calendar = Calendar.getInstance();
         Date lastValidDataDate = new Date(calendar.getTimeInMillis() - 
         		(getUpdateFrequency() * SplashActivity.DAY_IN_MILLISECONDS));

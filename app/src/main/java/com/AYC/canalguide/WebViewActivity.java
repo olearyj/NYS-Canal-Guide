@@ -3,6 +3,7 @@ package com.AYC.canalguide;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -10,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.Window;
+import android.view.WindowManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -36,7 +38,13 @@ public class WebViewActivity extends Activity {
 	      super.onCreate(savedInstanceState);
 	      getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
 	      setContentView(R.layout.activity_webview);
-	      
+
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+			getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+			getWindow().setStatusBarColor(getResources().getColor(R.color.darker_blue));
+			getWindow().setNavigationBarColor(getResources().getColor(R.color.darker_blue));
+		}
+
 	      ActionBar actionBar = getActionBar();
 	      // This will display the arrow on the left in the actionbar
 	      actionBar.setDisplayHomeAsUpEnabled(true);
