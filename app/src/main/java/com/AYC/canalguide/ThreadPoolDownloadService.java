@@ -1,7 +1,11 @@
 package com.AYC.canalguide;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -13,7 +17,7 @@ import java.util.concurrent.Executors;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
@@ -152,14 +156,14 @@ public class ThreadPoolDownloadService extends Service {
 	private String downloadXmlFile(String URL){
 		String xmlString = "";
 		
-		try {		
-			
+		try {
 			DefaultHttpClient httpClient = new DefaultHttpClient();
-			HttpPost httpPost = new HttpPost(URL);
+			HttpGet httpGet = new HttpGet(URL);
+			//httpGet.setHeader("Content-Type", "text/xml");
  
-			HttpResponse httpResponse = httpClient.execute(httpPost);
+			HttpResponse httpResponse = httpClient.execute(httpGet);
 			HttpEntity httpEntity = httpResponse.getEntity();
-			xmlString = EntityUtils.toString(httpEntity); 
+			xmlString = EntityUtils.toString(httpEntity);
 
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
@@ -172,8 +176,10 @@ public class ThreadPoolDownloadService extends Service {
 		
 		// There are 3 strange characters in the beginning of the some
 		// strings that need to be taken out
-		xmlString = xmlString.substring(xmlString.indexOf("<?xml version=\"1.0\" encoding=\"utf-8\"?>"));
-		
+		int idx = xmlString.indexOf("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
+		if(idx != -1)
+			xmlString = xmlString.substring(idx);
+
 		return xmlString;
 	}
 	
@@ -216,7 +222,7 @@ public class ThreadPoolDownloadService extends Service {
      * @param context		The context of the calling component.
      * @param handler		The handler that the service should
      *                          use to respond with a result  
-     * @param uri               The web URL of a file to download
+     * //@param uri               The web URL of a file to download
      * 
      * This method utilizes the Factory Method makeMessengerIntent()
      * from the DownloadUtils class.  The returned intent is a Command
@@ -237,7 +243,7 @@ public class ThreadPoolDownloadService extends Service {
     /**
 	 * This method saves the navInfoXmlStrings using SharedPreferences when downloaded.
 	 * 
-	 * @param xmlStrings The navInfoXmlStrings that will be saved
+	 * //@param xmlStrings The navInfoXmlStrings that will be saved
 	 */
 	private void saveXmlStrings(){
 		log("Saving navInfoXmlStrings");
@@ -261,7 +267,7 @@ public class ThreadPoolDownloadService extends Service {
 	
 	private void log(String msg){
     	if(SplashActivity.LOG_ENABLED)
-    		Log.i("ThreadPoolDownloadService", msg);
+    		Log.i("ThreadPoolDownloadServ", msg);
     }
 	
 }
