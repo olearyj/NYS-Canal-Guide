@@ -1,7 +1,7 @@
-#Thu Apr 20 15:40:15 EDT 2017
-base.0=C\:\\Users\\joleary1\\workspaces\\android\\NYS-Canal-Guide\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run-bootstrap_a12f04f675ff04c4e76386c0605edc895f9f7409
+#Mon Apr 24 15:33:20 EDT 2017
+base.0=C\:\\Users\\joleary1\\workspaces\\github\\NYS-Canal-Guide\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run_82c40d1860b9faa7377c80a49ec9b1ac2d8b447c
 renamed.1=classes.dex
 renamed.0=classes2.dex
-file.1=C\:\\Users\\joleary1\\workspaces\\android\\NYS-Canal-Guide\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run_c44147fce74c49f9717839becf0b63dbcc1241b9\\classes.dex
-base.1=C\:\\Users\\joleary1\\workspaces\\android\\NYS-Canal-Guide\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run_c44147fce74c49f9717839becf0b63dbcc1241b9
-file.0=C\:\\Users\\joleary1\\workspaces\\android\\NYS-Canal-Guide\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run-bootstrap_a12f04f675ff04c4e76386c0605edc895f9f7409\\classes.dex
+file.1=C\:\\Users\\joleary1\\workspaces\\github\\NYS-Canal-Guide\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run-bootstrap_aabbb8c715f381cea1a9764f7218446fef07e0e8\\classes.dex
+base.1=C\:\\Users\\joleary1\\workspaces\\github\\NYS-Canal-Guide\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run-bootstrap_aabbb8c715f381cea1a9764f7218446fef07e0e8
+file.0=C\:\\Users\\joleary1\\workspaces\\github\\NYS-Canal-Guide\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run_82c40d1860b9faa7377c80a49ec9b1ac2d8b447c\\classes.dex

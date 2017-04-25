@@ -1,10 +1,10 @@
 [
     {
-        "merged": "C:\\Users\\joleary1\\workspaces\\android\\NYS-Canal-Guide\\app\\build\\intermediates\\res\\merged\\debug\\menu\\main.xml",
-        "source": "C:\\Users\\joleary1\\workspaces\\android\\NYS-Canal-Guide\\app\\src\\main\\res\\menu\\main.xml"
+        "merged": "C:\\Users\\joleary1\\workspaces\\github\\NYS-Canal-Guide\\app\\build\\intermediates\\res\\merged\\debug\\menu\\main.xml",
+        "source": "C:\\Users\\joleary1\\workspaces\\github\\NYS-Canal-Guide\\app\\src\\main\\res\\menu\\main.xml"
     },
     {
-        "merged": "C:\\Users\\joleary1\\workspaces\\android\\NYS-Canal-Guide\\app\\build\\intermediates\\res\\merged\\debug\\menu\\searchview_in_menu.xml",
-        "source": "C:\\Users\\joleary1\\workspaces\\android\\NYS-Canal-Guide\\app\\src\\main\\res\\menu\\searchview_in_menu.xml"
+        "merged": "C:\\Users\\joleary1\\workspaces\\github\\NYS-Canal-Guide\\app\\build\\intermediates\\res\\merged\\debug\\menu\\searchview_in_menu.xml",
+        "source": "C:\\Users\\joleary1\\workspaces\\github\\NYS-Canal-Guide\\app\\src\\main\\res\\menu\\searchview_in_menu.xml"
     }
 ]

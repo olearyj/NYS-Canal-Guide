@@ -3,273 +3,120 @@
 
     <item
         is-multidex="true"
-        jar="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-location\8.4.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.3"
-        sha1="a8412b654dab86d57bf90683367488211c8a81f1">
-        <dex dex="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-location-8.4.0_22a5e3449bc828f5f5a0a5b5e24e4c77e03d1912\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\8.4.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.3"
-        sha1="fef2b3e4b6b1b0e5fe7b69fa137a5fa55a3182ab">
-        <dex dex="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-base-8.4.0_642f0b277f1aad44fe5406a2c51846dcf35ab577\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.3"
-        sha1="81dd1df9e45ecf96c21d2417039ae5529afa7c3c">
-        <dex dex="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_a12f04f675ff04c4e76386c0605edc895f9f7409\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-plus\8.4.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.3"
-        sha1="1a78298e7724d5440d210bcb946b3493250d354d">
-        <dex dex="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-plus-8.4.0_3090c538caa516464d4045d694edb13c0423dd37\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\exploded-aar\com.android.support\mediarouter-v7\23.0.0\jars\libs\internal_impl-23.0.0.jar"
+        jar="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\exploded-aar\com.android.support\mediarouter-v7\23.0.0\jars\libs\internal_impl-23.0.0.jar"
         jumboMode="true"
         optimize="true"
         revision="23.0.3"
         sha1="03d38bb042efe3e5ce27ba66b729a9523c36d8fe">
-        <dex dex="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-23.0.0_385d9a574c7ee2f15d48107ae6b79ae4869c5c16\classes.dex" />
+        <dex dex="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-23.0.0_0371f3b3a180343e538ecc5a202320d5d7c19fb8\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\exploded-aar\com.android.support\mediarouter-v7\23.0.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.3"
-        sha1="d358b3dd49a7c67844622dcbc9cf4339e13952ce">
-        <dex dex="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-mediarouter-v7-23.0.0_0d29b23ffa8f59c0190bdf478533eb8d49641a38\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\8.4.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.3"
-        sha1="8e673cdfadd8f2d98fdb2fda2285c30f6e449782">
-        <dex dex="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-basement-8.4.0_0493f71548731cf6e374d7eecaf909cc87c8661e\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\libs\internal_impl-23.0.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.3"
-        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
-        <dex dex="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-23.0.1_cbcd3dbab757e6e759e42b6b654a4748980071fd\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-drive\8.4.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.3"
-        sha1="b36f30ac5ee5d5214f4b1e2ac49f11889d58e71a">
-        <dex dex="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-drive-8.4.0_f58bcba7c41fbeab2afbab316ed4d125bf968d6a\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wearable\8.4.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.3"
-        sha1="e167a34eaca0b31704212f43f9576ea84e05046f">
-        <dex dex="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-wearable-8.4.0_6e80ade73a8a309416c9877d8957b9e88b395c84\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-gcm\8.4.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.3"
-        sha1="2d7fe76982677315c4dc4edfb459c8ca718a9d4c">
-        <dex dex="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-gcm-8.4.0_b20475675a43b7cfb351342944bd181a3de7e999\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.3"
-        sha1="d41e9c74a961485e8fc54ec14e5cf6e8dc2330b8">
-        <dex dex="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_c44147fce74c49f9717839becf0b63dbcc1241b9\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-safetynet\8.4.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.3"
-        sha1="0194a7409c40de94fb539d4ad9928ec5d47afeb7">
-        <dex dex="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-safetynet-8.4.0_c0984ed17eb3b179cbd9cbe36058ac976fc2fcec\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-nearby\8.4.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.3"
-        sha1="9cad249cf62751a323d9af568caf12284b7d6062">
-        <dex dex="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-nearby-8.4.0_510db5d754207832ed6c386f91e4ab84d9b17fc8\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-analytics\8.4.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.3"
-        sha1="1c9f35e952b212c843f7bd2c7eec8e82ad95602e">
-        <dex dex="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-analytics-8.4.0_e30ee178a1cb7e8e737c75256b1cbbb882406872\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wallet\8.4.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.3"
-        sha1="f2df436a8f02ce7e4d7d209671fc45f97c470f0e">
-        <dex dex="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-wallet-8.4.0_31f2d5f8178e33306563774d2365dfc10bd48990\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-auth\8.4.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.3"
-        sha1="966e5771a5a2ebfb31bf00d7cd6cd2546d245517">
-        <dex dex="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-auth-8.4.0_3c23966c11d55e1182cce0610be415c9e461b2de\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-measurement\8.4.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.3"
-        sha1="613298b7aa012f121ce542881c0a599ebd8078f2">
-        <dex dex="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-measurement-8.4.0_8f2b2e1a5efcbbe98b54df959a10b88f1731f7e1\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.0.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.3"
-        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
-        <dex dex="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-23.0.1_67ec992a6d6169d6d2cbe9e8681a02bd29d7ef84\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-identity\8.4.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.3"
-        sha1="b82b8e847173c28efffcd291b2a0b1ae9ad17fa4">
-        <dex dex="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-identity-8.4.0_a6682c18bce107647b941f6353b803da59cd90e4\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\8.4.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.3"
-        sha1="04de44f90606c77f3b28cf44861f306290505aac">
-        <dex dex="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-maps-8.4.0_92249cf0ceacabde5c67d48f04b6e7be30c6dce9\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-ads\8.4.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.3"
-        sha1="b5e7892fb0708e792e0e933c4c0a0ca0ac7831fb">
-        <dex dex="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-ads-8.4.0_5cac6ebdee2823d84960e755cbb55b8c10a36fe7\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-cast\8.4.0\jars\classes.jar"
+        jar="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-cast\8.4.0\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="23.0.3"
         sha1="551e78f21acf69ebfb489c0e79647824c838013e">
-        <dex dex="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-cast-8.4.0_afacfb26bf4cdcfcc056a834d42fa59551b70894\classes.dex" />
+        <dex dex="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-cast-8.4.0_9fef5ef521896f3d6404a385f3bf3c41241e330b\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-games\8.4.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.3"
-        sha1="3a364cc6b698d1b3b2d284f64618daaa7fe77ddf">
-        <dex dex="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-games-8.4.0_49d0b52974a9e7c9df5f1ea1d0a0acbd52106b68\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\8.4.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.3"
-        sha1="65d086ee9daaf87b5af62ad24471edafa433354c">
-        <dex dex="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-appindexing-8.4.0_4b2a2728eabca8e4e922fd9aa877359596099068\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appinvite\8.4.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.3"
-        sha1="9fe026fb4c7fce21bc5142f6e1bdf844f28061ac">
-        <dex dex="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-appinvite-8.4.0_92312e24ed169225401ec9c2428a9be2cb3536eb\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.3"
-        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
-        <dex dex="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-23.0.1_891892195dd3cd993e5da1a37d8f21fd0cd5c1df\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-panorama\8.4.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.3"
-        sha1="08d34b2d135c1cc96ab506fd8bf6916d1e2f391a">
-        <dex dex="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-panorama-8.4.0_e230f5a10bad37e5821db45f300bf787d9d82cfd\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-vision\8.4.0\jars\classes.jar"
+        jar="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-vision\8.4.0\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="23.0.3"
         sha1="dfecc4d835cdabcdecf7e95f0d20a3ef1e9d8ef4">
-        <dex dex="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-vision-8.4.0_4fecd5831c05a6085ff6b5f0f4a0ae684140afc8\classes.dex" />
+        <dex dex="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-vision-8.4.0_d680b60529e67a3170118739660c07b390e1768c\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-fitness\8.4.0\jars\classes.jar"
+        jar="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="26d0e183a5bfe4f21dc9ce65dad06a73b3210c65">
+        <dex dex="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_82c40d1860b9faa7377c80a49ec9b1ac2d8b447c\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\exploded-aar\com.android.support\mediarouter-v7\23.0.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="d358b3dd49a7c67844622dcbc9cf4339e13952ce">
+        <dex dex="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-mediarouter-v7-23.0.0_de36f7af15f90cdaa55a7da755aed1a247ff441d\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appinvite\8.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="9fe026fb4c7fce21bc5142f6e1bdf844f28061ac">
+        <dex dex="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-appinvite-8.4.0_ad72debf9d1d11ea754ee8760ff55f9543ccc61b\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-fitness\8.4.0\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="23.0.3"
         sha1="c54246475c1bb64ac6857d1320364bfbfeda2c46">
-        <dex dex="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-fitness-8.4.0_656231d20b083e44cef9e96249701a91a5fa31ea\classes.dex" />
+        <dex dex="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-fitness-8.4.0_c76b7281da1059103f78c11a0ddefc8b1c9dc2e7\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-analytics\8.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="1c9f35e952b212c843f7bd2c7eec8e82ad95602e">
+        <dex dex="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-analytics-8.4.0_4b29e1ba1712cf47ac57e40bc5607593141470c5\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wallet\8.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="f2df436a8f02ce7e4d7d209671fc45f97c470f0e">
+        <dex dex="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-wallet-8.4.0_799785d6ff8a52432162be2109580630173475dd\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-ads\8.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="b5e7892fb0708e792e0e933c4c0a0ca0ac7831fb">
+        <dex dex="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-ads-8.4.0_e85c42a511e72d831d3fa438e5829bd25570e828\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\8.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="65d086ee9daaf87b5af62ad24471edafa433354c">
+        <dex dex="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-appindexing-8.4.0_ade44e3312c69500c6c775400e5f17ee7bd98382\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-location\8.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="a8412b654dab86d57bf90683367488211c8a81f1">
+        <dex dex="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-location-8.4.0_4e2816a70a948fd0c9c740e9e69688508eed7aa1\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-drive\8.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="b36f30ac5ee5d5214f4b1e2ac49f11889d58e71a">
+        <dex dex="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-drive-8.4.0_e541f30677163dd6a607e40178a0e2acb6e357e9\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -278,7 +125,160 @@
         optimize="true"
         revision="23.0.3"
         sha1="1fce89a6428c51467090d7f424e4c9c3dbd55f7e">
-        <dex dex="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-23.0.1_0f27f3f2e6baf84001d2afa8230a137d4b3eaf12\classes.dex" />
+        <dex dex="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-23.0.1_0f27f3f2e6baf84001d2afa8230a137d4b3eaf12\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-nearby\8.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="9cad249cf62751a323d9af568caf12284b7d6062">
+        <dex dex="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-nearby-8.4.0_1970421937b91320348355e651bb65ffb25930b7\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-safetynet\8.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="0194a7409c40de94fb539d4ad9928ec5d47afeb7">
+        <dex dex="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-safetynet-8.4.0_0b0d8c5c6698e3ce2658fbd56f85658b45354974\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-measurement\8.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="613298b7aa012f121ce542881c0a599ebd8078f2">
+        <dex dex="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-measurement-8.4.0_04f2c0946343ce105cd5ef533ca63734ba6a5af5\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
+        <dex dex="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-23.0.1_eb76e700242e206f8b2b36dd38cd9b25e090aa93\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\8.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="8e673cdfadd8f2d98fdb2fda2285c30f6e449782">
+        <dex dex="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-basement-8.4.0_f2e58f27756a15edad7143cca65004be72a3c7a8\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-identity\8.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="b82b8e847173c28efffcd291b2a0b1ae9ad17fa4">
+        <dex dex="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-identity-8.4.0_a2fc7a2f24b9ff4752deafade940ed4ff63c8e78\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-auth\8.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="966e5771a5a2ebfb31bf00d7cd6cd2546d245517">
+        <dex dex="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-auth-8.4.0_2245779e301db9538f78235fd7d0cdf63d355ace\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="e6cf613703894a4d7177ec3e872a33a1f6628f27">
+        <dex dex="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_aabbb8c715f381cea1a9764f7218446fef07e0e8\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wearable\8.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="e167a34eaca0b31704212f43f9576ea84e05046f">
+        <dex dex="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-wearable-8.4.0_248b2609259b8cb08faa245d733038503502c508\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-plus\8.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="1a78298e7724d5440d210bcb946b3493250d354d">
+        <dex dex="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-plus-8.4.0_8211605ccf1a36dba3ac46bdd48a2c0e20ed4cfd\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-gcm\8.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="2d7fe76982677315c4dc4edfb459c8ca718a9d4c">
+        <dex dex="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-gcm-8.4.0_966c08259bb493cb5c59550b0da4bdd50187dd80\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\8.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="04de44f90606c77f3b28cf44861f306290505aac">
+        <dex dex="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-maps-8.4.0_fc4656618a02003adeebbb28b1ab449ea1032301\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-panorama\8.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="08d34b2d135c1cc96ab506fd8bf6916d1e2f391a">
+        <dex dex="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-panorama-8.4.0_9b61415775cb8c6c90d1626a8524914427477391\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
+        <dex dex="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-23.0.1_148acb7be0f9a12e77294d9fff310962ee8873bb\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\8.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="fef2b3e4b6b1b0e5fe7b69fa137a5fa55a3182ab">
+        <dex dex="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-base-8.4.0_fe5e4bc179d1b0c2d0077e4a17c64ec989c194d8\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-games\8.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="3a364cc6b698d1b3b2d284f64618daaa7fe77ddf">
+        <dex dex="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-games-8.4.0_70efefa010ccdd05c3b291ec8078738d8cf3e363\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\libs\internal_impl-23.0.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
+        <dex dex="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-23.0.1_1cfa8e32932f5da2b5570f2abf3eee40053cb2b0\classes.dex" />
     </item>
 
 </items>

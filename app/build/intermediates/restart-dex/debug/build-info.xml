@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <instant-run
-    abi="armeabi-v7a,armeabi"
-    api-level="21"
-    density="xxhdpi"
+    abi="arm64-v8a,armeabi-v7a,armeabi"
+    api-level="25"
+    density="xhdpi"
     format="8"
     plugin-version="2.2.3"
-    timestamp="619545906066576"
-    token="8797432568290528090"
+    timestamp="892246628649181"
+    token="7074458088992531088"
     verifier="FULL_BUILD_REQUESTED" >
 
     <task
         name="javac"
-        duration="0" />
+        duration="7093" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="0" />
+        duration="6724" />
     <task
         name="verifier"
-        duration="0" />
+        duration="5125" />
 
     <artifact
-        location="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\outputs\apk\app-debug.apk"
+        location="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\outputs\apk\app-debug.apk"
         type="MAIN" />
 
     <build
-        timestamp="619545906066576"
+        timestamp="892246628649181"
         verifier="FULL_BUILD_REQUESTED" >
         <artifact
-            location="C:\Users\joleary1\workspaces\android\NYS-Canal-Guide\app\build\outputs\apk\app-debug.apk"
+            location="C:\Users\joleary1\workspaces\github\NYS-Canal-Guide\app\build\outputs\apk\app-debug.apk"
             type="MAIN" />
     </build>
 
