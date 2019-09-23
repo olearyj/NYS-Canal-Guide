@@ -12,11 +12,15 @@ import java.util.Map;
 
 import org.xmlpull.v1.XmlPullParserException;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -158,13 +162,41 @@ public class CanalMapFragment extends MapFragment {
     protected void setCameraPositionToDefault(){
     	lastCameraPosition = null;
     }
-    
-    private void initMap(){
+
+    private int MY_REQUEST_CODE = 435;
+
+	private boolean hasPermission(String perm) {
+		return(PackageManager.PERMISSION_GRANTED==ContextCompat.checkSelfPermission(context, perm));
+	}
+
+	@Override
+	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+		if(MY_REQUEST_CODE == requestCode
+				&& hasPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+				&& hasPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
+				&& mMap != null) {
+			mMap.setMyLocationEnabled(true);
+		}
+		else {
+			// permissions denied
+		}
+	}
+
+	private void initMap(){
     	
     	mMap = getMap();
     	
     	// Initialize map options
-        mMap.setMyLocationEnabled(true);
+		if (hasPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+			&& hasPermission(Manifest.permission.ACCESS_COARSE_LOCATION)) {
+			mMap.setMyLocationEnabled(true);
+			//mMap.getUiSettings().setMyLocationButtonEnabled(true);
+		}
+		else {
+			String[] PERMS = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
+			requestPermissions(PERMS, MY_REQUEST_CODE);
+		}
         
         // Set map type to what the user selected in the options
     	OptionsFragment optFrag = (OptionsFragment) ((MainActivity) activity).getOptionsFragment();
