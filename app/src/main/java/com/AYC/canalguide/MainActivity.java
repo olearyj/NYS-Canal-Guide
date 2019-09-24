@@ -50,6 +50,7 @@ public class MainActivity extends Activity {
 		}
 
 		final ActionBar tabBar = getActionBar();
+		tabBar.setIcon(R.drawable.ic_launcher);	// Use the old icon with no BG
 		tabBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
 		xmlStrings = (HashMap<String, String>) getIntent().getSerializableExtra("map");

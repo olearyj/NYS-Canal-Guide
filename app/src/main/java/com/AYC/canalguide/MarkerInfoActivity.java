@@ -22,6 +22,7 @@ import android.app.DialogFragment;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -76,6 +77,8 @@ public class MarkerInfoActivity extends Activity implements OnClickListener {
 	      ActionBar actionBar = getActionBar();
 	      // This will display the arrow on the left in the actionbar
 	      actionBar.setDisplayHomeAsUpEnabled(true);
+	      actionBar.setIcon(R.drawable.ic_launcher);	// Use the old icon with no BG
+	      //actionBar.setIcon(new ColorDrawable(getResources().getColor(android.R.color.transparent)));
 	     
 	     // Get MapMarker from main activity
 	     Intent intent = getIntent();
