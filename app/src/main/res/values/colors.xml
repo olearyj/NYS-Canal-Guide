@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    
+    <!-- The splash background will be marine blue -->
+    <color name="splash_bg">#01386A</color>
+    
+    <!-- These colors are the main colors throughout this app -->
+    <color name="dark_blue">#01386A</color>
+    <color name="darker_blue">#002B53</color>
+    <color name="gold">#E9C200</color>
+    
+    <color name="white">#FFFFFF</color>
+    <color name="link_blue">#0000FF</color>
+    
+    <!-- Colors for map markers -->
+    <color name="blue">#0000FF</color>
+    <color name="red">#FF0400</color>
+    <color name="yellow">#FFFF00</color>
+    <color name="violet">#7F00FF</color>
+    <color name="green">#00FF00</color>
+    
+    
+    
 </resources>
