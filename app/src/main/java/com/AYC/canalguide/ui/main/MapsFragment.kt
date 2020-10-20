@@ -45,4 +45,26 @@ class MapsFragment : Fragment() {
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
     }
+
+    companion object {
+        /**
+         * The fragment argument representing the section number for this
+         * fragment.
+         */
+        private const val ARG_SECTION_NUMBER = "section_number"
+
+        /**
+         * Returns a new instance of this fragment for the given section
+         * number.
+         */
+        @JvmStatic
+        fun newInstance(sectionNumber: Int): MapsFragment {
+            return MapsFragment().apply {
+                arguments = Bundle().apply {
+                    putInt(ARG_SECTION_NUMBER, sectionNumber)
+                }
+            }
+        }
+    }
+
 }
