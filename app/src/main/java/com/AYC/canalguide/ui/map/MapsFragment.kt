@@ -1,4 +1,4 @@
-package com.AYC.canalguide.ui.main
+package com.AYC.canalguide.ui.map
 
 import androidx.fragment.app.Fragment
 
@@ -6,16 +6,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import com.AYC.canalguide.R
 
 import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
 
 class MapsFragment : Fragment() {
+
+
+    private val mapsViewModel: MapsViewModel by activityViewModels()
+
 
     private val callback = OnMapReadyCallback { googleMap ->
         /**
@@ -27,9 +30,19 @@ class MapsFragment : Fragment() {
          * install it inside the SupportMapFragment. This method will only be triggered once the
          * user has installed Google Play services and returned to the app.
          */
-        val sydney = LatLng(-34.0, 151.0)
-        googleMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        //val sydney = LatLng(-34.0, 151.0)
+        //googleMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
+        //googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+
+        // Move camera to starting position
+        val saratoga = LatLng(43.0616419,-73.7719178)
+        val startZoom = 8.0f
+        googleMap.moveCamera( CameraUpdateFactory.newLatLngZoom(saratoga, startZoom) )
+
+        mapsViewModel.bridgeGateMarkers.observe(viewLifecycleOwner) { markers ->
+            for (marker in markers)
+                googleMap.addMarker( marker.getMarkerOptions() )
+        }
     }
 
     override fun onCreateView(
@@ -45,6 +58,7 @@ class MapsFragment : Fragment() {
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
     }
+
 
     companion object {
         /**
