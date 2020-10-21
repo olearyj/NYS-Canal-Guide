@@ -1,6 +1,7 @@
 package com.AYC.canalguide.network
 
 import com.AYC.canalguide.data.entities.BridgeGateMarker
+import com.AYC.canalguide.data.xml_classes.GuardGates
 import com.AYC.canalguide.data.xml_classes.LiftBridges
 import com.tickaroo.tikxml.TikXml
 import com.tickaroo.tikxml.retrofit.TikXmlConverterFactory
@@ -16,25 +17,26 @@ import retrofit2.http.GET
 
 interface CanalsApiService {
 
-
+    @GET("liftbridges.xml")
+    suspend fun getLiftBridgesText(): ResponseBody
+    
     @GET("liftbridges.xml")
     suspend fun getLiftBridges(): Response<LiftBridges>
 
-
-    @GET("liftbridges.xml")
-    suspend fun getLiftBridgesText(): ResponseBody
+    @GET("guardgates.xml")
+    suspend fun getGuardGates(): Response<GuardGates>
 
 
     companion object {
 
         operator fun invoke(connectivityInterceptor: ConnectivityInterceptor): CanalsApiService {
-            val loggingInterceptor = HttpLoggingInterceptor().apply {
-                this.level = HttpLoggingInterceptor.Level.BODY
-            }
+//            val loggingInterceptor = HttpLoggingInterceptor().apply {
+//                this.level = HttpLoggingInterceptor.Level.BODY
+//            }
 
             val okHttpClient = OkHttpClient.Builder()
                 .addInterceptor(connectivityInterceptor)
-                .addInterceptor(loggingInterceptor)
+                //.addInterceptor(loggingInterceptor)
                 .build()
 
             val retrofit = Retrofit.Builder()
@@ -44,8 +46,8 @@ interface CanalsApiService {
                 .addConverterFactory(
                     TikXmlConverterFactory.create(
                         TikXml.Builder()
-                            .exceptionOnUnreadXml(false) // CRTL + F on this site for more info: https://github.com/Tickaroo/tikxml/blob/master/docs/AnnotatingModelClasses.md
-                            //.writeDefaultXmlDeclaration(false)
+                            // CRTL + F on this site for more info on exceptionOnUnreadXml: https://github.com/Tickaroo/tikxml/blob/master/docs/AnnotatingModelClasses.md
+                            .exceptionOnUnreadXml(false)
                             .build()
                     )
                 )

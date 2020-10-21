@@ -4,10 +4,12 @@ import android.util.Log
 import androidx.lifecycle.liveData
 import com.AYC.canalguide.data.AppRoomDatabase
 import com.AYC.canalguide.data.entities.BridgeGateMarker
+import com.AYC.canalguide.data.xml_classes.LiftBridges
 import com.AYC.canalguide.network.CanalsApiService
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import com.tickaroo.tikxml.TikXml
+import kotlinx.coroutines.*
+import okio.buffer
+import okio.source
 import javax.inject.Inject
 
 class MarkerRepository @Inject constructor(
@@ -15,26 +17,23 @@ class MarkerRepository @Inject constructor(
     private val canalsApiService: CanalsApiService
 ) : BaseRepository() {
 
-    //fun loadBridgeGateMarkers() = appDatabase.markerDao().getMarkers()
-    fun loadBridgeGateMarkers() = liveData {
+    fun loadSampleBridgeGateMarkers() = liveData {
         emit(BridgeGateMarker.sampleData)
     }
 
-
-    fun loadBridgeGateMarkers2() = liveData {
+    fun loadBridgeGateMarkers() = liveData {
         emitSource( appDatabase.markerDao().getMarkers() )
         withContext(Dispatchers.IO) {
             launch {
+                val liftBridges = async { safeApiCall( { canalsApiService.getLiftBridges() }, "error") }
+                val guardGates = async { safeApiCall( { canalsApiService.getGuardGates() }, "error") }
 
-                Log.i("", "IM HEREEEEE")
-                //val a = canalsApiService.getLiftBridgesText()
-                //Log.i("", canalsApiService.getLiftBridgesText())
+                // Await markers and concatenate
+                // Return if either are null since we don't want to delete the table unless we get a result for both
+                val markers1 = liftBridges.await()?.liftBridges ?: return@launch
+                val markers2 = guardGates.await()?.guardGates ?: return@launch
 
-                val result = safeApiCall( { canalsApiService.getLiftBridges() }, "error")
-                //logi("API result count is ${result?.count() ?: "null"}")
-
-                if (result != null)
-                    appDatabase.markerDao().insert(result.liftBridges)
+                appDatabase.markerDao().deleteAllAndInsert(markers1 + markers2)
             }
         }
     }

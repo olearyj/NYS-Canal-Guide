@@ -8,7 +8,7 @@ class MapsViewModel @ViewModelInject constructor(
         markerRepository: MarkerRepository
 ): ViewModel() {
 
-    //val bridgeGateMarkers = markerRepository.loadBridgeGateMarkers()
-    val bridgeGateMarkers = markerRepository.loadBridgeGateMarkers2()
+    //val bridgeGateMarkers = markerRepository.loadSampleBridgeGateMarkers()
+    val bridgeGateMarkers = markerRepository.loadBridgeGateMarkers()
 
 }
