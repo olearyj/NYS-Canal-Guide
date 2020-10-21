@@ -8,4 +8,8 @@ abstract class MapMarker (
     open val name: String,
     open val bodyOfWater: String,
     open val mile: Double
-)
+) {
+
+    fun getSnippet() = ("$bodyOfWater, mile $mile")
+
+}
