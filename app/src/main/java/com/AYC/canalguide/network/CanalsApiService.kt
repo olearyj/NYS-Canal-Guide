@@ -19,7 +19,7 @@ interface CanalsApiService {
 
     @GET("liftbridges.xml")
     suspend fun getLiftBridgesText(): ResponseBody
-    
+
     @GET("liftbridges.xml")
     suspend fun getLiftBridges(): Response<LiftBridges>
 
