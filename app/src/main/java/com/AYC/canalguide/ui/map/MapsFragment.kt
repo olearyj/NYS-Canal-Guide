@@ -53,6 +53,9 @@ class MapsFragment : Fragment() {
                 googleMap.addMarker( marker.getMarkerOptions() )
         }
 
+        // Set custom info window so an icon appears on the right - TODO
+        //googleMap.setInfoWindowAdapter(CanalInfoWindowAdapter())
+
         // When the user clicks on the info window open the details page
         googleMap.setOnInfoWindowClickListener {
             Toast.makeText(context, "CLICKED INFO WINDOW", Toast.LENGTH_SHORT).show()
