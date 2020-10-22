@@ -3,6 +3,7 @@ package com.AYC.canalguide.network
 import com.AYC.canalguide.Constants.BASE_URL
 import com.AYC.canalguide.data.xml_classes.GuardGates
 import com.AYC.canalguide.data.xml_classes.LiftBridges
+import com.AYC.canalguide.data.xml_classes.Locks
 import com.tickaroo.tikxml.TikXml
 import com.tickaroo.tikxml.retrofit.TikXmlConverterFactory
 import okhttp3.OkHttpClient
@@ -25,7 +26,7 @@ interface CanalsApiService {
 
     // Locks
     @GET("locks.xml")
-    suspend fun getLocks(): Response<Any>
+    suspend fun getLocks(): Response<Locks>
 
 
     // Rentals and cruises
