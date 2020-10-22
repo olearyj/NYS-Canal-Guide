@@ -1,6 +1,6 @@
 package com.AYC.canalguide.data.entities
 
-import androidx.room.PrimaryKey
+import com.google.android.gms.maps.model.MarkerOptions
 
 abstract class MapMarker (
     open val lat: Double,
@@ -11,5 +11,7 @@ abstract class MapMarker (
 ) {
 
     fun getSnippet() = ("$bodyOfWater, mile $mile")
+
+    abstract fun getMarkerOptions(): MarkerOptions?
 
 }

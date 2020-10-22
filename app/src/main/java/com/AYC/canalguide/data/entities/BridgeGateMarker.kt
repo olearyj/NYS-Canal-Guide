@@ -44,7 +44,7 @@ data class BridgeGateMarker (
 ): MapMarker(lat, lng, name, bodyOfWater, mile) {
 
 
-    fun getMarkerOptions(): MarkerOptions? {
+    override fun getMarkerOptions(): MarkerOptions? {
         return MarkerOptions()
             .title(name)
             .position(LatLng(lat, lng))
