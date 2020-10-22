@@ -21,12 +21,10 @@
     <color name="link_blue">#0000FF</color>
     
     <!-- Colors for map markers -->
-    <color name="blue">#0000FF</color>
-    <color name="red">#FF0400</color>
-    <color name="yellow">#FFFF00</color>
-    <color name="violet">#7F00FF</color>
-    <color name="green">#00FF00</color>
-    
-    
-    
+    <color name="mmi_blue">#0000FF</color>
+    <color name="mmi_red">#FF0400</color>
+    <color name="mmi_yellow">#FFFF00</color>
+    <color name="mmi_violet">#7F00FF</color>
+    <color name="mmi_green">#00FF00</color>
+
 </resources>
