@@ -42,11 +42,6 @@ class MapsFragment : Fragment() {
         val startZoom = 8.0f
         googleMap.moveCamera( CameraUpdateFactory.newLatLngZoom(saratoga, startZoom) )
 
-        val markerObserver = Observer<List<MapMarker>> { markers ->
-            for (marker in markers)
-                googleMap.addMarker( marker.getMarkerOptions() )
-        }
-
         mapsViewModel.bridgeGateMarkers.observe(viewLifecycleOwner) { markers ->
             for (marker in markers)
                 googleMap.addMarker( marker.getMarkerOptions() )

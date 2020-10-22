@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.AYC.canalguide">
+    package="com.ayc.canalguide">
 
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
@@ -32,7 +32,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MainActivity"
+            android:name="com.ayc.canalguide.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
