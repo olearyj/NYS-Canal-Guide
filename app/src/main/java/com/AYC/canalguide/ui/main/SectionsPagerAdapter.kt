@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.AYC.canalguide.R
 import com.AYC.canalguide.ui.map.MapsFragment
+import com.AYC.canalguide.ui.options.OptionsFragment
 
 private val TAB_TITLES = arrayOf(
     R.string.tab_text_1,
@@ -25,7 +26,7 @@ class SectionsPagerAdapter(private val context: Context, fm: FragmentManager) :
         //return PlaceholderFragment.newInstance(position + 1)
         return when (position) {
             0 -> MapsFragment.newInstance(position + 1)
-            else -> PlaceholderFragment.newInstance(position + 1)
+            else -> OptionsFragment.newInstance(position + 1)
         }
     }
 

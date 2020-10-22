@@ -6,13 +6,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import com.AYC.canalguide.R
+import com.AYC.canalguide.data.entities.MapMarker
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 
 class MapsFragment : Fragment() {
 
@@ -42,6 +46,16 @@ class MapsFragment : Fragment() {
         mapsViewModel.bridgeGateMarkers.observe(viewLifecycleOwner) { markers ->
             for (marker in markers)
                 googleMap.addMarker( marker.getMarkerOptions() )
+        }
+
+        mapsViewModel.lockMarkers.observe(viewLifecycleOwner) { markers ->
+            for (marker in markers)
+                googleMap.addMarker( marker.getMarkerOptions() )
+        }
+
+        // When the user clicks on the info window open the details page
+        googleMap.setOnInfoWindowClickListener {
+            Toast.makeText(context, "CLICKED INFO WINDOW", Toast.LENGTH_SHORT).show()
         }
     }
 
