@@ -4,6 +4,7 @@ import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import com.AYC.canalguide.R
+import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
@@ -48,11 +49,11 @@ data class BridgeGateMarker (
             .title(name)
             .position(LatLng(lat, lng))
             .snippet(getSnippet())
-            // TODO - .icon(markerIcon) //BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
+            .icon(markerIcon) //BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
     }
 
     companion object {
-        //val markerIcon = BitmapDescriptorFactory.fromResource(R.drawable.mmi_yellow_marker)
+        val markerIcon: BitmapDescriptor = BitmapDescriptorFactory.fromResource(R.drawable.mmi_yellow_marker)
 
         val sampleData = listOf(
             BridgeGateMarker(43.18955, -73.58102, "Guard Gate Crockers Reef", "Ft Miller", 31.3, "CHamplain", "518-555-5555", "3.2", "2.3"),
