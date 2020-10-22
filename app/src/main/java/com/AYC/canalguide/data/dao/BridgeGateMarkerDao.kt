@@ -10,10 +10,10 @@ import com.AYC.canalguide.data.entities.BridgeGateMarker
 @Dao
 interface BridgeGateMarkerDao: BaseDao<BridgeGateMarker> {
 
-    @Query("SELECT * FROM BridgeGateMarker")
+    @Query("SELECT * FROM bridge_gate_marker")
     fun getMarkers(): LiveData<List<BridgeGateMarker>>
 
-    @Query("DELETE FROM BridgeGateMarker")
+    @Query("DELETE FROM bridge_gate_marker")
     suspend fun deleteAll()
 
 

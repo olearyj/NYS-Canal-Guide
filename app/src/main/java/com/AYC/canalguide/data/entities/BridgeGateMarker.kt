@@ -12,7 +12,7 @@ import com.tickaroo.tikxml.annotation.Attribute
 import com.tickaroo.tikxml.annotation.Xml
 
 @Xml()
-@Entity(tableName = "BridgeGateMarker")
+@Entity(tableName = "bridge_gate_marker")
 data class BridgeGateMarker (
     @Attribute(name = "latitude")
     @Ignore
