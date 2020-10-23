@@ -16,7 +16,8 @@ import com.ayc.canalguide.data.entities.*
         LockMarker::class,
         MarinaMarker::class,
         CruiseMarker::class,
-        LaunchMarker::class
+        LaunchMarker::class,
+        NavInfoMarker::class
     ],
     version = 1,
     exportSchema = false
@@ -28,6 +29,7 @@ abstract class AppRoomDatabase : RoomDatabase() {
     abstract fun marinaDao(): MarinaMarkerDao
     abstract fun cruiseDao(): CruiseMarkerDao
     abstract fun launchDao(): LaunchMarkerDao
+    abstract fun navInfoDao(): NavInfoDao
 
     companion object {
 
