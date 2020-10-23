@@ -1,6 +1,7 @@
 package com.ayc.canalguide.repos
 
 import androidx.lifecycle.liveData
+import com.ayc.canalguide.Constants
 import com.ayc.canalguide.data.AppRoomDatabase
 import com.ayc.canalguide.data.entities.BridgeGateMarker
 import com.ayc.canalguide.network.CanalsApiService
@@ -78,6 +79,27 @@ class MarkerRepository @Inject constructor(
         withContext(Dispatchers.IO) {
             launch {
                 val markers = safeApiCall( { canalsApiService.getRentalsCruises() }, "error")?.markers ?: return@launch
+                dao.deleteAllAndInsert(markers)
+            }
+        }
+    }
+
+
+    fun loadNavInfoMarkers() = liveData {
+        val dao = appDatabase.navInfoDao()
+        emitSource( dao.getMarkers() )
+
+        withContext(Dispatchers.IO) {
+            launch {
+                val results = Constants.navInfoRegions.map {
+                    regionName -> async { safeApiCall( { canalsApiService.getNavInfo(regionName) }, "error") }
+                }.awaitAll()
+
+                // TODO - use last update date field
+
+                // Return if either are null since we don't want to delete the table unless we get a result for both
+                val markers = results.flatMap { navInfoMarkers -> navInfoMarkers?.markers ?: return@launch }
+
                 dao.deleteAllAndInsert(markers)
             }
         }
