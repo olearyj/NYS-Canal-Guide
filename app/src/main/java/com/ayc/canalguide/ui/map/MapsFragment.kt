@@ -15,6 +15,7 @@ import com.ayc.canalguide.data.entities.LockMarker
 import com.ayc.canalguide.data.entities.MapMarker
 
 import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
@@ -28,7 +29,9 @@ class MapsFragment : Fragment(R.layout.fragment_maps) {
 
     private val lockMarkers = mutableListOf<Marker>()
 
+    private lateinit var map: GoogleMap
 
+    @SuppressLint("MissingPermission")
     private val callback = OnMapReadyCallback { googleMap ->
         /**
          * Manipulates the map once available.
@@ -47,6 +50,8 @@ class MapsFragment : Fragment(R.layout.fragment_maps) {
         val saratoga = LatLng(43.0616419,-73.7719178)
         val startZoom = 8.0f
         googleMap.moveCamera( CameraUpdateFactory.newLatLngZoom(saratoga, startZoom) )
+        if (MainActivity.hasPermissions(requireContext(), MainActivity.LOCATION_PERMISSION))
+            map.isMyLocationEnabled = true
 
         fun createMarkerObserver(markerList: MutableList<Marker>): Observer<List<MapMarker>> =
                 Observer<List<MapMarker>> { markers ->
@@ -94,6 +99,16 @@ class MapsFragment : Fragment(R.layout.fragment_maps) {
         mapFragment?.getMapAsync(callback)
     }
 
+    @SuppressLint("MissingPermission")
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        if (PackageManager.PERMISSION_GRANTED == grantResults.firstOrNull()) {
+            if (requestCode == MainActivity.REQUEST_CODE)
+                map.isMyLocationEnabled = true
+            //Toast.makeText(this, "Permission request granted", Toast.LENGTH_LONG).show()
+        }
+    }
 
     companion object {
         /**
