@@ -47,4 +47,40 @@ class MarkerRepository @Inject constructor(
         }
     }
 
+    fun loadMarinaMarkers() = liveData {
+        val dao = appDatabase.marinaDao()
+        emitSource( dao.getMarkers() )
+
+        withContext(Dispatchers.IO) {
+            launch {
+                val markers = safeApiCall( { canalsApiService.getMarinas() }, "error")?.markers ?: return@launch
+                dao.deleteAllAndInsert(markers)
+            }
+        }
+    }
+
+    fun loadLaunchMarkers() = liveData {
+        val dao = appDatabase.launchDao()
+        emitSource( dao.getMarkers() )
+
+        withContext(Dispatchers.IO) {
+            launch {
+                val markers = safeApiCall( { canalsApiService.getBoatLaunches() }, "error")?.markers ?: return@launch
+                dao.deleteAllAndInsert(markers)
+            }
+        }
+    }
+
+    fun loadCruiseMarkers() = liveData {
+        val dao = appDatabase.cruiseDao()
+        emitSource( dao.getMarkers() )
+
+        withContext(Dispatchers.IO) {
+            launch {
+                val markers = safeApiCall( { canalsApiService.getRentalsCruises() }, "error")?.markers ?: return@launch
+                dao.deleteAllAndInsert(markers)
+            }
+        }
+    }
+
 }

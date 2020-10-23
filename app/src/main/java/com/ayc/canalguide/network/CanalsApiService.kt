@@ -1,9 +1,6 @@
 package com.ayc.canalguide.network
 
 import com.ayc.canalguide.Constants.BASE_URL
-import com.ayc.canalguide.data.entities.CruiseMarker
-import com.ayc.canalguide.data.entities.LaunchMarker
-import com.ayc.canalguide.data.entities.MarinaMarker
 import com.ayc.canalguide.data.xml_classes.*
 import com.tickaroo.tikxml.TikXml
 import com.tickaroo.tikxml.retrofit.TikXmlConverterFactory
@@ -67,8 +64,7 @@ interface CanalsApiService {
     @GET("navinfo-{region}.xml")
     suspend fun getNavInfo(
         @Path("region") region: String
-    ): Response<GuardGates>
-
+    ): Response<NavInfoMarkers>
 
 //    @GET("navinfo-hudsonriver.xml")
 //    suspend fun getGuardGates(): Response<GuardGates>
