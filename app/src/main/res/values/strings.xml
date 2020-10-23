@@ -3,10 +3,13 @@
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
 
-    <string name="title_filter_lock">Locks</string>
-    <string name="title_filter_bridge_gate">Lift Bridges and Guard Gates</string>
-
     <string name="title_filter">Filters</string>
     <string name="description_filters">Switch color matches the marker icons on the map</string>
+
+    <string name="title_filter_lock">Locks</string>
+    <string name="title_filter_bridge_gate">Lift Bridges and Guard Gates</string>
+    <string name="title_filter_marinas">Marinas and Public Docks</string>
+    <string name="title_filter_cruise">Rentals and Cruises</string>
+    <string name="title_filter_launches">Boat Ramps and Kayak Launches</string>
 
 </resources>

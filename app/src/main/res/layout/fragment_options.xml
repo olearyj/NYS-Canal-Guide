@@ -50,28 +50,32 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/title_filter_bridge_gate"
-                android:theme="@style/FilterSwitchThemeYellow" />
+                android:theme="@style/FilterSwitchThemeYellow"
+                android:checked="@={mapsViewModel.bridgeGateFilterState}" />
 
             <com.google.android.material.switchmaterial.SwitchMaterial
                 android:id="@+id/switchBoatLaunches"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/title_filter_lock"
-                android:theme="@style/FilterSwitchThemeGreen" />
+                android:text="@string/title_filter_launches"
+                android:theme="@style/FilterSwitchThemeGreen"
+                android:checked="@={mapsViewModel.launchFilterState}" />
 
             <com.google.android.material.switchmaterial.SwitchMaterial
                 android:id="@+id/switchMarinas"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/title_filter_lock"
-                android:theme="@style/FilterSwitchThemeblue" />
+                android:text="@string/title_filter_marinas"
+                android:theme="@style/FilterSwitchThemeblue"
+                android:checked="@={mapsViewModel.marinaFilterState}" />
 
             <com.google.android.material.switchmaterial.SwitchMaterial
                 android:id="@+id/switchBoatRentals"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/title_filter_lock"
-                android:theme="@style/FilterSwitchThemeViolet" />
+                android:text="@string/title_filter_cruise"
+                android:theme="@style/FilterSwitchThemeViolet"
+                android:checked="@={mapsViewModel.cruiseFilterState}" />
 
 
         </LinearLayout>
