@@ -28,7 +28,7 @@ data class LaunchMarker (
         override val bodyOfWater: String,
         @Attribute
         @Ignore
-        override val mile: Double,
+        override val mile: String,
 
         @Attribute
         val waterway: String?,

@@ -28,7 +28,7 @@ data class MarinaMarker (
         override val bodyOfWater: String,
         @Attribute
         @Ignore
-        override val mile: Double,
+        override val mile: String,
 
         @Attribute(name = "marina_url")
         val url: String?,

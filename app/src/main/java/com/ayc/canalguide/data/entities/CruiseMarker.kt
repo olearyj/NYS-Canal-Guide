@@ -23,12 +23,12 @@ data class CruiseMarker (
         @Attribute(name = "company")
         @Ignore
         override val name: String,
-        @Attribute(name = "bodyofwater")
+        @Attribute(name = "waterways")
         @Ignore
         override val bodyOfWater: String,
         @Attribute
         @Ignore
-        override val mile: Double,
+        override val mile: String?,
 
         @Attribute
         val homeport: String?,
@@ -38,8 +38,8 @@ data class CruiseMarker (
         val cruisetype: String?,
         @Attribute(name = "vesseltypes")
         val vesselTypes: String?,
-        @Attribute
-        val waterways: String?,
+//        @Attribute
+//        val waterways: String?,
         @Attribute(name = "company_url")
         val url: String?,
         @Attribute
