@@ -40,7 +40,7 @@ data class BridgeGateMarker (
     val clearanceOpened: String?,
     @Attribute
     @PrimaryKey(autoGenerate = true)
-    val id: Int = 0
+    val bridgeGateId: Int = 0
 ): MapMarker(lat, lng, name, bodyOfWater, mile) {
 
 

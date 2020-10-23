@@ -44,7 +44,7 @@ data class LockMarker (
     val phone: String?,
     @Attribute
     @PrimaryKey(autoGenerate = true)
-    val id: Int = 0
+    val lockId: Int = 0
 ): MapMarker(lat, lng, name, bodyOfWater, mile) {
 
 
