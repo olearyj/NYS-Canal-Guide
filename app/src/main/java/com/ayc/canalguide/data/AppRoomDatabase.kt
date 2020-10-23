@@ -5,17 +5,18 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.ayc.canalguide.data.dao.BridgeGateMarkerDao
-import com.ayc.canalguide.data.dao.LockMarkerDao
-import com.ayc.canalguide.data.entities.BridgeGateMarker
-import com.ayc.canalguide.data.entities.LockMarker
+import com.ayc.canalguide.data.dao.*
+import com.ayc.canalguide.data.entities.*
 
 
 // Annotates class to be a Room Database with a table (entity) of the Word class
 @Database(
     entities = [
         BridgeGateMarker::class,
-        LockMarker::class
+        LockMarker::class,
+        MarinaMarker::class,
+        CruiseMarker::class,
+        LaunchMarker::class
     ],
     version = 1,
     exportSchema = false
@@ -23,8 +24,10 @@ import com.ayc.canalguide.data.entities.LockMarker
 abstract class AppRoomDatabase : RoomDatabase() {
 
     abstract fun bridgeGateDao(): BridgeGateMarkerDao
-
     abstract fun lockDao(): LockMarkerDao
+    abstract fun marinaDao(): MarinaMarkerDao
+    abstract fun cruiseDao(): CruiseMarkerDao
+    abstract fun launchDao(): LaunchMarkerDao
 
     companion object {
 

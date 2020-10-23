@@ -1,9 +1,10 @@
 package com.ayc.canalguide.network
 
 import com.ayc.canalguide.Constants.BASE_URL
-import com.ayc.canalguide.data.xml_classes.GuardGates
-import com.ayc.canalguide.data.xml_classes.LiftBridges
-import com.ayc.canalguide.data.xml_classes.Locks
+import com.ayc.canalguide.data.entities.CruiseMarker
+import com.ayc.canalguide.data.entities.LaunchMarker
+import com.ayc.canalguide.data.entities.MarinaMarker
+import com.ayc.canalguide.data.xml_classes.*
 import com.tickaroo.tikxml.TikXml
 import com.tickaroo.tikxml.retrofit.TikXmlConverterFactory
 import okhttp3.OkHttpClient
@@ -31,15 +32,15 @@ interface CanalsApiService {
 
     // Rentals and cruises
     @GET("boatsforhire.xml")
-    suspend fun getRentalsCruises(): Response<Any>
+    suspend fun getRentalsCruises(): Response<Cruises>
 
     // Boat launches
     @GET("canalwatertrail.xml")
-    suspend fun getBoatLaunches(): Response<Any>
+    suspend fun getBoatLaunches(): Response<Launches>
 
     // Marinas
     @GET("marinas.xml")
-    suspend fun getMarinas(): Response<Any>
+    suspend fun getMarinas(): Response<Marinas>
 
 
     /**
