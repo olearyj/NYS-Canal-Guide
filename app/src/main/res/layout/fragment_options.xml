@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/title_filter_lock"
                 android:theme="@style/FilterSwitchThemeRed"
-                android:checked="@={mapsViewModel.bridgeGateFilterState}"/>
+                android:checked="@={mapsViewModel.lockFilterState}"/>
 
             <com.google.android.material.switchmaterial.SwitchMaterial
                 android:id="@+id/switchBridgeGates"

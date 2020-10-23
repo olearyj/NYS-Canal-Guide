@@ -16,6 +16,6 @@ class MapsViewModel @ViewModelInject constructor(
     val lockMarkers = markerRepository.loadLockMarkers()
 
 
-    val bridgeGateFilterState = MutableLiveData(true)
+    val lockFilterState = MutableLiveData(true)
 
 }

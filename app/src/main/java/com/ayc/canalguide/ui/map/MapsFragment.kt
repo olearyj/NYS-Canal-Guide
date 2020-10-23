@@ -16,11 +16,14 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 
 class MapsFragment : Fragment() {
 
 
     private val mapsViewModel: MapsViewModel by activityViewModels()
+
+    private val lockMarkers = mutableListOf<Marker>()
 
 
     private val callback = OnMapReadyCallback { googleMap ->
@@ -48,8 +51,21 @@ class MapsFragment : Fragment() {
         }
 
         mapsViewModel.lockMarkers.observe(viewLifecycleOwner) { markers ->
+            for (marker in lockMarkers) marker.remove()
+            lockMarkers.clear()
             for (marker in markers)
-                googleMap.addMarker( marker.getMarkerOptions() )
+                lockMarkers += googleMap.addMarker( marker.getMarkerOptions() )
+        }
+
+        mapsViewModel.lockFilterState.observe(viewLifecycleOwner) { isChecked ->
+            if (isChecked)
+                for (marker in mapsViewModel.lockMarkers.value ?: return@observe)
+                    lockMarkers += googleMap.addMarker( marker.getMarkerOptions() )
+            else {
+                for (marker in lockMarkers)
+                    marker.remove()
+                lockMarkers.clear()
+            }
         }
 
         // Set custom info window so an icon appears on the right - TODO
