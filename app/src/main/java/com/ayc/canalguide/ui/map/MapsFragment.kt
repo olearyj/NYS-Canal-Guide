@@ -8,8 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import com.ayc.canalguide.R
+import com.ayc.canalguide.data.entities.LockMarker
 import com.ayc.canalguide.data.entities.MapMarker
 
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -17,8 +19,9 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
+import com.google.android.gms.maps.model.MarkerOptions
 
-class MapsFragment : Fragment() {
+class MapsFragment : Fragment(R.layout.fragment_maps) {
 
 
     private val mapsViewModel: MapsViewModel by activityViewModels()
@@ -45,28 +48,30 @@ class MapsFragment : Fragment() {
         val startZoom = 8.0f
         googleMap.moveCamera( CameraUpdateFactory.newLatLngZoom(saratoga, startZoom) )
 
+        fun createMarkerObserver(markerList: MutableList<Marker>): Observer<List<MapMarker>> =
+                Observer<List<MapMarker>> { markers ->
+                    // Refresh the marker list with the updated list
+                    markerList.removeMarkersFromMapAndClearList()
+                    for (marker in markers)
+                        markerList += googleMap.addMarker( marker.getMarkerOptions() )
+                }
+
+        fun createFilterStateObserver(markerList: MutableList<Marker>, mapMarkers: List<MapMarker>?): Observer<Boolean> =
+                Observer { isChecked ->
+                    if (isChecked)  // Add markers to map
+                        for (marker in mapMarkers ?: return@Observer)
+                            markerList += googleMap.addMarker( marker.getMarkerOptions() )
+                    else
+                        markerList.removeMarkersFromMapAndClearList()
+                }
+
         mapsViewModel.bridgeGateMarkers.observe(viewLifecycleOwner) { markers ->
             for (marker in markers)
                 googleMap.addMarker( marker.getMarkerOptions() )
         }
 
-        mapsViewModel.lockMarkers.observe(viewLifecycleOwner) { markers ->
-            for (marker in lockMarkers) marker.remove()
-            lockMarkers.clear()
-            for (marker in markers)
-                lockMarkers += googleMap.addMarker( marker.getMarkerOptions() )
-        }
-
-        mapsViewModel.lockFilterState.observe(viewLifecycleOwner) { isChecked ->
-            if (isChecked)
-                for (marker in mapsViewModel.lockMarkers.value ?: return@observe)
-                    lockMarkers += googleMap.addMarker( marker.getMarkerOptions() )
-            else {
-                for (marker in lockMarkers)
-                    marker.remove()
-                lockMarkers.clear()
-            }
-        }
+        mapsViewModel.lockMarkers.observe(viewLifecycleOwner, createMarkerObserver(lockMarkers))
+        mapsViewModel.lockFilterState.observe(viewLifecycleOwner, createFilterStateObserver(lockMarkers, mapsViewModel.lockMarkers.value))
 
         // Set custom info window so an icon appears on the right - TODO
         //googleMap.setInfoWindowAdapter(CanalInfoWindowAdapter())
@@ -77,12 +82,10 @@ class MapsFragment : Fragment() {
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_maps, container, false)
+    private fun MutableList<Marker>.removeMarkersFromMapAndClearList() {
+        for (marker in lockMarkers)
+            marker.remove()
+        this.clear()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
