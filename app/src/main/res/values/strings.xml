@@ -13,4 +13,12 @@
     <string name="title_filter_cruise">Rentals and Cruises</string>
     <string name="title_filter_launches">Boat Ramps and Kayak Launches</string>
 
+    <string name="title_filter_navinfo">Navigation</string>
+    <string name="title_filter_navinfo_bridges">Bridges</string>
+    <string name="title_filter_navinfo_green_buoys">Green Buoys</string>
+    <string name="title_filter_navinfo_red_buoys">Red Buoys</string>
+    <string name="title_filter_navinfo_green_beacons">Green Beacons/Lights/Lighthouses</string>
+    <string name="title_filter_navinfo_red_beacons">Red Beacons/Lights/Lighthouses</string>
+    <string name="title_filter_navinfo_other_beacons">Other Beacons/Lights/Lighthouses</string>
+
 </resources>

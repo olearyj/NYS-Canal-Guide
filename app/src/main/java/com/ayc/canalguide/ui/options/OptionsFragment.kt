@@ -7,6 +7,7 @@ import com.ayc.canalguide.R
 import com.ayc.canalguide.databinding.FragmentOptionsBinding
 import com.ayc.canalguide.ui.map.MapsViewModel
 import com.ayc.canalguide.utils.viewBinding
+import kotlinx.android.synthetic.main.view_filters.*
 
 /**
  * A placeholder fragment containing a simple view.
@@ -23,6 +24,7 @@ class OptionsFragment : Fragment(R.layout.fragment_options) {
         super.onActivityCreated(savedInstanceState)
 
         binding.mapsViewModel = mapsViewModel
+        binding.lifecycleOwner = viewLifecycleOwner
     }
 
 
