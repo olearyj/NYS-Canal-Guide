@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@+id/nav_map">
+
+    <fragment
+        android:id="@+id/nav_map"
+        android:name="com.ayc.canalguide.ui.map.MapsFragment"
+        android:label="fragment_maps"
+        tools:layout="@layout/fragment_maps" >
+        <action
+            android:id="@+id/actionMarkerDetails"
+            app:destination="@id/markerDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/markerDetailsFragment"
+        android:name="com.ayc.canalguide.ui.details.MarkerDetailsFragment"
+        android:label="MarkerDetailsFragment" >
+        <argument
+            android:name="markerId"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_filters"
+        android:name="com.ayc.canalguide.ui.options.OptionsFragment"
+        android:label="OptionsFragment"
+        tools:layout="@layout/fragment_options" />
+</navigation>

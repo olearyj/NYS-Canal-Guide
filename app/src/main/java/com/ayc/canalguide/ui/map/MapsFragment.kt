@@ -9,6 +9,8 @@ import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.ayc.canalguide.MainActivity
 import com.ayc.canalguide.R
 import com.ayc.canalguide.data.entities.MapMarker
@@ -60,6 +62,8 @@ class MapsFragment : Fragment(R.layout.fragment_maps) {
         // When the user clicks on the info window open the details page
         googleMap.setOnInfoWindowClickListener {
             Toast.makeText(context, "CLICKED INFO WINDOW", Toast.LENGTH_SHORT).show()
+            val action = MapsFragmentDirections.actionMarkerDetails(3)
+            findNavController().navigate(action)
         }
 
         fun createMarkerObserver(markerList: MutableList<Marker>, filterStateIsChecked: LiveData<Boolean>): Observer<List<MapMarker>> =
