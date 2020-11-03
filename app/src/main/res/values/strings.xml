@@ -5,6 +5,7 @@
 
     <string name="title_map">Map</string>
     <string name="title_filter">Filters</string>
+    <string name="title_map_type">Map Type</string>
     <string name="description_filters">Switch color matches the marker icons on the map</string>
 
     <string name="title_filter_lock">Locks</string>

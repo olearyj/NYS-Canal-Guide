@@ -59,6 +59,10 @@ class MapsFragment : Fragment(R.layout.fragment_maps) {
         // Set custom info window so an icon appears on the right - TODO
         //googleMap.setInfoWindowAdapter(CanalInfoWindowAdapter())
 
+        mapsViewModel.selectedMapType.observe(viewLifecycleOwner) { mapType ->
+            googleMap.mapType = mapType
+        }
+
         // When the user clicks on the info window open the details page
         googleMap.setOnInfoWindowClickListener {
             Toast.makeText(context, "CLICKED INFO WINDOW", Toast.LENGTH_SHORT).show()

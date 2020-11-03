@@ -7,7 +7,8 @@ import com.ayc.canalguide.R
 import com.ayc.canalguide.databinding.FragmentOptionsBinding
 import com.ayc.canalguide.ui.map.MapsViewModel
 import com.ayc.canalguide.utils.viewBinding
-import kotlinx.android.synthetic.main.view_filters.*
+import com.google.android.gms.maps.GoogleMap
+
 
 /**
  * A placeholder fragment containing a simple view.
