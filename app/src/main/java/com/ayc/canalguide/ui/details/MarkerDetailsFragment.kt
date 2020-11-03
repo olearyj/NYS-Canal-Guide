@@ -15,7 +15,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import kotlinx.android.synthetic.main.marker_details_fragment.*
 
-class MarkerDetailsFragment : Fragment(R.layout.marker_details_fragment), OnMapReadyCallback {
+class MarkerDetailsFragment : Fragment(R.layout.fragment_marker_details), OnMapReadyCallback {
 
 
     private val viewModel: MarkerDetailsViewModel by viewModels()
