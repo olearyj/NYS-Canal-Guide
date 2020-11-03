@@ -26,11 +26,6 @@
             android:text="@string/app_name"
             android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title" />
 
-        <!--        <com.google.android.material.tabs.TabLayout-->
-        <!--            android:id="@+id/tabs"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:background="?attr/colorPrimary" />-->
     </com.google.android.material.appbar.AppBarLayout>
 
 
@@ -45,13 +40,6 @@
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
         app:defaultNavHost="true"
         app:navGraph="@navigation/nav_graph" />
-
-<!--    <androidx.viewpager.widget.ViewPager-->
-<!--        android:id="@+id/view_pager"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        app:layout_behavior="@string/appbar_scrolling_view_behavior" />-->
-
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav_view"
