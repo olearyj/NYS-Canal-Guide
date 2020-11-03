@@ -37,7 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:entries="@{mapsViewModel.mapTypeNames}"
+            android:entries="@array/map_type_names"
             android:padding="5dp"
             android:selectedItemPosition="@={mapsViewModel.mapTypePosition}" />
 

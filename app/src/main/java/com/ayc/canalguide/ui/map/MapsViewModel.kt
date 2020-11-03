@@ -34,7 +34,6 @@ class MapsViewModel @ViewModelInject constructor(
     // Map type (satellite, Terrain, etc.) variables
     private val mapTypes = arrayOf(GoogleMap.MAP_TYPE_NORMAL, GoogleMap.MAP_TYPE_HYBRID,
             GoogleMap.MAP_TYPE_SATELLITE, GoogleMap.MAP_TYPE_TERRAIN)
-    val mapTypeNames = arrayOf("Normal", "Hybrid", "Satellite", "Terrain")
 
     val mapTypePosition = MutableLiveData(0)
     val selectedMapType = Transformations.map(mapTypePosition) { position ->
