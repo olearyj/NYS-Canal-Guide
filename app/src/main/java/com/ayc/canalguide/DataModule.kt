@@ -29,6 +29,6 @@ object DataModule {
 
     @Provides
     @Singleton
-    fun providesCanalsAPiService(connectivityInterceptor: ConnectivityInterceptor) = CanalsApiService.invoke(connectivityInterceptor)
+    fun providesCanalsApiService(connectivityInterceptor: ConnectivityInterceptor) = CanalsApiService.invoke(connectivityInterceptor)
 
 }
