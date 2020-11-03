@@ -13,9 +13,9 @@ class MarkerRepository @Inject constructor(
     private val canalsApiService: CanalsApiService
 ) : BaseRepository() {
 
-    fun loadSampleBridgeGateMarkers() = liveData {
-        emit(BridgeGateMarker.sampleData)
-    }
+//    fun loadSampleBridgeGateMarkers() = liveData {
+//        emit(BridgeGateMarker.sampleData)
+//    }
 
     fun loadBridgeGateMarkers() = liveData {
         val dao = appDatabase.bridgeGateDao()

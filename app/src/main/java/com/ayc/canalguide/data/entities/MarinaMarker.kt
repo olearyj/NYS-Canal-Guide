@@ -14,38 +14,38 @@ import com.tickaroo.tikxml.annotation.Xml
 @Xml()
 @Entity(tableName = "marina_marker")
 data class MarinaMarker (
-        @Attribute(name = "latitude")
-        @Ignore
-        override val lat: Double,
-        @Attribute(name = "longitude")
-        @Ignore
-        override val lng: Double,
-        @Attribute(name = "marina")
-        @Ignore
-        override val name: String,
-        @Attribute(name = "bodyofwater")
-        @Ignore
-        override val bodyOfWater: String,
-        @Attribute
-        @Ignore
-        override val mile: String,
+    @Attribute
+    @Ignore
+    override val markerId: Int = 0,
+    @Attribute(name = "latitude")
+    @Ignore
+    override val lat: Double,
+    @Attribute(name = "longitude")
+    @Ignore
+    override val lng: Double,
+    @Attribute(name = "marina")
+    @Ignore
+    override val name: String,
+    @Attribute(name = "bodyofwater")
+    @Ignore
+    override val bodyOfWater: String,
+    @Attribute
+    @Ignore
+    override val mile: String,
 
-        @Attribute(name = "marina_url")
-        val url: String?,
-        @Attribute
-        val vhf: String?,
-        @Attribute
-        val fuel: String?,
-        @Attribute
-        val repair: String?,
-        @Attribute
-        val facilities: String?,
-        @Attribute(name = "phonenumber")
-        val phone: String?,
-        @Attribute
-        @PrimaryKey(autoGenerate = true)
-        val marinaId: Int = 0
-): MapMarker(lat, lng, name, bodyOfWater, mile) {
+    @Attribute(name = "marina_url")
+    val url: String?,
+    @Attribute
+    val vhf: String?,
+    @Attribute
+    val fuel: String?,
+    @Attribute
+    val repair: String?,
+    @Attribute
+    val facilities: String?,
+    @Attribute(name = "phonenumber")
+    val phone: String?
+): MapMarker(lat, lng, name, bodyOfWater, mile, markerId) {
 
 
     override fun getMarkerOptions(): MarkerOptions? {

@@ -14,6 +14,9 @@ import com.tickaroo.tikxml.annotation.Xml
 @Xml()
 @Entity(tableName = "lock_marker")
 data class LockMarker (
+    @Attribute
+    @Ignore
+    override val markerId: Int = 0,
     @Attribute(name = "latitude")
     @Ignore
     override val lat: Double,
@@ -41,11 +44,8 @@ data class LockMarker (
     @Attribute
     val zip: String?,
     @Attribute(name = "phonenumber")
-    val phone: String?,
-    @Attribute
-    @PrimaryKey(autoGenerate = true)
-    val lockId: Int = 0
-): MapMarker(lat, lng, name, bodyOfWater, mile) {
+    val phone: String?
+): MapMarker(lat, lng, name, bodyOfWater, mile, markerId) {
 
 
     override fun getMarkerOptions(): MarkerOptions? {

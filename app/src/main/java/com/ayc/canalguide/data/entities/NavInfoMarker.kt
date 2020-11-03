@@ -20,48 +20,48 @@ noaa_page="chart viewer" noaa_page_url="http://www.charts.noaa.gov/OnLineViewer/
 @Xml()
 @Entity(tableName = "navinfo_marker")
 data class NavInfoMarker (
-        @Attribute(name = "latitude", converter = LatLongConverter::class)
-        @Ignore
-        override val lat: Double,
-        @Attribute(name = "longitude", converter = LatLongConverter::class)
-        @Ignore
-        override val lng: Double,
-        @Attribute(name = "feature")
-        @Ignore
-        override val name: String,
-        @Attribute(name = "bodyofwater")
-        @Ignore
-        override val bodyOfWater: String?,
-        @Attribute
-        @Ignore
-        override val mile: String,
+    @Attribute
+    @Ignore
+    override val markerId: Int = 0,
+    @Attribute(name = "latitude", converter = LatLongConverter::class)
+    @Ignore
+    override val lat: Double,
+    @Attribute(name = "longitude", converter = LatLongConverter::class)
+    @Ignore
+    override val lng: Double,
+    @Attribute(name = "feature")
+    @Ignore
+    override val name: String,
+    @Attribute(name = "bodyofwater")
+    @Ignore
+    override val bodyOfWater: String?,
+    @Attribute
+    @Ignore
+    override val mile: String,
 
-        @Attribute
-        val shore: String?,
-        @Attribute(name = "feature_url")
-        val featureUrl: String?,
-        @Attribute(name = "feature_color")
-        val featureColor: String?,
-        @Attribute(name = "channel_width")
-        val channelWidth: String?,
-        @Attribute(name = "south_west_depth")
-        val southWestDepth: String?,
-        @Attribute(name = "middle_depth")
-        val middleDepth: String?,
-        @Attribute(name = "middle_depth_url")
-        val middleDepthUrl: String?,
-        @Attribute(name = "north_east_depth")
-        val northEastDepth: String?,
-        @Attribute(name = "overhead_clearance")
-        val overheadClearance: String?,
-        @Attribute(name = "noaa_page")
-        val noaaPage: String?,
-        @Attribute(name = "noaa_page_url")
-        val noaaPageUrl: String?,
-        @Attribute
-        @PrimaryKey(autoGenerate = true)
-        val marinaId: Int = 0
-): MapMarker(lat, lng, name, bodyOfWater, mile) {
+    @Attribute
+    val shore: String?,
+    @Attribute(name = "feature_url")
+    val featureUrl: String?,
+    @Attribute(name = "feature_color")
+    val featureColor: String?,
+    @Attribute(name = "channel_width")
+    val channelWidth: String?,
+    @Attribute(name = "south_west_depth")
+    val southWestDepth: String?,
+    @Attribute(name = "middle_depth")
+    val middleDepth: String?,
+    @Attribute(name = "middle_depth_url")
+    val middleDepthUrl: String?,
+    @Attribute(name = "north_east_depth")
+    val northEastDepth: String?,
+    @Attribute(name = "overhead_clearance")
+    val overheadClearance: String?,
+    @Attribute(name = "noaa_page")
+    val noaaPage: String?,
+    @Attribute(name = "noaa_page_url")
+    val noaaPageUrl: String?
+): MapMarker(lat, lng, name, bodyOfWater, mile, markerId) {
 
 
     override fun getMarkerOptions(): MarkerOptions? {

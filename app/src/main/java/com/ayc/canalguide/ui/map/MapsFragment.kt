@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import androidx.fragment.app.Fragment
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
@@ -64,8 +65,8 @@ class MapsFragment : Fragment(R.layout.fragment_maps) {
         }
 
         // When the user clicks on the info window open the details page
-        googleMap.setOnInfoWindowClickListener {
-            val action = MapsFragmentDirections.actionMarkerDetails(3)
+        googleMap.setOnInfoWindowClickListener { marker ->
+            val action = MapsFragmentDirections.actionMarkerDetails(marker.tag as Int)
             findNavController().navigate(action)
         }
 
@@ -81,7 +82,7 @@ class MapsFragment : Fragment(R.layout.fragment_maps) {
                 // Refresh the marker list with the updated list
                 markerList.removeMarkersFromMapAndClearList()
                 for (marker in markers)
-                    markerList += googleMap.addMarker( marker.getMarkerOptions() )
+                    markerList += googleMap.addMarker( marker.getMarkerOptions() ).apply { tag = marker.markerId }
             }
 
         mapsViewModel.lockMarkers.observe(viewLifecycleOwner, createMarkerObserver(lockMarkers, mapsViewModel.lockFilterState))
@@ -97,7 +98,7 @@ class MapsFragment : Fragment(R.layout.fragment_maps) {
             Observer { isChecked ->
                 if (isChecked)  // Add markers to map
                     for (marker in mapMarkers.value ?: return@Observer)
-                        markerList += googleMap.addMarker( marker.getMarkerOptions() )
+                        markerList += googleMap.addMarker( marker.getMarkerOptions() ).apply { tag = marker.markerId }
                 else
                     markerList.removeMarkersFromMapAndClearList()
             }

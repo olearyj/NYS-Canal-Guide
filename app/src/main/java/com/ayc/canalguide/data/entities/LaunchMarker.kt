@@ -14,46 +14,46 @@ import com.tickaroo.tikxml.annotation.Xml
 @Xml()
 @Entity(tableName = "launch_marker")
 data class LaunchMarker (
-        @Attribute(name = "latitude")
-        @Ignore
-        override val lat: Double,
-        @Attribute(name = "longitude")
-        @Ignore
-        override val lng: Double,
-        @Attribute(name = "site_name")
-        @Ignore
-        override val name: String,
-        @Attribute(name = "bodyofwater")
-        @Ignore
-        override val bodyOfWater: String,
-        @Attribute
-        @Ignore
-        override val mile: String,
+    @Attribute
+    @Ignore
+    override val markerId: Int = 0,
+    @Attribute(name = "latitude")
+    @Ignore
+    override val lat: Double,
+    @Attribute(name = "longitude")
+    @Ignore
+    override val lng: Double,
+    @Attribute(name = "site_name")
+    @Ignore
+    override val name: String,
+    @Attribute(name = "bodyofwater")
+    @Ignore
+    override val bodyOfWater: String,
+    @Attribute
+    @Ignore
+    override val mile: String,
 
-        @Attribute
-        val waterway: String?,
-        @Attribute
-        val id: String?,
-        @Attribute
-        val municipality: String?,
-        @Attribute
-        val launch_type: String?,
-        @Attribute
-        val overnight_parking: String?,
-        @Attribute
-        val camping: String?,
-        @Attribute
-        val potable_water: String?,
-        @Attribute
-        val restrooms: String?,
-        @Attribute
-        val day_use_amenities: String?,
-        @Attribute
-        val shore: String?,
-        @Attribute
-        @PrimaryKey(autoGenerate = true)
-        val launchId: Int = 0
-): MapMarker(lat, lng, name, bodyOfWater, mile) {
+    @Attribute
+    val waterway: String?,
+    @Attribute(name = "id")
+    val strId: String?,
+    @Attribute
+    val municipality: String?,
+    @Attribute
+    val launch_type: String?,
+    @Attribute
+    val overnight_parking: String?,
+    @Attribute
+    val camping: String?,
+    @Attribute
+    val potable_water: String?,
+    @Attribute
+    val restrooms: String?,
+    @Attribute
+    val day_use_amenities: String?,
+    @Attribute
+    val shore: String?
+): MapMarker(lat, lng, name, bodyOfWater, mile, markerId) {
 
 
     override fun getMarkerOptions(): MarkerOptions? {

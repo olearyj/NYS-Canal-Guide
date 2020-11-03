@@ -14,6 +14,9 @@ import com.tickaroo.tikxml.annotation.Xml
 @Xml()
 @Entity(tableName = "bridge_gate_marker")
 data class BridgeGateMarker (
+    @Attribute
+    @Ignore
+    override val markerId: Int = 0,
     @Attribute(name = "latitude")
     @Ignore
     override val lat: Double,
@@ -37,11 +40,8 @@ data class BridgeGateMarker (
     @Attribute(name = "clearance_closed")
     val clearanceClosed: String?,
     @Attribute(name = "clearance_opened")
-    val clearanceOpened: String?,
-    @Attribute
-    @PrimaryKey(autoGenerate = true)
-    val bridgeGateId: Int = 0
-): MapMarker(lat, lng, name, bodyOfWater, mile) {
+    val clearanceOpened: String?
+): MapMarker(lat, lng, name, bodyOfWater, mile, markerId) {
 
 
     override fun getMarkerOptions(): MarkerOptions? {
@@ -55,10 +55,10 @@ data class BridgeGateMarker (
     companion object {
         val markerIcon: BitmapDescriptor = BitmapDescriptorFactory.fromResource(R.drawable.mmi_yellow_marker)
 
-        val sampleData = listOf(
-            BridgeGateMarker(43.18955, -73.58102, "Guard Gate Crockers Reef", "Ft Miller", "31.3", "CHamplain", "518-555-5555", "3.2", "2.3"),
-            BridgeGateMarker(42.80340, -73.70890, "Guard Gate fake data", "Ft Miller!!", "31.2", "CHamplain", "518-555-5555", "3.2", "2.3")
-        )
+//        val sampleData = listOf(
+//            BridgeGateMarker(43.18955, -73.58102, "Guard Gate Crockers Reef", "Ft Miller", "31.3", "CHamplain", "518-555-5555", "3.2", "2.3"),
+//            BridgeGateMarker(42.80340, -73.70890, "Guard Gate fake data", "Ft Miller!!", "31.2", "CHamplain", "518-555-5555", "3.2", "2.3")
+//        )
     }
 
 }
