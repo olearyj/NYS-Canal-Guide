@@ -50,13 +50,7 @@ data class LockMarker (
 
     override fun getTitle() = "Lock - " + name.replace(" Lock", "")	+ " " + lift
 
-    override fun getMarkerOptions(): MarkerOptions? {
-        return MarkerOptions()
-            .title(getTitle())
-            .position(LatLng(lat, lng))
-            .snippet(getSnippet())
-            .icon(markerIcon)
-    }
+    override fun getMarkerOptions() = super.getMarkerOptions()?.icon(markerIcon)
 
     companion object {
         val markerIcon: BitmapDescriptor = BitmapDescriptorFactory.fromResource(R.drawable.mmi_red_marker)

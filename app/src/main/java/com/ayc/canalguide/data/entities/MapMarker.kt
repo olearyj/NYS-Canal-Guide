@@ -1,6 +1,7 @@
 package com.ayc.canalguide.data.entities
 
 import androidx.room.PrimaryKey
+import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
 abstract class MapMarker (
@@ -18,7 +19,10 @@ abstract class MapMarker (
 
     open fun getSnippet() = ("$bodyOfWater, mile $mile")
 
-    abstract fun getMarkerOptions(): MarkerOptions?
+    open fun getMarkerOptions(): MarkerOptions? = MarkerOptions()
+            .title(getTitle())
+            .position(LatLng(lat, lng))
+            .snippet(getSnippet())
 
     protected open fun isNotBlank(str: String?): Boolean {
         return !(str == "" || str == null || str == " " || str == "-1")

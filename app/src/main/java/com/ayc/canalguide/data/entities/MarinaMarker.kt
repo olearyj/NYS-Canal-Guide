@@ -48,13 +48,7 @@ data class MarinaMarker (
 ): MapMarker(lat, lng, name, bodyOfWater, mile, markerId) {
 
 
-    override fun getMarkerOptions(): MarkerOptions? {
-        return MarkerOptions()
-                .title(getTitle())
-                .position(LatLng(lat, lng))
-                .snippet(getSnippet())
-                .icon(markerIcon)
-    }
+    override fun getMarkerOptions() = super.getMarkerOptions()?.icon(markerIcon)
 
     companion object {
         val markerIcon: BitmapDescriptor = BitmapDescriptorFactory.fromResource(R.drawable.mmi_blue_marker)

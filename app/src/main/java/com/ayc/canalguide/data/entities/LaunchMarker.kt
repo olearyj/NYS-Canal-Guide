@@ -58,13 +58,7 @@ data class LaunchMarker (
 
     override fun getTitle() = "Launch - $name"
 
-    override fun getMarkerOptions(): MarkerOptions? {
-        return MarkerOptions()
-                .title(getTitle())
-                .position(LatLng(lat, lng))
-                .snippet(getSnippet())
-                .icon(markerIcon)
-    }
+    override fun getMarkerOptions() = super.getMarkerOptions()?.icon(markerIcon)
 
     companion object {
         val markerIcon: BitmapDescriptor = BitmapDescriptorFactory.fromResource(R.drawable.mmi_green_marker)

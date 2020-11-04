@@ -44,13 +44,8 @@ data class BridgeGateMarker (
 ): MapMarker(lat, lng, name, bodyOfWater, mile, markerId) {
 
 
-    override fun getMarkerOptions(): MarkerOptions? {
-        return MarkerOptions()
-            .title(getTitle())
-            .position(LatLng(lat, lng))
-            .snippet(getSnippet())
-            .icon(markerIcon) //BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
-    }
+
+    override fun getMarkerOptions() = super.getMarkerOptions()?.icon(markerIcon)
 
     companion object {
         val markerIcon: BitmapDescriptor = BitmapDescriptorFactory.fromResource(R.drawable.mmi_yellow_marker)

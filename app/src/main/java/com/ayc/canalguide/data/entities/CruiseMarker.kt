@@ -64,13 +64,7 @@ data class CruiseMarker (
         else -> ""
     }
 
-    override fun getMarkerOptions(): MarkerOptions? {
-        return MarkerOptions()
-                .title(getTitle())
-                .position(LatLng(lat, lng))
-                .snippet(getSnippet())
-                .icon(markerIcon)
-    }
+    override fun getMarkerOptions() = super.getMarkerOptions()?.icon(markerIcon)
 
     companion object {
         val markerIcon: BitmapDescriptor = BitmapDescriptorFactory.fromResource(R.drawable.mmi_violet_marker)
