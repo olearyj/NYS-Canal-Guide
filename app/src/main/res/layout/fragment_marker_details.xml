@@ -7,6 +7,8 @@
         <variable
             name="viewModel"
             type="com.ayc.canalguide.ui.details.MarkerDetailsViewModel" />
+
+        <import type="android.view.View"/>
     </data>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -45,7 +47,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:padding="10dp"
-                    android:src="@drawable/ic_call_24" />
+                    android:src="@drawable/ic_call_24"
+                    android:visibility="@{viewModel.hasPhoneNumber() ? View.GONE : View.VISIBLE}"/>
 
                 <ImageView
                     android:id="@+id/ivWebsite"
@@ -53,7 +56,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:padding="10dp"
-                    android:src="@drawable/ic_action_web_site" />
+                    android:src="@drawable/ic_action_web_site"
+                    android:visibility="@{viewModel.hasWebsite() ? View.GONE : View.VISIBLE}" />
             </LinearLayout>
 
             <fragment
