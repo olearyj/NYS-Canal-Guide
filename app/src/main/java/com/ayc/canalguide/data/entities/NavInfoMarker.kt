@@ -63,6 +63,10 @@ data class NavInfoMarker (
     val noaaPageUrl: String?
 ): MapMarker(lat, lng, name, bodyOfWater, mile, markerId) {
 
+    
+    override fun getSnippet() = "Mile " + mile +  //(isNotBlank(southWestDepth) ? ", SW Depth=" + southWestDepth : "") +
+            (if (isNotBlank(middleDepth)) ", Middle Depth=$middleDepth" else "") +  //(isNotBlank(northEastDepth) ? ", NE Depth=" + northEastDepth : "") +
+            if (isNotBlank(overheadClearance)) ", Overhead Clearance=$overheadClearance" else ""
 
     override fun getMarkerOptions(): MarkerOptions? {
         return MarkerOptions()

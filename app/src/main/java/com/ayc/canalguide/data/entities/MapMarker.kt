@@ -13,10 +13,15 @@ abstract class MapMarker (
     open val markerId: Int = 0
 ) {
 
+
     open fun getTitle() = name
 
-    fun getSnippet() = ("$bodyOfWater, mile $mile")
+    open fun getSnippet() = ("$bodyOfWater, mile $mile")
 
     abstract fun getMarkerOptions(): MarkerOptions?
+
+    protected open fun isNotBlank(str: String?): Boolean {
+        return !(str == "" || str == null || str == " " || str == "-1")
+    }
 
 }

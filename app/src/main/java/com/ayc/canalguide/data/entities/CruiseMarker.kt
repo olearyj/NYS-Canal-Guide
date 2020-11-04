@@ -58,6 +58,12 @@ data class CruiseMarker (
 ): MapMarker(lat, lng, name, bodyOfWater, mile, markerId) {
 
 
+    override fun getSnippet() = when (type) {
+        "rentals" -> "Rentals: $vesselTypes"
+        "cruises" -> "Cruises: $cruisetype"
+        else -> ""
+    }
+
     override fun getMarkerOptions(): MarkerOptions? {
         return MarkerOptions()
                 .title(getTitle())
