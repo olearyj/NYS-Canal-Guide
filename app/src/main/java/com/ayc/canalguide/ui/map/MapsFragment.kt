@@ -58,7 +58,7 @@ class MapsFragment : Fragment(R.layout.fragment_maps) {
             map.isMyLocationEnabled = true
 
         // Set custom info window so an icon appears on the right - TODO
-        //googleMap.setInfoWindowAdapter(CanalInfoWindowAdapter())
+        googleMap.setInfoWindowAdapter( CanalInfoWindowAdapter(requireActivity()) )
 
         mapsViewModel.selectedMapType.observe(viewLifecycleOwner) { mapType ->
             googleMap.mapType = mapType
