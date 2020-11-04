@@ -60,7 +60,7 @@ data class CruiseMarker (
 
     override fun getMarkerOptions(): MarkerOptions? {
         return MarkerOptions()
-                .title(name)
+                .title(getTitle())
                 .position(LatLng(lat, lng))
                 .snippet(getSnippet())
                 .icon(markerIcon)

@@ -56,9 +56,11 @@ data class LaunchMarker (
 ): MapMarker(lat, lng, name, bodyOfWater, mile, markerId) {
 
 
+    override fun getTitle() = "Launch - $name"
+
     override fun getMarkerOptions(): MarkerOptions? {
         return MarkerOptions()
-                .title(name)
+                .title(getTitle())
                 .position(LatLng(lat, lng))
                 .snippet(getSnippet())
                 .icon(markerIcon)

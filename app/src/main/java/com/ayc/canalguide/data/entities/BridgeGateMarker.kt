@@ -46,7 +46,7 @@ data class BridgeGateMarker (
 
     override fun getMarkerOptions(): MarkerOptions? {
         return MarkerOptions()
-            .title(name)
+            .title(getTitle())
             .position(LatLng(lat, lng))
             .snippet(getSnippet())
             .icon(markerIcon) //BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
