@@ -10,6 +10,9 @@ import com.ayc.canalguide.data.entities.LaunchMarker
 @Dao
 interface LaunchMarkerDao: BaseDao<LaunchMarker> {
 
+    @Query("SELECT * FROM launch_marker WHERE markerId=:id")
+    fun getMarker(id: Int): LiveData<LaunchMarker>
+
     @Query("SELECT * FROM launch_marker")
     fun getMarkers(): LiveData<List<LaunchMarker>>
 

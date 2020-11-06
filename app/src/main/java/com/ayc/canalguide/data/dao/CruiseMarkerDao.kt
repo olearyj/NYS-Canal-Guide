@@ -10,6 +10,9 @@ import com.ayc.canalguide.data.entities.CruiseMarker
 @Dao
 interface CruiseMarkerDao: BaseDao<CruiseMarker> {
 
+    @Query("SELECT * FROM cruises_marker WHERE markerId=:id")
+    fun getMarker(id: Int): LiveData<CruiseMarker>
+
     @Query("SELECT * FROM cruises_marker")
     fun getMarkers(): LiveData<List<CruiseMarker>>
 

@@ -10,6 +10,9 @@ import com.ayc.canalguide.data.entities.LockMarker
 @Dao
 interface LockMarkerDao: BaseDao<LockMarker> {
 
+    @Query("SELECT * FROM lock_marker WHERE markerId=:id")
+    fun getMarker(id: Int): LiveData<LockMarker>
+
     @Query("SELECT * FROM lock_marker")
     fun getMarkers(): LiveData<List<LockMarker>>
 
