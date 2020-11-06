@@ -40,4 +40,9 @@ class MarkerDetailsViewModel @ViewModelInject constructor(
         }
     }
 
+    fun hasWebsiteNoaa() = !(mapMarker.value as? NavInfoMarker)?.noaaPageUrl.isNullOrBlank()
+    val websiteNoaa = Transformations.map(mapMarker) {
+        (it as? NavInfoMarker)?.noaaPageUrl
+    }
+
 }

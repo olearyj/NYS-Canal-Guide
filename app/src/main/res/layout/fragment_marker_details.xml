@@ -59,6 +59,15 @@
                     android:padding="10dp"
                     android:src="@drawable/ic_action_web_site"
                     android:visibility="@{TextUtils.isEmpty(viewModel.website) ? View.GONE : View.VISIBLE}" />
+
+                <ImageView
+                    android:id="@+id/ivWebsiteNoaa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_action_web_site"
+                    android:visibility="@{TextUtils.isEmpty(viewModel.websiteNoaa) ? View.GONE : View.VISIBLE}" />
             </LinearLayout>
 
             <fragment

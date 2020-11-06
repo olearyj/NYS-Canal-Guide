@@ -40,6 +40,10 @@ class MarkerDetailsFragment : Fragment(R.layout.fragment_marker_details), OnMapR
             if (viewModel.hasWebsite())
                 MyHelper.openUrl(context, viewModel.website.value!!)
         }
+        ivWebsiteNoaa.setOnClickListener {
+            if (viewModel.hasWebsiteNoaa())
+                MyHelper.openUrl(context, viewModel.websiteNoaa.value!!)
+        }
 
         //(map as SupportMapFragment).getMapAsync(this)
     }
