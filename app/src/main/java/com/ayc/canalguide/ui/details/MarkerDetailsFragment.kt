@@ -2,18 +2,20 @@ package com.ayc.canalguide.ui.details
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.ayc.canalguide.MainActivity
 import com.ayc.canalguide.R
+import com.ayc.canalguide.databinding.FragmentMarkerDetailsBinding
 import com.ayc.canalguide.utils.MyHelper
+import com.ayc.canalguide.utils.viewBinding
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_marker_details.*
 
-
+@AndroidEntryPoint
 class MarkerDetailsFragment : Fragment(R.layout.fragment_marker_details), OnMapReadyCallback {
 
 
@@ -21,18 +23,19 @@ class MarkerDetailsFragment : Fragment(R.layout.fragment_marker_details), OnMapR
 
     private val viewModel: MarkerDetailsViewModel by viewModels()
 
+    private val binding by viewBinding(FragmentMarkerDetailsBinding::bind)
+
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        Log.i("TEST", "args = ${args.markerId}")
-
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
 
         ivCall.setOnClickListener {
             if (viewModel.hasPhoneNumber())
                 MyHelper.makeCall(activity, viewModel.phoneNumber.value!!)
         }
-
         ivWebsite.setOnClickListener {
             if (viewModel.hasWebsite())
                 MyHelper.openUrl(context, viewModel.website.value!!)

@@ -4,13 +4,10 @@ import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import androidx.fragment.app.Fragment
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.ayc.canalguide.MainActivity
 import com.ayc.canalguide.R
@@ -66,7 +63,8 @@ class MapsFragment : Fragment(R.layout.fragment_maps) {
 
         // When the user clicks on the info window open the details page
         googleMap.setOnInfoWindowClickListener { marker ->
-            val action = MapsFragmentDirections.actionMarkerDetails(marker.tag as Int)
+            val mapMarker = marker.tag as MapMarker
+            val action = MapsFragmentDirections.actionMarkerDetails(mapMarker.markerId, mapMarker.javaClass.simpleName)
             findNavController().navigate(action)
         }
 
@@ -82,7 +80,7 @@ class MapsFragment : Fragment(R.layout.fragment_maps) {
                 // Refresh the marker list with the updated list
                 markerList.removeMarkersFromMapAndClearList()
                 for (marker in markers)
-                    markerList += googleMap.addMarker( marker.getMarkerOptions() ).apply { tag = marker.markerId }
+                    markerList += googleMap.addMarker( marker.getMarkerOptions() ).apply { tag = marker }
             }
 
         mapsViewModel.lockMarkers.observe(viewLifecycleOwner, createMarkerObserver(lockMarkers, mapsViewModel.lockFilterState))
@@ -98,7 +96,7 @@ class MapsFragment : Fragment(R.layout.fragment_maps) {
             Observer { isChecked ->
                 if (isChecked)  // Add markers to map
                     for (marker in mapMarkers.value ?: return@Observer)
-                        markerList += googleMap.addMarker( marker.getMarkerOptions() ).apply { tag = marker.markerId }
+                        markerList += googleMap.addMarker( marker.getMarkerOptions() ).apply { tag = marker }
                 else
                     markerList.removeMarkersFromMapAndClearList()
             }

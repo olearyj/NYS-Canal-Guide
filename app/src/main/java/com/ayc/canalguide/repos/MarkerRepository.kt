@@ -3,7 +3,7 @@ package com.ayc.canalguide.repos
 import androidx.lifecycle.liveData
 import com.ayc.canalguide.Constants
 import com.ayc.canalguide.data.AppRoomDatabase
-import com.ayc.canalguide.data.entities.BridgeGateMarker
+import com.ayc.canalguide.data.entities.*
 import com.ayc.canalguide.network.CanalsApiService
 import kotlinx.coroutines.*
 import javax.inject.Inject
@@ -16,6 +16,17 @@ class MarkerRepository @Inject constructor(
 //    fun loadSampleBridgeGateMarkers() = liveData {
 //        emit(BridgeGateMarker.sampleData)
 //    }
+
+    fun loadMapMarker(markerId: Int, javaClassSimpleName: String) =
+            when (javaClassSimpleName) {
+                MarinaMarker::class.java.simpleName -> appDatabase.marinaDao().getMarker(markerId)
+                LockMarker::class.java.simpleName -> appDatabase.lockDao().getMarker(markerId)
+                LaunchMarker::class.java.simpleName -> appDatabase.launchDao().getMarker(markerId)
+                CruiseMarker::class.java.simpleName -> appDatabase.cruiseDao().getMarker(markerId)
+                BridgeGateMarker::class.java.simpleName -> appDatabase.bridgeGateDao().getMarker(markerId)
+                NavInfoMarker::class.java.simpleName -> appDatabase.navInfoDao().getMarker(markerId)
+                else -> throw Exception("loadMapMarker parameter is not a MapMarker class name: $javaClassSimpleName")
+            }
 
     fun loadBridgeGateMarkers() = liveData {
         val dao = appDatabase.bridgeGateDao()
