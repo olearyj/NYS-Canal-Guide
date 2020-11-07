@@ -10,8 +10,11 @@ import com.ayc.canalguide.R
 import com.ayc.canalguide.databinding.FragmentMarkerDetailsBinding
 import com.ayc.canalguide.utils.MyHelper
 import com.ayc.canalguide.utils.viewBinding
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_marker_details.*
 
@@ -24,6 +27,8 @@ class MarkerDetailsFragment : Fragment(R.layout.fragment_marker_details), OnMapR
     private val viewModel: MarkerDetailsViewModel by viewModels()
 
     private val binding by viewBinding(FragmentMarkerDetailsBinding::bind)
+
+    private lateinit var googleMap: GoogleMap
 
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -45,15 +50,22 @@ class MarkerDetailsFragment : Fragment(R.layout.fragment_marker_details), OnMapR
                 MyHelper.openUrl(context, viewModel.websiteNoaa.value!!)
         }
 
-        //(map as SupportMapFragment).getMapAsync(this)
+        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
+        mapFragment?.getMapAsync(this)
     }
 
     @SuppressLint("MissingPermission")
-    override fun onMapReady(googleMap: GoogleMap?) {
-        googleMap ?: return
+    override fun onMapReady(map: GoogleMap?) {
+        googleMap = map ?: return
 
         if (MainActivity.hasPermissions(requireContext(), MainActivity.LOCATION_PERMISSION))
             googleMap.isMyLocationEnabled = true
+
+        // Add marker to map and move camera to it's position
+        viewModel.mapMarker.observe(viewLifecycleOwner) { mapMarker ->
+            googleMap.addMarker( mapMarker.getMarkerOptions() )
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(mapMarker.lat, mapMarker.lng), 14.5f))
+        }
     }
 
 

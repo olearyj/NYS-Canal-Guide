@@ -14,7 +14,7 @@ class MarkerDetailsViewModel @ViewModelInject constructor(
 ) : ViewModel() {
 
 
-    private val mapMarker = markerRepo.loadMapMarker(
+    val mapMarker = markerRepo.loadMapMarker(
             savedStateHandle.get<Int>("markerId")!!,
             savedStateHandle.get<String>("javaClassSimpleName")!!
     )
