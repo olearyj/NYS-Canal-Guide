@@ -1,7 +1,10 @@
 package com.ayc.canalguide.ui.details
 
 import android.annotation.SuppressLint
+import android.os.Build
 import android.os.Bundle
+import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
@@ -9,6 +12,7 @@ import com.ayc.canalguide.MainActivity
 import com.ayc.canalguide.R
 import com.ayc.canalguide.databinding.FragmentMarkerDetailsBinding
 import com.ayc.canalguide.utils.MyHelper
+import com.ayc.canalguide.utils.dpToPx
 import com.ayc.canalguide.utils.viewBinding
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -50,6 +54,13 @@ class MarkerDetailsFragment : Fragment(R.layout.fragment_marker_details), OnMapR
                 MyHelper.openUrl(context, viewModel.websiteNoaa.value!!)
         }
 
+        viewModel.markerDetails.observe(viewLifecycleOwner) { details ->
+            detailsLayout.removeAllViews()
+
+            for (i in details.indices)
+                addDetailsTextView(details[i], i % 2 == 0)
+        }
+
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(this)
     }
@@ -68,5 +79,17 @@ class MarkerDetailsFragment : Fragment(R.layout.fragment_marker_details), OnMapR
         }
     }
 
+    private fun addDetailsTextView(detail: String, isHeader: Boolean) {
+        detailsLayout.addView(TextView(context).apply {
+            text = detail
+
+            val textAppearance = if (isHeader) android.R.style.TextAppearance_Medium else android.R.style.TextAppearance_Small
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) setTextAppearance(textAppearance)
+            else setTextAppearance(context, textAppearance)
+
+            if (isHeader) setPadding(4.dpToPx(context), 6.dpToPx(context), 4.dpToPx(context), 4.dpToPx(context))
+            else setPadding(8.dpToPx(context), 0, 4.dpToPx(context), 2.dpToPx(context))
+        })
+    }
 
 }

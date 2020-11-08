@@ -3,6 +3,8 @@ package com.ayc.canalguide.utils
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.util.TypedValue
+import kotlin.math.roundToInt
 
 class MyHelper {
     companion object {
@@ -24,3 +26,11 @@ class MyHelper {
 
     }
 }
+
+
+internal fun Int.dpToPx(context: Context): Int {
+    return dpToPx(context, this.toFloat())
+}
+
+private fun dpToPx(context: Context, dp: Float): Int =
+    TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, context.resources.displayMetrics).roundToInt()

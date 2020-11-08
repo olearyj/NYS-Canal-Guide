@@ -45,4 +45,61 @@ class MarkerDetailsViewModel @ViewModelInject constructor(
         (it as? NavInfoMarker)?.noaaPageUrl
     }
 
+    val markerDetails = Transformations.map(mapMarker) { mapMarker ->
+        mutableListOf<String>().apply {
+            add(mapMarker.getTitle())
+            add(if (mapMarker !is NavInfoMarker) mapMarker.getSnippet() else mapMarker.getSnippet().replace(", ", "\n"))
+
+            getAddress(mapMarker)?.let { address ->
+                add("Address")
+                add(address)
+            }
+
+            /*
+
+		if( !isBlank(marina.getFuel()) ){
+        	addTextView("Fuel");
+        	addTextView(getFuelString(marina.getFuel()));
+    	}
+
+    	if( !isBlank(marina.getVhf()) ){
+        	addTextView("Vhf Channels");
+        	addTextView(marina.getVhf().replaceAll(", *", ", "));
+    	}
+
+    	if( !isBlank(marina.getFacilities()) ){
+        	addTextView("Facilities");
+        	addTextView(getFacilitiesString(marina.getFacilities()));
+    	}
+
+    	if(  !isBlank(marina.getRepair()) ){
+        	addTextView("Repair");
+        	addTextView(getRepairString(marina.getRepair()));
+    	}
+             */
+
+            when (mapMarker) {
+                //is LockMarker -> it.phone
+                is MarinaMarker -> {
+                }
+//                is CruiseMarker -> it.url
+//                is BridgeGateMarker -> it.phone
+//                is LaunchMarker -> {}
+//                is NavInfoMarker -> it.featureUrl
+                else -> {}
+            }
+        }.toList()
+    }
+
+    private fun getAddress(mapMarker: MapMarker): String? {
+        val strings = when (mapMarker) {
+            is LockMarker -> arrayOf(mapMarker.address, mapMarker.city, mapMarker.zip)
+            is CruiseMarker -> arrayOf(mapMarker.address, mapMarker.city, mapMarker.zip)
+            else -> return null
+        }
+        return if ( strings.all { !it.isNullOrBlank() } )
+            String.format("%s\n%s, NY %s", *strings)
+        else null
+    }
+
 }
