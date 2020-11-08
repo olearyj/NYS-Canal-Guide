@@ -2,18 +2,15 @@ package com.ayc.canalguide.data.entities
 
 import androidx.room.Entity
 import androidx.room.Ignore
-import androidx.room.PrimaryKey
 import com.ayc.canalguide.R
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
 import com.tickaroo.tikxml.annotation.Attribute
 import com.tickaroo.tikxml.annotation.Xml
 // <marina bodyofwater="hudson" mile="131.48" shore="west" marina="Donovan's Shady Harbor Marina" marina_url="http://www.shadyharbormarina.com/" phonenumber="(518) 756-8001" vhf="9,16,68" fuel="GD" repair="EHM" facilities="EWPRSLIC" latitude="42.450930" longitude="-73.786800"/>
 @Xml()
 @Entity(tableName = "marina_marker")
-data class MarinaMarker (
+data class MarinaMarker(
     @Attribute
     @Ignore
     override val markerId: Int = 0,
@@ -49,6 +46,41 @@ data class MarinaMarker (
 
 
     override fun getMarkerOptions() = super.getMarkerOptions()?.icon(markerIcon)
+
+    fun getFuelText() = if (!fuel.isNullOrBlank())
+        when {
+            fuel.contains("G") && fuel.contains("D") -> "Gas & Diesel"
+            fuel.contains("G") -> "Gas"
+            fuel.contains("D") -> "Diesel"
+            else -> null
+    } else null
+
+    fun getRepairText(): String? {
+        repair ?: return null
+
+        var repairText = ""
+        if( repair.contains("E") ) repairText += "Electrical\n"
+        if( repair.contains("H") ) repairText += "Hull\n"
+        if( repair.contains("M") ) repairText += "Mechanical\n"
+        if( repair.contains("S") ) repairText += "Mast Stepping\n"
+        if( repair.contains("T") ) repairText += "Towing\n"
+
+        // Remove extra new line character
+        return if (repairText.isNotEmpty()) repairText.substring(0, repairText.length - 1) else null
+    }
+
+    fun getFacilitiesText(): String? {
+        facilities ?: return null
+        var facilitiesText = ""
+        val chars = charArrayOf('E', 'W', 'P', 'R', 'S', 'L', 'I', 'C')
+        val strings = arrayOf("Electrical", "Water", "Pumpout", "Restrooms", "Showers", "Laundry", "Wi-Fi", "Cable")
+        for (i in chars.indices)
+            if (facilities.contains(chars[i]))
+                facilitiesText += strings[i] + "\n"
+
+        // Remove extra new line character
+        return if (facilitiesText.isNotEmpty()) facilitiesText.substring(0, facilitiesText.length - 1) else null
+    }
 
     companion object {
         val markerIcon: BitmapDescriptor = BitmapDescriptorFactory.fromResource(R.drawable.mmi_blue_marker)

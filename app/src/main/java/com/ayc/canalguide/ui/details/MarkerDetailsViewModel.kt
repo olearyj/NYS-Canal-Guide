@@ -81,6 +81,22 @@ class MarkerDetailsViewModel @ViewModelInject constructor(
             when (mapMarker) {
                 //is LockMarker -> it.phone
                 is MarinaMarker -> {
+                    mapMarker.getFuelText()?.let {
+                        add("Fuel")
+                        add(it)
+                    }
+                    mapMarker.vhf?.let {
+                        add("Vhf Channels")
+                        add(it) //.replace(", *", ", "))
+                    }
+                    mapMarker.getFacilitiesText()?.let {
+                        add("Facilities")
+                        add(it)
+                    }
+                    mapMarker.getRepairText()?.let {
+                        add("Repair")
+                        add(it)
+                    }
                 }
 //                is CruiseMarker -> it.url
 //                is BridgeGateMarker -> it.phone
