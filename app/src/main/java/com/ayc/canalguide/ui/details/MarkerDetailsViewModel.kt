@@ -99,7 +99,16 @@ class MarkerDetailsViewModel @ViewModelInject constructor(
                     }
                 }
 //                is CruiseMarker -> it.url
-//                is BridgeGateMarker -> it.phone
+                is BridgeGateMarker -> {
+                    mapMarker.location?.let {
+                        add("Location")
+                        add(it)
+                    }
+                    mapMarker.getClearanceSubtext()?.let {
+                        add("Clearance")
+                        add(it)
+                    }
+                }
 //                is LaunchMarker -> {}
 //                is NavInfoMarker -> it.featureUrl
                 else -> {}

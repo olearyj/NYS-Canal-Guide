@@ -2,12 +2,9 @@ package com.ayc.canalguide.data.entities
 
 import androidx.room.Entity
 import androidx.room.Ignore
-import androidx.room.PrimaryKey
 import com.ayc.canalguide.R
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
 import com.tickaroo.tikxml.annotation.Attribute
 import com.tickaroo.tikxml.annotation.Xml
 
@@ -44,8 +41,18 @@ data class BridgeGateMarker (
 ): MapMarker(lat, lng, name, bodyOfWater, mile, markerId) {
 
 
-
     override fun getMarkerOptions() = super.getMarkerOptions()?.icon(markerIcon)
+
+    fun getClearanceSubtext(): String? {
+        val cc = clearanceClosed
+        val co = clearanceOpened?.replace("999", "Unlimited")
+
+        val subText = (if (cc != "-1" && cc != null) "Closed clearance: $cc\n" else "") +
+                (if (co != "-1" && co != null) "Opened clearance: $co\n" else "")
+
+        // Remove extra new line character
+        return if(subText.isNotBlank()) subText.substring(0, subText.length - 1) else null
+    }
 
     companion object {
         val markerIcon: BitmapDescriptor = BitmapDescriptorFactory.fromResource(R.drawable.mmi_yellow_marker)
