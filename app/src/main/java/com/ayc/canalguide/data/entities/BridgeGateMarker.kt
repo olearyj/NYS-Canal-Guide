@@ -47,8 +47,9 @@ data class BridgeGateMarker (
         val cc = clearanceClosed
         val co = clearanceOpened?.replace("999", "Unlimited")
 
-        val subText = (if (cc != "-1" && cc != null) "Closed clearance: $cc\n" else "") +
-                (if (co != "-1" && co != null) "Opened clearance: $co\n" else "")
+        var subText = ""
+        if (cc != "-1" && cc != null) subText += "Closed clearance: $cc\n"
+        if (co != "-1" && co != null) subText += "Opened clearance: $co\n"
 
         // Remove extra new line character
         return if(subText.isNotBlank()) subText.substring(0, subText.length - 1) else null

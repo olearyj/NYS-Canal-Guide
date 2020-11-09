@@ -55,29 +55,6 @@ class MarkerDetailsViewModel @ViewModelInject constructor(
                 add(address)
             }
 
-            /*
-
-		if( !isBlank(marina.getFuel()) ){
-        	addTextView("Fuel");
-        	addTextView(getFuelString(marina.getFuel()));
-    	}
-
-    	if( !isBlank(marina.getVhf()) ){
-        	addTextView("Vhf Channels");
-        	addTextView(marina.getVhf().replaceAll(", *", ", "));
-    	}
-
-    	if( !isBlank(marina.getFacilities()) ){
-        	addTextView("Facilities");
-        	addTextView(getFacilitiesString(marina.getFacilities()));
-    	}
-
-    	if(  !isBlank(marina.getRepair()) ){
-        	addTextView("Repair");
-        	addTextView(getRepairString(marina.getRepair()));
-    	}
-             */
-
             when (mapMarker) {
                 //is LockMarker -> it.phone
                 is MarinaMarker -> {
