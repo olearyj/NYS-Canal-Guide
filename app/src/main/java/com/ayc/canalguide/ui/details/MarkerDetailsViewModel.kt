@@ -75,7 +75,12 @@ class MarkerDetailsViewModel @ViewModelInject constructor(
                         add(it)
                     }
                 }
-//                is CruiseMarker -> it.url
+                is CruiseMarker -> {
+                    mapMarker.bodyOfWater.let {
+                        add("Waterways")
+                        add(it)
+                    }
+                }
                 is BridgeGateMarker -> {
                     mapMarker.location?.let {
                         add("Location")
