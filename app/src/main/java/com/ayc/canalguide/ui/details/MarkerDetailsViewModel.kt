@@ -86,8 +86,28 @@ class MarkerDetailsViewModel @ViewModelInject constructor(
                         add(it)
                     }
                 }
-//                is LaunchMarker -> {}
-//                is NavInfoMarker -> it.featureUrl
+                is LaunchMarker -> {
+                    mapMarker.launchType?.let {
+                        add("Launch Type")
+                        add(it)
+                    }
+                    mapMarker.getParkingSubtext()?.let {
+                        add("Parking")
+                        add(it)
+                    }
+                    mapMarker.dayUseAmenities?.let {
+                        add("Day Use Amenities")
+                        add(it.replace(", ", "\n"))
+                    }
+                    mapMarker.getFacilitiesSubtext()?.let {
+                        add("Facilities / Utilities")
+                        add(it)
+                    }
+                    mapMarker.getotherInfoSubtext()?.let {
+                        add("Other Information")
+                        add(it)
+                    }
+                }
                 is NavInfoMarker -> {
                     mapMarker.getDepthSubtext()?.let {
                         add("Depths")
