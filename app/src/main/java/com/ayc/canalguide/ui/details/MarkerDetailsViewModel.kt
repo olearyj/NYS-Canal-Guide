@@ -88,6 +88,12 @@ class MarkerDetailsViewModel @ViewModelInject constructor(
                 }
 //                is LaunchMarker -> {}
 //                is NavInfoMarker -> it.featureUrl
+                is NavInfoMarker -> {
+                    mapMarker.getDepthSubtext()?.let {
+                        add("Depths")
+                        add(it)
+                    }
+                }
                 else -> {}
             }
         }.toList()

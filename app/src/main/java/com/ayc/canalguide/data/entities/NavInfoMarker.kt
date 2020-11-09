@@ -2,13 +2,10 @@ package com.ayc.canalguide.data.entities
 
 import androidx.room.Entity
 import androidx.room.Ignore
-import androidx.room.PrimaryKey
 import com.ayc.canalguide.R
 import com.ayc.canalguide.utils.LatLongConverter
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
 import com.tickaroo.tikxml.annotation.Attribute
 import com.tickaroo.tikxml.annotation.Xml
 
@@ -63,6 +60,15 @@ data class NavInfoMarker (
     val noaaPageUrl: String?
 ): MapMarker(lat, lng, name, bodyOfWater, mile, markerId) {
 
+
+    fun getDepthSubtext(): String? {
+        var subText = ""
+        if (northEastDepth != null) subText += "North/East Depth: $northEastDepth\n"
+        if (southWestDepth != null) subText += "South/West Depth: $southWestDepth\n"
+
+        // Remove extra new line character
+        return if(subText.isNotBlank()) subText.substring(0, subText.length - 1) else null
+    }
 
     override fun getSnippet() = "Mile " + mile +  //(isNotBlank(southWestDepth) ? ", SW Depth=" + southWestDepth : "") +
             (if (isNotBlank(middleDepth)) ", Middle Depth=$middleDepth" else "") +  //(isNotBlank(northEastDepth) ? ", NE Depth=" + northEastDepth : "") +
