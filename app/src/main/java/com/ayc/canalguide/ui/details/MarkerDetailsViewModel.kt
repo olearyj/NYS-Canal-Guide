@@ -56,7 +56,7 @@ class MarkerDetailsViewModel @ViewModelInject constructor(
             }
 
             when (mapMarker) {
-                //is LockMarker -> it.phone
+                is LockMarker -> {}
                 is MarinaMarker -> {
                     mapMarker.getFuelText()?.let {
                         add("Fuel")
