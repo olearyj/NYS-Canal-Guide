@@ -95,24 +95,21 @@ class MarkerRepository @Inject constructor(
         }
     }
 
-
     fun loadNavInfoMarkers() = liveData {
         val dao = appDatabase.navInfoDao()
         emitSource( dao.getMarkers() )
 
-        withContext(Dispatchers.IO) {
-            launch {
-                val results = Constants.navInfoRegions.map {
-                    regionName -> async { safeApiCall( { canalsApiService.getNavInfo(regionName) }, "error") }
-                }.awaitAll()
+        CoroutineScope(Dispatchers.Default).launch {
+            val results = Constants.navInfoRegions.map {
+                regionName -> async { safeApiCall( { canalsApiService.getNavInfo(regionName) }, "error") }
+            }.awaitAll()
 
-                // TODO - use last update date field
+            // TODO - use last update date field
 
-                // Return if either are null since we don't want to delete the table unless we get a result for both
-                val markers = results.flatMap { navInfoMarkers -> navInfoMarkers?.markers ?: return@launch }
+            // Return if either are null since we don't want to delete the table unless we get a result for both
+            val markers = results.flatMap { navInfoMarkers -> navInfoMarkers?.markers ?: return@launch }
 
-                dao.deleteAllAndInsert(markers)
-            }
+            dao.deleteAllAndInsert(markers)
         }
     }
 

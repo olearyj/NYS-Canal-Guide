@@ -47,7 +47,6 @@ class MapsFragment : Fragment(R.layout.fragment_maps) {
     /**
      * When the map is ready, move to start camera location, observe filter states & data from view model, set custom info window
      */
-    @SuppressLint("MissingPermission")
     private val callback = OnMapReadyCallback { googleMap ->
         map = googleMap
 
@@ -55,6 +54,9 @@ class MapsFragment : Fragment(R.layout.fragment_maps) {
         val saratoga = LatLng(43.0616419,-73.7719178)
         val startZoom = 8.0f
         googleMap.moveCamera( CameraUpdateFactory.newLatLngZoom(saratoga, startZoom) )
+
+        // If permissions are granted show the users location
+        @SuppressLint("MissingPermission")
         if (MainActivity.hasPermissions(requireContext(), MainActivity.LOCATION_PERMISSION))
             map.isMyLocationEnabled = true
 

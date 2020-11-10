@@ -6,6 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.ayc.canalguide.repos.MarkerRepository
 import com.google.android.gms.maps.GoogleMap
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MapsViewModel @ViewModelInject constructor(
         markerRepository: MarkerRepository
@@ -19,8 +22,8 @@ class MapsViewModel @ViewModelInject constructor(
     val launchMarkers = markerRepository.loadLaunchMarkers()
     val cruiseMarkers = markerRepository.loadCruiseMarkers()
     val navInfoMarkers = Transformations.map(markerRepository.loadNavInfoMarkers()) { markers ->
-        // Remove any markers that don't fall into a category
-        markers.filter { marker -> marker.getBitmapDescriptor() != null }
+            // Remove any markers that don't fall into a category
+            markers.filter { marker -> marker.getBitmapDescriptor() != null }
     }
 
     // Filter states

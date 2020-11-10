@@ -63,10 +63,10 @@ class MarkerDetailsFragment : Fragment(R.layout.fragment_marker_details), OnMapR
         mapFragment?.getMapAsync(this)
     }
 
-    @SuppressLint("MissingPermission")
     override fun onMapReady(map: GoogleMap?) {
         googleMap = map ?: return
 
+        @SuppressLint("MissingPermission")
         if (MainActivity.hasPermissions(requireContext(), MainActivity.LOCATION_PERMISSION))
             googleMap.isMyLocationEnabled = true
 
