@@ -4,10 +4,8 @@ import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import android.widget.TextView
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.navArgs
 import com.ayc.canalguide.MainActivity
 import com.ayc.canalguide.R
 import com.ayc.canalguide.databinding.FragmentMarkerDetailsBinding
@@ -26,7 +24,7 @@ import kotlinx.android.synthetic.main.fragment_marker_details.*
 class MarkerDetailsFragment : Fragment(R.layout.fragment_marker_details), OnMapReadyCallback {
 
 
-    private val args: MarkerDetailsFragmentArgs by navArgs()
+    //private val args: MarkerDetailsFragmentArgs by navArgs()
 
     private val viewModel: MarkerDetailsViewModel by viewModels()
 
@@ -83,9 +81,10 @@ class MarkerDetailsFragment : Fragment(R.layout.fragment_marker_details), OnMapR
         detailsLayout.addView(TextView(context).apply {
             text = detail
 
+            // Set text appearance to medium or large depending on if this should be a header
             val textAppearance = if (isHeader) android.R.style.TextAppearance_Medium else android.R.style.TextAppearance_Small
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) setTextAppearance(textAppearance)
-            else setTextAppearance(context, textAppearance)
+            else @Suppress("DEPRECATION") setTextAppearance(context, textAppearance)
 
             if (isHeader) setPadding(4.dpToPx(context), 6.dpToPx(context), 4.dpToPx(context), 4.dpToPx(context))
             else setPadding(8.dpToPx(context), 0, 4.dpToPx(context), 2.dpToPx(context))
