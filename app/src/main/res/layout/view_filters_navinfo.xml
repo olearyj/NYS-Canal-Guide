@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingLeft="16dp">
+    android:paddingLeft="12dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,11 +14,13 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:minWidth="45dp"
             app:srcCompat="@drawable/mmi_bridge" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:text="@string/title_filter_navinfo_bridges" />
     </LinearLayout>
 
@@ -30,11 +32,13 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:minWidth="45dp"
             app:srcCompat="@drawable/mmi_green_buoy" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:text="@string/title_filter_navinfo_green_buoys" />
     </LinearLayout>
 
@@ -46,11 +50,13 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:minWidth="45dp"
             app:srcCompat="@drawable/mmi_red_buoy" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:text="@string/title_filter_navinfo_red_buoys" />
     </LinearLayout>
 
@@ -62,11 +68,13 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:minWidth="45dp"
             app:srcCompat="@drawable/mmi_green_beacon" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:text="@string/title_filter_navinfo_green_beacons" />
     </LinearLayout>
 
@@ -78,11 +86,13 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:minWidth="45dp"
             app:srcCompat="@drawable/mmi_red_beacon" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:text="@string/title_filter_navinfo_red_beacons" />
     </LinearLayout>
 
@@ -94,11 +104,13 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:minWidth="45dp"
             app:srcCompat="@drawable/mmi_other_beacon" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:text="@string/title_filter_navinfo_other_beacons" />
     </LinearLayout>
 

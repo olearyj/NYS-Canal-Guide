@@ -25,8 +25,7 @@
             android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="12dp"
             android:text="@string/description_filters" />
 
         <LinearLayout
@@ -139,6 +138,7 @@
             android:layout_height="wrap_content"
             android:text="@string/title_filter_navinfo"
             android:theme="@style/FilterSwitchBlueAppTheme"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:checked="@={mapsViewModel.navInfoFilterState}" />
 
         <include
