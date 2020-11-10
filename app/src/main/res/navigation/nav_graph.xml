@@ -29,11 +29,6 @@
             app:argType="string" />
     </fragment>
     <fragment
-        android:id="@+id/nav_filters"
-        android:name="com.ayc.canalguide.ui.options.OptionsFragment"
-        android:label="OptionsFragment"
-        tools:layout="@layout/fragment_options" />
-    <fragment
         android:id="@+id/optionsDialogFragment"
         android:name="com.ayc.canalguide.ui.options.OptionsDialogFragment"
         android:label="OptionsDialogFragment" />
