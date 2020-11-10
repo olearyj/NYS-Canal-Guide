@@ -4,10 +4,12 @@ import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import androidx.fragment.app.Fragment
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import com.ayc.canalguide.MainActivity
 import com.ayc.canalguide.R
@@ -18,6 +20,8 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
+import com.google.android.material.transition.MaterialElevationScale
+import kotlinx.android.synthetic.main.fragment_maps.*
 
 /**
  * Be sure to know the difference between the two types with the word "marker" in it:
@@ -54,12 +58,8 @@ class MapsFragment : Fragment(R.layout.fragment_maps) {
         if (MainActivity.hasPermissions(requireContext(), MainActivity.LOCATION_PERMISSION))
             map.isMyLocationEnabled = true
 
-        // Set custom info window so an icon appears on the right - TODO
+        // Set custom info window so info icon appears to the right of window
         googleMap.setInfoWindowAdapter( CanalInfoWindowAdapter(requireActivity()) )
-
-        mapsViewModel.selectedMapType.observe(viewLifecycleOwner) { mapType ->
-            googleMap.mapType = mapType
-        }
 
         // When the user clicks on the info window open the details page
         googleMap.setOnInfoWindowClickListener { marker ->
@@ -68,14 +68,23 @@ class MapsFragment : Fragment(R.layout.fragment_maps) {
             findNavController().navigate(action)
         }
 
-        observeMarkers(googleMap)
-        observeFilterStates(googleMap)
+        googleMap.setOnCameraMoveListener {
+            fabFilters.shrink()
+        }
+
+        // Add viewModel observers
+        observeMarkers(map)
+        observeFilterStates(map)
+        mapsViewModel.selectedMapType.observeForever { mapType ->
+            map.mapType = mapType
+        }
     }
 
     private fun observeMarkers(googleMap: GoogleMap) {
         fun createMarkerObserver(markerList: MutableList<Marker>, filterStateIsChecked: LiveData<Boolean>): Observer<List<MapMarker>> =
             Observer<List<MapMarker>> { markers ->
                 if (filterStateIsChecked.value != true) return@Observer
+                Log.i("TEST", "There are ${markers.count()} ${if(markers.count() > 0) markers[0].javaClass.simpleName else "markers"}")
 
                 // Refresh the marker list with the updated list
                 markerList.removeMarkersFromMapAndClearList()
@@ -83,12 +92,12 @@ class MapsFragment : Fragment(R.layout.fragment_maps) {
                     markerList += googleMap.addMarker( marker.getMarkerOptions() ).apply { tag = marker }
             }
 
-        mapsViewModel.lockMarkers.observe(viewLifecycleOwner, createMarkerObserver(lockMarkers, mapsViewModel.lockFilterState))
-        mapsViewModel.bridgeGateMarkers.observe(viewLifecycleOwner, createMarkerObserver(bridgeGateMarkers, mapsViewModel.bridgeGateFilterState))
-        mapsViewModel.marinaMarkers.observe(viewLifecycleOwner, createMarkerObserver(marinaMarkers, mapsViewModel.marinaFilterState))
-        mapsViewModel.cruiseMarkers.observe(viewLifecycleOwner, createMarkerObserver(cruiseMarkers, mapsViewModel.cruiseFilterState))
-        mapsViewModel.launchMarkers.observe(viewLifecycleOwner, createMarkerObserver(launchMarkers, mapsViewModel.launchFilterState))
-        mapsViewModel.navInfoMarkers.observe(viewLifecycleOwner, createMarkerObserver(navInfoMarkers, mapsViewModel.navInfoFilterState))
+        mapsViewModel.lockMarkers.observeForever(createMarkerObserver(lockMarkers, mapsViewModel.lockFilterState))
+        mapsViewModel.bridgeGateMarkers.observeForever(createMarkerObserver(bridgeGateMarkers, mapsViewModel.bridgeGateFilterState))
+        mapsViewModel.marinaMarkers.observeForever(createMarkerObserver(marinaMarkers, mapsViewModel.marinaFilterState))
+        mapsViewModel.cruiseMarkers.observeForever(createMarkerObserver(cruiseMarkers, mapsViewModel.cruiseFilterState))
+        mapsViewModel.launchMarkers.observeForever(createMarkerObserver(launchMarkers, mapsViewModel.launchFilterState))
+        mapsViewModel.navInfoMarkers.observeForever(createMarkerObserver(navInfoMarkers, mapsViewModel.navInfoFilterState))
     }
 
     private fun observeFilterStates(googleMap: GoogleMap) {
@@ -101,12 +110,12 @@ class MapsFragment : Fragment(R.layout.fragment_maps) {
                     markerList.removeMarkersFromMapAndClearList()
             }
 
-        mapsViewModel.lockFilterState.observe(viewLifecycleOwner, createFilterStateObserver(lockMarkers, mapsViewModel.lockMarkers))
-        mapsViewModel.bridgeGateFilterState.observe(viewLifecycleOwner, createFilterStateObserver(bridgeGateMarkers, mapsViewModel.bridgeGateMarkers))
-        mapsViewModel.marinaFilterState.observe(viewLifecycleOwner, createFilterStateObserver(marinaMarkers, mapsViewModel.marinaMarkers))
-        mapsViewModel.cruiseFilterState.observe(viewLifecycleOwner, createFilterStateObserver(cruiseMarkers, mapsViewModel.cruiseMarkers))
-        mapsViewModel.launchFilterState.observe(viewLifecycleOwner, createFilterStateObserver(launchMarkers, mapsViewModel.launchMarkers))
-        mapsViewModel.navInfoFilterState.observe(viewLifecycleOwner, createFilterStateObserver(navInfoMarkers, mapsViewModel.navInfoMarkers))
+        mapsViewModel.lockFilterState.observeForever(createFilterStateObserver(lockMarkers, mapsViewModel.lockMarkers))
+        mapsViewModel.bridgeGateFilterState.observeForever(createFilterStateObserver(bridgeGateMarkers, mapsViewModel.bridgeGateMarkers))
+        mapsViewModel.marinaFilterState.observeForever(createFilterStateObserver(marinaMarkers, mapsViewModel.marinaMarkers))
+        mapsViewModel.cruiseFilterState.observeForever(createFilterStateObserver(cruiseMarkers, mapsViewModel.cruiseMarkers))
+        mapsViewModel.launchFilterState.observeForever(createFilterStateObserver(launchMarkers, mapsViewModel.launchMarkers))
+        mapsViewModel.navInfoFilterState.observeForever(createFilterStateObserver(navInfoMarkers, mapsViewModel.navInfoMarkers))
     }
 
     private fun MutableList<Marker>.removeMarkersFromMapAndClearList() {
@@ -117,8 +126,17 @@ class MapsFragment : Fragment(R.layout.fragment_maps) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
-        mapFragment?.getMapAsync(callback)
+
+        fabFilters.setOnClickListener {
+            val action = MapsFragmentDirections.actionOptionsDialog()
+            findNavController().navigate(action)
+        }
+
+        // Initialize the map if it is not already initialized
+        if (!this::map.isInitialized) {
+            val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
+            mapFragment?.getMapAsync(callback)
+        }
     }
 
     @SuppressLint("MissingPermission")
