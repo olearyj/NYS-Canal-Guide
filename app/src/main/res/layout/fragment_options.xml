@@ -10,37 +10,42 @@
 
     </data>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="4dp"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/title_filter"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+            android:layout_margin="4dp"
+            android:orientation="vertical">
 
-        <include
-            android:id="@+id/filters"
-            layout="@layout/view_filters"
-            app:mapsViewModel="@{mapsViewModel}" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/title_filter"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/title_map_type"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+            <include
+                android:id="@+id/filters"
+                layout="@layout/view_filters"
+                app:mapsViewModel="@{mapsViewModel}" />
 
-        <androidx.appcompat.widget.AppCompatSpinner
-            android:id="@+id/spinnerMapType"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:entries="@array/map_type_names"
-            android:padding="5dp"
-            android:selectedItemPosition="@={mapsViewModel.mapTypePosition}" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/title_map_type"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
-    </LinearLayout>
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spinnerMapType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:entries="@array/map_type_names"
+                android:padding="5dp"
+                android:selectedItemPosition="@={mapsViewModel.mapTypePosition}" />
+
+        </LinearLayout>
+    </ScrollView>
 </layout>
