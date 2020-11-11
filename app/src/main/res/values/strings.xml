@@ -22,4 +22,7 @@
     <string name="title_filter_navinfo_red_beacons">Red Beacons/Lights/Lighthouses</string>
     <string name="title_filter_navinfo_other_beacons">Other Beacons/Lights/Lighthouses</string>
 
+
+    <string name="shared_container_transition_name_filters">shared_filters_container</string>
+
 </resources>

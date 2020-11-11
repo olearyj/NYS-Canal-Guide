@@ -2,10 +2,10 @@ package com.ayc.canalguide.ui.map
 
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
-import androidx.fragment.app.Fragment
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
@@ -20,7 +20,6 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
-import com.google.android.material.transition.MaterialElevationScale
 import kotlinx.android.synthetic.main.fragment_maps.*
 
 /**
@@ -131,7 +130,8 @@ class MapsFragment : Fragment(R.layout.fragment_maps) {
 
         fabFilters.setOnClickListener {
             val action = MapsFragmentDirections.actionOptionsDialog()
-            findNavController().navigate(action)
+            val extras = FragmentNavigatorExtras(fabFilters to getString(R.string.shared_container_transition_name_filters))
+            findNavController().navigate(action, extras)
         }
 
         // Initialize the map if it is not already initialized

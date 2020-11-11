@@ -11,8 +11,11 @@
     </data>
 
     <ScrollView
+        android:id="@+id/filters_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:transitionName="@string/shared_container_transition_name_filters">
 
         <LinearLayout
             android:layout_width="match_parent"
