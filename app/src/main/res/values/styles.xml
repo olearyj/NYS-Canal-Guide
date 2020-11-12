@@ -35,7 +35,7 @@
     <style name="FilterSwitchThemeGreen" parent="AppTheme">
         <item name="colorAccent">@color/mmi_green</item>
     </style>
-    <!-- app themed -->
+    <!-- app theme filter switch -->
     <style name="FilterSwitchBlueAppTheme" parent="AppTheme">
         <item name="colorAccent">@color/colorPrimary</item>
     </style>
