@@ -146,7 +146,7 @@ class MapsFragment : Fragment(R.layout.fragment_maps) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
         if (PackageManager.PERMISSION_GRANTED == grantResults.firstOrNull()) {
-            if (requestCode == MainActivity.REQUEST_CODE)
+            if (requestCode == MainActivity.LOCATION_REQUEST_CODE)
                 map.isMyLocationEnabled = true
             //Toast.makeText(this, "Permission request granted", Toast.LENGTH_LONG).show()
         }
