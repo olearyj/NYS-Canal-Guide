@@ -39,6 +39,20 @@ class MarkerDetailsFragment : Fragment(R.layout.fragment_marker_details), OnMapR
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
+        addButtonClickListeners()
+
+        viewModel.markerDetails.observe(viewLifecycleOwner) { details ->
+            detailsLayout.removeAllViews()
+
+            for (i in details.indices)
+                addDetailsTextView(details[i], i % 2 == 0)
+        }
+
+        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
+        mapFragment?.getMapAsync(this)
+    }
+
+    private fun addButtonClickListeners() {
         ivCall.setOnClickListener {
             if (viewModel.hasPhoneNumber())
                 MyHelper.makeCall(activity, viewModel.phoneNumber.value!!)
@@ -51,16 +65,6 @@ class MarkerDetailsFragment : Fragment(R.layout.fragment_marker_details), OnMapR
             if (viewModel.hasWebsiteNoaa())
                 MyHelper.openUrl(context, viewModel.websiteNoaa.value!!)
         }
-
-        viewModel.markerDetails.observe(viewLifecycleOwner) { details ->
-            detailsLayout.removeAllViews()
-
-            for (i in details.indices)
-                addDetailsTextView(details[i], i % 2 == 0)
-        }
-
-        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
-        mapFragment?.getMapAsync(this)
     }
 
     override fun onMapReady(map: GoogleMap?) {
