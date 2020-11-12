@@ -4,7 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingLeft="12dp">
+    android:paddingStart="12dp"
+    android:paddingEnd="8dp"
+    android:focusable="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,7 +17,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:minWidth="45dp"
-            app:srcCompat="@drawable/mmi_bridge" />
+            app:srcCompat="@drawable/mmi_bridge"
+            android:contentDescription="@null" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -33,7 +36,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:minWidth="45dp"
-            app:srcCompat="@drawable/mmi_green_buoy" />
+            app:srcCompat="@drawable/mmi_green_buoy"
+            android:contentDescription="@null" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -51,7 +55,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:minWidth="45dp"
-            app:srcCompat="@drawable/mmi_red_buoy" />
+            app:srcCompat="@drawable/mmi_red_buoy"
+            android:contentDescription="@null" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -69,7 +74,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:minWidth="45dp"
-            app:srcCompat="@drawable/mmi_green_beacon" />
+            app:srcCompat="@drawable/mmi_green_beacon"
+            android:contentDescription="@null" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -87,7 +93,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:minWidth="45dp"
-            app:srcCompat="@drawable/mmi_red_beacon" />
+            app:srcCompat="@drawable/mmi_red_beacon"
+            android:contentDescription="@null" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -105,7 +112,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:minWidth="45dp"
-            app:srcCompat="@drawable/mmi_other_beacon" />
+            app:srcCompat="@drawable/mmi_other_beacon"
+            android:contentDescription="@null" />
 
         <TextView
             android:layout_width="wrap_content"

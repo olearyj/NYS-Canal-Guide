@@ -31,13 +31,15 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:focusable="true">
 
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/mmi_red_marker" />
+                app:srcCompat="@drawable/mmi_red_marker"
+                android:contentDescription="@null" />
 
             <com.google.android.material.switchmaterial.SwitchMaterial
                 android:id="@+id/switchLocks"
@@ -52,13 +54,15 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:focusable="true">
 
             <ImageView
                 android:id="@+id/imageView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/mmi_yellow_marker" />
+                app:srcCompat="@drawable/mmi_yellow_marker"
+                android:contentDescription="@null" />
 
             <com.google.android.material.switchmaterial.SwitchMaterial
                 android:id="@+id/switchBridgeGates"
@@ -73,13 +77,15 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:focusable="true">
 
             <ImageView
                 android:id="@+id/imageView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/mmi_green_marker" />
+                app:srcCompat="@drawable/mmi_green_marker"
+                android:contentDescription="@null" />
 
             <com.google.android.material.switchmaterial.SwitchMaterial
                 android:id="@+id/switchBoatLaunches"
@@ -94,13 +100,15 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:focusable="true">
 
             <ImageView
                 android:id="@+id/imageView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/mmi_blue_marker" />
+                app:srcCompat="@drawable/mmi_blue_marker"
+                android:contentDescription="@null" />
 
             <com.google.android.material.switchmaterial.SwitchMaterial
                 android:id="@+id/switchMarinas"
@@ -115,13 +123,15 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:focusable="true">
 
             <ImageView
                 android:id="@+id/imageView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/mmi_violet_marker" />
+                app:srcCompat="@drawable/mmi_violet_marker"
+                android:contentDescription="@null" />
 
             <com.google.android.material.switchmaterial.SwitchMaterial
                 android:id="@+id/switchBoatRentals"
