@@ -5,7 +5,10 @@ import com.ayc.canalguide.Constants
 import com.ayc.canalguide.data.AppRoomDatabase
 import com.ayc.canalguide.data.entities.*
 import com.ayc.canalguide.network.CanalsApiService
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class MarkerRepository @Inject constructor(
@@ -13,9 +16,6 @@ class MarkerRepository @Inject constructor(
     private val canalsApiService: CanalsApiService
 ) : BaseRepository() {
 
-//    fun loadSampleBridgeGateMarkers() = liveData {
-//        emit(BridgeGateMarker.sampleData)
-//    }
 
     fun loadMapMarker(markerId: Int, javaClassSimpleName: String) =
             when (javaClassSimpleName) {
@@ -33,17 +33,14 @@ class MarkerRepository @Inject constructor(
         emitSource( dao.getMarkers() )
 
         withContext(Dispatchers.IO) {
-            launch {
-                val liftBridges = async { safeApiCall( { canalsApiService.getLiftBridges() }, "error") }
-                val guardGates = async { safeApiCall( { canalsApiService.getGuardGates() }, "error") }
+            val liftBridges = async { safeApiCall( { canalsApiService.getLiftBridges() }, "error") }
+            val guardGates = async { safeApiCall( { canalsApiService.getGuardGates() }, "error") }
 
-                // Await markers and concatenate
-                // Return if either are null since we don't want to delete the table unless we get a result for both
-                val markers1 = liftBridges.await()?.liftBridges ?: return@launch
-                val markers2 = guardGates.await()?.guardGates ?: return@launch
+            // Await markers and return if either are null since we don't want to delete the table unless we get a result for both
+            val liftBridgeMarkers = liftBridges.await()?.liftBridges ?: return@withContext
+            val guardGateMarkers = guardGates.await()?.guardGates ?: return@withContext
 
-                dao.deleteAllAndInsert(markers1 + markers2)
-            }
+            dao.deleteAllAndInsert(liftBridgeMarkers + guardGateMarkers)
         }
     }
 
@@ -52,10 +49,8 @@ class MarkerRepository @Inject constructor(
         emitSource( dao.getMarkers() )
 
         withContext(Dispatchers.IO) {
-            launch {
-                val markers = safeApiCall( { canalsApiService.getLocks() }, "error")?.markers ?: return@launch
-                dao.deleteAllAndInsert(markers)
-            }
+            val markers = safeApiCall( { canalsApiService.getLocks() }, "error")?.markers ?: return@withContext
+            dao.deleteAllAndInsert(markers)
         }
     }
 
@@ -64,10 +59,8 @@ class MarkerRepository @Inject constructor(
         emitSource( dao.getMarkers() )
 
         withContext(Dispatchers.IO) {
-            launch {
-                val markers = safeApiCall( { canalsApiService.getMarinas() }, "error")?.markers ?: return@launch
-                dao.deleteAllAndInsert(markers)
-            }
+            val markers = safeApiCall( { canalsApiService.getMarinas() }, "error")?.markers ?: return@withContext
+            dao.deleteAllAndInsert(markers)
         }
     }
 
@@ -76,10 +69,8 @@ class MarkerRepository @Inject constructor(
         emitSource( dao.getMarkers() )
 
         withContext(Dispatchers.IO) {
-            launch {
-                val markers = safeApiCall( { canalsApiService.getBoatLaunches() }, "error")?.markers ?: return@launch
-                dao.deleteAllAndInsert(markers)
-            }
+            val markers = safeApiCall( { canalsApiService.getBoatLaunches() }, "error")?.markers ?: return@withContext
+            dao.deleteAllAndInsert(markers)
         }
     }
 
@@ -88,10 +79,8 @@ class MarkerRepository @Inject constructor(
         emitSource( dao.getMarkers() )
 
         withContext(Dispatchers.IO) {
-            launch {
-                val markers = safeApiCall( { canalsApiService.getRentalsCruises() }, "error")?.markers ?: return@launch
-                dao.deleteAllAndInsert(markers)
-            }
+            val markers = safeApiCall( { canalsApiService.getRentalsCruises() }, "error")?.markers ?: return@withContext
+            dao.deleteAllAndInsert(markers)
         }
     }
 
@@ -99,7 +88,7 @@ class MarkerRepository @Inject constructor(
         val dao = appDatabase.navInfoDao()
         emitSource( dao.getMarkers() )
 
-        CoroutineScope(Dispatchers.Default).launch {
+        withContext(Dispatchers.IO) {
             val results = Constants.navInfoRegions.map {
                 regionName -> async { safeApiCall( { canalsApiService.getNavInfo(regionName) }, "error") }
             }.awaitAll()
@@ -107,7 +96,7 @@ class MarkerRepository @Inject constructor(
             // TODO - use last update date field
 
             // Return if either are null since we don't want to delete the table unless we get a result for both
-            val markers = results.flatMap { navInfoMarkers -> navInfoMarkers?.markers ?: return@launch }
+            val markers = results.flatMap { navInfoMarkers -> navInfoMarkers?.markers ?: return@withContext }
 
             dao.deleteAllAndInsert(markers)
         }

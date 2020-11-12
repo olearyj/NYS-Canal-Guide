@@ -57,11 +57,6 @@ data class BridgeGateMarker (
 
     companion object {
         val markerIcon: BitmapDescriptor = BitmapDescriptorFactory.fromResource(R.drawable.mmi_yellow_marker)
-
-//        val sampleData = listOf(
-//            BridgeGateMarker(43.18955, -73.58102, "Guard Gate Crockers Reef", "Ft Miller", "31.3", "CHamplain", "518-555-5555", "3.2", "2.3"),
-//            BridgeGateMarker(42.80340, -73.70890, "Guard Gate fake data", "Ft Miller!!", "31.2", "CHamplain", "518-555-5555", "3.2", "2.3")
-//        )
     }
 
 }
