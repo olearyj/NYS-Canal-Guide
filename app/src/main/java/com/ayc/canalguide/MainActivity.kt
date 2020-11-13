@@ -16,12 +16,18 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavController
+import androidx.navigation.NavDestination
+import androidx.navigation.fragment.NavHostFragment
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.UpdateAvailability
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
@@ -31,6 +37,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     //private val mapsViewModel: MapsViewModel by viewModels()
 
     private lateinit var appUpdateManager: AppUpdateManager
+
+    private lateinit var navController: NavController
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,7 +60,31 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
 
 
-        
+
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        navController = navHostFragment.navController
+
+        navController.addOnDestinationChangedListener { navController, navDestination, bundle ->
+            when (navDestination.id) {
+                R.id.optionsDialogFragment -> lifecycleScope.launch {
+                    delay(500L)
+                    if (immerseMode) showSystemUI()
+                }
+                R.id.markerDetailsFragment -> {
+                    if (immerseMode) showSystemUI()
+                }
+                R.id.nav_map -> {
+                    //if (immerseMode) hideSystemUI()
+                    // TODO only delay if coming from options fragment
+                    lifecycleScope.launch {
+                        delay(500L)
+                        if (immerseMode) hideSystemUI()
+                    }
+                }
+            }
+
+        }
+
 
 
         ViewCompat.setOnApplyWindowInsetsListener(main_container) { view: View, windowInsetsCompat: WindowInsetsCompat ->
@@ -109,11 +141,9 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     fun toggleImmerseMode() {
         if (immerseMode) {
             showSystemUI()
-            supportActionBar?.show()
         }
         else {
             hideSystemUI()
-            supportActionBar?.hide()
         }
 
         immerseMode = !immerseMode
@@ -121,6 +151,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     // https://stackoverflow.com/questions/62643517/immersive-fullscreen-on-android-11
     private fun hideSystemUI() {
+        supportActionBar?.hide()
         WindowCompat.setDecorFitsSystemWindows(window, false)
         WindowInsetsControllerCompat(window, main_container).let { controller ->
             controller.hide(WindowInsetsCompat.Type.statusBars() or WindowInsetsCompat.Type.navigationBars())
@@ -129,6 +160,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     }
 
     private fun showSystemUI() {
+        supportActionBar?.show()
         WindowCompat.setDecorFitsSystemWindows(window, true)
         WindowInsetsControllerCompat(window, main_container).show(WindowInsetsCompat.Type.statusBars() or WindowInsetsCompat.Type.navigationBars())
     }
