@@ -5,12 +5,14 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowInsetsController
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
@@ -50,13 +52,19 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
 
 
+        
 
 
-        //window.setDecorFitsSystemWindows(false)
-        //hideSystemUI()
+        ViewCompat.setOnApplyWindowInsetsListener(main_container) { view: View, windowInsetsCompat: WindowInsetsCompat ->
+            if (windowInsetsCompat.isVisible(WindowInsetsCompat.Type.systemBars())) {
+                Log.i("TESTQQQ", "Window Insets visible")
 
+            } else {
+                Log.i("TESTQQQ", "Window Insets invisible")
 
-        //supportActionBar?.setDisplayHomeAsUpEnabled(true)
+            }
+            windowInsetsCompat
+        }
 
 //        window.decorView.setOnApplyWindowInsetsListener { view, windowInsets ->
 //            if (windowInsets.isVisible(WindowInsets.Type.systemBars())) {
@@ -101,14 +109,16 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     fun toggleImmerseMode() {
         if (immerseMode) {
             showSystemUI()
+            supportActionBar?.show()
         }
         else {
             hideSystemUI()
+            supportActionBar?.hide()
         }
 
         immerseMode = !immerseMode
     }
-    
+
     // https://stackoverflow.com/questions/62643517/immersive-fullscreen-on-android-11
     private fun hideSystemUI() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
