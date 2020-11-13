@@ -20,6 +20,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.android.play.core.install.model.AppUpdateType
@@ -44,6 +45,11 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        navController = navHostFragment.navController
+
+        setupActionBarWithNavController(this, navController)
+
         // Request location permissions
         val permissions = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION)
         ActivityCompat.requestPermissions(this, permissions, LOCATION_REQUEST_CODE)
@@ -61,8 +67,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
 
 
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        navController = navHostFragment.navController
 
         navController.addOnDestinationChangedListener { navController, navDestination, bundle ->
             when (navDestination.id) {
@@ -82,7 +86,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                     }
                 }
             }
-
         }
 
 
@@ -135,6 +138,10 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 //
 //        }
 
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
     var immerseMode = false
