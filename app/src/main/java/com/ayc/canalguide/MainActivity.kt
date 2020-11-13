@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
 
 
-        
+
         //window.setDecorFitsSystemWindows(false)
         //hideSystemUI()
 
@@ -93,10 +93,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 //                immerseMode = true
 //            }
 //
-//            main_container.requestLayout()
-//            nav_host_fragment.requestLayout()
-//
-//            main_container.fitsSystemWindows = immerseMode
 //        }
 
     }
@@ -105,79 +101,14 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     fun toggleImmerseMode() {
         if (immerseMode) {
             showSystemUI()
-            //showSystemUI3()
-            //nav_host_fragment.fitsSystemWindows = true
         }
         else {
             hideSystemUI()
-            //hideSystemUI3()
-            //nav_host_fragment.fitsSystemWindows = false
         }
 
-//            main_container.requestLayout()
-//            nav_host_fragment.requestLayout()
         immerseMode = !immerseMode
     }
-
-    private fun hideSystemUI1() {
-        // Enables regular immersive mode.
-        // For "lean back" mode, remove SYSTEM_UI_FLAG_IMMERSIVE.
-        // Or for "sticky immersive," replace it with SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-        window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_IMMERSIVE
-                // Set the content to appear under the system bars so that the
-                // content doesn't resize when the system bars hide and show.
-                or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                // Hide the nav bar and status bar
-                or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                or View.SYSTEM_UI_FLAG_FULLSCREEN)
-    }
-
-    // Shows the system bars by removing all the flags
-// except for the ones that make the content appear under the system bars.
-    private fun showSystemUI1() {
-        window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
-    }
-
-    // https://stackoverflow.com/questions/62643517/immersive-fullscreen-on-android-11
-    private fun hideSystemUI2() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            window.setDecorFitsSystemWindows(false)
-            window.insetsController?.let { controller ->
-                controller.hide(WindowInsets.Type.statusBars() or WindowInsets.Type.navigationBars())
-                controller.systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
-            }
-        } else {
-            // Enables regular immersive mode.
-            // For "lean back" mode, remove SYSTEM_UI_FLAG_IMMERSIVE.
-            // Or for "sticky immersive," replace it with SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-            window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_IMMERSIVE
-                    // Set the content to appear under the system bars so that the
-                    // content doesn't resize when the system bars hide and show.
-                    or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                    or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                    or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                    // Hide the nav bar and status bar
-                    or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                    or View.SYSTEM_UI_FLAG_FULLSCREEN)
-        }
-    }
-
-    private fun showSystemUI2() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            window.setDecorFitsSystemWindows(true)
-            window.insetsController?.show(WindowInsets.Type.statusBars() or WindowInsets.Type.navigationBars())
-        } else {
-            window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                    or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                    or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
-        }
-    }
-
-
+    
     // https://stackoverflow.com/questions/62643517/immersive-fullscreen-on-android-11
     private fun hideSystemUI() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
@@ -192,19 +123,26 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         WindowInsetsControllerCompat(window, main_container).show(WindowInsetsCompat.Type.statusBars() or WindowInsetsCompat.Type.navigationBars())
     }
 
-
     override fun onResume() {
         super.onResume()
 
         // If an in-app update is already running, resume the update.
         appUpdateManager.appUpdateInfo.addOnSuccessListener { appUpdateInfo ->
             if (appUpdateInfo.updateAvailability() == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS)
-                appUpdateManager.startUpdateFlowForResult(appUpdateInfo, AppUpdateType.IMMEDIATE, this, APP_UPDATE_REQUEST_CODE)
+                appUpdateManager.startUpdateFlowForResult(
+                    appUpdateInfo,
+                    AppUpdateType.IMMEDIATE,
+                    this,
+                    APP_UPDATE_REQUEST_CODE
+                )
         }
     }
 
     companion object {
-        val LOCATION_PERMISSION = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
+        val LOCATION_PERMISSION = arrayOf(
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+        )
         const val LOCATION_REQUEST_CODE = 123
 
         const val APP_UPDATE_REQUEST_CODE = 321
