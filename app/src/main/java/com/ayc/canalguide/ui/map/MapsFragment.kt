@@ -73,6 +73,13 @@ class MapsFragment : Fragment(R.layout.fragment_maps) {
             fabFilters.shrink()
         }
 
+
+        googleMap.setOnMapClickListener {
+            Log.i("TESTQQQ", "CLICKED ON THE MAP")
+            (activity as MainActivity).toggleImmerseMode()
+        }
+
+
         // Add viewModel observers
         observeMarkers(map)
         observeFilterStates(map)
