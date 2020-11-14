@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.ayc.canalguide.MainActivity
+import com.ayc.canalguide.ui.MainActivity
 import com.ayc.canalguide.R
 import com.ayc.canalguide.databinding.FragmentMarkerDetailsBinding
 import com.ayc.canalguide.utils.MyHelper

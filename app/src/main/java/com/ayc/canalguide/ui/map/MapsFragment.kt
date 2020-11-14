@@ -11,7 +11,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
-import com.ayc.canalguide.MainActivity
+import com.ayc.canalguide.ui.MainActivity
 import com.ayc.canalguide.R
 import com.ayc.canalguide.data.entities.MapMarker
 import com.google.android.gms.maps.CameraUpdateFactory

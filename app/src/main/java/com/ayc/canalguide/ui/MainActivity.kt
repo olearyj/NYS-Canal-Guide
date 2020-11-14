@@ -1,4 +1,4 @@
-package com.ayc.canalguide
+package com.ayc.canalguide.ui
 
 import android.Manifest
 import android.content.Context
@@ -17,6 +17,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
+import com.ayc.canalguide.R
 import com.ayc.canalguide.ui.map.MapsViewModel
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
