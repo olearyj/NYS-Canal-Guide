@@ -72,7 +72,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                     if (viewModel.immerseMode) showSystemUI()
                 }
                 // TODO only delay if coming from options fragment
-                R.id.nav_map -> lifecycleScope.launch {
+                R.id.mapFragment -> lifecycleScope.launch {
                     delay(500L)
                     if (viewModel.immerseMode) hideSystemUI()
                 }

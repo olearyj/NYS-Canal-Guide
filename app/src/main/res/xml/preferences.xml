@@ -20,6 +20,6 @@
             android:key="immerse_mode"
             android:icon="@drawable/ic_baseline_fullscreen_24"
             android:title="Fullscreen map"
-            android:summary="Choose if you want to hide the system bars while viewing the map" />
+            android:summary="Choose if you want to hide the system bars while viewing the map\nNote: Feature will work but animations may not be perfectly smooth" />
     </PreferenceCategory>
 </PreferenceScreen>

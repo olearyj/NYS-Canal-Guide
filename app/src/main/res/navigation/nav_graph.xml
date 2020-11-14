@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@+id/nav_map">
+    app:startDestination="@+id/mapFragment">
 
     <fragment
-        android:id="@+id/nav_map"
+        android:id="@+id/mapFragment"
         android:name="com.ayc.canalguide.ui.map.MapsFragment"
         android:label="@string/app_name"
         tools:layout="@layout/fragment_maps">
@@ -35,5 +35,5 @@
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.ayc.canalguide.ui.SettingsFragment"
-        android:label="SettingsFragment" />
+        android:label="@string/title_settings" />
 </navigation>
