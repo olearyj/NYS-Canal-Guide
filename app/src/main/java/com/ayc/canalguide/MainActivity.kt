@@ -87,9 +87,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.item_settings -> {
-                TODO()
-            }
+            R.id.item_settings -> navController.navigate(R.id.settingsFragment)
         }
         return super.onOptionsItemSelected(item)
     }

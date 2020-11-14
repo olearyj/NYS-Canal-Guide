@@ -32,4 +32,8 @@
         android:id="@+id/optionsDialogFragment"
         android:name="com.ayc.canalguide.ui.options.OptionsDialogFragment"
         android:label="@string/title_filter" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.ayc.canalguide.ui.SettingsFragment"
+        android:label="SettingsFragment" />
 </navigation>

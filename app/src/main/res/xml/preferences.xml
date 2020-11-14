@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="General">
+
+        <ListPreference
+            android:entries="@array/map_type_names"
+            android:entryValues="@array/map_type_index"
+            android:key="default_map_type_index"
+            android:summary="Choose the map type that'll appear when first opening the app"
+            android:title="Default Map Type"/>
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Beta features">
+
+    </PreferenceCategory>
+</PreferenceScreen>
