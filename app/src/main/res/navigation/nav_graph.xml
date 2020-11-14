@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/nav_map"
         android:name="com.ayc.canalguide.ui.map.MapsFragment"
-        android:label="fragment_maps"
-        tools:layout="@layout/fragment_maps" >
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_maps">
         <action
             android:id="@+id/actionMarkerDetails"
             app:destination="@id/markerDetailsFragment" />
@@ -20,7 +20,7 @@
     <fragment
         android:id="@+id/markerDetailsFragment"
         android:name="com.ayc.canalguide.ui.details.MarkerDetailsFragment"
-        android:label="MarkerDetailsFragment" >
+        android:label="@string/app_name">
         <argument
             android:name="markerId"
             app:argType="integer" />
@@ -31,5 +31,5 @@
     <fragment
         android:id="@+id/optionsDialogFragment"
         android:name="com.ayc.canalguide.ui.options.OptionsDialogFragment"
-        android:label="OptionsDialogFragment" />
+        android:label="@string/title_filter" />
 </navigation>

@@ -6,7 +6,7 @@
     <string name="title_map">Map</string>
     <string name="title_filter">Filters</string>
     <string name="title_map_type">Map Type</string>
-    <string name="description_filters">Switch color matches the marker icons on the map</string>
+    <string name="description_filters">Add or remove markers on the map by category.</string>
 
     <string name="title_filter_lock">Locks</string>
     <string name="title_filter_bridge_gate">Lift Bridges and Guard Gates</string>
