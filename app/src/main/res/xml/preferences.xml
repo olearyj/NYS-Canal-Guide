@@ -7,10 +7,19 @@
             android:entries="@array/map_type_names"
             android:entryValues="@array/map_type_index"
             android:key="default_map_type_index"
+            android:icon="@drawable/ic_map_24"
             android:summary="Choose the map type that'll appear when first opening the app"
             android:title="Default Map Type"/>
     </PreferenceCategory>
     <PreferenceCategory android:title="Beta features">
 
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/immerse_mode_options"
+            android:entryValues="@array/map_type_index"
+            android:key="immerse_mode"
+            android:icon="@drawable/ic_baseline_fullscreen_24"
+            android:title="Fullscreen map"
+            android:summary="Choose if you want to hide the system bars while viewing the map" />
     </PreferenceCategory>
 </PreferenceScreen>

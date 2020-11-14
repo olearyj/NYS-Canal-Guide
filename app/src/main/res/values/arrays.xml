@@ -15,4 +15,11 @@
         <item>3</item>
     </string-array>
 
+    <string-array name="immerse_mode_options">
+        <item>Off</item>
+        <item>Toggle (tap the map)</item>
+        <item>Always on</item>
+    </string-array>
+
+
 </resources>
