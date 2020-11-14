@@ -63,11 +63,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                 appUpdateManager.startUpdateFlowForResult(appUpdateInfo, AppUpdateType.IMMEDIATE, this, APP_UPDATE_REQUEST_CODE)
         }
 
-
-
-
-
-
+        // Handle immerseMode when navigating to other fragments
+        // Delay is used to make animations look better
         navController.addOnDestinationChangedListener { navController, navDestination, bundle ->
             when (navDestination.id) {
                 R.id.optionsDialogFragment -> lifecycleScope.launch {
@@ -77,86 +74,29 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                 R.id.markerDetailsFragment -> {
                     if (immerseMode) showSystemUI()
                 }
-                R.id.nav_map -> {
-                    //if (immerseMode) hideSystemUI()
-                    // TODO only delay if coming from options fragment
-                    lifecycleScope.launch {
-                        delay(500L)
-                        if (immerseMode) hideSystemUI()
-                    }
+                // TODO only delay if coming from options fragment
+                R.id.nav_map -> lifecycleScope.launch {
+                    delay(500L)
+                    if (immerseMode) hideSystemUI()
                 }
             }
         }
-
-
-
-        ViewCompat.setOnApplyWindowInsetsListener(main_container) { view: View, windowInsetsCompat: WindowInsetsCompat ->
-            if (windowInsetsCompat.isVisible(WindowInsetsCompat.Type.systemBars())) {
-                Log.i("TESTQQQ", "Window Insets visible")
-
-            } else {
-                Log.i("TESTQQQ", "Window Insets invisible")
-
-            }
-            windowInsetsCompat
-        }
-
-//        window.decorView.setOnApplyWindowInsetsListener { view, windowInsets ->
-//            if (windowInsets.isVisible(WindowInsets.Type.systemBars())) {
-//                immerseMode = false
-//                supportActionBar?.show()
-//                Log.i("TESTQQQ", "system bars are Visible")
-//            }
-//            else {
-//                Log.i("TESTQQQ", "system bars are Invisible")
-//                supportActionBar?.hide()
-//                immerseMode = true
-//            }
-//            main_container.fitsSystemWindows = immerseMode
-//            windowInsets
-//        }
-
-        // Set immerseMode variable here in case the user swipes down to show system UI
-//        window.decorView.setOnSystemUiVisibilityChangeListener { visibility ->
-//            // Note that system bars will only be "visible" if none of the
-//            // LOW_PROFILE, HIDE_NAVIGATION, or FULLSCREEN flags are set.
-//            if (visibility and View.SYSTEM_UI_FLAG_FULLSCREEN == 0) {
-//                // TODO: The system bars are visible. Make any desired
-//                // adjustments to your UI, such as showing the action bar or
-//                // other navigational controls.
-//                immerseMode = false
-//                supportActionBar?.show()
-//                Log.i("TESTQQQ", "LISTENER says visibility = $visibility")
-//            } else {
-//                // TODO: The system bars are NOT visible. Make any desired
-//                // adjustments to your UI, such as hiding the action bar or
-//                // other navigational controls.
-//                Log.i("TESTQQQ", "LISTENER says visibility = $visibility")
-//                supportActionBar?.hide()
-//                immerseMode = true
-//            }
-//
-//        }
-
     }
 
+    // Handle navigation bar back button
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
     var immerseMode = false
     fun toggleImmerseMode() {
-        if (immerseMode) {
-            showSystemUI()
-        }
-        else {
-            hideSystemUI()
-        }
-
+        if (immerseMode) showSystemUI()
+        else hideSystemUI()
         immerseMode = !immerseMode
     }
 
     // https://stackoverflow.com/questions/62643517/immersive-fullscreen-on-android-11
+    // Hide the app action bar, system status bar and system navigation bar
     private fun hideSystemUI() {
         supportActionBar?.hide()
         WindowCompat.setDecorFitsSystemWindows(window, false)
@@ -178,20 +118,12 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         // If an in-app update is already running, resume the update.
         appUpdateManager.appUpdateInfo.addOnSuccessListener { appUpdateInfo ->
             if (appUpdateInfo.updateAvailability() == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS)
-                appUpdateManager.startUpdateFlowForResult(
-                    appUpdateInfo,
-                    AppUpdateType.IMMEDIATE,
-                    this,
-                    APP_UPDATE_REQUEST_CODE
-                )
+                appUpdateManager.startUpdateFlowForResult(appUpdateInfo, AppUpdateType.IMMEDIATE, this, APP_UPDATE_REQUEST_CODE)
         }
     }
 
     companion object {
-        val LOCATION_PERMISSION = arrayOf(
-            Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.ACCESS_COARSE_LOCATION
-        )
+        val LOCATION_PERMISSION = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
         const val LOCATION_REQUEST_CODE = 123
 
         const val APP_UPDATE_REQUEST_CODE = 321
