@@ -39,7 +39,12 @@ class MarkerDetailsFragment : Fragment(R.layout.fragment_marker_details), OnMapR
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-        addButtonClickListeners()
+        viewModel.mapMarker.observe(viewLifecycleOwner) { mapMarker ->
+            (activity as MainActivity).supportActionBar?.let {
+                it.title = mapMarker.getTitle()
+                it.subtitle = mapMarker.getSnippet()
+            }
+        }
 
         viewModel.markerDetails.observe(viewLifecycleOwner) { details ->
             detailsLayout.removeAllViews()
@@ -50,6 +55,15 @@ class MarkerDetailsFragment : Fragment(R.layout.fragment_marker_details), OnMapR
 
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(this)
+
+        addButtonClickListeners()
+    }
+
+    override fun onStop() {
+        super.onStop()
+
+        // Remove subtitle from actionbar
+        (activity as MainActivity).supportActionBar?.subtitle = null
     }
 
     private fun addButtonClickListeners() {
