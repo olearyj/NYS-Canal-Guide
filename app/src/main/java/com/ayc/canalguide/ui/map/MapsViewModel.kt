@@ -11,6 +11,8 @@ class MapsViewModel @ViewModelInject constructor(
         markerRepository: MarkerRepository
 ): ViewModel() {
 
+    var immerseMode = false
+
     // Get markers from repo
     val bridgeGateMarkers = markerRepository.loadBridgeGateMarkers()
     val lockMarkers = markerRepository.loadLockMarkers()
