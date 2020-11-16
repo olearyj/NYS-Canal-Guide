@@ -26,6 +26,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.util.*
 
 
 @AndroidEntryPoint
@@ -92,9 +93,16 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
+    private var lastImmerseModeToggleTime = 0L
     // Toggled by mapFragment when the user taps on an empty area of the map
     fun toggleImmerseMode() {
         if (!viewModel.toggleImmerseMode) return
+
+        // Add a delay so immerse mode can only be toggled once every 3 seconds
+        val currentTimeMillis = Date().time
+        if (currentTimeMillis - lastImmerseModeToggleTime < 2000) return
+        lastImmerseModeToggleTime = currentTimeMillis
+
         if (viewModel.immerseMode) showSystemUI()
         else hideSystemUI()
         viewModel.immerseMode = !viewModel.immerseMode
