@@ -22,7 +22,7 @@ class SettingsFragment : PreferenceFragmentCompat(), SharedPreferences.OnSharedP
 
         when (key) {
             requireContext().getString(R.string.pref_key_fullscreen_mode) ->
-                mainViewModel.setImmerseMode(preferences?.getString(key, "0")!!)
+                mainViewModel.setImmerseMode(preferences?.getString(key, ImmerseMode.Off.value)!!)
         }
     }
 

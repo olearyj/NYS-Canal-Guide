@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.core.content.edit
 import com.ayc.canalguide.R
+import com.ayc.canalguide.ui.ImmerseMode
 
 class CanalPreferences(
     private val prefs: SharedPreferences,
@@ -29,7 +30,7 @@ class CanalPreferences(
         get() = prefs.getString(defaultMapTypeIndexKey, "0")!!
 
     val fullscreenMapModeIndex: String
-        get() = prefs.getString(fullscreenModeIndexKey, "0")!!
+        get() = prefs.getString(fullscreenModeIndexKey, ImmerseMode.Off.value)!!
 
     private val cacheFilters: Boolean
         get() = prefs.getBoolean(defaultCacheFiltersKey, false)

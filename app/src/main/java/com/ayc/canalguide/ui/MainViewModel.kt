@@ -12,21 +12,21 @@ class MainViewModel @ViewModelInject constructor(
 
     // TODO - change var to livedata
     // True when immerse mode is set to Always On
-    var immerseMode = preferences.fullscreenMapModeIndex == "2"
+    var immerseMode = preferences.fullscreenMapModeIndex == ImmerseMode.AlwaysOn.value
 
     // True when immerse mode set to Toggle on Tap
-    var toggleImmerseMode = preferences.fullscreenMapModeIndex == "1"
+    var toggleImmerseMode = preferences.fullscreenMapModeIndex == ImmerseMode.TapToToggle.value
         private set
 
     // Used by settinngs fragment
-    fun setImmerseMode(value: String) {
-        when (value) {
-            "0" -> {
+    fun setImmerseMode(fullscreenMapModeIndex: String) {
+        when (fullscreenMapModeIndex) {
+            ImmerseMode.Off.value -> {
                 immerseMode = false
                 toggleImmerseMode = false
             }
-            "1" -> toggleImmerseMode = true
-            "2" -> {
+            ImmerseMode.TapToToggle.value -> toggleImmerseMode = true
+            ImmerseMode.AlwaysOn.value -> {
                 immerseMode = true
                 toggleImmerseMode = false
             }
