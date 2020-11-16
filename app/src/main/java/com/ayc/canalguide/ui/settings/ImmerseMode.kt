@@ -1,4 +1,4 @@
-package com.ayc.canalguide.ui
+package com.ayc.canalguide.ui.settings
 
 enum class ImmerseMode(val value: String) {
     Off("0"),

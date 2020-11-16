@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.core.content.edit
 import com.ayc.canalguide.R
-import com.ayc.canalguide.ui.ImmerseMode
+import com.ayc.canalguide.ui.settings.ImmerseMode
 
 class CanalPreferences(
     private val prefs: SharedPreferences,

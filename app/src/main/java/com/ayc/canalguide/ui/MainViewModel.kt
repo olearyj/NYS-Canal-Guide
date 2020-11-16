@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import com.ayc.canalguide.data.CanalPreferences
+import com.ayc.canalguide.ui.settings.ImmerseMode
 
 class MainViewModel @ViewModelInject constructor(
     preferences: CanalPreferences

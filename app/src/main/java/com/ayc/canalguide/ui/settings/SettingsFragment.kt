@@ -1,10 +1,11 @@
-package com.ayc.canalguide.ui
+package com.ayc.canalguide.ui.settings
 
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.activityViewModels
 import androidx.preference.PreferenceFragmentCompat
 import com.ayc.canalguide.R
+import com.ayc.canalguide.ui.MainViewModel
 
 
 class SettingsFragment : PreferenceFragmentCompat(), SharedPreferences.OnSharedPreferenceChangeListener {
