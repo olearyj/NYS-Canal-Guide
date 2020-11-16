@@ -30,7 +30,7 @@
     </fragment>
     <fragment
         android:id="@+id/optionsDialogFragment"
-        android:name="com.ayc.canalguide.ui.options.OptionsDialogFragment"
+        android:name="com.ayc.canalguide.ui.filter.FilterFragment"
         android:label="@string/title_filter" />
     <fragment
         android:id="@+id/settingsFragment"

@@ -1,16 +1,14 @@
-package com.ayc.canalguide.ui.options
+package com.ayc.canalguide.ui.filter
 
 import android.graphics.Color
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.ayc.canalguide.R
 import com.ayc.canalguide.data.CanalPreferences
-import com.ayc.canalguide.databinding.FragmentOptionsBinding
+import com.ayc.canalguide.databinding.FragmentFilterBinding
 import com.ayc.canalguide.ui.map.MapsViewModel
 import com.ayc.canalguide.utils.viewBinding
 import com.google.android.material.transition.MaterialArcMotion
@@ -19,23 +17,19 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class OptionsDialogFragment: DialogFragment() {
+class FilterFragment: Fragment(R.layout.fragment_filter) {
 
+
+    @Inject lateinit var preferences: CanalPreferences
 
     private val mapsViewModel: MapsViewModel by activityViewModels()
 
-    private val binding by viewBinding(FragmentOptionsBinding::bind)
-
-    @Inject lateinit var preferences: CanalPreferences
+    private val binding by viewBinding(FragmentFilterBinding::bind)
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContainerTransition()
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_options, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
