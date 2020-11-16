@@ -18,7 +18,6 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import com.ayc.canalguide.R
-import com.ayc.canalguide.ui.map.MapsViewModel
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.android.play.core.install.model.AppUpdateType
@@ -33,7 +32,8 @@ import kotlinx.coroutines.launch
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
 
-    private val viewModel: MapsViewModel by viewModels()
+    private val viewModel: MainViewModel by viewModels()
+    //private val mapsViewModel: MapsViewModel by viewModels()
 
     private lateinit var appUpdateManager: AppUpdateManager
 
@@ -61,23 +61,17 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                 appUpdateManager.startUpdateFlowForResult(appUpdateInfo, AppUpdateType.IMMEDIATE, this, APP_UPDATE_REQUEST_CODE)
         }
 
-        // Handle immerseMode when navigating to other fragments
-        // Delay is used to make animations look better
-        navController.addOnDestinationChangedListener { navController, navDestination, bundle ->
-            when (navDestination.id) {
-                R.id.optionsDialogFragment -> lifecycleScope.launch {
-                    delay(500L)
-                    if (viewModel.immerseMode) showSystemUI()
-                }
-                R.id.markerDetailsFragment -> {
-                    if (viewModel.immerseMode) showSystemUI()
-                }
-                // TODO only delay if coming from options fragment
-                R.id.mapFragment -> lifecycleScope.launch {
-                    delay(500L)
-                    if (viewModel.immerseMode) hideSystemUI()
-                }
-            }
+        // Handle immerse mode when navigating
+        addNavigationListener()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        // If an in-app update is already running, resume the update.
+        appUpdateManager.appUpdateInfo.addOnSuccessListener { appUpdateInfo ->
+            if (appUpdateInfo.updateAvailability() == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS)
+                appUpdateManager.startUpdateFlowForResult(appUpdateInfo, AppUpdateType.IMMEDIATE, this, APP_UPDATE_REQUEST_CODE)
         }
     }
 
@@ -100,9 +94,33 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     // Toggled by mapFragment when the user taps on an empty area of the map
     fun toggleImmerseMode() {
+        if (!viewModel.toggleImmerseMode) return
         if (viewModel.immerseMode) showSystemUI()
         else hideSystemUI()
         viewModel.immerseMode = !viewModel.immerseMode
+    }
+
+    /**
+     * Handle immerseMode when navigating
+     * Delay is used to make animations look better
+     */
+    private fun addNavigationListener() {
+        navController.addOnDestinationChangedListener { navController, navDestination, bundle ->
+            when (navDestination.id) {
+                R.id.optionsDialogFragment -> if (viewModel.immerseMode) lifecycleScope.launch {
+                    delay(500L)
+                    showSystemUI()
+                }
+                R.id.markerDetailsFragment -> {
+                    if (viewModel.immerseMode) showSystemUI()
+                }
+                // TODO only delay if coming from options fragment
+                R.id.mapFragment -> if (viewModel.immerseMode) lifecycleScope.launch {
+                    delay(500L)
+                    hideSystemUI()
+                }
+            }
+        }
     }
 
     // https://stackoverflow.com/questions/62643517/immersive-fullscreen-on-android-11
@@ -120,16 +138,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         supportActionBar?.show()
         WindowCompat.setDecorFitsSystemWindows(window, true)
         WindowInsetsControllerCompat(window, main_container).show(WindowInsetsCompat.Type.statusBars() or WindowInsetsCompat.Type.navigationBars())
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        // If an in-app update is already running, resume the update.
-        appUpdateManager.appUpdateInfo.addOnSuccessListener { appUpdateInfo ->
-            if (appUpdateInfo.updateAvailability() == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS)
-                appUpdateManager.startUpdateFlowForResult(appUpdateInfo, AppUpdateType.IMMEDIATE, this, APP_UPDATE_REQUEST_CODE)
-        }
     }
 
     companion object {

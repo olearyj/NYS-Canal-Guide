@@ -9,18 +9,24 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import com.ayc.canalguide.R
+import com.ayc.canalguide.data.CanalPreferences
 import com.ayc.canalguide.databinding.FragmentOptionsBinding
 import com.ayc.canalguide.ui.map.MapsViewModel
 import com.ayc.canalguide.utils.viewBinding
 import com.google.android.material.transition.MaterialArcMotion
 import com.google.android.material.transition.MaterialContainerTransform
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class OptionsDialogFragment: DialogFragment() {
 
 
     private val mapsViewModel: MapsViewModel by activityViewModels()
 
     private val binding by viewBinding(FragmentOptionsBinding::bind)
+
+    @Inject lateinit var preferences: CanalPreferences
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +43,18 @@ class OptionsDialogFragment: DialogFragment() {
 
         binding.mapsViewModel = mapsViewModel
         binding.lifecycleOwner = viewLifecycleOwner
+    }
+
+    override fun onPause() {
+        preferences.updateCachedFilterStates(
+            lock = mapsViewModel.lockFilterState.value!!,
+            bridge = mapsViewModel.bridgeGateFilterState.value!!,
+            launch = mapsViewModel.launchFilterState.value!!,
+            marina = mapsViewModel.marinaFilterState.value!!,
+            cruise = mapsViewModel.cruiseFilterState.value!!,
+            navinfo = mapsViewModel.navInfoFilterState.value!!
+        )
+        super.onPause()
     }
 
     private fun setContainerTransition() {
