@@ -2,10 +2,14 @@ package com.ayc.canalguide.ui.filter
 
 import android.graphics.Color
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.ayc.canalguide.R
 import com.ayc.canalguide.data.CanalPreferences
 import com.ayc.canalguide.databinding.FragmentFilterBinding
@@ -29,6 +33,7 @@ class FilterFragment: Fragment(R.layout.fragment_filter) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
         setContainerTransition()
     }
 
@@ -51,6 +56,18 @@ class FilterFragment: Fragment(R.layout.fragment_filter) {
         super.onPause()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_actionbar, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.item_settings -> findNavController().navigate(R.id.settingsFragment)
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     private fun setContainerTransition() {
         sharedElementEnterTransition = MaterialContainerTransform().apply {
             fadeMode = MaterialContainerTransform.FADE_MODE_CROSS
@@ -66,6 +83,13 @@ class FilterFragment: Fragment(R.layout.fragment_filter) {
             startContainerColor = Color.WHITE
             endContainerColor = ContextCompat.getColor(requireContext(), R.color.mmi_yellow)
         }
+    }
+
+    private fun ImageView.toGrayscale(){
+        val matrix = ColorMatrix().apply {
+            setSaturation(0f)
+        }
+        colorFilter = ColorMatrixColorFilter(matrix)
     }
 
 }
