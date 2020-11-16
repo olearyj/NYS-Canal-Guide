@@ -77,27 +77,47 @@ data class NavInfoMarker (
     override fun getMarkerOptions() = super.getMarkerOptions()?.icon( getBitmapDescriptor() )
 
     //val bitmapDescriptor: BitmapDescriptor? by lazy {
-    fun getBitmapDescriptor(): BitmapDescriptor? {
+    private fun getBitmapDescriptor(): BitmapDescriptor? = when (getNavInfoType()) {
+        NavInfoMarker.Type.GreenBuoy -> greenBuoyIcon
+        NavInfoMarker.Type.GreenBeacon -> greenBeaconIcon
+        NavInfoMarker.Type.RedBuoy -> redBuoyIcon
+        NavInfoMarker.Type.RedBeacon -> redBeaconIcon
+        NavInfoMarker.Type.OtherBeacon -> otherBeaconIcon
+        NavInfoMarker.Type.Bridge -> bridgeIcon
+        NavInfoMarker.Type.Unknown -> null
+    }
+
+    fun getNavInfoType(): Type {
         val isBeaconLightOrLighthouse = name.contains("beacon", ignoreCase = true)
                 || name.startsWith("light", ignoreCase = true)
 
         return when {
             featureColor.equals("green", ignoreCase = true) ->
                 when {
-                    name.contains("buoy", ignoreCase = true) -> greenBuoyIcon
-                    isBeaconLightOrLighthouse -> greenBeaconIcon
-                    else -> null
+                    name.contains("buoy", ignoreCase = true) -> Type.GreenBuoy
+                    isBeaconLightOrLighthouse -> Type.GreenBeacon
+                    else -> Type.Unknown
                 }
             featureColor.equals("red", ignoreCase = true) ->
                 when {
-                    name.contains("buoy", ignoreCase = true) -> redBuoyIcon
-                    isBeaconLightOrLighthouse -> redBeaconIcon
-                    else -> null
+                    name.contains("buoy", ignoreCase = true) -> Type.RedBuoy
+                    isBeaconLightOrLighthouse -> Type.RedBeacon
+                    else -> Type.Unknown
                 }
-            isBeaconLightOrLighthouse -> otherBeaconIcon
-            name.contains("bridge", ignoreCase = true) -> bridgeIcon
-            else -> null
+            isBeaconLightOrLighthouse -> Type.OtherBeacon
+            name.contains("bridge", ignoreCase = true) -> Type.Bridge
+            else -> Type.Unknown
         }
+    }
+
+    enum class Type {
+        GreenBuoy,
+        GreenBeacon,
+        RedBuoy,
+        RedBeacon,
+        OtherBeacon,
+        Bridge,
+        Unknown
     }
 
     companion object {

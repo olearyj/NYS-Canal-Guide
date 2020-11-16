@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.ayc.canalguide.data.CanalPreferences
+import com.ayc.canalguide.data.entities.NavInfoMarker
 import com.ayc.canalguide.repos.MarkerRepository
 import com.google.android.gms.maps.GoogleMap
 
@@ -21,7 +22,7 @@ class MapsViewModel @ViewModelInject constructor(
     val cruiseMarkers = markerRepository.loadCruiseMarkers()
     val navInfoMarkers = Transformations.map(markerRepository.loadNavInfoMarkers()) { markers ->
             // Remove any markers that don't fall into a category
-            markers.filter { marker -> marker.getBitmapDescriptor() != null }
+            markers.filter { marker -> marker.getNavInfoType() != NavInfoMarker.Type.Unknown }
     }
 
     // Filter states
