@@ -2,24 +2,26 @@
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory android:title="General">
+    <PreferenceCategory android:title="@string/pref_category_title_general">
         <SwitchPreference
             android:defaultValue="false"
-            android:key="@string/pref_key_cache_filters"
             android:icon="@drawable/ic_baseline_cached_24"
-            android:title="@string/title_setting_cache_map_filters"
-            android:summary="@string/summary_setting_default_map_type"/>
+            android:key="@string/pref_key_cache_filters"
+            android:summary="@string/summary_setting_default_map_type"
+            android:title="@string/title_setting_cache_map_filters" />
 
         <ListPreference
+            android:defaultValue="0"
             android:entries="@array/map_type_names"
             android:entryValues="@array/map_type_index"
             android:icon="@drawable/ic_map_24"
             android:key="@string/pref_key_default_map_type"
             android:title="@string/title_setting_default_map_type"
-            android:defaultValue="0"
             app:useSimpleSummaryProvider="true" />
     </PreferenceCategory>
-    <PreferenceCategory android:title="Beta features">
+
+    <PreferenceCategory
+        android:title="@string/pref_category_title_beta">
         <ListPreference
             android:defaultValue="0"
             android:entries="@array/immerse_mode_options"
@@ -30,6 +32,9 @@
             android:summary="@string/summary_setting_fullscreen_map" />
     </PreferenceCategory>
 
-    <!-- Add info like last sync date, version TODO -->
-
+    <PreferenceCategory
+        android:title="@string/pref_category_title_about"
+        android:key="@string/pref_key_about_category">
+        <!-- Added dynamically in Settings Fragment -->
+    </PreferenceCategory>
 </PreferenceScreen>

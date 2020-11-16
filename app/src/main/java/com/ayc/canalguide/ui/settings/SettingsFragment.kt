@@ -3,7 +3,10 @@ package com.ayc.canalguide.ui.settings
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.activityViewModels
+import androidx.preference.Preference
+import androidx.preference.PreferenceCategory
 import androidx.preference.PreferenceFragmentCompat
+import com.ayc.canalguide.BuildConfig
 import com.ayc.canalguide.R
 import com.ayc.canalguide.ui.MainViewModel
 
@@ -16,6 +19,20 @@ class SettingsFragment : PreferenceFragmentCompat(), SharedPreferences.OnSharedP
 
     override fun onCreatePreferences(bundle: Bundle?, s: String?) {
         setPreferencesFromResource(R.xml.preferences, s)
+
+        // Add app version preference
+        val appVersionPref = Preference(context).apply {
+            title = context.getString(R.string.title_setting_app_version)
+            summary = "v${BuildConfig.VERSION_NAME}"
+        }
+        val appDeveloperPref = Preference(context).apply {
+            title = context.getString(R.string.title_setting_app_developer)
+            summary = "James O'Leary"
+        }
+        findPreference<PreferenceCategory>(requireContext().getString(R.string.pref_key_about_category))?.apply {
+            addPreference(appDeveloperPref)
+            addPreference(appVersionPref)
+        }
     }
 
     override fun onSharedPreferenceChanged(preferences: SharedPreferences?, key: String?) {
