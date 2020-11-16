@@ -23,12 +23,37 @@
     <string name="title_filter_navinfo_red_beacons">Red Beacons/Lights/Lighthouses</string>
     <string name="title_filter_navinfo_other_beacons">Other Beacons/Lights/Lighthouses</string>
 
-
-    <string name="shared_container_transition_name_filters">shared_filters_container</string>
-
     <string name="content_desc_filters_button">Filters</string>
     <string name="content_desc_call_button">Call</string>
     <string name="content_desc_website_button">Website</string>
     <string name="content_desc_noaa_maps_button">NOAA maps</string>
+
+    <string translatable="false" name="shared_container_transition_name_filters">shared_filters_container</string>
+
+    <string name="pref_immerse_mode_off">Off</string>
+    <string name="pref_immerse_mode_toggle">Tap to Toggle</string>
+    <string name="pref_immerse_mode_on">Always On</string>
+
+    <string name="title_setting_fullscreen_map">Fullscreen Map</string>
+    <string name="title_setting_default_map_type">Default Map Type</string>
+    <string name="title_setting_cache_map_filters">Cache Map Filters</string>
+    <string name="summary_setting_default_map_type">Remember the state of the filter switches</string>
+    <string name="summary_setting_fullscreen_map">Choose if you want to hide the system bars while viewing the map\nNote: This feature is expected to work but animations may not be as smooth</string>
+
+    <string translatable="false" name="pref_immerse_mode_off_value">OFF</string>
+    <string translatable="false" name="pref_immerse_mode_toggle_value">TOGGLE</string>
+    <string translatable="false" name="pref_immerse_mode_on_value">ON</string>
+
+    <string translatable="false" name="pref_key_cache_filters">cache_filters</string>
+    <string translatable="false" name="pref_key_default_map_type">default_map_type_index</string>
+    <string translatable="false" name="pref_key_fullscreen_mode">fullscreen_mode_index</string>
+
+    <string translatable="false" name="pref_key_filter_state_lock">LOCK_FILTER_STATE</string>
+    <string translatable="false" name="pref_key_filter_state_bridge">BRIDGE_FILTER_STATE</string>
+    <string translatable="false" name="pref_key_filter_state_marina">MARINA_FILTER_STATE</string>
+    <string translatable="false" name="pref_key_filter_state_launch">LAUNCH_FILTER_STATE</string>
+    <string translatable="false" name="pref_key_filter_state_cruise">CRUISE_FILTER_STATE</string>
+    <string translatable="false" name="pref_key_filter_state_navinfo">NAVINFO_FILTER_STATE</string>
+
 
 </resources>

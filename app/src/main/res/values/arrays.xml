@@ -16,10 +16,28 @@
     </string-array>
 
     <string-array name="immerse_mode_options">
-        <item>Off</item>
-        <item>Toggle (tap the map)</item>
-        <item>Always on</item>
+        <item>@string/pref_immerse_mode_off</item>
+        <item>@string/pref_immerse_mode_toggle</item>
+        <item>@string/pref_immerse_mode_on</item>
     </string-array>
 
+    <string-array name="immerse_mode_options_index">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+
+<!--    <string-array name="immerse_mode_options">-->
+<!--        <item>Off</item>-->
+<!--        <item>Tap to Toggle</item>-->
+<!--        <item>Always On</item>-->
+<!--    </string-array>-->
+
+<!--    <string-array name="immerse_mode_options_index">-->
+<!--        <item>@string/pref_immerse_mode_off_value</item>-->
+<!--        <item>@string/pref_immerse_mode_toggle_value</item>-->
+<!--        <item>@string/pref_immerse_mode_on_value</item>-->
+<!--    </string-array>-->
 
 </resources>

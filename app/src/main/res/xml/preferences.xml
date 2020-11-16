@@ -1,25 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory android:title="General">
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="@string/pref_key_cache_filters"
+            android:icon="@drawable/ic_baseline_cached_24"
+            android:title="@string/title_setting_cache_map_filters"
+            android:summary="@string/summary_setting_default_map_type"/>
 
         <ListPreference
             android:entries="@array/map_type_names"
             android:entryValues="@array/map_type_index"
-            android:key="default_map_type_index"
             android:icon="@drawable/ic_map_24"
-            android:summary="Choose the map type that'll appear when first opening the app"
-            android:title="Default Map Type"/>
+            android:key="@string/pref_key_default_map_type"
+            android:title="@string/title_setting_default_map_type"
+            android:defaultValue="0"
+            app:useSimpleSummaryProvider="true" />
     </PreferenceCategory>
     <PreferenceCategory android:title="Beta features">
-
         <ListPreference
-            android:defaultValue="1"
+            android:defaultValue="0"
             android:entries="@array/immerse_mode_options"
-            android:entryValues="@array/map_type_index"
-            android:key="immerse_mode"
+            android:entryValues="@array/immerse_mode_options_index"
+            android:key="@string/pref_key_fullscreen_mode"
             android:icon="@drawable/ic_baseline_fullscreen_24"
-            android:title="Fullscreen map"
-            android:summary="Choose if you want to hide the system bars while viewing the map\nNote: Feature will work but animations may not be perfectly smooth" />
+            android:title="@string/title_setting_fullscreen_map"
+            android:summary="@string/summary_setting_fullscreen_map" />
     </PreferenceCategory>
+
+    <!-- Add info like last sync date, version TODO -->
+
 </PreferenceScreen>
