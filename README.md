@@ -38,7 +38,7 @@ Be sure to add your own Google API key to the `values/google_maps_api.xml` file
 
 ## History
 
-TBD - Released **v3.0** - Full Kotlin re-write
-09/23/2019 - Released **v2.7**
-...
-08/29/2014 - Released **v1.0**
+- TBD - Released **v3.0** - Full Kotlin re-write
+- 09/23/2019 - Released **v2.7**
+- ...
+- 08/29/2014 - Released **v1.0**
