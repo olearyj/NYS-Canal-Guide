@@ -34,6 +34,8 @@ Be sure to add your own Google API key to the `values/google_maps_api.xml` file
  - [ ] [Google Places API](https://developers.google.com/places/web-service/overview) for map in details fragment (privacy policy required for API usage)
  - [ ] Dark mode to Material design specs
  - [ ] Add UI/Unit testing
+ - [ ] Add Ads and in-app purchase for ad-free mode
+ - [ ] Option to sponsor a marina and add their club's flag to the map
 
 
 ## History
