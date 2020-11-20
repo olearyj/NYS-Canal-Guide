@@ -3,8 +3,8 @@
 This Android app is published in the Google Play Store: [NYS Canal Guide](https://play.google.com/store/apps/details?id=com.AYC.canalguide&hl=en&gl=US)
 
 
-### Running this app
-Be sure to add your own Google API key to the `values/google_maps_api.xml` file. To get a api key, follow these [instructions](https://developers.google.com/maps/documentation/android-sdk/get-api-key).
+### Running this project
+Be sure to add your own Google API key to the `values/google_maps_api.xml` file. To get an api key, follow these [instructions](https://developers.google.com/maps/documentation/android-sdk/get-api-key).
 
 
 ## Technology stack / libraries / design patterns / frameworks
