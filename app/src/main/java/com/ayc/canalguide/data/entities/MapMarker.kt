@@ -3,6 +3,7 @@ package com.ayc.canalguide.data.entities
 import androidx.room.PrimaryKey
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import java.util.*
 
 abstract class MapMarker (
     open val lat: Double,
@@ -17,7 +18,7 @@ abstract class MapMarker (
 
     open fun getTitle() = name
 
-    open fun getSnippet() = ("$bodyOfWater, mile $mile")
+    open fun getSnippet() = ("$bodyOfWater, mile $mile".capitalize(Locale.ROOT))
 
     open fun getMarkerOptions(): MarkerOptions? = MarkerOptions()
             .title(getTitle())
