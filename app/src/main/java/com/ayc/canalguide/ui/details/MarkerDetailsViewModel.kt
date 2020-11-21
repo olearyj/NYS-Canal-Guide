@@ -45,76 +45,88 @@ class MarkerDetailsViewModel @ViewModelInject constructor(
         (it as? NavInfoMarker)?.noaaPageUrl
     }
 
+    /**
+     * Every string will be it's own textView. Every other will be a header.
+     * Handle dirty data such as nulls and empty strings when building this list of strings.
+     */
     val markerDetails = Transformations.map(mapMarker) { mapMarker ->
         mutableListOf<String>().apply {
+            // Add title and snippet
             add(mapMarker.getTitle())
             add(if (mapMarker !is NavInfoMarker) mapMarker.getSnippet() else mapMarker.getSnippet().replace(", ", "\n"))
 
-            getAddress(mapMarker)?.let { address ->
+            getAddress(mapMarker)?.let {
+                if (it.isBlank()) return@let
                 add("Address")
-                add(address)
+                add(it)
             }
 
             when (mapMarker) {
                 is LockMarker -> {}
                 is MarinaMarker -> {
                     mapMarker.getFuelText()?.let {
+                        if (it.isBlank()) return@let
                         add("Fuel")
                         add(it)
                     }
-                    mapMarker.vhf?.let {
+                    if(!mapMarker.vhf.isNullOrBlank()) {
                         add("Vhf Channels")
-                        add(it) //.replace(", *", ", "))
+                        add(mapMarker.vhf)
                     }
                     mapMarker.getFacilitiesText()?.let {
+                        if (it.isBlank()) return@let
                         add("Facilities")
                         add(it)
                     }
                     mapMarker.getRepairText()?.let {
+                        if (it.isBlank()) return@let
                         add("Repair")
                         add(it)
                     }
                 }
                 is CruiseMarker -> {
-                    mapMarker.bodyOfWater.let {
-                        add("Waterways")
-                        add(it)
-                    }
+                    add("Waterways")
+                    add(mapMarker.bodyOfWater)
                 }
                 is BridgeGateMarker -> {
-                    mapMarker.location?.let {
+                    if(!mapMarker.location.isNullOrBlank()) {
                         add("Location")
-                        add(it)
+                        add(mapMarker.location)
                     }
                     mapMarker.getClearanceSubtext()?.let {
+                        if (it.isBlank()) return@let
                         add("Clearance")
                         add(it)
                     }
                 }
                 is LaunchMarker -> {
-                    mapMarker.launchType?.let {
+                    if(!mapMarker.launchType.isNullOrBlank()) {
                         add("Launch Type")
-                        add(it)
+                        add(mapMarker.launchType)
                     }
                     mapMarker.getParkingSubtext()?.let {
+                        if (it.isBlank()) return@let
                         add("Parking")
                         add(it)
                     }
-                    mapMarker.dayUseAmenities?.let {
+                    if(!mapMarker.dayUseAmenities.isNullOrBlank()) {
                         add("Day Use Amenities")
-                        add(it.replace(", ", "\n"))
+                        add(mapMarker.dayUseAmenities.replace(", ", "\n"))
                     }
                     mapMarker.getFacilitiesSubtext()?.let {
+                        if (it.isBlank()) return@let
                         add("Facilities / Utilities")
                         add(it)
                     }
                     mapMarker.getotherInfoSubtext()?.let {
+                        if (it.isBlank()) return@let
                         add("Other Information")
                         add(it)
                     }
                 }
                 is NavInfoMarker -> {
                     mapMarker.getDepthSubtext()?.let {
+                        if (it.isBlank()) return@let
                         add("Depths")
                         add(it)
                     }

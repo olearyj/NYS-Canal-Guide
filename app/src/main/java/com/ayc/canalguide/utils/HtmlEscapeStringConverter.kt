@@ -8,12 +8,12 @@ class HtmlEscapeStringConverter : TypeConverter<String?> {
 
     @Throws(Exception::class)
     override fun read(s: String?): String {
-        return if(s != null) HtmlCompat.fromHtml(s, HtmlCompat.FROM_HTML_MODE_COMPACT).toString() else ""
+        return if(s != null) HtmlCompat.fromHtml(s, HtmlCompat.FROM_HTML_MODE_COMPACT).toString().trim() else ""
     }
 
     @Throws(Exception::class)
     override fun write(s: String?): String {
-        return if(s != null) HtmlCompat.fromHtml(s, HtmlCompat.FROM_HTML_MODE_COMPACT).toString() else ""
+        return if(s != null) HtmlCompat.fromHtml(s, HtmlCompat.FROM_HTML_MODE_COMPACT).toString().trim() else ""
     }
 
 }
