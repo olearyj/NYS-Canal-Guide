@@ -85,11 +85,4 @@ class FilterFragment: Fragment(R.layout.fragment_filter) {
         }
     }
 
-    private fun ImageView.toGrayscale(){
-        val matrix = ColorMatrix().apply {
-            setSaturation(0f)
-        }
-        colorFilter = ColorMatrixColorFilter(matrix)
-    }
-
 }
