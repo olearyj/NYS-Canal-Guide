@@ -88,15 +88,20 @@ class MarkerRepository @Inject constructor(
         val dao = appDatabase.navInfoDao()
         emitSource( dao.getMarkers() )
 
-        withContext(Dispatchers.IO) {
+        withContext(Dispatchers.Default) {
             val results = Constants.navInfoRegions.map {
                 regionName -> async { safeApiCall( { canalsApiService.getNavInfo(regionName) }, "error") }
             }.awaitAll()
 
             // TODO - use last update date field
 
-            // Return if either are null since we don't want to delete the table unless we get a result for both
-            val markers = results.flatMap { navInfoMarkers -> navInfoMarkers?.markers ?: return@withContext }
+            // Return if if api fails since we don't want to delete the table unless we get a result for all
+            val markers = results.flatMapIndexed { apiIndex, navInfoMarkers ->
+                val netMarkers = navInfoMarkers?.markers ?: return@withContext
+
+                // Map each NetworkNavInfoMarker to a NavInfoMarker and add the apiIndex
+                netMarkers.map { netMarker -> netMarker.toNavInfoMarker(apiIndex) }
+            }
 
             dao.deleteAllAndInsert(markers)
         }

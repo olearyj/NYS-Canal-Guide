@@ -2,69 +2,59 @@ package com.ayc.canalguide.data.entities
 
 import androidx.room.Entity
 import androidx.room.Ignore
+import androidx.room.TypeConverters
+import com.ayc.canalguide.Constants
 import com.ayc.canalguide.R
-import com.ayc.canalguide.utils.LatLongConverter
+import com.ayc.canalguide.data.NavInfoType
+import com.ayc.canalguide.utils.Converters
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.tickaroo.tikxml.annotation.Attribute
-import com.tickaroo.tikxml.annotation.Xml
 
 /*
 <channelinfo mile="145.00" shore="west" feature="marina: Springer's" feature_url="http://www.springersmarina.com" feature_color=""
 channel_width="300" south_west_depth="" middle_depth="" middle_depth_url="" north_east_depth="" overhead_clearance=""
 noaa_page="chart viewer" noaa_page_url="http://www.charts.noaa.gov/OnLineViewer/12348.shtml" latitude="42.637241" longitude="-73.752825"/>
  */
-@Xml()
 @Entity(tableName = "navinfo_marker")
+@TypeConverters(Converters::class)
 data class NavInfoMarker (
-    @Attribute
-    @Ignore
-    override val markerId: Int = 0,
-    @Attribute(name = "latitude", converter = LatLongConverter::class)
-    @Ignore
-    override val lat: Double,
-    @Attribute(name = "longitude", converter = LatLongConverter::class)
-    @Ignore
-    override val lng: Double,
-    @Attribute(name = "feature")
-    @Ignore
-    override val name: String,
-    @Attribute(name = "bodyofwater")
-    @Ignore
-    override val bodyOfWater: String?,
-    @Attribute
-    @Ignore
-    override val mile: String,
+        @Ignore
+        override val markerId: Int = 0,
+        @Ignore
+        override val lat: Double,
+        @Ignore
+        override val lng: Double,
+        @Ignore
+        override val name: String,
+        @Ignore
+        override val bodyOfWater: String?,
+        @Ignore
+        override val mile: String,
 
-    @Attribute
-    val shore: String?,
-    @Attribute(name = "feature_url")
-    val featureUrl: String?,
-    @Attribute(name = "feature_color")
-    val featureColor: String?,
-    @Attribute(name = "channel_width")
-    val channelWidth: String?,
-    @Attribute(name = "south_west_depth")
-    val southWestDepth: String?,
-    @Attribute(name = "middle_depth")
-    val middleDepth: String?,
-    @Attribute(name = "middle_depth_url")
-    val middleDepthUrl: String?,
-    @Attribute(name = "north_east_depth")
-    val northEastDepth: String?,
-    @Attribute(name = "overhead_clearance")
-    val overheadClearance: String?,
-    @Attribute(name = "noaa_page")
-    val noaaPage: String?,
-    @Attribute(name = "noaa_page_url")
-    val noaaPageUrl: String?
+        val shore: String?,
+        val featureUrl: String?,
+        val featureColor: String?,
+        val channelWidth: String?,
+        val southWestDepth: String?,
+        val middleDepth: String?,
+        val middleDepthUrl: String?,
+        val northEastDepth: String?,
+        val overheadClearance: String?,
+        val noaaPage: String?,
+        val noaaPageUrl: String?,
+        val navInfoType: NavInfoType,
+        val apiId: Int
 ): MapMarker(lat, lng, name, bodyOfWater, mile, markerId) {
+
+
+    @Ignore
+    val waterFlowEastWest = Constants.navInfoRegionsEastWestWaterflow.contains(apiId)
 
 
     fun getDepthSubtext(): String? {
         var subText = ""
-        if (northEastDepth != null) subText += "North/East Depth: $northEastDepth\n"
-        if (southWestDepth != null) subText += "South/West Depth: $southWestDepth\n"
+        if (!northEastDepth.isNullOrBlank()) subText += "${if (waterFlowEastWest) "North" else "East"} Depth: $northEastDepth\n"
+        if (!southWestDepth.isNullOrBlank()) subText += "${if (waterFlowEastWest) "South" else "West"} Depth: $southWestDepth\n"
 
         // Remove extra new line character
         return if(subText.isNotBlank()) subText.substring(0, subText.length - 1) else null
@@ -77,47 +67,14 @@ data class NavInfoMarker (
     override fun getMarkerOptions() = super.getMarkerOptions()?.icon( getBitmapDescriptor() )
 
     //val bitmapDescriptor: BitmapDescriptor? by lazy {
-    private fun getBitmapDescriptor(): BitmapDescriptor? = when (getNavInfoType()) {
-        NavInfoMarker.Type.GreenBuoy -> greenBuoyIcon
-        NavInfoMarker.Type.GreenBeacon -> greenBeaconIcon
-        NavInfoMarker.Type.RedBuoy -> redBuoyIcon
-        NavInfoMarker.Type.RedBeacon -> redBeaconIcon
-        NavInfoMarker.Type.OtherBeacon -> otherBeaconIcon
-        NavInfoMarker.Type.Bridge -> bridgeIcon
-        NavInfoMarker.Type.Unknown -> null
-    }
-
-    fun getNavInfoType(): Type {
-        val isBeaconLightOrLighthouse = name.contains("beacon", ignoreCase = true)
-                || name.startsWith("light", ignoreCase = true)
-
-        return when {
-            featureColor.equals("green", ignoreCase = true) ->
-                when {
-                    name.contains("buoy", ignoreCase = true) -> Type.GreenBuoy
-                    isBeaconLightOrLighthouse -> Type.GreenBeacon
-                    else -> Type.Unknown
-                }
-            featureColor.equals("red", ignoreCase = true) ->
-                when {
-                    name.contains("buoy", ignoreCase = true) -> Type.RedBuoy
-                    isBeaconLightOrLighthouse -> Type.RedBeacon
-                    else -> Type.Unknown
-                }
-            isBeaconLightOrLighthouse -> Type.OtherBeacon
-            name.contains("bridge", ignoreCase = true) -> Type.Bridge
-            else -> Type.Unknown
-        }
-    }
-
-    enum class Type {
-        GreenBuoy,
-        GreenBeacon,
-        RedBuoy,
-        RedBeacon,
-        OtherBeacon,
-        Bridge,
-        Unknown
+    private fun getBitmapDescriptor(): BitmapDescriptor? = when (navInfoType) {
+        NavInfoType.GreenBuoy -> greenBuoyIcon
+        NavInfoType.GreenBeacon -> greenBeaconIcon
+        NavInfoType.RedBuoy -> redBuoyIcon
+        NavInfoType.RedBeacon -> redBeaconIcon
+        NavInfoType.OtherBeacon -> otherBeaconIcon
+        NavInfoType.Bridge -> bridgeIcon
+        NavInfoType.Unknown -> null
     }
 
     companion object {

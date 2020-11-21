@@ -10,4 +10,11 @@ object Constants {
         "uticaharbor", "oswego", "eriecentral", "onondagalake", "cayugaseneca",
         "cayugalake", "senecalake", "eriewestern", "geneseeriver", "ellicottcreek"
     )
+    // These regions flow east to west
+    val navInfoRegionsEastWestWaterflow = arrayOf(
+            navInfoRegions.indexOf("fortedward"),
+            navInfoRegions.indexOf("eriewestern"),
+            navInfoRegions.indexOf("erieeastern"),
+            navInfoRegions.indexOf("eriecentral")
+    )
 }

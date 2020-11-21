@@ -1,7 +1,5 @@
 package com.ayc.canalguide.data.xml_classes
 
-import com.ayc.canalguide.data.entities.LockMarker
-import com.ayc.canalguide.data.entities.NavInfoMarker
 import com.tickaroo.tikxml.annotation.Element
 import com.tickaroo.tikxml.annotation.PropertyElement
 import com.tickaroo.tikxml.annotation.Xml
@@ -31,6 +29,6 @@ class NavInfoMarkers {
     lateinit var clearance: String
 
     @Element(name = "channelinfo")
-    lateinit var markers: List<NavInfoMarker>
+    lateinit var markers: List<NetworkNavInfoMarker>
 
 }
