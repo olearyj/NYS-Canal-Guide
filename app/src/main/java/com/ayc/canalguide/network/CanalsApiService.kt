@@ -64,7 +64,7 @@ interface CanalsApiService {
     @GET("navinfo-{region}.xml")
     suspend fun getNavInfo(
         @Path("region") region: String
-    ): Response<NavInfoMarkers>
+    ): Response<NavInfos>
 
 //    @GET("navinfo-hudsonriver.xml")
 //    suspend fun getGuardGates(): Response<GuardGates>

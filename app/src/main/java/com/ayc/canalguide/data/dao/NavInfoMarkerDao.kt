@@ -8,7 +8,7 @@ import com.ayc.canalguide.data.entities.NavInfoMarker
 
 
 @Dao
-interface NavInfoDao: BaseDao<NavInfoMarker> {
+interface NavInfoMarkerDao: BaseDao<NavInfoMarker> {
 
     @Query("SELECT * FROM navinfo_marker WHERE markerId=:id")
     fun getMarker(id: Int): LiveData<NavInfoMarker>

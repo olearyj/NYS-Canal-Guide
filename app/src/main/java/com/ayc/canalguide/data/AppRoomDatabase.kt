@@ -29,7 +29,7 @@ abstract class AppRoomDatabase : RoomDatabase() {
     abstract fun marinaDao(): MarinaMarkerDao
     abstract fun cruiseDao(): CruiseMarkerDao
     abstract fun launchDao(): LaunchMarkerDao
-    abstract fun navInfoDao(): NavInfoDao
+    abstract fun navInfoDao(): NavInfoMarkerDao
 
     companion object {
 

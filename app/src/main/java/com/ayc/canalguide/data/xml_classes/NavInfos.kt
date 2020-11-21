@@ -14,7 +14,7 @@ import com.tickaroo.tikxml.annotation.Xml
 <channelinfo....
  */
 @Xml(name = "navigationinfo")
-class NavInfoMarkers {
+class NavInfos {
 
     @PropertyElement(name = "lastupdatetime")
     lateinit var lastUpdateDate: String
