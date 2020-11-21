@@ -14,6 +14,13 @@ android {
         versionCode 8
         versionName "3.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        // TikXML requires arguments for HtmlEscapeStringConverter() in CanalsApiService
+        kapt {
+            arguments {
+                arg("primitiveTypeConverters", "java.lang.String, int, java.lang.Integer")
+            }
+        }
     }
     buildTypes {
         debug {

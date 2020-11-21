@@ -2,6 +2,7 @@ package com.ayc.canalguide.network
 
 import com.ayc.canalguide.Constants.BASE_URL
 import com.ayc.canalguide.data.xml_classes.*
+import com.ayc.canalguide.utils.HtmlEscapeStringConverter
 import com.tickaroo.tikxml.TikXml
 import com.tickaroo.tikxml.retrofit.TikXmlConverterFactory
 import okhttp3.OkHttpClient
@@ -117,9 +118,11 @@ interface CanalsApiService {
                 .addConverterFactory(
                     TikXmlConverterFactory.create(
                         TikXml.Builder()
-                            // CRTL + F on this site for more info on exceptionOnUnreadXml: https://github.com/Tickaroo/tikxml/blob/master/docs/AnnotatingModelClasses.md
-                            .exceptionOnUnreadXml(false)
-                            .build()
+                                // CRTL + F on this site for more info on exceptionOnUnreadXml: https://github.com/Tickaroo/tikxml/blob/master/docs/AnnotatingModelClasses.md
+                                .exceptionOnUnreadXml(false)
+                                // Escape all special characters such as &quot; and &amp;
+                                .addTypeConverter(String::class.java, HtmlEscapeStringConverter())
+                                .build()
                     )
                 )
                 .build()
