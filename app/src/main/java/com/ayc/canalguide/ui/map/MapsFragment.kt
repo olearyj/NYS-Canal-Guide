@@ -28,7 +28,7 @@ import kotlinx.android.synthetic.main.fragment_maps.*
  * MapMarker(com.ayc.canalguide.data.entities.MapMarker) - data class to store data from the nys canal corp, stored in viewModel
  * Marker(com.google.android.gms.maps.model.Marker) - Reference to the icon that's placed on the google map view, stored in this fragment
  */
-class MapsFragment : Fragment(R.layout.fragment_maps) {
+class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
 
 
     private val mapsViewModel: MapsViewModel by activityViewModels()
@@ -44,11 +44,27 @@ class MapsFragment : Fragment(R.layout.fragment_maps) {
     private lateinit var map: GoogleMap
 
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        fabFilters.setOnClickListener {
+            val action = MapsFragmentDirections.actionOptionsDialog()
+            val extras = FragmentNavigatorExtras(fabFilters to getString(R.string.shared_container_transition_name_filters))
+            findNavController().navigate(action, extras)
+        }
+
+        // Initialize the map if it is not already initialized
+        if (!this::map.isInitialized) {
+            val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
+            mapFragment?.getMapAsync(this)
+        }
+    }
+
     /**
      * When the map is ready, move to start camera location, observe filter states & data from view model, set custom info window
      */
-    private val callback = OnMapReadyCallback { googleMap ->
-        map = googleMap
+    override fun onMapReady(googleMap: GoogleMap?) {
+        map = googleMap ?: return
 
         // Move camera to starting position
         val saratoga = LatLng(43.0616419,-73.7719178)
@@ -125,22 +141,6 @@ class MapsFragment : Fragment(R.layout.fragment_maps) {
         for (marker in this)
             marker.remove()
         this.clear()
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        fabFilters.setOnClickListener {
-            val action = MapsFragmentDirections.actionOptionsDialog()
-            val extras = FragmentNavigatorExtras(fabFilters to getString(R.string.shared_container_transition_name_filters))
-            findNavController().navigate(action, extras)
-        }
-
-        // Initialize the map if it is not already initialized
-        if (!this::map.isInitialized) {
-            val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
-            mapFragment?.getMapAsync(callback)
-        }
     }
 
     private fun enableMyLocation() {
