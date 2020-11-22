@@ -1,14 +1,13 @@
 package com.ayc.canalguide.ui.details
 
-import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.ayc.canalguide.ui.MainActivity
 import com.ayc.canalguide.R
 import com.ayc.canalguide.databinding.FragmentMarkerDetailsBinding
+import com.ayc.canalguide.ui.MainActivity
 import com.ayc.canalguide.utils.MyHelper
 import com.ayc.canalguide.utils.dpToPx
 import com.ayc.canalguide.utils.viewBinding
@@ -83,10 +82,6 @@ class MarkerDetailsFragment : Fragment(R.layout.fragment_marker_details), OnMapR
 
     override fun onMapReady(map: GoogleMap?) {
         googleMap = map ?: return
-
-        @SuppressLint("MissingPermission")
-        if (MainActivity.hasPermissions(requireContext(), MainActivity.LOCATION_PERMISSION))
-            googleMap.isMyLocationEnabled = true
 
         // Add marker to map and move camera to it's position
         viewModel.mapMarker.observe(viewLifecycleOwner) { mapMarker ->

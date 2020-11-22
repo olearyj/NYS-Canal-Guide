@@ -1,14 +1,12 @@
 package com.ayc.canalguide.ui
 
 import android.Manifest
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
@@ -43,26 +41,25 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // Setup navigation and actionbar
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
-
         setupActionBarWithNavController(this, navController)
 
-        // Request location permissions
-        val permissions = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION)
-        ActivityCompat.requestPermissions(this, permissions, LOCATION_REQUEST_CODE)
+        // Handle immerse mode when navigating
+        addNavigationListener()
 
-        // https://developer.android.com/guide/playcore/in-app-updates
+        // Request location permissions
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
+
+        // Checks that the platform will allow the specified type of update: https://developer.android.com/guide/playcore/in-app-updates
         appUpdateManager = AppUpdateManagerFactory.create(applicationContext)
 
-        // Checks that the platform will allow the specified type of update
         appUpdateManager.appUpdateInfo.addOnSuccessListener { appUpdateInfo ->
             if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE)
                 appUpdateManager.startUpdateFlowForResult(appUpdateInfo, AppUpdateType.IMMEDIATE, this, APP_UPDATE_REQUEST_CODE)
         }
-
-        // Handle immerse mode when navigating
-        addNavigationListener()
     }
 
     override fun onResume() {
@@ -150,14 +147,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     }
 
     companion object {
-        val LOCATION_PERMISSION = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
-        const val LOCATION_REQUEST_CODE = 123
-
+        const val LOCATION_PERMISSION_REQUEST_CODE = 123
         const val APP_UPDATE_REQUEST_CODE = 321
-
-        fun hasPermissions(context: Context, permissions: Array<String>) = permissions.all {
-            ContextCompat.checkSelfPermission(context, it) == PackageManager.PERMISSION_GRANTED
-        }
-
     }
 }

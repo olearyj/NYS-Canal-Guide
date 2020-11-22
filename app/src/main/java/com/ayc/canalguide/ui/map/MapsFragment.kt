@@ -1,19 +1,20 @@
 package com.ayc.canalguide.ui.map
 
-import android.annotation.SuppressLint
+import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
-import com.ayc.canalguide.ui.MainActivity
 import com.ayc.canalguide.R
 import com.ayc.canalguide.data.entities.MapMarker
+import com.ayc.canalguide.ui.MainActivity
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -54,10 +55,7 @@ class MapsFragment : Fragment(R.layout.fragment_maps) {
         val startZoom = 8.0f
         googleMap.moveCamera( CameraUpdateFactory.newLatLngZoom(saratoga, startZoom) )
 
-        // If permissions are granted show the users location
-        @SuppressLint("MissingPermission")
-        if (MainActivity.hasPermissions(requireContext(), MainActivity.LOCATION_PERMISSION))
-            map.isMyLocationEnabled = true
+        enableMyLocation()
 
         // Set custom info window so info icon appears to the right of window
         googleMap.setInfoWindowAdapter( CanalInfoWindowAdapter(requireActivity()) )
@@ -73,12 +71,9 @@ class MapsFragment : Fragment(R.layout.fragment_maps) {
             fabFilters.shrink()
         }
 
-
         googleMap.setOnMapClickListener {
-            Log.i("TESTQQQ", "CLICKED ON THE MAP")
             (activity as MainActivity).toggleImmerseMode()
         }
-
 
         // Add viewModel observers
         observeMarkers(map)
@@ -148,15 +143,17 @@ class MapsFragment : Fragment(R.layout.fragment_maps) {
         }
     }
 
-    @SuppressLint("MissingPermission")
+    private fun enableMyLocation() {
+        if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
+            map.isMyLocationEnabled = true
+    }
+
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
-        if (PackageManager.PERMISSION_GRANTED == grantResults.firstOrNull()) {
-            if (requestCode == MainActivity.LOCATION_REQUEST_CODE)
-                map.isMyLocationEnabled = true
-            //Toast.makeText(this, "Permission request granted", Toast.LENGTH_LONG).show()
-        }
+        if (grantResults.contains(PackageManager.PERMISSION_GRANTED))
+            if (requestCode == MainActivity.LOCATION_PERMISSION_REQUEST_CODE)
+                enableMyLocation()
     }
 
 }
