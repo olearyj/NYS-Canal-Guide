@@ -73,6 +73,9 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
 
         enableMyLocation()
 
+        // Hide the street view and directions button when a marker is clicked
+        googleMap.uiSettings.isMapToolbarEnabled = false
+
         // Set custom info window so info icon appears to the right of window
         googleMap.setInfoWindowAdapter( CanalInfoWindowAdapter(requireActivity()) )
 
@@ -86,16 +89,15 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
         googleMap.setOnCameraMoveListener {
             fabFilters.shrink()
         }
-
         googleMap.setOnMapClickListener {
             (activity as MainActivity).toggleImmerseMode()
         }
 
         // Add viewModel observers
-        observeMarkers(map)
-        observeFilterStates(map)
+        observeMarkers(googleMap)
+        observeFilterStates(googleMap)
         mapsViewModel.selectedMapType.observeForever { mapType ->
-            map.mapType = mapType
+            googleMap.mapType = mapType
         }
     }
 
