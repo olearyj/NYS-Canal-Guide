@@ -38,6 +38,8 @@ data class LaunchMarker (
     val municipality: String?,
     @Attribute(name = "launch_type")
     val launchType: String?,
+    @Attribute
+    val parking: String?,
     @Attribute(name = "overnight_parking")
     val overnightParking: String?,
     @Attribute
@@ -55,21 +57,25 @@ data class LaunchMarker (
 ): MapMarker(lat, lng, name, bodyOfWater, mile, markerId) {
 
 
-    fun getParkingSubtext() = when {
-        overnightParking.equals("yes", true) -> "Overnight Parking"
-        overnightParking.equals("Yes, call", true) ->
-            "Overnight Parking" + overnightParking!!.substring(3)
-        else -> null
+    fun getParkingSubtext(): String? {
+        var subText = ""
+        if (!parking.isNullOrBlank())
+            subText += parking + "\n"
+        if (!overnightParking.isNullOrBlank())
+            subText += "Overnight Parking: $overnightParking\n"
+
+        // Remove extra new line character
+        return if(subText.isNotBlank()) subText.substring(0, subText.length - 1) else null
     }
 
     fun getFacilitiesSubtext(): String? {
         var subText = ""
-        if (restrooms?.contains("yes", true) == true)
-            subText += "Restrooms${restrooms.substring(3)}\n"
-        if (potableWater?.contains("yes", true) == true)
-            subText += "Potable Water\n"
-        if (camping?.contains("yes", true) == true)
-            subText += "Camping\n"
+        if (!restrooms.isNullOrBlank())
+            subText += "Restrooms: $restrooms\n"
+        if (!potableWater.isNullOrBlank())
+            subText += "Potable Water: $potableWater\n"
+        if (!camping.isNullOrBlank())
+            subText += "Camping: $camping\n"
 
         // Remove extra new line character
         return if(subText.isNotBlank()) subText.substring(0, subText.length - 1) else null
@@ -77,10 +83,10 @@ data class LaunchMarker (
 
     fun getotherInfoSubtext(): String? {
         var subText = ""
+        if (!portageDistance.isNullOrBlank())
+            subText += "Portage Distance: $portageDistance\n"
         if (!municipality.isNullOrBlank())
             subText += "Municipality: $municipality\n"
-        if (camping?.contains("yes", true) == true)
-            subText += "Portage Distance: \n"
 
         // Remove extra new line character
         return if(subText.isNotBlank()) subText.substring(0, subText.length - 1) else null
