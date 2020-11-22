@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LiveData
@@ -43,6 +44,14 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
 
     private lateinit var map: GoogleMap
 
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        // Request location permissions
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+            requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -154,8 +163,13 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
         if (grantResults.contains(PackageManager.PERMISSION_GRANTED))
-            if (requestCode == MainActivity.LOCATION_PERMISSION_REQUEST_CODE)
+            if (requestCode == LOCATION_PERMISSION_REQUEST_CODE)
                 enableMyLocation()
+    }
+
+
+    companion object {
+        const val LOCATION_PERMISSION_REQUEST_CODE = 123
     }
 
 }

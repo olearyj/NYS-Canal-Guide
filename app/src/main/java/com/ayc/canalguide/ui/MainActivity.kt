@@ -1,12 +1,9 @@
 package com.ayc.canalguide.ui
 
-import android.Manifest
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
@@ -48,10 +45,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
         // Handle immerse mode when navigating
         addNavigationListener()
-
-        // Request location permissions
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
 
         // Checks that the platform will allow the specified type of update: https://developer.android.com/guide/playcore/in-app-updates
         appUpdateManager = AppUpdateManagerFactory.create(applicationContext)
@@ -147,7 +140,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     }
 
     companion object {
-        const val LOCATION_PERMISSION_REQUEST_CODE = 123
         const val APP_UPDATE_REQUEST_CODE = 321
     }
 }
