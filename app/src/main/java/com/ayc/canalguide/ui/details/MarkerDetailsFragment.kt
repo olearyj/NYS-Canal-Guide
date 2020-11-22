@@ -6,6 +6,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.ayc.canalguide.R
+import com.ayc.canalguide.data.entities.NavInfoMarker
 import com.ayc.canalguide.databinding.FragmentMarkerDetailsBinding
 import com.ayc.canalguide.ui.MainActivity
 import com.ayc.canalguide.utils.MyHelper
@@ -50,6 +51,9 @@ class MarkerDetailsFragment : Fragment(R.layout.fragment_marker_details), OnMapR
 
             for (i in details.indices)
                 addDetailsTextView(details[i], i % 2 == 0)
+
+            if(viewModel.mapMarker.value !is NavInfoMarker)
+                addDetailsTextView(requireContext().getString(R.string.text_marker_contact_info, viewModel.mapMarker.value?.name), false)
         }
 
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
