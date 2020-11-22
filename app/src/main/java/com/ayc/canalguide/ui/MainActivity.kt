@@ -2,6 +2,7 @@ package com.ayc.canalguide.ui
 
 import android.Manifest
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -92,6 +93,20 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         if (viewModel.immerseMode) showSystemUI()
         else hideSystemUI()
         viewModel.immerseMode = !viewModel.immerseMode
+    }
+
+    /**
+     * If current fragment is the home / map fragment then go home (don't do default behavior / destroy the activity)
+     */
+    override fun onBackPressed() {
+        if (navController.currentDestination?.id == R.id.mapFragment) {
+            val intent = Intent(Intent.ACTION_MAIN)
+                .addCategory(Intent.CATEGORY_HOME)
+                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+        }
+        else
+            super.onBackPressed()
     }
 
     /**
