@@ -50,6 +50,8 @@ class MarkerDetailsViewModel @ViewModelInject constructor(
      * Handle dirty data such as nulls and empty strings when building this list of strings.
      */
     val markerDetails = Transformations.map(mapMarker) { mapMarker ->
+        mapMarker ?: return@map emptyList<String>()
+
         mutableListOf<String>().apply {
             // Add title and snippet
             add(mapMarker.getTitle())
