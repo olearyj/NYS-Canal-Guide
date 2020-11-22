@@ -39,12 +39,12 @@ class MarkerDetailsFragment : Fragment(R.layout.fragment_marker_details), OnMapR
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-        viewModel.mapMarker.observe(viewLifecycleOwner) { mapMarker ->
-            (activity as MainActivity).supportActionBar?.let {
-                it.title = mapMarker.getTitle()
-                it.subtitle = mapMarker.getSnippet()
-            }
-        }
+//        viewModel.mapMarker.observe(viewLifecycleOwner) { mapMarker ->
+//            (activity as MainActivity).supportActionBar?.let {
+//                it.title = mapMarker.getTitle()
+//                it.subtitle = mapMarker.getSnippet()
+//            }
+//        }
 
         viewModel.markerDetails.observe(viewLifecycleOwner) { details ->
             detailsLayout.removeAllViews()
