@@ -8,7 +8,6 @@ import androidx.fragment.app.viewModels
 import com.ayc.canalguide.R
 import com.ayc.canalguide.data.entities.NavInfoMarker
 import com.ayc.canalguide.databinding.FragmentMarkerDetailsBinding
-import com.ayc.canalguide.ui.MainActivity
 import com.ayc.canalguide.utils.MyHelper
 import com.ayc.canalguide.utils.dpToPx
 import com.ayc.canalguide.utils.viewBinding
@@ -17,6 +16,9 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_marker_details.*
 
@@ -39,6 +41,8 @@ class MarkerDetailsFragment : Fragment(R.layout.fragment_marker_details), OnMapR
 
     private lateinit var googleMap: GoogleMap
 
+    private var firebaseLogScreenCompleted = false
+
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -46,13 +50,11 @@ class MarkerDetailsFragment : Fragment(R.layout.fragment_marker_details), OnMapR
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-//        // Set title and subtitle of actionbar
-//        viewModel.mapMarker.observe(viewLifecycleOwner) { mapMarker ->
-//            (activity as MainActivity).supportActionBar?.let {
-//                it.title = mapMarker.getTitle()
-//                it.subtitle = mapMarker.getSnippet()
-//            }
-//        }
+        // Log firebase event when we have the marker title
+        viewModel.mapMarker.observe(viewLifecycleOwner) { mapMarker ->
+            if (!firebaseLogScreenCompleted)
+                firebaseLogScreen(mapMarker.getTitle())
+        }
 
         viewModel.markerDetails.observe(viewLifecycleOwner) { details ->
             detailsLayout.removeAllViews()
@@ -70,11 +72,12 @@ class MarkerDetailsFragment : Fragment(R.layout.fragment_marker_details), OnMapR
         addButtonClickListeners()
     }
 
-    override fun onStop() {
-        super.onStop()
-
-        // Remove subtitle from actionbar
-        (activity as MainActivity).supportActionBar?.subtitle = null
+    private fun firebaseLogScreen(title: String) {
+        Firebase.analytics.logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, Bundle().apply {
+            putString(FirebaseAnalytics.Param.SCREEN_NAME, title)
+            putString(FirebaseAnalytics.Param.SCREEN_CLASS, this@MarkerDetailsFragment.javaClass.simpleName)
+        })
+        firebaseLogScreenCompleted = true
     }
 
     private fun addButtonClickListeners() {

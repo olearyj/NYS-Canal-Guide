@@ -9,6 +9,9 @@ import androidx.preference.PreferenceFragmentCompat
 import com.ayc.canalguide.BuildConfig
 import com.ayc.canalguide.R
 import com.ayc.canalguide.ui.MainViewModel
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.ktx.Firebase
 
 
 /**
@@ -39,6 +42,11 @@ class SettingsFragment : PreferenceFragmentCompat(), SharedPreferences.OnSharedP
             addPreference(appDeveloperPref)
             addPreference(appVersionPref)
         }
+
+        Firebase.analytics.logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, Bundle().apply {
+            putString(FirebaseAnalytics.Param.SCREEN_NAME, this@SettingsFragment.javaClass.simpleName)
+            putString(FirebaseAnalytics.Param.SCREEN_CLASS, this@SettingsFragment.javaClass.simpleName)
+        })
     }
 
     override fun onSharedPreferenceChanged(preferences: SharedPreferences?, key: String?) {

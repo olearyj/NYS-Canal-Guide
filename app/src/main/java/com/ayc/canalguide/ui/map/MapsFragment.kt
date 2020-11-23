@@ -26,6 +26,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.analytics.FirebaseAnalytics
 import kotlinx.android.synthetic.main.fragment_maps.*
 
 /**
@@ -65,6 +66,11 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
         // Request location permissions if we don't have them
         if (!hasLocationPermission())
             requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
+
+        (activity as MainActivity).firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, Bundle().apply {
+            putString(FirebaseAnalytics.Param.SCREEN_NAME, this@MapsFragment.javaClass.simpleName)
+            putString(FirebaseAnalytics.Param.SCREEN_CLASS, this@MapsFragment.javaClass.simpleName)
+        })
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

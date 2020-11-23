@@ -18,6 +18,9 @@ import com.ayc.canalguide.ui.map.MapsViewModel
 import com.ayc.canalguide.utils.viewBinding
 import com.google.android.material.transition.MaterialArcMotion
 import com.google.android.material.transition.MaterialContainerTransform
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -43,6 +46,11 @@ class FilterFragment: Fragment(R.layout.fragment_filter) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
         setContainerTransition()
+
+        Firebase.analytics.logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, Bundle().apply {
+            putString(FirebaseAnalytics.Param.SCREEN_NAME, this@FilterFragment.javaClass.simpleName)
+            putString(FirebaseAnalytics.Param.SCREEN_CLASS, this@FilterFragment.javaClass.simpleName)
+        })
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
