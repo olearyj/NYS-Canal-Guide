@@ -20,6 +20,13 @@ import com.google.android.gms.maps.model.LatLng
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_marker_details.*
 
+/**
+ * This class will:
+ *  Setup data binding
+ *  Observe marker details and add details to view
+ *  Display map with one marker
+ *  Handle button clicks for call, website, noaa pdf map
+ */
 @AndroidEntryPoint
 class MarkerDetailsFragment : Fragment(R.layout.fragment_marker_details), OnMapReadyCallback {
 
@@ -39,6 +46,7 @@ class MarkerDetailsFragment : Fragment(R.layout.fragment_marker_details), OnMapR
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
+//        // Set title and subtitle of actionbar
 //        viewModel.mapMarker.observe(viewLifecycleOwner) { mapMarker ->
 //            (activity as MainActivity).supportActionBar?.let {
 //                it.title = mapMarker.getTitle()

@@ -20,6 +20,13 @@ import com.google.android.material.transition.MaterialContainerTransform
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+/**
+ * This class will:
+ *  Handle data binding
+ *  Handle container transition, animate transform filter FAB to this fragment
+ *  Display and handle options menu with settings button
+ *  Update shared preferences of filter states for caching
+ */
 @AndroidEntryPoint
 class FilterFragment: Fragment(R.layout.fragment_filter) {
 

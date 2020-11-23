@@ -32,6 +32,14 @@ import kotlinx.android.synthetic.main.fragment_maps.*
  * Be sure to know the difference between the two types with the word "marker" in it:
  * MapMarker(com.ayc.canalguide.data.entities.MapMarker) - data class to store data from the nys canal corp, stored in viewModel
  * Marker(com.google.android.gms.maps.model.Marker) - Reference to the icon that's placed on the google map view, stored in this fragment
+ *
+ * This class will:
+ *  Handle location permissions and display location on map
+ *  Display snackbar if location services are turned off
+ *  Display filter FAB
+ *  Initialize map
+ *  Observe all MapMarkers and filter states
+ *  Keep a list of references to all UI Markers displayed on map
  */
 class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
 

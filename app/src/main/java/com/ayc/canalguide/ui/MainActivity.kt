@@ -22,7 +22,13 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.*
 
-
+/**
+ * This class will:
+ *  Check if app update is available
+ *  Handle Immerse / full screen mode
+ *  Setup navigation and action bar
+ *  Handle navigation up (actionbar back) button and hardware back button
+ */
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
@@ -33,6 +39,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     private lateinit var appUpdateManager: AppUpdateManager
 
     private lateinit var navController: NavController
+
+    private var lastImmerseModeToggleTime = 0L
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,21 +78,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
-    private var lastImmerseModeToggleTime = 0L
-    // Toggled by mapFragment when the user taps on an empty area of the map
-    fun toggleImmerseMode() {
-        if (!viewModel.toggleImmerseMode) return
-
-        // Add a delay so immerse mode can only be toggled once every 3 seconds
-        val currentTimeMillis = Date().time
-        if (currentTimeMillis - lastImmerseModeToggleTime < 2000) return
-        lastImmerseModeToggleTime = currentTimeMillis
-
-        if (viewModel.immerseMode) showSystemUI()
-        else hideSystemUI()
-        viewModel.immerseMode = !viewModel.immerseMode
-    }
-
     /**
      * If current fragment is the home / map fragment then go home (don't do default behavior / destroy the activity)
      */
@@ -97,6 +90,20 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         }
         else
             super.onBackPressed()
+    }
+
+    // Toggled by mapFragment when the user taps on an empty area of the map
+    fun toggleImmerseMode() {
+        if (!viewModel.toggleImmerseMode) return
+
+        // Add a delay so immerse mode can only be toggled once every 3 seconds
+        val currentTimeMillis = Date().time
+        if (currentTimeMillis - lastImmerseModeToggleTime < 2000) return
+        lastImmerseModeToggleTime = currentTimeMillis
+
+        if (viewModel.immerseMode) showSystemUI()
+        else hideSystemUI()
+        viewModel.immerseMode = !viewModel.immerseMode
     }
 
     /**

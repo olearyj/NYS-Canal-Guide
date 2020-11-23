@@ -11,6 +11,12 @@ import com.ayc.canalguide.R
 import com.ayc.canalguide.ui.MainViewModel
 
 
+/**
+ * This class will:
+ *  Display preferences
+ *  Add non-editable dynamic preferences for app version and app developer to the about category
+ *  Listen to preferences changes to handle immerse mode
+ */
 class SettingsFragment : PreferenceFragmentCompat(), SharedPreferences.OnSharedPreferenceChangeListener {
 
 

@@ -9,6 +9,9 @@ import com.ayc.canalguide.data.NavInfoType
 import com.ayc.canalguide.repos.MarkerRepository
 import com.google.android.gms.maps.GoogleMap
 
+/**
+ * This class holds MapMarkers, filter states and map type
+ */
 class MapsViewModel @ViewModelInject constructor(
         markerRepository: MarkerRepository,
         preferences: CanalPreferences

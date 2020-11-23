@@ -6,16 +6,18 @@ import androidx.lifecycle.ViewModel
 import com.ayc.canalguide.data.CanalPreferences
 import com.ayc.canalguide.ui.settings.ImmerseMode
 
+/**
+ * This class will handle immerse mode states
+ */
 class MainViewModel @ViewModelInject constructor(
     preferences: CanalPreferences
 ): ViewModel() {
 
 
-    // TODO - change var to livedata
-    // True when immerse mode is set to Always On
+    // True when immerse mode preference is set to Always On
     var immerseMode = preferences.fullscreenMapModeIndex == ImmerseMode.AlwaysOn.value
 
-    // True when immerse mode set to Toggle on Tap
+    // True when immerse mode preference set to Toggle on Tap
     var toggleImmerseMode = preferences.fullscreenMapModeIndex == ImmerseMode.TapToToggle.value
         private set
 

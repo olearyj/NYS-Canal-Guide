@@ -8,12 +8,21 @@ import androidx.lifecycle.ViewModel
 import com.ayc.canalguide.data.entities.*
 import com.ayc.canalguide.repos.MarkerRepository
 
+
+/**
+ * This class will:
+ *  Load the individual MapMarker based on the navArgs provided by the savedStateHandle
+ *  Prepare data for buttons: phone number, website, noaa pdf website
+ *  Prepare address string
+ *  Prepare marker details as a list of strings
+ */
 class MarkerDetailsViewModel @ViewModelInject constructor(
         markerRepo: MarkerRepository,
         @Assisted private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
 
+    // These arguments come from safeArgs / navArgs
     val mapMarker = markerRepo.loadMapMarker(
             savedStateHandle.get<Int>("markerId")!!,
             savedStateHandle.get<String>("javaClassSimpleName")!!
@@ -43,6 +52,17 @@ class MarkerDetailsViewModel @ViewModelInject constructor(
     fun hasWebsiteNoaa() = !(mapMarker.value as? NavInfoMarker)?.noaaPageUrl.isNullOrBlank()
     val websiteNoaa = Transformations.map(mapMarker) {
         (it as? NavInfoMarker)?.noaaPageUrl
+    }
+
+    private fun getAddress(mapMarker: MapMarker): String? {
+        val strings = when (mapMarker) {
+            is LockMarker -> arrayOf(mapMarker.address, mapMarker.city, mapMarker.zip)
+            is CruiseMarker -> arrayOf(mapMarker.address, mapMarker.city, mapMarker.zip)
+            else -> return null
+        }
+        return if ( strings.all { !it.isNullOrBlank() } )
+            String.format("%s\n%s, NY %s", *strings)
+        else null
     }
 
     /**
@@ -136,17 +156,6 @@ class MarkerDetailsViewModel @ViewModelInject constructor(
                 else -> {}
             }
         }.toList()
-    }
-
-    private fun getAddress(mapMarker: MapMarker): String? {
-        val strings = when (mapMarker) {
-            is LockMarker -> arrayOf(mapMarker.address, mapMarker.city, mapMarker.zip)
-            is CruiseMarker -> arrayOf(mapMarker.address, mapMarker.city, mapMarker.zip)
-            else -> return null
-        }
-        return if ( strings.all { !it.isNullOrBlank() } )
-            String.format("%s\n%s, NY %s", *strings)
-        else null
     }
 
 }
