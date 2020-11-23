@@ -4,6 +4,7 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: "kotlin-kapt"
 apply plugin: 'dagger.hilt.android.plugin'
 apply plugin: 'androidx.navigation.safeargs.kotlin'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 30
@@ -87,6 +88,10 @@ dependencies {
 
     // Gson - JSON parsing
     implementation 'com.google.code.gson:gson:2.8.6'
+
+    // Firebase BOM and analytics
+    implementation platform('com.google.firebase:firebase-bom:26.1.0')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
 
     // Hilt DI
     implementation "com.google.dagger:hilt-android:$hilt_version"
