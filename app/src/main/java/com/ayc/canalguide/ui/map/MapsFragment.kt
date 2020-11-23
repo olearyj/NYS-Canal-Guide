@@ -170,9 +170,9 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
     }
 
     private fun showGpsOffSnackbar() =
-        Snackbar.make(mapContainer, "Location services turned off. Turn on?", Snackbar.LENGTH_INDEFINITE)
+        Snackbar.make(mapContainer, getString(R.string.snackbar_text_turn_on_gps), Snackbar.LENGTH_INDEFINITE)
             //.setAnchorView(fabFilters)    // Attempt to show snackbar above FAB per material design specs
-            .setAction("Settings") { startActivity( Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS) ) }
+            .setAction(getString(R.string.title_settings)) { startActivity( Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS) ) }
             .addCallback(object : Snackbar.Callback() {
                 override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
                     if (event != DISMISS_EVENT_ACTION)  // Clicking the FAB is a good test for this
