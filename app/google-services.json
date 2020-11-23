@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "867287457043",
+    "firebase_url": "https://nys-canal-guide.firebaseio.com",
+    "project_id": "nys-canal-guide",
+    "storage_bucket": "nys-canal-guide.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:867287457043:android:6678a1b846855128ec8ee6",
+        "android_client_info": {
+          "package_name": "com.AYC.canalguide"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "867287457043-b88nedfkilhjcckodjuh421lptpkl244.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCljpkzc47vy1HBZkqA1ZN6dxuVVl57LnA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "867287457043-b88nedfkilhjcckodjuh421lptpkl244.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

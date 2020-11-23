@@ -8,6 +8,7 @@ import com.ayc.canalguide.data.CanalPreferences
 import com.ayc.canalguide.network.CanalsApiService
 import com.ayc.canalguide.network.ConnectivityInterceptor
 import com.ayc.canalguide.network.ConnectivityInterceptorImpl
+import com.google.firebase.analytics.FirebaseAnalytics
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,6 +22,11 @@ import javax.inject.Singleton
 @Module
 @InstallIn(ApplicationComponent::class)
 object DataModule {
+
+
+    @Provides
+    @Singleton
+    fun provideFirebaseAnalytics(@ApplicationContext context: Context) = FirebaseAnalytics.getInstance(context)
 
     @Provides
     @Singleton
