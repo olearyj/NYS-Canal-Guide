@@ -77,11 +77,7 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
 
     override fun onResume() {
         super.onResume()
-
-        // If the device has location services disabled, show a snackbar to allow the user to go to location settings
-        val locationManager = requireContext().getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) && hasLocationPermission() && !hasDismissedGpsOffSnackbar)
-            showGpsOffSnackbar()
+        checkForGps()
     }
 
     /**
@@ -169,6 +165,15 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
         this.clear()
     }
 
+    /**
+     * If the device has location services disabled show a snackbar to allow the user to go to location settings
+     */
+    private fun checkForGps() {
+        val locationManager = requireContext().getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) && hasLocationPermission() && !hasDismissedGpsOffSnackbar)
+            showGpsOffSnackbar()
+    }
+
     private fun showGpsOffSnackbar() =
         Snackbar.make(mapContainer, getString(R.string.snackbar_text_turn_on_gps), Snackbar.LENGTH_INDEFINITE)
             //.setAnchorView(fabFilters)    // Attempt to show snackbar above FAB per material design specs
@@ -194,8 +199,10 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
         if (grantResults.contains(PackageManager.PERMISSION_GRANTED))
-            if (requestCode == LOCATION_PERMISSION_REQUEST_CODE)
+            if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
                 enableMyLocation()
+                checkForGps()
+            }
     }
 
 
