@@ -1,5 +1,6 @@
 package com.ayc.canalguide.ui.filter
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
@@ -71,6 +72,14 @@ class FilterFragment: Fragment(R.layout.fragment_filter) {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.item_settings -> findNavController().navigate(R.id.settingsFragment)
+            R.id.item_share -> {
+                val intent = Intent().apply {
+                    action = Intent.ACTION_SEND
+                    putExtra(Intent.EXTRA_TEXT, getString(R.string.app_playstore_url))
+                    type = "text/plain"
+                }
+                startActivity(Intent.createChooser(intent, getString(R.string.title_app_share)))
+            }
         }
         return super.onOptionsItemSelected(item)
     }

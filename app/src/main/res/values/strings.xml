@@ -1,12 +1,13 @@
 <resources>
     <string name="app_name">NYS Canal Guide</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
+    <string translatable="false" name="app_playstore_url">https://play.google.com/store/apps/details?id=com.AYC.canalguide&amp;hl=en&amp;gl=US</string>
 
     <string name="title_map">Map</string>
     <string name="title_filter">Filters</string>
     <string name="title_details">Details</string>
     <string name="title_settings">Settings</string>
+    <string name="title_share">Share</string>
+    <string name="title_app_share">Share NYS Canal Guide to:</string>
     <string name="title_map_type">Map Type</string>
     <string name="description_filters">Add or remove markers on the map by category.</string>
     <string name="text_marker_contact_info">*For more information please contact %s</string>
