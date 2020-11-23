@@ -1,11 +1,14 @@
 package com.ayc.canalguide.ui.map
 
 import android.Manifest
+import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.LocationManager
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import android.view.View
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -22,6 +25,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_maps.*
 
 /**
@@ -44,12 +48,14 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
 
     private lateinit var map: GoogleMap
 
+    private var hasDismissedGpsOffSnackbar = false
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Request location permissions
-        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        // Request location permissions if we don't have them
+        if (!hasLocationPermission())
             requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
     }
 
@@ -67,6 +73,15 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
             val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
             mapFragment?.getMapAsync(this)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        // If the device has location services disabled, show a snackbar to allow the user to go to location settings
+        val locationManager = requireContext().getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) && hasLocationPermission() && !hasDismissedGpsOffSnackbar)
+            showGpsOffSnackbar()
     }
 
     /**
@@ -154,8 +169,24 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
         this.clear()
     }
 
+    private fun showGpsOffSnackbar() =
+        Snackbar.make(mapContainer, "Location services turned off. Turn on?", Snackbar.LENGTH_INDEFINITE)
+            //.setAnchorView(fabFilters)    // Attempt to show snackbar above FAB per material design specs
+            .setAction("Settings") { startActivity( Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS) ) }
+            .addCallback(object : Snackbar.Callback() {
+                override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
+                    if (event != DISMISS_EVENT_ACTION)  // Clicking the FAB is a good test for this
+                        hasDismissedGpsOffSnackbar = true
+                    super.onDismissed(transientBottomBar, event)
+                }
+            })
+            .show()
+
+    private fun hasLocationPermission() =
+        ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+
     private fun enableMyLocation() {
-        if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
             map.isMyLocationEnabled = true
     }
 
