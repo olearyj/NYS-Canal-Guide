@@ -121,7 +121,7 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
         }
 
         googleMap.setOnCameraMoveListener {
-            fabFilters.shrink()
+            fabFilters?.shrink()
         }
         googleMap.setOnMapClickListener {
             (activity as MainActivity).toggleImmerseMode()
