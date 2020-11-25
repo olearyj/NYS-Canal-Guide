@@ -2,9 +2,11 @@
 
 This Android app is published in the Google Play Store: [NYS Canal Guide](https://play.google.com/store/apps/details?id=com.AYC.canalguide&hl=en&gl=US)
 
+### About
+This app connects to 21 different endpoints maintained my the NYS Canal Corporation. Since users will likely be using the app while traveling through poor cell service areas, all data will be cached for offline use. Since the data isn't updated very frequently the app will compare server side last modified dates to app side dates before syncing to operate efficiency.
 
 ### Running this project
-Be sure to add your own Google API key to the `values/google_maps_api.xml` file. To get an api key, follow these [instructions](https://developers.google.com/maps/documentation/android-sdk/get-api-key).
+Be sure to add your own Google API key to the `values/google_maps_api.xml` file. To create an api key, follow these [instructions](https://developers.google.com/maps/documentation/android-sdk/get-api-key).
 
 
 ## Technology stack / libraries / design patterns / frameworks
@@ -18,6 +20,7 @@ Be sure to add your own Google API key to the `values/google_maps_api.xml` file.
 - **Navigation component architecture**
 - **Data Binding**
 - **LiveData**
+- **Firebase Analytics**
 - **UI/UX**
 	- [Material design](https://material.io/)
 	- [Container transformation pattern](https://material.io/design/motion/the-motion-system.html#container-transform)
