@@ -9,7 +9,7 @@ import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.ayc.canalguide.data.dao.*
 import com.ayc.canalguide.data.entities.*
-import com.ayc.canalguide.utils.DateConverter
+import com.ayc.canalguide.utils.converters.DateConverter
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.util.*

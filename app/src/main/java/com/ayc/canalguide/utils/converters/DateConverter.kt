@@ -1,4 +1,4 @@
-package com.ayc.canalguide.utils
+package com.ayc.canalguide.utils.converters
 
 import androidx.room.TypeConverter
 import java.util.*

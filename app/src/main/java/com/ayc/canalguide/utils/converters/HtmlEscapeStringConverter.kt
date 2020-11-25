@@ -1,4 +1,4 @@
-package com.ayc.canalguide.utils
+package com.ayc.canalguide.utils.converters
 
 import androidx.core.text.HtmlCompat
 import com.tickaroo.tikxml.TypeConverter

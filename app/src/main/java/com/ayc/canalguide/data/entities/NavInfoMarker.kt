@@ -6,7 +6,7 @@ import androidx.room.TypeConverters
 import com.ayc.canalguide.R
 import com.ayc.canalguide.data.Constants
 import com.ayc.canalguide.data.NavInfoType
-import com.ayc.canalguide.utils.Converters
+import com.ayc.canalguide.utils.converters.NavInfoTypeConverter
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 
@@ -16,7 +16,7 @@ channel_width="300" south_west_depth="" middle_depth="" middle_depth_url="" nort
 noaa_page="chart viewer" noaa_page_url="http://www.charts.noaa.gov/OnLineViewer/12348.shtml" latitude="42.637241" longitude="-73.752825"/>
  */
 @Entity(tableName = "navinfo_marker")
-@TypeConverters(Converters::class)
+@TypeConverters(NavInfoTypeConverter::class)
 data class NavInfoMarker (
         @Ignore
         override val markerId: Int = 0,

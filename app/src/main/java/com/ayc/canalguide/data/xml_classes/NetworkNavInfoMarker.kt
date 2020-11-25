@@ -3,7 +3,7 @@ package com.ayc.canalguide.data.xml_classes
 import com.ayc.canalguide.data.NavInfoType
 import com.ayc.canalguide.data.entities.MapMarker
 import com.ayc.canalguide.data.entities.NavInfoMarker
-import com.ayc.canalguide.utils.LatLongConverter
+import com.ayc.canalguide.utils.converters.LatLongConverter
 import com.tickaroo.tikxml.annotation.Attribute
 import com.tickaroo.tikxml.annotation.Xml
 

@@ -2,7 +2,7 @@ package com.ayc.canalguide.network
 
 import com.ayc.canalguide.data.Constants.BASE_URL
 import com.ayc.canalguide.data.xml_classes.*
-import com.ayc.canalguide.utils.HtmlEscapeStringConverter
+import com.ayc.canalguide.utils.converters.HtmlEscapeStringConverter
 import com.tickaroo.tikxml.TikXml
 import com.tickaroo.tikxml.retrofit.TikXmlConverterFactory
 import okhttp3.OkHttpClient
