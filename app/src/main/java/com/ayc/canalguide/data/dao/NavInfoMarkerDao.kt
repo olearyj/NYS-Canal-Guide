@@ -16,14 +16,22 @@ interface NavInfoMarkerDao: BaseDao<NavInfoMarker> {
     @Query("SELECT * FROM navinfo_marker")
     fun getMarkers(): LiveData<List<NavInfoMarker>>
 
-    @Query("DELETE FROM navinfo_marker")
-    suspend fun deleteAll()
-
+    @Query("DELETE from navinfo_marker WHERE apiId=:apiId")
+    suspend fun delete(apiId: Int)
 
     @Transaction
-    suspend fun deleteAllAndInsert(objects: List<NavInfoMarker>) {
-        deleteAll()
+    suspend fun deleteApiRecordsAndInsert(apiId: Int, objects: List<NavInfoMarker>) {
+        delete(apiId)
         insert(objects)
     }
+
+//    @Query("DELETE FROM navinfo_marker")
+//    suspend fun deleteAll()
+
+//    @Transaction
+//    suspend fun deleteAllAndInsert(objects: List<NavInfoMarker>) {
+//        deleteAll()
+//        insert(objects)
+//    }
 
 }

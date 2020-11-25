@@ -8,6 +8,7 @@ import com.ayc.canalguide.data.CanalPreferences
 import com.ayc.canalguide.network.CanalsApiService
 import com.ayc.canalguide.network.ConnectivityInterceptor
 import com.ayc.canalguide.network.ConnectivityInterceptorImpl
+import com.ayc.canalguide.network.NetworkPreferences
 import com.google.firebase.analytics.FirebaseAnalytics
 import dagger.Module
 import dagger.Provides
@@ -47,5 +48,9 @@ object DataModule {
     @Provides
     @Singleton
     fun providesCanalPreferences(sharedPrefs: SharedPreferences, @ApplicationContext context: Context): CanalPreferences = CanalPreferences(sharedPrefs, context)
+
+    @Provides
+    @Singleton
+    fun providesNetworkPreferences(sharedPrefs: SharedPreferences, @ApplicationContext context: Context): NetworkPreferences = NetworkPreferences(sharedPrefs, context)
 
 }

@@ -1,6 +1,6 @@
 package com.ayc.canalguide.network
 
-import com.ayc.canalguide.Constants.BASE_URL
+import com.ayc.canalguide.data.Constants.BASE_URL
 import com.ayc.canalguide.data.xml_classes.*
 import com.ayc.canalguide.utils.HtmlEscapeStringConverter
 import com.tickaroo.tikxml.TikXml
@@ -10,6 +10,7 @@ import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.http.GET
+import retrofit2.http.HEAD
 import retrofit2.http.Path
 
 
@@ -61,6 +62,11 @@ interface CanalsApiService {
     /**
      * Navigation
      */
+
+    @HEAD("navinfo-{region}.xml")
+    suspend fun navInfoHead(
+        @Path("region") region: String
+    ): Response<Void>
 
     @GET("navinfo-{region}.xml")
     suspend fun getNavInfo(

@@ -3,8 +3,8 @@ package com.ayc.canalguide.data.entities
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.TypeConverters
-import com.ayc.canalguide.Constants
 import com.ayc.canalguide.R
+import com.ayc.canalguide.data.Constants
 import com.ayc.canalguide.data.NavInfoType
 import com.ayc.canalguide.utils.Converters
 import com.google.android.gms.maps.model.BitmapDescriptor
