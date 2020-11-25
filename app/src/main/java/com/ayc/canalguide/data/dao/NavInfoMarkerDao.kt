@@ -25,13 +25,4 @@ interface NavInfoMarkerDao: BaseDao<NavInfoMarker> {
         insert(objects)
     }
 
-//    @Query("DELETE FROM navinfo_marker")
-//    suspend fun deleteAll()
-
-//    @Transaction
-//    suspend fun deleteAllAndInsert(objects: List<NavInfoMarker>) {
-//        deleteAll()
-//        insert(objects)
-//    }
-
 }
