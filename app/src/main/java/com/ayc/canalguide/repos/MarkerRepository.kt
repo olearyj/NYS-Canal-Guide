@@ -7,18 +7,18 @@ import com.ayc.canalguide.data.AppRoomDatabase
 import com.ayc.canalguide.data.Constants
 import com.ayc.canalguide.data.entities.*
 import com.ayc.canalguide.network.CanalsApiService
-import com.ayc.canalguide.network.NetworkPreferences
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.text.SimpleDateFormat
 import javax.inject.Inject
 
 class MarkerRepository @Inject constructor(
     private val appDatabase: AppRoomDatabase,
     private val canalsApiService: CanalsApiService,
-    networkPrefs: NetworkPreferences
+    private val canalDateFormat: SimpleDateFormat
 ) : BaseRepository() {
-
-
-    private val canalDateFormat = networkPrefs.canalDateFormat
 
 
     fun loadMapMarker(markerId: Int, javaClassSimpleName: String) =
@@ -35,17 +35,6 @@ class MarkerRepository @Inject constructor(
     fun loadBridgeGateMarkers() = liveData {
         val dao = appDatabase.bridgeGateDao()
         emitSource( dao.getMarkers() )
-
-//        withContext(Dispatchers.IO) {
-//            val liftBridges = async { safeApiCall( { canalsApiService.getLiftBridges() }, "error") }
-//            val guardGates = async { safeApiCall( { canalsApiService.getGuardGates() }, "error") }
-//
-//            // Await markers and return if either are null since we don't want to delete the table unless we get a result for both
-//            val liftBridgeMarkers = liftBridges.await()?.liftBridges ?: return@withContext
-//            val guardGateMarkers = guardGates.await()?.guardGates ?: return@withContext
-//
-//            dao.deleteAllAndInsert(liftBridgeMarkers + guardGateMarkers)
-//        }
 
         withContext(Dispatchers.IO) {
             val bridgesDeferred = async { safeApiCallPair( { canalsApiService.getLiftBridges() }, "error in getLiftBridges") }
@@ -72,16 +61,6 @@ class MarkerRepository @Inject constructor(
         val dao = appDatabase.lockDao()
         emitSource( dao.getMarkers() )
 
-//        withContext(Dispatchers.IO) {
-//            val (locks, lastModified) = safeApiCall( { canalsApiService.getLocks() }, "error") ?: return@withContext
-//            val newDataLastModifiedDate = canalDateFormat.parse(lastModified)
-//
-//            // If there are updates, refresh table
-//            if (newDataLastModifiedDate?.after(networkPrefs.lockLastModifiedDate) != false) {
-//                dao.deleteAllAndInsert(locks.markers)
-//                networkPrefs.lockLastModifiedDate = (newDataLastModifiedDate ?: return@withContext)
-//            }
-//        }
         withContext(Dispatchers.IO) {
             val (locks, lastModified) = safeApiCallPair( { canalsApiService.getLocks() }, "error in getLocks") ?: return@withContext
             val newDataLastModifiedDate = canalDateFormat.parse(lastModified)
@@ -100,10 +79,6 @@ class MarkerRepository @Inject constructor(
         val dao = appDatabase.marinaDao()
         emitSource( dao.getMarkers() )
 
-//        withContext(Dispatchers.IO) {
-//            val markers = safeApiCall( { canalsApiService.getMarinas() }, "error")?.markers ?: return@withContext
-//            dao.deleteAllAndInsert(markers)
-//        }
         withContext(Dispatchers.IO) {
             val (marinas, lastModified) = safeApiCallPair( { canalsApiService.getMarinas() }, "error in getMarinas") ?: return@withContext
             val newDataLastModifiedDate = canalDateFormat.parse(lastModified)
@@ -122,10 +97,6 @@ class MarkerRepository @Inject constructor(
         val dao = appDatabase.launchDao()
         emitSource( dao.getMarkers() )
 
-//        withContext(Dispatchers.IO) {
-//            val markers = safeApiCall( { canalsApiService.getBoatLaunches() }, "error")?.markers ?: return@withContext
-//            dao.deleteAllAndInsert(markers)
-//        }
         withContext(Dispatchers.IO) {
             val (launches, lastModified) = safeApiCallPair( { canalsApiService.getBoatLaunches() }, "error in getBoatLaunches") ?: return@withContext
             val newDataLastModifiedDate = canalDateFormat.parse(lastModified)
@@ -144,10 +115,6 @@ class MarkerRepository @Inject constructor(
         val dao = appDatabase.cruiseDao()
         emitSource( dao.getMarkers() )
 
-//        withContext(Dispatchers.IO) {
-//            val markers = safeApiCall( { canalsApiService.getRentalsCruises() }, "error")?.markers ?: return@withContext
-//            dao.deleteAllAndInsert(markers)
-//        }
         withContext(Dispatchers.IO) {
             val (cruises, lastModified) = safeApiCallPair( { canalsApiService.getRentalsCruises() }, "error in getRentalsCruises") ?: return@withContext
             val newDataLastModifiedDate = canalDateFormat.parse(lastModified)
@@ -166,28 +133,7 @@ class MarkerRepository @Inject constructor(
         val dao = appDatabase.navInfoDao()
         emitSource( dao.getMarkers() )
 
-//        withContext(Dispatchers.Default) {
-//            val results = Constants.navInfoRegions.map {
-//                regionName -> async { safeApiCall( { canalsApiService.getNavInfo(regionName) }, "error") }
-//            }.awaitAll()
-//
-//            // TODO - use last update date field
-//
-//            // Return if if api fails since we don't want to delete the table unless we get a result for all
-//            val markers = results.flatMapIndexed { apiIndex, navInfoMarkers ->
-//                val netMarkers = navInfoMarkers?.markers ?: return@withContext
-//
-//                // Map each NetworkNavInfoMarker to a NavInfoMarker and add the apiIndex
-//                netMarkers.map { netMarker -> netMarker.toNavInfoMarker(apiIndex) }
-//            }
-//
-//            dao.deleteAllAndInsert(markers)
-//        }
-
-
-
         withContext(Dispatchers.Default) {
-
             // For each region launch a coroutine to sync each region's data
             Constants.navInfoRegions.forEachIndexed { regionIndex, regionName ->
                 launch {

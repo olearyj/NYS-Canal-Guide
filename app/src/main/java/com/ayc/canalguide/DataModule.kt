@@ -2,19 +2,20 @@ package com.ayc.canalguide
 
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.core.os.ConfigurationCompat
 import androidx.preference.PreferenceManager
 import com.ayc.canalguide.data.AppRoomDatabase
 import com.ayc.canalguide.data.CanalPreferences
 import com.ayc.canalguide.network.CanalsApiService
 import com.ayc.canalguide.network.ConnectivityInterceptor
 import com.ayc.canalguide.network.ConnectivityInterceptorImpl
-import com.ayc.canalguide.network.NetworkPreferences
 import com.google.firebase.analytics.FirebaseAnalytics
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
+import java.text.SimpleDateFormat
 import javax.inject.Singleton
 
 /**
@@ -51,6 +52,6 @@ object DataModule {
 
     @Provides
     @Singleton
-    fun providesNetworkPreferences(sharedPrefs: SharedPreferences, @ApplicationContext context: Context): NetworkPreferences = NetworkPreferences(sharedPrefs, context)
+    fun providesCanalDateFormat(@ApplicationContext context: Context): SimpleDateFormat = SimpleDateFormat("E, dd MMM yyyy hh:mm:ss zzz", ConfigurationCompat.getLocales(context.resources.configuration)[0])
 
 }
