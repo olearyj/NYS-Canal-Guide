@@ -206,7 +206,8 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
 
     private fun enableMyLocation() {
         if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
-            map.isMyLocationEnabled = true
+            if (this::map.isInitialized)
+                map.isMyLocationEnabled = true
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {

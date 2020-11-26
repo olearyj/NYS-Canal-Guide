@@ -49,7 +49,8 @@ class MarkerRepository @Inject constructor(
             // If there are updates to liftBridges or guardGates, refresh table and updateApiSyncDates
             if (bridgesNewLastModifiedDate?.after(bridgeAppLastModifiedDate) != false
                     || gatesNewLastModifiedDate?.after(gatesAppLastModifiedDate) != false) appDatabase.withTransaction {
-                Log.i("Repository","Updating bridgeGates")
+                Log.i("Repository","Updating liftbridges and guardgates")
+
                 dao.deleteAllAndInsert(bridges.liftBridges + gates.guardGates)
                 appDatabase.apiSyncDateDao().updateApiSyncDates(Constants.apiLiftBridges, bridgesNewLastModifiedDate)
                 appDatabase.apiSyncDateDao().updateApiSyncDates(Constants.apiGuardGates, gatesNewLastModifiedDate)
@@ -69,6 +70,7 @@ class MarkerRepository @Inject constructor(
             // If there are updates, refresh marker table and update dates in apiSyncDate table
             if (newDataLastModifiedDate?.after(appDataLastModifiedDate) != false) appDatabase.withTransaction {
                 Log.i("Repository","Updating Locks")
+
                 dao.deleteAllAndInsert(locks.markers)
                 appDatabase.apiSyncDateDao().updateApiSyncDates(Constants.apiLocks, newDataLastModifiedDate)
             }
@@ -87,6 +89,7 @@ class MarkerRepository @Inject constructor(
             // If there are updates, refresh marker table and update dates in apiSyncDate table
             if (newDataLastModifiedDate?.after(appDataLastModifiedDate) != false) appDatabase.withTransaction {
                 Log.i("Repository","Updating Marinas")
+
                 dao.deleteAllAndInsert(marinas.markers)
                 appDatabase.apiSyncDateDao().updateApiSyncDates(Constants.apiMarinas, newDataLastModifiedDate)
             }
@@ -105,6 +108,7 @@ class MarkerRepository @Inject constructor(
             // If there are updates, refresh marker table and update dates in apiSyncDate table
             if (newDataLastModifiedDate?.after(appDataLastModifiedDate) != false) appDatabase.withTransaction {
                 Log.i("Repository","Updating Launches")
+
                 dao.deleteAllAndInsert(launches.markers)
                 appDatabase.apiSyncDateDao().updateApiSyncDates(Constants.apiCanalWaterTrail, newDataLastModifiedDate)
             }
@@ -123,6 +127,7 @@ class MarkerRepository @Inject constructor(
             // If there are updates, refresh marker table and update dates in apiSyncDate table
             if (newDataLastModifiedDate?.after(appDataLastModifiedDate) != false) appDatabase.withTransaction {
                 Log.i("Repository","Updating Cruises")
+
                 dao.deleteAllAndInsert(cruises.markers)
                 appDatabase.apiSyncDateDao().updateApiSyncDates(Constants.apiBoatsForHire, newDataLastModifiedDate)
             }
