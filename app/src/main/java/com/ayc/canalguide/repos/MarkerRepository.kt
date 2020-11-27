@@ -14,6 +14,13 @@ import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import javax.inject.Inject
 
+/**
+ * This class will:
+ *  Get liveData from database
+ *  Get data from API, compare response header Last-Modified date to local Last-Modified date.
+ *      If there are updates then update database
+ *  Update last modified date in the database
+ */
 class MarkerRepository @Inject constructor(
     private val appDatabase: AppRoomDatabase,
     private val canalsApiService: CanalsApiService,
@@ -36,6 +43,7 @@ class MarkerRepository @Inject constructor(
         val dao = appDatabase.bridgeGateDao()
         emitSource( dao.getMarkers() )
 
+        // Fetch data from two endpoints, liftbridges and guardgates
         withContext(Dispatchers.IO) {
             val bridgesDeferred = async { safeApiCallPair( { canalsApiService.getLiftBridges() }, "error in getLiftBridges") }
             val gatesDeferred = async { safeApiCallPair( { canalsApiService.getGuardGates() }, "error in getGuardGates") }
