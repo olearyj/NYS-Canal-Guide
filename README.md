@@ -5,6 +5,8 @@ This Android app is published in the Google Play Store: [NYS Canal Guide](https:
 ### About
 This app connects to 21 different endpoints maintained my the NYS Canal Corporation. Since users will likely be using the app while traveling through poor cell service areas, all data will be cached for offline use. Since the data isn't updated very frequently the app will compare server side last modified dates to app side dates before syncing to operate efficiency.
 
+This app will help users find points of interest along rivers throughout the New York state canal systems. Points of interest include locks, marinas and public docks, boat launches, bridges and guarded gates, cruises and rentals. You can then find out information such as a phone number, web site, and other information about the site. Now the map includes navigation information such as buoys, beacons and lighthouses.
+
 ### Running this project
 Be sure to add your own Google API key to the `values/google_maps_api.xml` file. To create an api key, follow these [instructions](https://developers.google.com/maps/documentation/android-sdk/get-api-key).
 
