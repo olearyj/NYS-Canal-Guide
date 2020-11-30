@@ -17,8 +17,6 @@ import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.UpdateAvailability
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.google.firebase.analytics.ktx.analytics
-import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.delay
@@ -55,6 +53,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         // Setup navigation and actionbar
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
+
+        setSupportActionBar(toolbar)
         setupActionBarWithNavController(this, navController)
 
         // Handle immerse mode when navigating
