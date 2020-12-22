@@ -12,8 +12,8 @@ android {
         applicationId "com.AYC.canalguide"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 8
-        versionName "3.0"
+        versionCode 9
+        versionName "3.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         // TikXML requires arguments for HtmlEscapeStringConverter() in CanalsApiService
