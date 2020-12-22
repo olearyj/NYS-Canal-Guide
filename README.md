@@ -45,7 +45,7 @@ Be sure to add your own Google API key to the `values/google_maps_api.xml` file.
 
 ## History
 
-- 11/30/2020 - Released **v3.0**
+- 11/30/2020 - Released **v3.1**
 	- Full Kotlin re-write for enhanced user experience
 	- Performance optimizations
 	- User interface upgrades
