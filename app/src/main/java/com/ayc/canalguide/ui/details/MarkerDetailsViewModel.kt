@@ -1,12 +1,12 @@
 package com.ayc.canalguide.ui.details
 
-import androidx.hilt.Assisted
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.ayc.canalguide.data.entities.*
 import com.ayc.canalguide.repos.MarkerRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
 
 /**
@@ -16,9 +16,10 @@ import com.ayc.canalguide.repos.MarkerRepository
  *  Prepare address string
  *  Prepare marker details as a list of strings
  */
-class MarkerDetailsViewModel @ViewModelInject constructor(
+@HiltViewModel
+class MarkerDetailsViewModel @Inject constructor(
         markerRepo: MarkerRepository,
-        @Assisted private val savedStateHandle: SavedStateHandle
+        savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
 

@@ -13,8 +13,8 @@ import com.google.firebase.analytics.FirebaseAnalytics
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import java.text.SimpleDateFormat
 import javax.inject.Singleton
 
@@ -22,7 +22,7 @@ import javax.inject.Singleton
  * https://medium.com/androiddevelopers/dependency-injection-on-android-with-hilt-67b6031e62d
  */
 @Module
-@InstallIn(ApplicationComponent::class)
+@InstallIn(SingletonComponent::class)
 object DataModule {
 
 
