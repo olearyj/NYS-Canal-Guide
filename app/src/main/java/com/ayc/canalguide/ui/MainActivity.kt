@@ -16,13 +16,13 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import com.ayc.canalguide.R
+import com.ayc.canalguide.databinding.ActivityMainBinding
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.UpdateAvailability
 import com.google.firebase.analytics.FirebaseAnalytics
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.*
@@ -36,11 +36,13 @@ import javax.inject.Inject
  *  Handle navigation up (actionbar back) button and hardware back button
  */
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(R.layout.activity_main) {
+class MainActivity : AppCompatActivity() {
 
 
     private val viewModel: MainViewModel by viewModels()
     //private val mapsViewModel: MapsViewModel by viewModels()
+
+    private lateinit var binding: ActivityMainBinding
 
     @Inject lateinit var firebaseAnalytics: FirebaseAnalytics
 
@@ -54,11 +56,14 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         // Setup navigation and actionbar
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
 
-        setSupportActionBar(toolbar)
+        setSupportActionBar(binding.toolbar)
         setupActionBarWithNavController(this, navController)
 
         // Handle immerse mode when navigating
@@ -152,6 +157,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     // Use this fun because bug on androidx.core:1.5.0-alpha05 found when setting systemBarsBehavior on galaxy s9+ and note 10+ (android 10)
     // https://stackoverflow.com/a/64828028/3422470
+    // TODO replace this
     private fun hideSystemUI() {
         supportActionBar?.hide()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
@@ -174,7 +180,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     private fun showSystemUI() {
         supportActionBar?.show()
         WindowCompat.setDecorFitsSystemWindows(window, true)
-        WindowInsetsControllerCompat(window, main_container).show(WindowInsetsCompat.Type.statusBars() or WindowInsetsCompat.Type.navigationBars())
+        WindowInsetsControllerCompat(window, binding.mainContainer).show(WindowInsetsCompat.Type.statusBars() or WindowInsetsCompat.Type.navigationBars())
     }
 
     companion object {

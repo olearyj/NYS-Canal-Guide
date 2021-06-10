@@ -8,7 +8,9 @@ import android.location.LocationManager
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.fragment.app.Fragment
@@ -19,6 +21,7 @@ import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import com.ayc.canalguide.R
 import com.ayc.canalguide.data.entities.MapMarker
+import com.ayc.canalguide.databinding.FragmentMapsBinding
 import com.ayc.canalguide.ui.MainActivity
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -28,7 +31,6 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.analytics.FirebaseAnalytics
-import kotlinx.android.synthetic.main.fragment_maps.*
 
 /**
  * Be sure to know the difference between the two types with the word "marker" in it:
@@ -47,6 +49,8 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
 
 
     private val mapsViewModel: MapsViewModel by activityViewModels()
+
+    private lateinit var binding: FragmentMapsBinding
 
     // List of references to the markers on the map by category
     private val lockMarkers = mutableListOf<Marker>()
@@ -78,12 +82,17 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
         })
     }
 
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        binding = FragmentMapsBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        fabFilters.setOnClickListener {
+        binding.fabFilters.setOnClickListener {
             val action = MapsFragmentDirections.actionOptionsDialog()
-            val extras = FragmentNavigatorExtras(fabFilters to getString(R.string.shared_container_transition_name_filters))
+            val extras = FragmentNavigatorExtras(binding.fabFilters to getString(R.string.shared_container_transition_name_filters))
             findNavController().navigate(action, extras)
         }
 
@@ -128,7 +137,7 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
         }
 
         googleMap.setOnCameraMoveListener {
-            fabFilters?.shrink()
+            binding.fabFilters.shrink()
         }
         googleMap.setOnMapClickListener {
             (activity as MainActivity).toggleImmerseMode()
@@ -196,7 +205,7 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
     }
 
     private fun showGpsOffSnackbar() =
-        Snackbar.make(mapContainer, getString(R.string.snackbar_text_turn_on_gps), Snackbar.LENGTH_INDEFINITE)
+        Snackbar.make(binding.mapContainer, getString(R.string.snackbar_text_turn_on_gps), Snackbar.LENGTH_INDEFINITE)
             //.setAnchorView(fabFilters)    // Attempt to show snackbar above FAB per material design specs
             .setAction(getString(R.string.title_settings)) { startActivity( Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS) ) }
             .addCallback(object : Snackbar.Callback() {
