@@ -20,7 +20,7 @@ Be sure to add your own Google API key to the `values/google_maps_api.xml` file.
 - **Design patterns** - MVVM, Repository, Observable, Factory, Singleton
 - **Legacy API support** & backwards compatibility - AndroidX
 - **Navigation component architecture**
-- **Data Binding**
+- **View Binding & Data Binding**
 - **LiveData**
 - **Firebase Analytics**
 - **UI/UX**
@@ -45,6 +45,11 @@ Be sure to add your own Google API key to the `values/google_maps_api.xml` file.
 
 ## History
 
+
+- 06/10/2021 - Released **v3.2**
+	- Performance enhancements
+	- Dependency updates (HILT and others)
+	- Migrated from Kotlin Synthetics to ViewBinding
 - 11/30/2020 - Released **v3.1**
 	- Full Kotlin re-write for enhanced user experience
 	- Performance optimizations
