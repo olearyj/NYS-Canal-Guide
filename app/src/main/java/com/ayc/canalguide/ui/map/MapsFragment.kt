@@ -9,7 +9,8 @@ import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
 import android.view.View
-import androidx.core.content.ContextCompat
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LiveData
@@ -59,13 +60,17 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
 
     private var hasDismissedGpsOffSnackbar = false
 
+    private val permReqLuncher = registerForActivityResult( ActivityResultContracts.RequestPermission() ) { granted ->
+        Log.i(javaClass.name, "Location permissions${if (granted) "" else " NOT"} granted")
+        if (granted) {
+            enableMyLocation()
+            checkForGps()
+        }
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        // Request location permissions if we don't have them
-        if (!hasLocationPermission())
-            requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
 
         (activity as MainActivity).firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, Bundle().apply {
             putString(FirebaseAnalytics.Param.SCREEN_NAME, this@MapsFragment.javaClass.simpleName)
@@ -87,6 +92,8 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
             val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
             mapFragment?.getMapAsync(this)
         }
+
+        handleLocationPermission()
     }
 
     override fun onResume() {
@@ -202,27 +209,25 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
             .show()
 
     private fun hasLocationPermission() =
-        ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+        checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
 
     private fun enableMyLocation() {
-        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
+        if (checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
             if (this::map.isInitialized)
                 map.isMyLocationEnabled = true
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    /**
+     * Check for location permissions and request if not available
+     */
+    private fun handleLocationPermission() {
+        val hasLocationPermission = checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
 
-        if (grantResults.contains(PackageManager.PERMISSION_GRANTED))
-            if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
-                enableMyLocation()
-                checkForGps()
-            }
-    }
-
-
-    companion object {
-        const val LOCATION_PERMISSION_REQUEST_CODE = 123
+        if (hasLocationPermission) {
+            enableMyLocation()
+            checkForGps()
+        } else
+            permReqLuncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
     }
 
 }
