@@ -46,7 +46,7 @@ Be sure to add your own Google API key to the `values/google_maps_api.xml` file.
 ## History
 
 
-- 06/10/2021 - Released **v3.2**
+- 06/29/2021 - Released **v3.3**
 	- Performance enhancements
 	- Dependency updates (HILT and others)
 	- Migrated from Kotlin Synthetics to ViewBinding
