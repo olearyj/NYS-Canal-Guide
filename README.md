@@ -46,10 +46,11 @@ Be sure to add your own Google API key to the `values/google_maps_api.xml` file.
 ## History
 
 
-- 06/29/2021 - Released **v3.3**
+- 06/30/2021 - Released **v3.4**
 	- Performance enhancements
 	- Dependency updates (HILT and others)
 	- Migrated from Kotlin Synthetics to ViewBinding
+	- Bug fix: In fullscreen, map wasn't displaying all the way to the top of the screen if there was a display cutout (camera)
 - 11/30/2020 - Released **v3.1**
 	- Full Kotlin re-write for enhanced user experience
 	- Performance optimizations

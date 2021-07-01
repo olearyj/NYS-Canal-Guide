@@ -222,8 +222,13 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
 
     private fun enableMyLocation() {
         if (checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
-            if (this::map.isInitialized)
+            if (this::map.isInitialized) {
                 map.isMyLocationEnabled = true
+                // Make the Google Map mocation button fit system window so that
+                // a display cutout (camera) doesn't block it's view
+                val locationButton: View? = binding.root.findViewWithTag("GoogleMapMyLocationButton")
+                locationButton?.fitsSystemWindows = true
+            }
     }
 
     /**
