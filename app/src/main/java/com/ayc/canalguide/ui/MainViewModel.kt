@@ -1,15 +1,17 @@
 package com.ayc.canalguide.ui
 
 import android.util.Log
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import com.ayc.canalguide.data.CanalPreferences
 import com.ayc.canalguide.ui.settings.ImmerseMode
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
 /**
  * This class will handle immerse mode states
  */
-class MainViewModel @ViewModelInject constructor(
+@HiltViewModel
+class MainViewModel @Inject constructor(
     preferences: CanalPreferences
 ): ViewModel() {
 

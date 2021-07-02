@@ -2,6 +2,7 @@ package com.ayc.canalguide.ui.details
 
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -20,7 +21,6 @@ import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_marker_details.*
 
 /**
  * This class will:
@@ -44,8 +44,8 @@ class MarkerDetailsFragment : Fragment(R.layout.fragment_marker_details), OnMapR
     private var firebaseLogScreenCompleted = false
 
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
@@ -57,7 +57,7 @@ class MarkerDetailsFragment : Fragment(R.layout.fragment_marker_details), OnMapR
         }
 
         viewModel.markerDetails.observe(viewLifecycleOwner) { details ->
-            detailsLayout.removeAllViews()
+            binding.detailsLayout.removeAllViews()
 
             for (i in details.indices)
                 addDetailsTextView(details[i], i % 2 == 0)
@@ -81,15 +81,15 @@ class MarkerDetailsFragment : Fragment(R.layout.fragment_marker_details), OnMapR
     }
 
     private fun addButtonClickListeners() {
-        ivCall.setOnClickListener {
+        binding.ivCall.setOnClickListener {
             if (viewModel.hasPhoneNumber())
                 MyHelper.makeCall(activity, viewModel.phoneNumber.value!!)
         }
-        ivWebsite.setOnClickListener {
+        binding.ivWebsite.setOnClickListener {
             if (viewModel.hasWebsite())
                 MyHelper.openUrl(context, viewModel.website.value!!)
         }
-        ivWebsiteNoaa.setOnClickListener {
+        binding.ivWebsiteNoaa.setOnClickListener {
             if (viewModel.hasWebsiteNoaa())
                 MyHelper.openUrl(context, viewModel.websiteNoaa.value!!)
         }
@@ -106,7 +106,7 @@ class MarkerDetailsFragment : Fragment(R.layout.fragment_marker_details), OnMapR
     }
 
     private fun addDetailsTextView(detail: String, isHeader: Boolean) {
-        detailsLayout.addView(TextView(context).apply {
+        binding.detailsLayout.addView(TextView(context).apply {
             text = detail
 
             // Set text appearance to medium or large depending on if this should be a header

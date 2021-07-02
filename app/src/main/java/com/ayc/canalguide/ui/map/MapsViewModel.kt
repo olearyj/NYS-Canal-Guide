@@ -1,6 +1,5 @@
 package com.ayc.canalguide.ui.map
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
@@ -8,11 +7,14 @@ import com.ayc.canalguide.data.CanalPreferences
 import com.ayc.canalguide.data.NavInfoType
 import com.ayc.canalguide.repos.MarkerRepository
 import com.google.android.gms.maps.GoogleMap
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
 /**
  * This class holds MapMarkers, filter states and map type
  */
-class MapsViewModel @ViewModelInject constructor(
+@HiltViewModel
+class MapsViewModel @Inject constructor(
         markerRepository: MarkerRepository,
         preferences: CanalPreferences
 ): ViewModel() {
@@ -44,5 +46,8 @@ class MapsViewModel @ViewModelInject constructor(
     val selectedMapType = Transformations.map(mapTypePosition) { position ->
         mapTypes[position]
     }
+
+
+
 
 }

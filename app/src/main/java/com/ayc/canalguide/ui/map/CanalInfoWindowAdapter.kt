@@ -1,24 +1,23 @@
 package com.ayc.canalguide.ui.map
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.view.View
-import com.ayc.canalguide.R
+import com.ayc.canalguide.databinding.ViewInfowindowBinding
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.Marker
-import kotlinx.android.synthetic.main.view_infowindow.view.*
 
 class CanalInfoWindowAdapter(
         private val activity: Activity
 ): GoogleMap.InfoWindowAdapter {
 
 
-    @SuppressLint("InflateParams")
     override fun getInfoContents(marker: Marker?): View {
-        return activity.layoutInflater.inflate(R.layout.view_infowindow, null).apply {
+        val binding = ViewInfowindowBinding.inflate(activity.layoutInflater, null, false).apply {
             textTitle.text = marker?.title
             textSnippet.text = marker?.snippet
         }
+
+        return binding.root
     }
 
     // Use default InfoWindow frame

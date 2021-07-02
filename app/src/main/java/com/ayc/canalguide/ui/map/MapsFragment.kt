@@ -8,8 +8,11 @@ import android.location.LocationManager
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
-import androidx.core.content.ContextCompat
+import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LiveData
@@ -18,6 +21,7 @@ import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import com.ayc.canalguide.R
 import com.ayc.canalguide.data.entities.MapMarker
+import com.ayc.canalguide.databinding.FragmentMapsBinding
 import com.ayc.canalguide.ui.MainActivity
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -27,7 +31,6 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.analytics.FirebaseAnalytics
-import kotlinx.android.synthetic.main.fragment_maps.*
 
 /**
  * Be sure to know the difference between the two types with the word "marker" in it:
@@ -47,6 +50,8 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
 
     private val mapsViewModel: MapsViewModel by activityViewModels()
 
+    private lateinit var binding: FragmentMapsBinding
+
     // List of references to the markers on the map by category
     private val lockMarkers = mutableListOf<Marker>()
     private val bridgeGateMarkers = mutableListOf<Marker>()
@@ -59,13 +64,17 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
 
     private var hasDismissedGpsOffSnackbar = false
 
+    private val permReqLuncher = registerForActivityResult( ActivityResultContracts.RequestPermission() ) { granted ->
+        Log.i(javaClass.name, "Location permissions${if (granted) "" else " NOT"} granted")
+        if (granted) {
+            enableMyLocation()
+            checkForGps()
+        }
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        // Request location permissions if we don't have them
-        if (!hasLocationPermission())
-            requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
 
         (activity as MainActivity).firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, Bundle().apply {
             putString(FirebaseAnalytics.Param.SCREEN_NAME, this@MapsFragment.javaClass.simpleName)
@@ -73,12 +82,17 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
         })
     }
 
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        binding = FragmentMapsBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        fabFilters.setOnClickListener {
+        binding.fabFilters.setOnClickListener {
             val action = MapsFragmentDirections.actionOptionsDialog()
-            val extras = FragmentNavigatorExtras(fabFilters to getString(R.string.shared_container_transition_name_filters))
+            val extras = FragmentNavigatorExtras(binding.fabFilters to getString(R.string.shared_container_transition_name_filters))
             findNavController().navigate(action, extras)
         }
 
@@ -87,6 +101,8 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
             val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
             mapFragment?.getMapAsync(this)
         }
+
+        handleLocationPermission()
     }
 
     override fun onResume() {
@@ -121,7 +137,7 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
         }
 
         googleMap.setOnCameraMoveListener {
-            fabFilters?.shrink()
+            binding.fabFilters.shrink()
         }
         googleMap.setOnMapClickListener {
             (activity as MainActivity).toggleImmerseMode()
@@ -189,7 +205,7 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
     }
 
     private fun showGpsOffSnackbar() =
-        Snackbar.make(mapContainer, getString(R.string.snackbar_text_turn_on_gps), Snackbar.LENGTH_INDEFINITE)
+        Snackbar.make(binding.mapContainer, getString(R.string.snackbar_text_turn_on_gps), Snackbar.LENGTH_INDEFINITE)
             //.setAnchorView(fabFilters)    // Attempt to show snackbar above FAB per material design specs
             .setAction(getString(R.string.title_settings)) { startActivity( Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS) ) }
             .addCallback(object : Snackbar.Callback() {
@@ -202,27 +218,30 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
             .show()
 
     private fun hasLocationPermission() =
-        ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+        checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
 
     private fun enableMyLocation() {
-        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
-            if (this::map.isInitialized)
+        if (checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
+            if (this::map.isInitialized) {
                 map.isMyLocationEnabled = true
-    }
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-
-        if (grantResults.contains(PackageManager.PERMISSION_GRANTED))
-            if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
-                enableMyLocation()
-                checkForGps()
+                // Make the Google Map mocation button fit system window so that
+                // a display cutout (camera) doesn't block it's view
+                val locationButton: View? = binding.root.findViewWithTag("GoogleMapMyLocationButton")
+                locationButton?.fitsSystemWindows = true
             }
     }
 
+    /**
+     * Check for location permissions and request if not available
+     */
+    private fun handleLocationPermission() {
+        val hasLocationPermission = checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
 
-    companion object {
-        const val LOCATION_PERMISSION_REQUEST_CODE = 123
+        if (hasLocationPermission) {
+            enableMyLocation()
+            checkForGps()
+        } else
+            permReqLuncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
     }
 
 }
