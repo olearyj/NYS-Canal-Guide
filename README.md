@@ -45,6 +45,7 @@ Be sure to add your own Google API key to the `values/google_maps_api.xml` file.
  - [ ] Remove data binding and / or use Compose
  - [ ] Use Gradle version catalog
  - [ ] Add attributions for open source libraries used with: https://developers.google.com/android/guides/opensource
+ - [ ] Consider adding ktor client
 
 
 ## History
