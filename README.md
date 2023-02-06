@@ -41,6 +41,10 @@ Be sure to add your own Google API key to the `values/google_maps_api.xml` file.
  - [ ] Add UI/Unit testing
  - [ ] Add Ads and in-app purchase for ad-free mode
  - [ ] Option to sponsor a marina and add their club's flag to the map
+ - [ ] Replace LiveData with Flow
+ - [ ] Remove data binding and / or use Compose
+ - [ ] Use Gradle version catalog
+ - [ ] Add attributions for open source libraries used with: https://developers.google.com/android/guides/opensource
 
 
 ## History
