@@ -48,6 +48,7 @@ Be sure to add your own Google API key to the `values/google_maps_api.xml` file.
  - [ ] Consider adding ktor client
  - [ ] Replace SharedPreferences with Jetpack DataStore
  - [ ] Upgrade libraries
+ - [ ] Add analytics
 
 
 ## History
