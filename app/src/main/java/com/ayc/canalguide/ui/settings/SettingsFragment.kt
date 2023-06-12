@@ -30,11 +30,11 @@ class SettingsFragment : PreferenceFragmentCompat(), SharedPreferences.OnSharedP
         setPreferencesFromResource(R.xml.preferences, s)
 
         // Add app version preference
-        val appVersionPref = Preference(context).apply {
+        val appVersionPref = Preference(requireContext()).apply {
             title = context.getString(R.string.title_setting_app_version)
             summary = "v${BuildConfig.VERSION_NAME}"
         }
-        val appDeveloperPref = Preference(context).apply {
+        val appDeveloperPref = Preference(requireContext()).apply {
             title = context.getString(R.string.title_setting_app_developer)
             summary = "James O'Leary"
         }
@@ -60,11 +60,11 @@ class SettingsFragment : PreferenceFragmentCompat(), SharedPreferences.OnSharedP
 
     override fun onResume() {
         super.onResume()
-        preferenceScreen.sharedPreferences.registerOnSharedPreferenceChangeListener(this)
+        preferenceScreen.sharedPreferences?.registerOnSharedPreferenceChangeListener(this)
     }
 
     override fun onPause() {
-        preferenceScreen.sharedPreferences.unregisterOnSharedPreferenceChangeListener(this)
+        preferenceScreen.sharedPreferences?.unregisterOnSharedPreferenceChangeListener(this)
         super.onPause()
     }
 
