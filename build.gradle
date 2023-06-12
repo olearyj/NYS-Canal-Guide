@@ -1,39 +1,45 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.kotlin_version = '1.5.0'
+    ext.kotlin_version = '1.6.21'
     ext.coroutine_version = '1.5.0-native-mt'
-    ext.nav_version = '2.3.5'
+    ext.nav_version = '2.5.0'
     ext.lifecycle_version = '2.3.1'
     ext.retrofit_version = '2.9.0'
     ext.kodein_version = '5.3.0'
     ext.room_version = '2.2.6'
-    ext.hilt_version = '2.36'
+    ext.hilt_version = '2.40.1'
     ext.tikxml_version = '0.9.0_11-SNAPSHOT'
 
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.2.1'
+        classpath 'com.android.tools.build:gradle:8.0.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
-        classpath 'com.google.gms:google-services:4.3.8'
+        classpath 'com.google.gms:google-services:4.3.10'
     }
 }
 
 allprojects {
     repositories {
         google()
-        jcenter()
 
         // Below is for Tickaroo
         mavenCentral()
         maven {
             url 'http://oss.sonatype.org/content/repositories/snapshots'
+            allowInsecureProtocol = true
             //url 'https://www.jitpack.io'
+        }
+    }
+    // needed to run on m1 mac with room v2.2.6
+    configurations.all {
+        resolutionStrategy {
+            force 'org.xerial:sqlite-jdbc:3.34.0'
         }
     }
 }
