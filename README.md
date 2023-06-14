@@ -49,6 +49,7 @@ Be sure to add your own Google API key to the `values/google_maps_api.xml` file.
  - [ ] Replace SharedPreferences with Jetpack DataStore
  - [ ] Upgrade libraries
  - [ ] Add analytics
+ - [ ] Option for users to tip the developer
 
 
 ## History
