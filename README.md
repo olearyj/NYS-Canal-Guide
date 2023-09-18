@@ -39,22 +39,25 @@ Be sure to add your own Google API key to the `values/google_maps_api.xml` file.
  - [ ] [Google Places API](https://developers.google.com/places/web-service/overview) for map in details fragment (privacy policy required for API usage)
  - [ ] Dark mode to Material design specs
  - [ ] Add UI/Unit testing
- - [ ] Add Ads and in-app purchase for ad-free mode
  - [ ] Option to sponsor a marina and add their club's flag to the map
  - [ ] Replace LiveData with Flow
- - [ ] Remove data binding and / or use Compose
  - [ ] Use Gradle version catalog
- - [ ] Add attributions for open source libraries used with: https://developers.google.com/android/guides/opensource
- - [ ] Consider adding ktor client
+ - [ ] Replace Retrofit with ktor client
+ - [ ] Consider using Kotlin multi-platform and Compose multi-platform
+ - [ ] Replace XML UI with Compose
  - [ ] Replace SharedPreferences with Jetpack DataStore
  - [ ] Upgrade libraries
  - [ ] Add analytics
+ - [ ] Add attributions for open source libraries used with: https://developers.google.com/android/guides/opensource
+ - [ ] Add Ads and in-app purchase for ad-free mode
  - [ ] Option for users to tip the developer
 
 
 ## History
 
 
+- 06/15/2023 - Released **v3.5**
+	- Update libraries and target sdk version
 - 06/30/2021 - Released **v3.4**
 	- Performance enhancements
 	- Dependency updates (HILT and others)
