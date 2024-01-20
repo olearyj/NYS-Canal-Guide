@@ -1,5 +1,6 @@
 package com.ayc.canalguide.ui.settings
 
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.activityViewModels
@@ -9,6 +10,7 @@ import androidx.preference.PreferenceFragmentCompat
 import com.ayc.canalguide.BuildConfig
 import com.ayc.canalguide.R
 import com.ayc.canalguide.ui.MainViewModel
+import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.ktx.Firebase
@@ -38,9 +40,17 @@ class SettingsFragment : PreferenceFragmentCompat(), SharedPreferences.OnSharedP
             title = context.getString(R.string.title_setting_app_developer)
             summary = "James O'Leary"
         }
+        val openSourceAttrPref = Preference(requireContext()).apply {
+            title = context.getString(R.string.title_setting_open_source_attribution)
+            setOnPreferenceClickListener {
+                startActivity(Intent(context, OssLicensesMenuActivity::class.java))
+                true
+            }
+        }
         findPreference<PreferenceCategory>(requireContext().getString(R.string.pref_key_about_category))?.apply {
             addPreference(appDeveloperPref)
             addPreference(appVersionPref)
+            addPreference(openSourceAttrPref)
         }
 
         Firebase.analytics.logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, Bundle().apply {
