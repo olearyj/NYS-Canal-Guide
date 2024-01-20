@@ -147,7 +147,7 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.hide()
         WindowCompat.setDecorFitsSystemWindows(window, false)
         WindowInsetsControllerCompat(window, binding.mainContainer).let { controller ->
-            controller.hide(WindowInsetsCompat.Type.statusBars() or WindowInsetsCompat.Type.navigationBars())
+            controller.hide(WindowInsetsCompat.Type.systemBars())
             controller.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
         }
     }
@@ -155,7 +155,7 @@ class MainActivity : AppCompatActivity() {
     private fun showSystemUI() {
         supportActionBar?.show()
         WindowCompat.setDecorFitsSystemWindows(window, true)
-        WindowInsetsControllerCompat(window, binding.mainContainer).show(WindowInsetsCompat.Type.statusBars() or WindowInsetsCompat.Type.navigationBars())
+        WindowInsetsControllerCompat(window, binding.mainContainer).show(WindowInsetsCompat.Type.systemBars())
     }
 
     companion object {
